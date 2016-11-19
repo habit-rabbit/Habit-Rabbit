@@ -16,18 +16,19 @@ database.prototype.insert = function (query, callback) {
     .returning("*") //makes it so callback will have data which = the inserted row as an array on sucess
     .then(callback);
 }
-database.prototype.getAll = function (query, callback) {
+database.prototype.getOne = function (query, callback) {
   this.knex(query.table)
     .where(query.data)
-    .then(callback)
+    .then(callback);
 }
-database.prototype.getOne = function (query, callback) {
+database.prototype.getAll = function (query, callback) {
   this.knex
     .select()
-    .table(query)
+    .table(query.table)
+    .then(callback);
 }
 database.prototype.query = function(query, callback) {
-
+  console.log("these are query", query)
   switch(query.type) {
 
     case 'insert':
@@ -40,7 +41,7 @@ database.prototype.query = function(query, callback) {
     case 'getAll':
       this.getAll(query, callback)
       break;
-    case 'get':
+    case 'getOne':
       this.getOne(query, callback)
       break;
     default:

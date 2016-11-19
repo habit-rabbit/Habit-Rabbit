@@ -2,8 +2,8 @@ const router = require('express').Router();
 const db = require("./query_class.js");
 //routes that serve the data base and return json
 router.post("/api/users", (req, res) => {
-  const params = req.body;
-  db.query(params, callback)
+  const query = req.body;
+  db.query(query, callback)
 
 });
 
@@ -14,8 +14,9 @@ router.get("/api/users", (req, res) => {
   // table: 'users',
   // data: {},
   //SEE query_class.js
-  const query = req.body;
-  db.query(params, callback)
+  const query = req.query;
+  console.log(query);
+  db.query(query, callback)
 })
 
 
