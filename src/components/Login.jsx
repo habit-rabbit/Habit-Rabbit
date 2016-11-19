@@ -16,7 +16,7 @@ class Login extends Component {
       url: '/api/users',
       data: {
         data: {
-          first_name: "UltraaSerious",
+          first_name: "Ublueeous",
           last_name: "Granger",
           email: "iLoveCats@hogwarts.uk",
           password:"apples",

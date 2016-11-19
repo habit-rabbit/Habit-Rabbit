@@ -5,25 +5,26 @@ const Response = require("./response.js")
 //routes that serve the data base and return json
 
 
-router.post("/users", (req, res) => {
+router.post("/users/create", (req, res) => {
   //this route implies we are looking to insert into users table
   let r = new Response();
   let query = req.body;
-  console.log(req.body.data, "YADIA")
-  if(req.body.data.password === req.body.data.password.confirmation) {
-    console.log("workingns")
+
+  if(req.body.data.password === req.body.data.password_confirmation) {
     bcrypt.hash(req.body.data.password, 10, (err, hash) => {
       //set up query object..
-      const query = {
+      const query = {};
+      query.table = "users"; //for definition required by db (need to dry up)
+      query.data = {
         first_name: req.body.data.first_name,
         last_name: req.body.data.last_name,
         email: req.body.data.email,
         password_digest: hash
       }
-      query.table = "users"; //for definition required by db (need to dry up)
+      //insert into database
       db.insertRow(query,  (data) => {
         console.log("success");
-        //sends an array back
+        //set data into response object 'r'
         r.setData(data)
         res.send(r);
       });
