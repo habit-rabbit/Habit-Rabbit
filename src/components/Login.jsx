@@ -10,18 +10,10 @@ class Login extends Component {
   }
 
   componentWillMount() {
-    // $.ajax({
-    //   method: 'post',
-    //   url: '/api/users/',
-    //   data: {
-    //     data: {
-    //       first_name: "Serious",
-    //       last_name: "Granger",
-    //       email: "iLoveCats@hogwarts.uk",
-    //       password_digest: "notdigested"
-    //     }
-    //   }
-    // });
+    $.ajax({
+      method: 'post',
+      url: '/api/goals/4/delete',
+    });
   }
 
   render() {

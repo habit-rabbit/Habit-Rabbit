@@ -8,7 +8,7 @@ function database() {
   this.knex = k;
 }
 
-database.prototype.insert = function (query, callback) {
+database.prototype.insertRow = function (query, callback) {
   this.knex(query.table)
     .insert(query.data)
     .returning("*") //makes it so callback will have data which = the inserted row as an array on sucess
@@ -25,6 +25,11 @@ database.prototype.getAll = function (query, callback) {
     .table(query.table)
     .then(callback);
 }
-
+database.prototype.delRow = function (query, callback) {
+  this.knex(query.table)
+    .where(query.data)
+    .del()
+    .then(callback);
+}
 
 module.exports = new database();
