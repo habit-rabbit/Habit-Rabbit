@@ -23,7 +23,40 @@ router.use("/api", goalsRoutes);
 // from the data base
 // ====================================================
 
-// in the instance
+// a more verbose example:
 
+    // $.ajax({
+    //   method: 'post',
+    //   url: '/api/users',
+    //   data: {
+    //     data: {
+    //       first_name: "Serious",
+    //       last_name: "Granger",
+    //       email: "iLoveCats@hogwarts.uk",
+    //       password_digest: "notdigested"
+    //     }
+    //   }
+    // });
+    //  it has not been implemented yet but we will find a way to route
+    // to the update function for that users id via a cookie
 
+  // $.ajax({
+    //   method: 'post',
+    //   url: '/api/users/9/update',
+    //   data: {
+    //     data: {
+    //       first_name: "UltraaSerious",
+    //       last_name: "Granger",
+    //       email: "iLoveCats@hogwarts.uk",
+    //       password_digest: "notdigested"
+    //     }
+    //   }
+    // });
+
+// ======================Please note I haven't written and real callback to send
+// responses back to the ajax calls, everything console logs as a aproof of concept
+// try /api/users, /api/goals etc..
+
+// also ***********I noticed we need to make migrations for the tables to
+// cascasde on delete from goals to tasks
 module.exports = router;
