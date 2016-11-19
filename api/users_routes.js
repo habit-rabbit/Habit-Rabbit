@@ -11,9 +11,15 @@ router.post("/users", (req, res) => {
 });
 
 router.get("/users", (req, res) => {
-  let query = req.query;
-  query.table = "users";
-  db.getAll(query, callback);
+  //checks to see if xhr was used, this prevents users from
+  //accessing the api via its endpoint only
+  if(req.xhr) {
+    let query = req.query;
+    query.table = "users";
+    db.getAll(query, callback);
+  } else {
+    res.redirect("/");
+  }
 })
 
 router.get("/users/:id", (req, res) => {
