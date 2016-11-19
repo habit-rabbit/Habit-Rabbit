@@ -1,11 +1,14 @@
 
 const ENV = process.env.ENV || "development";
 const express = require('express');
-const app = express()
+const app = express();
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const config = require('./webpack.config');
 const compiler = webpack(config);
+
+const bodyParser  = require("body-parser");
+
 require('dotenv').config({silent: true});
 
 const port = process.env.PORT || 3000;
@@ -20,7 +23,7 @@ app.use(webpackDevMiddleware(compiler, {
     poll: 1000
   }
 }));
-//=================knex testing
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(require("webpack-hot-middleware")(compiler));
 
@@ -28,7 +31,7 @@ app.use(require("webpack-hot-middleware")(compiler));
 app.use(require('./routes/home'));
 // database api
 
-app.use(require('./api/db_connect'));
+app.use(require('./api/routes'));
 
 // configure slack
 // (function() {

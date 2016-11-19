@@ -10,10 +10,18 @@ class Login extends Component {
   }
 
   componentWillMount() {
-    // axios.get('/api/users').then( (response) => {
-    //   this.setState({users: response});
-    //   console.log(this.users);
-    //   console.log("blah");
+    //for demonstration
+    // $.ajax({
+    //   method: 'post',
+    //   url: '/api/users/9/update',
+    //   data: {
+    //     data: {
+    //       first_name: "UltraaSerious",
+    //       last_name: "Granger",
+    //       email: "iLoveCats@hogwarts.uk",
+    //       password_digest: "notdigested"
+    //     }
+    //   }
     // });
   }
 
@@ -34,4 +42,4 @@ class Login extends Component {
     );
   }
 }
-export default Login;
+export default Login
