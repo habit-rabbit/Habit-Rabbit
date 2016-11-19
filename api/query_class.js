@@ -37,12 +37,14 @@ database.prototype.query = function(query, callback) {
       break;
     case 'update':
       break;
-    case 'getAll'
+    case 'getAll':
       this.getAll(query, callback)
       break;
-    case 'get'
+    case 'get':
       this.getOne(query, callback)
       break;
+    default:
+      console.log("incorrect query type")
   }
 }
 
