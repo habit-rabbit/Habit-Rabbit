@@ -8,6 +8,12 @@ function database() {
   this.knex = k;
 }
 
+database.prototype.delRow = function (query, callback) {
+  this.knex(query.table)
+    .where(query.data)
+    .del()
+    .then(callback);
+}
 database.prototype.insertRow = function (query, callback) {
   this.knex(query.table)
     .insert(query.data)
@@ -25,11 +31,11 @@ database.prototype.getAll = function (query, callback) {
     .table(query.table)
     .then(callback);
 }
-database.prototype.delRow = function (query, callback) {
+database.prototype.updateRow = function (query, callback) {
+  console.log(query, "db query")
   this.knex(query.table)
-    .where(query.data)
-    .del()
+    .where("id", query.data.id)
+    .update(query.data)
     .then(callback);
 }
-
 module.exports = new database();

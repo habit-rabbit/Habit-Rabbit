@@ -27,6 +27,15 @@ router.get("/users/:id", (req, res) => {
   db.getRow(query, callback);
 })
 
+//for the sake of demo and lack of willingness to set up method override
+// delete and update methods will be posts for now..
+
+router.post("/users/:id/update", (req, res) => {
+  let query = req.body
+  query.table = "users";
+  query.data.id = req.params.id;
+  db.updateRow(query, callback);
+})
 module.exports = router;
 
 function callback(data) {
