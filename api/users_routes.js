@@ -1,18 +1,37 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 const db = require("./query_class.js");
+const Response = require("./response.js")
 //routes that serve the data base and return json
 
 
 router.post("/users", (req, res) => {
   //this route implies we are looking to insert into users table
+  let r = new Response();
   let query = req.body;
-  query.table = "users"; //for definition required by db (need to dry up)
-  db.insert(query,  (data) => {
-    console.log("success");
-    //sends an array back
-    res.send(data);
-  });
-
+  console.log(req.body.data, "YADIA")
+  if(req.body.data.password === req.body.data.password.confirmation) {
+    console.log("workingns")
+    bcrypt.hash(req.body.data.password, 10, (err, hash) => {
+      //set up query object..
+      const query = {
+        first_name: req.body.data.first_name,
+        last_name: req.body.data.last_name,
+        email: req.body.data.email,
+        password_digest: hash
+      }
+      query.table = "users"; //for definition required by db (need to dry up)
+      db.insertRow(query,  (data) => {
+        console.log("success");
+        //sends an array back
+        r.setData(data)
+        res.send(r);
+      });
+    });
+  } else {
+    r.setErrorMsg("The passwords do not match");
+    res.send(r);
+  }
 });
 
 router.get("/users", (req, res) => {
