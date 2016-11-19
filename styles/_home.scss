@@ -1,0 +1,28 @@
+// normalize common tags
+body {
+  font-family: 'Raleway', sans-serif;
+}
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+#carousel-example-generic {
+  position: relative;
+  top: 120px;
+  height: 80%;
+
+
+  .carousel-inner > .item {
+      margin: 0 auto;
+  }
+}
+@media (min-width: 640px) {
+  .main-content {
+    border: 4px solid red;
+    height: 800px;
+    width: 75%;
+
+  }
+
+}

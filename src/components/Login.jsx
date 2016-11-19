@@ -31,7 +31,7 @@ class Login extends Component {
     return (
       <div className="login">
           <h1>Login to Your Account</h1><br/>
-          <p>   </p>
+
           <form>
             <input type="text" name="email" placeholder="Email"/>
             <input type="password" name="password" placeholder="Password"/>
