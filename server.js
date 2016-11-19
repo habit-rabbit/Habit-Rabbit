@@ -31,7 +31,7 @@ app.use(require("webpack-hot-middleware")(compiler));
 app.use(require('./routes/home'));
 // database api
 
-app.use(require('./api/db_connect'));
+app.use(require('./api/routes'));
 
 // configure slack
 // (function() {
