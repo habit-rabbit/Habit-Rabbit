@@ -7,7 +7,11 @@ router.post("/users", (req, res) => {
   //this route implies we are looking to insert into users table
   let query = req.body;
   query.table = "users"; //for definition required by db (need to dry up)
-  db.insert(query, callback);
+  db.insert(query,  (data) => {
+    console.log("success");
+    //sends an array back
+    res.send(data);
+  });
 
 });
 
@@ -37,7 +41,11 @@ router.get("/users/:id", (req, res) => {
     //this preserves the formatting required for the database class
     query.data = {};
     query.data.id = req.params.id;
-    db.getRow(query, callback, res);
+    db.getRow(query, (data) => {
+      console.log("success");
+      //sends an array back
+      res.send(data);
+    });
   } else {
     res.redirect("/")
   }
@@ -51,7 +59,12 @@ router.post("/users/:id/update", (req, res) => {
     let query = req.body
     query.table = "users";
     query.data.id = req.params.id;
-    db.updateRow(query, callback);
+
+    db.updateRow(query,  (data) => {
+      console.log("success");
+      //sends an array back
+      res.send(data);
+    });
   } else {
     res.redirect("/")
   }
