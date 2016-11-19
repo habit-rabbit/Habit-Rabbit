@@ -29,9 +29,14 @@ class Login extends Component {
     console.log("Rendering <Login/>");
 
     return (
-      <div className="login">
+
+      <div className="jumbotron">
+        <h1>Hello, world!</h1>
+        <p>...</p>
+  <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+  <div className="login">
           <h1>Login to Your Account</h1><br/>
-          <p>   </p>
+
           <form>
             <input type="text" name="email" placeholder="Email"/>
             <input type="password" name="password" placeholder="Password"/>
@@ -39,6 +44,8 @@ class Login extends Component {
           </form>
 
       </div>
+</div>
+
     );
   }
 }

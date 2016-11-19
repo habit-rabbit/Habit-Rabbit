@@ -8,6 +8,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 import Login from './components/Login.jsx';
+import Hero from './components/Hero.jsx';
 import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router'
 ReactDOM.render(
 
