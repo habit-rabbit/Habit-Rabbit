@@ -11,13 +11,11 @@ class Login extends Component {
 
   componentWillMount() {
     $.ajax({
-      method: 'get',
-      url: '/api/users',
+      method: 'post',
+      url: '/api/users/',
       data: {
-        type: 'getAll',
-        table: 'users',
         data: {
-          first_name: "Hermione",
+          first_name: "Serious",
           last_name: "Granger",
           email: "iLoveCats@hogwarts.uk",
           password_digest: "notdigested"

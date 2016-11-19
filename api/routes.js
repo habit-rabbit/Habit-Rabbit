@@ -1,22 +1,29 @@
 const router = require('express').Router();
 const db = require("./query_class.js");
 //routes that serve the data base and return json
-router.post("/api/users", (req, res) => {
-  const query = req.body;
-  db.query(query, callback)
 
+
+router.post("/api/users", (req, res) => {
+  let query = req.body;
+  req.body.table = "users"; //for definition required by db (need to dry up)
+  //this route implies we are looking to insert into users table
+  db.insert(query, callback)
 });
 
 router.get("/api/users", (req, res) => {
-  //since we are getting all users
-  //req.body should be formatted via ajax like
-  //  type: 'getAll',
-  // table: 'users',
-  // data: {},
-  //SEE query_class.js
-  const query = req.query;
-  console.log(query);
-  db.query(query, callback)
+  req.query.table = "users";
+  let query = req.query;
+  db.getAll(query, callback)
+})
+
+router.get("/api/users/:id", (req, res) => {
+  req.query.table = "users";
+  req.query.data = {};
+  req.query.data.id = req.params.id;
+  // we can assign the req.params.id to our query
+  // since we are getting only one user
+  let query = req.query;
+  db.getRow(query, callback)
 })
 
 
