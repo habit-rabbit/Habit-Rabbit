@@ -129,14 +129,19 @@ router.get("/users/:id/goals/:goal_id", (req, res) => {
   if (req.xhr) {
     let query = {};
     query.table = "goals";
-    query.data = {id: req.params.goal_id}
+    query.data = {id: req.params.goal_id, user_id: req.params.id}
     db.getAllWhere(query, (err, data) => {
       r.setData(data);
-      if (err) r.setErrorMsg("That goal doesn't exist! Make it your goal to make this goal a goal. (goal goal goal).")
+      if (!r.getData()) {
+        r.setErrorMsg ("This isn't one of your goals! Stop creeping, you creeper.");
+      }
+      if (err) {
+        r.setErrorMsg("That goal doesn't exist! Make it your goal to make this goal a goal. (goal goal goal).");
+      }
       res.send(r);
     });
   } else {
-    res.redirec("/");
+    res.redirect("/");
   }
 });
 
