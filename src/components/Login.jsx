@@ -25,7 +25,6 @@ class Login extends Component {
     });
   }
 
-
   render() {
     console.log("Rendering <Login/>");
 
@@ -40,7 +39,7 @@ class Login extends Component {
             </div>
 
             <div className="modal-body">
-              <form>
+              <form className="login">
                 <input type="text" name="email" placeholder="Email"/>
                 <input type="password" name="password" placeholder="Password"/>
                 <input type="submit" name="login" value="Login" data-dismiss="modal"/>
