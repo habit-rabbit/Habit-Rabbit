@@ -1,4 +1,4 @@
-Chat Reflector 9000
+
 ===================
 
 # Goals
