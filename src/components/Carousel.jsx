@@ -21,9 +21,6 @@ class Carousel extends Component {
 
   render() {
     console.log("Rendering Carousel")
-    console.log("???", this.props.goalInfo);
-    let goal = this.props.goalInfo[0];
-    console.log("MAYBE:???", goal.name);
 
     return (
       <div id="carousel-example-generic" className="carousel slide">
@@ -42,10 +39,10 @@ class Carousel extends Component {
                       <h1> {goal.name} </h1>
                       {this.goalType(goal)}
                       <div className="progress">
-                        <div className="progress-bar progress-bar-success" style={{width: "35%"}}>
-                          <span className="sr-only">35% Complete (success)</span>
+                        <div className="progress-bar progress-bar-success" style={{width: "33%"}}>
+                          <span className="sr-only">33% Complete (success)</span>
                         </div>
-                        <div className="progress-bar progress-bar-warning progress-bar-striped" style={{width: "20%"}}>
+                        <div className="progress-bar progress-bar-warning" style={{width: "20%"}}>
                           <span className="sr-only">20% Complete (warning)</span>
                         </div>
                         <div className="progress-bar progress-bar-danger" style={{width: "10%"}}>
