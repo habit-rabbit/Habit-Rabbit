@@ -2,6 +2,7 @@ const router = require('express').Router();
 const db = require("../api/query_class.js");
 const bcrypt = require('bcrypt');
 const Response = require('../api/response.js')
+
 router.get('/', (req, res) => {
   res.render('index');
 });
@@ -31,9 +32,15 @@ router.post('/login', (req, res) => {
       let user = data[0];
       // compare password to has...
       bcrypt.compare(pw , user.password_digest, function(err, result) {
-
-
-      // res == true
+        if(err) {
+          throw err;
+        }
+        if(result) {
+          //setcookie
+          req.session["user-id"] = user.id;
+          r.setData(user);
+          res.send(r);
+        }
       });
     }
   })
