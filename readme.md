@@ -36,7 +36,7 @@ Did you improve something somewhere, just for a moment?
 **DID YOU FORGET THE INEVITABLE APOCOLYPSE AND FORBODING DOOM ON THE HORIZON, EVEN FOR A SECOND?**
 
 
-Then our job here is done.
+Welp, our job here is done.
 Thanks!
 
 <3
