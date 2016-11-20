@@ -42,7 +42,7 @@ router.get("/users", (req, res) => {
     let query = req.query;
     query.table = "users";
     db.getAll(query, (data) => {
-      console.log("success");
+      console.log("successfully logged in");
       //sends an array back
       res.send(data)
     });

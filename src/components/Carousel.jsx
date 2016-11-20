@@ -4,6 +4,19 @@ class Carousel extends Component {
 
   constructor(props){
     super(props);
+    this.goalType = this.goalType.bind(this);
+  }
+
+  goalType (goal) {
+    if(goal.private === false){
+      return (
+        <h5> Public </h5>
+      )
+    } else {
+      return (
+        <h5> Private </h5>
+      )
+    }
   }
 
   render() {
@@ -23,11 +36,25 @@ class Carousel extends Component {
         <div className="carousel-inner">
           <div className="item active">
             <div className="container main-content">
-              <div className="goals-template">
-                <h1> Name Goes Here</h1>
-                <h2> Type Goes Here</h2>
-                <h3> Here they are{this.props.goalInfo[0].name} right here</h3>
-              </div>
+                {this.props.goalInfo.map((goal, index) => {
+                  return (
+                    <div className="goals-template" key={index}>
+                      <h1> {goal.name} </h1>
+                      {this.goalType(goal)}
+                      <div className="progress">
+                        <div className="progress-bar progress-bar-success" style={{width: "35%"}}>
+                          <span className="sr-only">35% Complete (success)</span>
+                        </div>
+                        <div className="progress-bar progress-bar-warning progress-bar-striped" style={{width: "20%"}}>
+                          <span className="sr-only">20% Complete (warning)</span>
+                        </div>
+                        <div className="progress-bar progress-bar-danger" style={{width: "10%"}}>
+                          <span className="sr-only">10% Complete (danger)</span>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
             </div>
             <div className="carousel-caption">
               <h1>Slide 1</h1>
