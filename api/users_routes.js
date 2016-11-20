@@ -106,6 +106,26 @@ router.post("/users/:id/update", (req, res) => {
   }
 });
 
+router.get("/users/:id/goals", (req, res) => {
+  const r = new Response();
+  let query = {};
+  query.table = "goals";
+  query.data = {user_id: 4}
+  db.getAllWhere(query, (err, data) => {
+    console.log (data);
+    console.log (err);
+  });
+});
 
+router.get("/users/:id/goals/:id", (req, res) => {
+  const r = new Response();
+  let query = {};
+  query.table = "tasks";
+  query.data = {goal_id: 5}
+  db.getAllWhere(query, (err, data) => {
+    console.log (data);
+    console.log (err);
+  });
+});
 
 module.exports = router;
