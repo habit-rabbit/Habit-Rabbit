@@ -2,8 +2,15 @@ import React, {Component} from 'react';
 
 class Carousel extends Component {
 
+  constructor(props){
+    super(props);
+  }
 
   render() {
+    console.log("Rendering Carousel")
+    console.log("???", this.props.goalInfo);
+    let goal = this.props.goalInfo[0];
+    console.log("MAYBE:???", goal.name);
 
     return (
       <div id="carousel-example-generic" className="carousel slide">
@@ -16,6 +23,11 @@ class Carousel extends Component {
         <div className="carousel-inner">
           <div className="item active">
             <div className="container main-content">
+              <div className="goals-template">
+                <h1> Name Goes Here</h1>
+                <h2> Type Goes Here</h2>
+                <h3> Here they are{this.props.goalInfo[0].name} right here</h3>
+              </div>
             </div>
             <div className="carousel-caption">
               <h1>Slide 1</h1>
