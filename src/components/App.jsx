@@ -1,22 +1,23 @@
 import React, {Component} from 'react';
 import Nav from './Nav.jsx';
-import Carousel from './Carousel.jsx';
+import Goals from './Goals.jsx';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      goals: [{name:"test"}],
+      goals: [],
       users: [],
     }
     this.queryDatabase = this.queryDatabase.bind(this);
   }
 
-  componentDidMount () {
+  componentWillMount () {
     let goals = $.ajax({
             method: "get",
             url: "/api/goals",
           }).done((data) => {
+            console.log(data)
             this.setState({goals: data});
           });
   }
@@ -41,7 +42,7 @@ class App extends Component {
     return (
       <div className="wrapper">
         <Nav />
-        <Carousel goalInfo={this.state.goals}/>
+        <Goals goalInfo={this.state.goals}/>
       </div>
     );
   }
