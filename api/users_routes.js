@@ -110,12 +110,18 @@ router.get("/users/:id/goals", (req, res) => {
   const r = new Response();
   if (req.xhr) {
     let query = {};
-    query.table = "goals";
+    query.table = findTable(req.url);
     query.data = {user_id: req.params.id}
     db.getAllWhere(query, (err, data) => {
-      r.setData(data);
-      if (err) r.setErrorMsg("You don't have any goals yet! Why are you even here?");
-      res.send(r);
+      if (err) {
+        // If there's an error here, the query has an invalid format
+        r.setErrorMsg("You're trying to do a thing that isn't a thing. STAHP.");
+        res.send(r);
+      } else {
+        // If there's an error here, the format is valid but the user doesn't exist
+        data.length ? r.setData(data) : r.setErrorMsg ("Sources say this user doesn't exist. Are you a ghost?");
+        res.send(r);
+      }
     });
   } else {
     res.redirect("/");
@@ -126,17 +132,18 @@ router.get("/users/:id/goals/:goal_id", (req, res) => {
   const r = new Response();
   if (req.xhr) {
     let query = {};
-    query.table = "goals";
+    query.table = findTable(req.url);
     query.data = {id: req.params.goal_id, user_id: req.params.id}
     db.getAllWhere(query, (err, data) => {
-      r.setData(data);
-      if (!r.getData()) {
-        r.setErrorMsg ("This isn't one of your goals! Stop creeping, you creeper.");
-      }
+      // If there's an error here, the query has an invalid format
       if (err) {
-        r.setErrorMsg("That goal doesn't exist! Make it your goal to make this goal a goal. (goal goal goal).");
+        r.setErrorMsg ("That goal doesn't exist! Make it your goal to make this goal a goal. (goal goal goal).");
+        res.send(r);
+      } else {
+        // If there's an error here, the user is trying to access another user's goals
+        data.length ? r.setData(data) : r.setErrorMsg ("This isn't one of your goals! Stop creeping, you creeper.");
+        res.send(r);
       }
-      res.send(r);
     });
   } else {
     res.redirect("/");
