@@ -59,4 +59,7 @@ router.use("/api", goalsRoutes);
 
 // also ***********I noticed we need to make migrations for the tables to
 // cascasde on delete from goals to tasks
+// hey it's me corky! we need a cascade delete on basically everything b/c right now
+// tasks depend on goals which depend on users and challenges
+// so I think a migration for each table that nukes everything immediately would be a Good Plan
 module.exports = router;
