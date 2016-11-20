@@ -25,7 +25,6 @@ class Login extends Component {
     });
   }
 
-
   render() {
     console.log("Rendering <Login/>");
 
@@ -39,11 +38,17 @@ class Login extends Component {
                 <h1 className="modal-title" id="myModalLabel">Login To Your Account</h1>
             </div>
 
-            <div className="modal-body">
-              <form>
+            <div id="login-body" className="modal-body">
+            <form>
+              <div className="form-group">
                 <input type="text" name="email" placeholder="Email"/>
+              </div>
+              <div className="form-group">
                 <input type="password" name="password" placeholder="Password"/>
-                <input type="submit" name="login" value="Login" data-dismiss="modal"/>
+              </div>
+              <div className="form-group">
+                <input type="submit" name="login" className="btn btn-default" value="Login" data-dismiss="modal"/>
+              </div>
               </form>
             </div>
 
