@@ -67,7 +67,8 @@ router.get("/users/:id", (req, res) => {
     query.data = {};
     query.data.id = req.params.id;
     db.getRow(query, (err, data) => {
-      r.setData(data);
+      //set data to first index as we should only ever get one result from getRow
+      r.setData(data[0]);
       //if there is an error that means a query was made with an invalid id
       // eg id = 'abcd'
       if (err) {
