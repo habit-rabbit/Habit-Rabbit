@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
-
+import Login from './Login.jsx';
+import Register from './Register.jsx';
 
 class Nav extends Component {
-
 
   render() {
     console.log("Rendering <Nav/>");
 
     return (
-
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
@@ -32,6 +31,10 @@ class Nav extends Component {
             </form>
 
             <ul className="nav navbar-nav navbar-right">
+             <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
+             <Login />
+             <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
+             <Register />
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
                 <ul className="dropdown-menu">
