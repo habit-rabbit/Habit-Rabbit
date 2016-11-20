@@ -52,7 +52,7 @@ router.get("/users", (req, res) => {
 })
 
 router.get("/users/:id", (req, res) => {
-
+const r = new Response();
 if(req.xhr) {
     let query = req.query;
     query.table = "users";
