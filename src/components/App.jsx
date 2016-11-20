@@ -6,17 +6,18 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      goals: [{name:"test"}],
+      goals: [],
       users: [],
     }
     this.queryDatabase = this.queryDatabase.bind(this);
   }
 
-  componentDidMount () {
+  componentWillMount () {
     let goals = $.ajax({
             method: "get",
             url: "/api/goals",
           }).done((data) => {
+            console.log(data)
             this.setState({goals: data});
           });
   }

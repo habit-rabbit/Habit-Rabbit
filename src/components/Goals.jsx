@@ -5,6 +5,8 @@ class Goals extends Component {
   constructor(props){
     super(props);
     this.goalType = this.goalType.bind(this);
+    // this.renderGoals = this.renderGoals.bind(this);
+
   }
 
   goalType (goal) {
@@ -19,35 +21,47 @@ class Goals extends Component {
     }
   }
 
-  render() {
-    console.log("Rendering Carousel")
-    console.log("???", this.props.goalInfo);
-    let goal = this.props.goalInfo[0];
-    console.log("MAYBE:???", goal.name);
-
-    return (
-      <div>
-        {this.props.goalInfo.map((goal, index) => {
-          return (
-            <div className="goals-template" key={index}>
-              <h1> {goal.name} </h1>
-              {this.goalType(goal)}
-              <div className="progress">
-                <div className="progress-bar progress-bar-success" style={{width: "35%"}}>
-                  <span className="sr-only">35% Complete (success)</span>
-                </div>
-                <div className="progress-bar progress-bar-warning progress-bar-striped" style={{width: "20%"}}>
-                  <span className="sr-only">20% Complete (warning)</span>
-                </div>
-                <div className="progress-bar progress-bar-danger" style={{width: "10%"}}>
-                  <span className="sr-only">10% Complete (danger)</span>
+  renderGoals() {
+    if(this.props.goalInfo == false) {
+    console.log("if" +this.props.goalInfo)
+      return (
+        <div>
+          Goals Loading...
+        </div>
+      )
+    } else {
+      console.log("else" +this.props.goalInfo)
+      return(
+        <div>
+          {console.log(this.props, "these r thr props")}
+          {this.props.goalInfo.data.map((goal, index) => {
+            console.log("GOOOOOOAAAAALLLLLL " + goal)
+            return (
+              <div className="goals-template" key={index}>
+                <h1> {goal.name} </h1>
+                {this.goalType(goal)}
+                <div className="progress">
+                  <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                    60%
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
+      );
+    }
+  }
+
+  render() {
+    // console.log (this.props.goalInfo.data)
+    return (
+      <div>
+       {this.renderGoals()}
       </div>
     );
   }
+
 }
+
 export default Goals;
