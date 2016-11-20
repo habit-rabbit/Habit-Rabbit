@@ -11,17 +11,17 @@ class Login extends Component {
   componentWillMount() {
     // for demonstration
     $.ajax({
-      method: 'post',
-      url: '/api/users',
-      data: {
-        data: {
-          first_name: "Ublueeous",
-          last_name: "Granger",
-          email: "iLoveCats@hogwarts.uk",
-          password:"apples",
-          password_confirmation: "apples"
-        }
-      }
+      method: 'get',
+      url: '/api/users/2',
+      // data: {
+      //   data: {
+      //     first_name: "Ublueeous",
+      //     last_name: "Granger",
+      //     email: "iLoveCats@hogwarts.uk",
+      //     password:"apples",
+      //     password_confirmation: "apples"
+      //   }
+      // }
     });
   }
 

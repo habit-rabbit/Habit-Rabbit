@@ -6,12 +6,13 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const config = require('./webpack.config');
 const compiler = webpack(config);
-
+const cookieSession = require('cookie-session')
 const bodyParser  = require("body-parser");
 
 require('dotenv').config({silent: true});
 
 const port = process.env.PORT || 3000;
+
 
 app.set('view engine', 'ejs');
 
@@ -24,7 +25,11 @@ app.use(webpackDevMiddleware(compiler, {
   }
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cookieSession({
+  name: 'session',
+  //to be changed
+  secret: "liamneeson"
+}));
 app.use(require("webpack-hot-middleware")(compiler));
 
 // routing
