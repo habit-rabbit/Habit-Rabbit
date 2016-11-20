@@ -38,7 +38,7 @@ router.post('/login', (req, res) => {
         if(result) {
           //setcookie
           req.session["user-id"] = user.id;
-          r.setData(user);
+          r.setData(user.first_name);
           res.send(r);
         }
       });

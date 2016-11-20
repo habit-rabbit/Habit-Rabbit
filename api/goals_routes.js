@@ -7,7 +7,7 @@ router.post("/goals/create", (req, res) => {
   //this route implies we are looking to insert into users table
   if(req.xhr) {
     let query = req.body;
-    query.table = "users"; //for definition required by db (need to dry up)
+    query.table = "goals"; //for definition required by db (need to dry up)
     db.insertRow(query,  (data) => {
       console.log("success");
       //sends an array back
