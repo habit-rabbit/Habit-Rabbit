@@ -1,14 +1,13 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const db = require("./query_class.js");
-const Response = require("./response.js")
-//routes that serve the data base and return json
+const Response = require("./response.js");
+//routes that serve the data base and return a response object r
 
 
 router.post("/users/create", (req, res) => {
   //this route implies we are looking to insert into users table
   let r = new Response();
-  let query = req.body;
 
   if(req.body.data.password === req.body.data.password_confirmation) {
     bcrypt.hash(req.body.data.password, 10, (err, hash) => {
@@ -20,16 +19,17 @@ router.post("/users/create", (req, res) => {
         last_name: req.body.data.last_name,
         email: req.body.data.email,
         password_digest: hash
-      }
+      };
       //insert into database
-      db.insertRow(query,  (data) => {
-        console.log("success");
+      db.insertRow(query,  (err, data) => {
+        if (err) r.setErrorMsg("Unable to save user, bad credentials!");
         //set data into response object 'r'
-        r.setData(data)
+        r.setData(data);
         res.send(r);
       });
     });
   } else {
+    //passwords didn't match
     r.setErrorMsg("The passwords do not match");
     res.send(r);
   }
@@ -38,13 +38,15 @@ router.post("/users/create", (req, res) => {
 router.get("/users", (req, res) => {
   //checks to see if xhr was used, this prevents users from
   //accessing the api via its endpoint only
+  let r = new Response();
   if(req.xhr) {
     let query = req.query;
     query.table = "users";
     db.getAll(query, (data) => {
-      console.log("successfully logged in");
+      console.log("success");
       //sends an array back
-      res.send(data)
+      r.setData(data);
+      res.send(r);
     });
   } else {
     res.redirect("/");
@@ -62,19 +64,18 @@ if(req.xhr) {
     query.data = {};
     query.data.id = req.params.id;
     db.getRow(query, (err, data) => {
+      r.setData(data);
       //if there is an error that means a query was made with an invalid id
       // eg id = 'abcd'
       if (err) {
-        r.setErrorMsg("Queried with invalid id!")
+        r.setErrorMsg("Queried with invalid id!");
       }
-      if (!r.getData()) {
-        //if data is empty that means the id that was supplied for the query
-        //does not exist in the database for users table
-        r.setErrorMsg(`User does not exist!`);
+      //if data is empty that means the id that was supplied for the query
+      //does not exist in the database for users table
+      if (!r.getData) {
+        r.setErrorMsg(" User does not exist!");
       }
-      r.setData(data);
       console.log("success");
-      //sends an array back
       res.send(r);
     });
   } else {
