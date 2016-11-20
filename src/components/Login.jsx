@@ -41,7 +41,6 @@ class Login extends Component {
             <div id="login-body" className="modal-body">
             <form>
               <div className="form-group">
->>>>>>> master
                 <input type="text" name="email" placeholder="Email"/>
               </div>
               <div className="form-group">
