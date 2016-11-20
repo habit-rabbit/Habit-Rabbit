@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Nav from './Nav.jsx';
-import Carousel from './Carousel.jsx';
+import Goals from './Goals.jsx';
 
 class App extends Component {
   constructor(props){
@@ -41,7 +41,7 @@ class App extends Component {
     return (
       <div className="wrapper">
         <Nav />
-        <Carousel goalInfo={this.state.goals}/>
+        <Goals goalInfo={this.state.goals}/>
       </div>
     );
   }
