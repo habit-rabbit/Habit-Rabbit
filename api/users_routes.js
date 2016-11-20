@@ -6,6 +6,7 @@ const Response = require("./response.js");
 
 
 router.post("/users/create", (req, res) => {
+
   //this route implies we are looking to insert into users table
   let r = new Response();
 
