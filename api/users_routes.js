@@ -73,14 +73,14 @@ router.get("/users/:id", (req, res) => {
       }
       //if data is empty that means the id that was supplied for the query
       //does not exist in the database for users table
-      if (!r.getData) {
+      if (!r.getData()) {
         r.setErrorMsg(" User does not exist!");
       }
       console.log("success");
       res.send(r);
     });
   } else {
-    res.redirect("/")
+    res.redirect("/");
   }
 })
 
@@ -102,7 +102,10 @@ router.post("/users/:id/update", (req, res) => {
       r.send(r);
     });
   } else {
-    res.redirect("/")
+    res.redirect("/");
   }
-})
+});
+
+
+
 module.exports = router;
