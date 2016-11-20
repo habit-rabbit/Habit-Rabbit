@@ -43,7 +43,7 @@ router.get("/users", (req, res) => {
   //accessing the api via its endpoint only
   if(req.xhr) {
     let query = req.query;
-    query.table = "users";
+    query.table = findTable(req.url);
     db.getAll(query, (err, data) => {
       r.setData(data);
       if (err) r.setErrorMsg("Unable to get all users!");
@@ -60,7 +60,7 @@ router.get("/users/:id", (req, res) => {
   //accessing the api via its endpoint only
   if(req.xhr) {
     let query = req.query;
-    query.table = "users";
+    query.table = findTable(req.url);
     // we can assign the req.params.id to our data object, but as there is no
     // data object being passed in from the ajax call we create an empty one
     //this preserves the formatting required for the database class
@@ -95,7 +95,7 @@ router.post("/users/:id/update", (req, res) => {
   //accessing the api via its endpoint only
   if(req.xhr) {
     let query = req.body
-    query.table = "users";
+    query.table = findTable(req.url);
     query.data.id = req.params.id;
 
     db.updateRow(query,  (err, data) => {
