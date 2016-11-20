@@ -35,7 +35,7 @@ database.prototype.getAll = function (query, callback) {
     .asCallback(callback);
 }
 
-database.prototype.updateRow = function (query, callback) {
+  database.prototype.updateRow = function (query, callback) {
   console.log(query, "db query")
   this.knex(query.table)
     .where("id", query.data.id)

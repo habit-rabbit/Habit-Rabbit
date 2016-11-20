@@ -36,16 +36,15 @@ router.post("/users/create", (req, res) => {
 });
 
 router.get("/users", (req, res) => {
+  const r = new Response();
   //checks to see if xhr was used, this prevents users from
   //accessing the api via its endpoint only
-  let r = new Response();
   if(req.xhr) {
     let query = req.query;
     query.table = "users";
-    db.getAll(query, (data) => {
-      console.log("success");
-      //sends an array back
+    db.getAll(query, (err, data) => {
       r.setData(data);
+      if (err) r.setErrorMsg("Unable to get all users!");
       res.send(r);
     });
   } else {
@@ -54,8 +53,10 @@ router.get("/users", (req, res) => {
 })
 
 router.get("/users/:id", (req, res) => {
-const r = new Response();
-if(req.xhr) {
+  const r = new Response();
+  //checks to see if xhr was used, this prevents users from
+  //accessing the api via its endpoint only
+  if(req.xhr) {
     let query = req.query;
     query.table = "users";
     // we can assign the req.params.id to our data object, but as there is no
@@ -87,29 +88,21 @@ if(req.xhr) {
 // delete and update methods will be posts for now..
 
 router.post("/users/:id/update", (req, res) => {
+  const r = new Response();
+  //checks to see if xhr was used, this prevents users from
+  //accessing the api via its endpoint only
   if(req.xhr) {
     let query = req.body
     query.table = "users";
     query.data.id = req.params.id;
 
-    db.updateRow(query,  (data) => {
-      console.log("success");
-      //sends an array back
-      res.send(data);
+    db.updateRow(query,  (err, data) => {
+      r.setData(data);
+      if (err) r.setErrorMsg("Unable to update user information");
+      r.send(r);
     });
   } else {
     res.redirect("/")
   }
 })
 module.exports = router;
-
-// function callback(data) {
-//   console.log(data);
-//   console.log("works");
-//   res.JSON("Good");
-// }
-
-// function response(res) {
-
-//   res.send("okay");
-// }
