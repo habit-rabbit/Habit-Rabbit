@@ -3,7 +3,7 @@ const db = require("./query_class.js");
 //routes that serve the data base and return json
 
 
-router.post("/goals", (req, res) => {
+router.post("/goals/create", (req, res) => {
   //this route implies we are looking to insert into users table
   if(req.xhr) {
     let query = req.body;
