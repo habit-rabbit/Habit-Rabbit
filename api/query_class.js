@@ -23,7 +23,7 @@ database.prototype.insertRow = function (query, callback) {
 database.prototype.getRow = function (query, callback) {
   this.knex(query.table)
     .where(query.data)
-    .then(callback);
+    .asCallback(callback);
 }
 database.prototype.getAll = function (query, callback) {
   this.knex

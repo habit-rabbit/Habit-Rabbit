@@ -53,7 +53,7 @@ router.get("/users", (req, res) => {
 
 router.get("/users/:id", (req, res) => {
 
-  if(req.xhr) {
+if(req.xhr) {
     let query = req.query;
     query.table = "users";
     // we can assign the req.params.id to our data object, but as there is no
@@ -61,10 +61,21 @@ router.get("/users/:id", (req, res) => {
     //this preserves the formatting required for the database class
     query.data = {};
     query.data.id = req.params.id;
-    db.getRow(query, (data) => {
+    db.getRow(query, (err, data) => {
+      //if there is an error that means a query was made with an invalid id
+      // eg id = 'abcd'
+      if (err) {
+        r.setErrorMsg("Queried with invalid id!")
+      }
+      if (!r.getData()) {
+        //if data is empty that means the id that was supplied for the query
+        //does not exist in the database for users table
+        r.setErrorMsg(`User does not exist!`);
+      }
+      r.setData(data);
       console.log("success");
       //sends an array back
-      res.send(data);
+      res.send(r);
     });
   } else {
     res.redirect("/")
