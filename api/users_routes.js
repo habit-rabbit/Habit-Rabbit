@@ -99,7 +99,7 @@ router.post("/users/:id/update", (req, res) => {
     db.updateRow(query,  (err, data) => {
       r.setData(data);
       if (err) r.setErrorMsg("Unable to update user information");
-      r.send(r);
+      res.send(r);
     });
   } else {
     res.redirect("/");
@@ -108,24 +108,34 @@ router.post("/users/:id/update", (req, res) => {
 
 router.get("/users/:id/goals", (req, res) => {
   const r = new Response();
-  let query = {};
-  query.table = "goals";
-  query.data = {user_id: 4}
-  db.getAllWhere(query, (err, data) => {
-    console.log (data);
-    console.log (err);
-  });
+  if (req.xhr) {
+    let query = {};
+    query.table = "goals";
+    query.data = {user_id: req.params.id}
+    db.getAllWhere(query, (err, data) => {
+      r.setData(data);
+      if (err) r.setErrorMsg("You don't have any goals yet! Why are you even here?");
+      res.send(r);
+    });
+  } else {
+    res.redirect("/");
+  }
 });
 
-router.get("/users/:id/goals/:id", (req, res) => {
+router.get("/users/:id/goals/:goal_id", (req, res) => {
   const r = new Response();
-  let query = {};
-  query.table = "tasks";
-  query.data = {goal_id: 5}
-  db.getAllWhere(query, (err, data) => {
-    console.log (data);
-    console.log (err);
-  });
+  if (req.xhr) {
+    let query = {};
+    query.table = "goals";
+    query.data = {id: req.params.goal_id}
+    db.getAllWhere(query, (err, data) => {
+      r.setData(data);
+      if (err) r.setErrorMsg("That goal doesn't exist! Make it your goal to make this goal a goal. (goal goal goal).")
+      res.send(r);
+    });
+  } else {
+    res.redirec("/");
+  }
 });
 
 module.exports = router;
