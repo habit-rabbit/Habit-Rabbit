@@ -21,6 +21,7 @@ ReactDOM.render(
       <Route path="/login" component={Login} />
     </Route>
     <Route path="/home" component={App} />
+     <Route path="/hero" component={Hero} />
  </Router>
   , document.getElementById('react-root'));
 
