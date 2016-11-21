@@ -3,19 +3,19 @@ function ResponseData(error, data) {
   this.error = {};
 }
 
-Response.prototype.setErrorMsg = function(msg) {
+ResponseData.prototype.setErrorMsg = function(msg) {
   this.error.msg = msg;
 }
 
-Response.prototype.getErrorMsg = function() {
+ResponseData.prototype.getErrorMsg = function() {
   return this.error.msg;
 }
 
-Response.prototype.setData = function(dataObject) {
+ResponseData.prototype.setData = function(dataObject) {
   this.data = dataObject;
 }
 
-Response.prototype.getData = function() {
+ResponseData.prototype.getData = function() {
   return this.data;
 }
 
