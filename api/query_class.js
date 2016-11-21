@@ -35,7 +35,7 @@ database.prototype.getAll = function (query, callback) {
     .asCallback(callback);
 }
 
-  database.prototype.updateRow = function (query, callback) {
+database.prototype.updateRow = function (query, callback) {
   console.log(query, "db query")
   this.knex(query.table)
     .where("id", query.data.id)
@@ -43,12 +43,12 @@ database.prototype.getAll = function (query, callback) {
     .asCallback(callback);
 }
 
-  database.prototype.getAllWhere = function (query, callback) {
-    console.log(query, "db query");
-    this.knex
-      .select()
-      .table(query.table)
-      .where(query.data)
-      .asCallback(callback);
-  }
+database.prototype.getAllWhere = function (query, callback) {
+  this.knex
+    .select()
+    .table(query.table)
+    .where(query.data)
+    .asCallback(callback);
+}
+
 module.exports = new database();

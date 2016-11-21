@@ -9,6 +9,10 @@ import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 import Login from './components/Login.jsx';
 import Hero from './components/Hero.jsx';
+import Goals from './components/Goals.jsx';
+import Carousel from './components/Carousel.jsx';
+
+
 import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router'
 ReactDOM.render(
 
@@ -21,7 +25,7 @@ ReactDOM.render(
         <Route path="/hero" component={Hero} />
   </Route>
   <Route path="/home" component={App} />
-    <Route path="/hero" component={Hero} />
+    <Route path="/goals" component={Carousel} />
   </Router>
 , document.getElementById('react-root'));
 
