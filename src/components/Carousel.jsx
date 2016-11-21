@@ -9,8 +9,6 @@ class Carousel extends Component {
   render() {
     console.log("Rendering Carousel")
 
-                  // goalInfo={this.props.goalInfo.data}
-                  // taskInfo={this.props.taskInfo.data}
     return (
       <div id="carousel-example-generic" className="carousel slide">
         <ol className="carousel-indicators">

@@ -7,31 +7,46 @@ class Goals extends Component {
     this.goalType = this.goalType.bind(this);
     this.renderGoals = this.renderGoals.bind(this);
     this.updateTask = this.updateTask.bind(this);
+    this.getCurrentTask = this.getCurrentTask.bind(this);
+    this.initializeGoalData = this.initializeGoalData.bind(this);
     this.state = {
       goals: [],
-      tasks: [],
-      userId: null
+      tasks: {},
+      userId: null,
+      updating: false
     }
-
+    this.initializeGoalData();
   }
 
-  componentWillMount () {
+  initializeGoalData () {
 
   let goals = $.ajax({
     method: "get",
     url: "/api/goals",
   }).done((data) => {
-    console.log("DATA:",data)
+    console.log("DATA:", data);
     this.setState({goals: data});
   });
 
-  let tasks = $.ajax({
+  $.ajax({
     method: "get",
     url: "/api/goals/5/tasks"
   }).done((data) => {
-    console.log(data)
+    console.log(data);
+    let tasks = data.data;
+    tasks.sort((a, b) => {
+      if (a.task_order > b.task_order) {
+        return 1;
+      }
+      if (a.task_order < b.task_order) {
+        return -1;
+      }
+      return 0;
+    });
+    console.log("SORTED TASKS:", tasks);
     this.setState({tasks: data});
   });
+  // this.setState({updating: false});
   }
 
   goalType (goal) {
@@ -46,14 +61,33 @@ class Goals extends Component {
     }
   }
 
-  updateTask () {
-    console.log("You checked a checkbox! Look at you go!");
-    // needs an ajax call to update the task table (is_done = true)
+  getCurrentTask () {
+    console.log("GETTING CURRENT TASK");
+    function findNextTask(task) {
+      return !task.is_done
+    }
+    let taskName = this.state.tasks.data.find(findNextTask);
+    console.log("getCurrentTaskResult:", taskName.name);
+    return taskName;
+  }
+
+  updateTask (goalId, taskId) {
+    // console.log("You checked a checkbox! Look at you go!");
+    console.log("SENDING TASK UPDATE");
+    console.log(`Goal id: ${goalId}, task id: ${taskId}`);
+    let taskUpdate = $.ajax({
+      method: "post",
+      url: `api/goals/${goalId}/tasks/${taskId}/update`,
+      data: {is_done: true}
+    }).done((data) => {
+      this.value = false;
+      this.initializeGoalData();
+    })
   }
 
   renderGoals() {
     console.log("Rendering <Goals/>");
-    console.log(this.state);
+    console.log("State Tasks:", this.state.tasks);
     if(this.state.goals.length === 0) {
       console.log("if" +this.state.goals);
       return (
@@ -65,9 +99,7 @@ class Goals extends Component {
       console.log("else" +this.state.goals);
       return(
         <div>
-          {console.log(this.state, "these r thr props")}
           {this.state.goals.data.map((goal, index) => {
-            console.log("GOOOOOOAAAAALLLLLL " + goal)
             return (
               <div className="goals-template row " key={index}>
                 <div className="col-md-3">
@@ -81,16 +113,11 @@ class Goals extends Component {
                   </div>
                 </div>
                 <div className="col-md-3">
-                  {/*this.props.taskInfo.map((task, index) => {
-                    return (
-                      <p className="task" key={index}> {task.name} </p>
-                    )
-                  })*/}
                   <h4 className="task-list"> Next Task: </h4>
-                  <p>{this.state.tasks.data[0].name}</p>
+                  <p>{this.getCurrentTask().name}</p>
                   <span>Finished already? </span>
                     <label>
-                      <input type="checkbox" onChange={this.updateTask}/>
+                      <input type="checkbox" onChange={()=>{this.updateTask(goal.id, this.getCurrentTask().id)}}/>
                     </label>
                 </div>
               </div>
