@@ -97,4 +97,26 @@ router.get("/goals/:id/tasks", (req, res) => {
   }
 });
 
+router.post("/goals/:id/tasks/:task_id/update", (req, res) => {
+  const r = new Response();
+  if (req.xhr) {
+    let query = {};
+    query.table = findTable(req.url);
+    query.data = req.body;
+    console.log("Query Data: ", query.data);
+    query.data.id = req.params.task_id;
+    db.updateRow(query, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(data);
+        r.setData(data);
+        res.send(r);
+      }
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
 module.exports = router;
