@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Nav from './Nav.jsx';
 import Goals from './Goals.jsx';
+import Hero from './Hero.jsx';
+
 
 class App extends Component {
   constructor(props){
@@ -8,8 +10,10 @@ class App extends Component {
     this.state = {
       goals: [],
       users: [],
+      isLoggedIn: false
     }
     this.queryDatabase = this.queryDatabase.bind(this);
+    this.loggedIn = this.loggedIn.bind(this);
   }
 
   componentWillMount () {
@@ -36,13 +40,23 @@ class App extends Component {
     }
   }
 
+//THIS LOGIC IS IN BETA TESTING - cecia and nat were attempting to get login routes working
+    loggedIn() {
+      if (this.state.isLoggedIn) {
+        return <Goals goalInfo={this.state.goals}/>
+      } else {
+        return <Hero />
+      }
+    }
+
   render() {
     console.log("Rendering <App/>");
+
 
     return (
       <div className="wrapper">
         <Nav />
-        <Goals goalInfo={this.state.goals}/>
+        {this.loggedIn()}
       </div>
     );
   }

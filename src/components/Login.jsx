@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Nav from './Nav.jsx';
+import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
+
 
 class Login extends Component {
 
@@ -9,23 +11,6 @@ class Login extends Component {
     this.state = {email: "", password: ""};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentWillMount() {
-    // for demonstration
-    $.ajax({
-      method: 'get',
-      url: '/api/users/2',
-      // data: {
-      //   data: {
-      //     first_name: "Ublueeous",
-      //     last_name: "Granger",
-      //     email: "iLoveCats@hogwarts.uk",
-      //     password:"apples",
-      //     password_confirmation: "apples"
-      //   }
-      // }
-    });
   }
 
   handleChange(event) {
@@ -43,7 +28,6 @@ class Login extends Component {
   }
 
  handleSubmit(event) {
-    event.preventDefault();
 
     $.ajax({
       method: 'post',
@@ -57,6 +41,9 @@ class Login extends Component {
     }).then( (data) => {
       console.log("DAATAA", data)
     });
+    event.preventDefault();
+
+    // this.setState({dismiss: "modal"});
   }
 
   render() {
