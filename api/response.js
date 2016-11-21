@@ -1,4 +1,4 @@
-function Response(error, data) {
+function ResponseData(error, data) {
   this.data = {};
   this.error = {};
 }
@@ -19,4 +19,4 @@ Response.prototype.getData = function() {
   return this.data;
 }
 
-module.exports = Response;
+module.exports = ResponseData;
