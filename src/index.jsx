@@ -15,14 +15,14 @@ ReactDOM.render(
   //here we would have our conditionals some ho that sets up the redirects
   // ie   <IndexRedirect to="/welcome" />
 
- <Router history={hashHistory} >
+  <Router history={hashHistory} >
     <Route path="/">
-        <IndexRedirect to="/login" />
-      <Route path="/login" component={Login} />
-    </Route>
-    <Route path="/home" component={App} />
-     <Route path="/hero" component={Hero} />
- </Router>
-  , document.getElementById('react-root'));
+      <IndexRedirect to="/hero" />
+        <Route path="/hero" component={Hero} />
+  </Route>
+  <Route path="/home" component={App} />
+    <Route path="/hero" component={Hero} />
+  </Router>
+, document.getElementById('react-root'));
 
 

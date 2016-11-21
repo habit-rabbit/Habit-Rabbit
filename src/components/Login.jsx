@@ -1,28 +1,49 @@
 import React, {Component} from 'react';
 import Nav from './Nav.jsx';
+import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
+
 
 class Login extends Component {
 
   constructor(props) {
     super(props);
     this.users = {};
+    this.state = {email: "", password: ""};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
-    // for demonstration
+  handleChange(event) {
+    let id = event.target.id;
+    let value = event.target.value.trim();
+
+    if (id === "email") {
+      this.setState({email: value});
+      console.log(this.state.email)
+    }
+    if (id === "password") {
+      this.setState({password: value});
+      console.log(this.state.password)
+    }
+  }
+
+ handleSubmit(event) {
+
     $.ajax({
-      method: 'get',
-      url: '/api/users/2',
-      // data: {
-      //   data: {
-      //     first_name: "Ublueeous",
-      //     last_name: "Granger",
-      //     email: "iLoveCats@hogwarts.uk",
-      //     password:"apples",
-      //     password_confirmation: "apples"
-      //   }
-      // }
+      method: 'post',
+      url: '/login',
+      data: {
+        data: {
+          email: this.state.email,
+          password: this.state.password,
+        }
+      }
+    }).then( (data) => {
+      console.log("DAATAA", data)
     });
+    event.preventDefault();
+
+    // this.setState({dismiss: "modal"});
   }
 
   render() {
@@ -39,15 +60,17 @@ class Login extends Component {
             </div>
 
             <div id="login-body" className="modal-body">
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <div className="form-group">
-                <input type="text" name="email" placeholder="Email"/>
+                <input id="email" type="text" value={this.state.value} onChange={this.handleChange} name="email" placeholder="Email"/>
               </div>
+
               <div className="form-group">
-                <input type="password" name="password" placeholder="Password"/>
+                <input id="password" type="password" value={this.state.password} onChange={this.handleChange} name="password" placeholder="Password"/>
               </div>
+
               <div className="form-group">
-                <input type="submit" name="login" className="btn btn-default" value="Login" data-dismiss="modal"/>
+                <input type="submit" name="login" className="btn btn-default" value="Login" />
               </div>
               </form>
             </div>
