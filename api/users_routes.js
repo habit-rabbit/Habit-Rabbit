@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const db = require("./query_class.js");
-const Response = require("./response.js");
+const ResponseData = require("./response.js");
 const findTable = require("./utilities/find_table.js");
 //routes that serve the data base and return a response object r
 
@@ -9,7 +9,7 @@ const findTable = require("./utilities/find_table.js");
 router.post("/users/create", (req, res) => {
 
   //this route implies we are looking to insert into users table
-  let r = new Response();
+  let r = new ResponseData();
 
   if(req.body.data.password === req.body.data.password_confirmation) {
     bcrypt.hash(req.body.data.password, 10, (err, hash) => {
@@ -25,7 +25,7 @@ router.post("/users/create", (req, res) => {
       //insert into database
       db.insertRow(query,  (err, data) => {
         if (err) r.setErrorMsg("Unable to save user, bad credentials!");
-        //set data into response object 'r'
+        //set data into responseData object 'r'
         r.setData(data);
         res.send(r);
       });
@@ -38,7 +38,7 @@ router.post("/users/create", (req, res) => {
 });
 
 router.get("/users", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   //checks to see if xhr was used, this prevents users from
   //accessing the api via its endpoint only
   if(req.xhr) {
@@ -55,7 +55,7 @@ router.get("/users", (req, res) => {
 })
 
 router.get("/users/:id", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   //checks to see if xhr was used, this prevents users from
   //accessing the api via its endpoint only
   if(req.xhr) {
@@ -88,7 +88,7 @@ router.get("/users/:id", (req, res) => {
 // delete and update methods will be posts for now..
 
 router.post("/users/:id/update", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   //checks to see if xhr was used, this prevents users from
   //accessing the api via its endpoint only
   if(req.xhr) {
@@ -107,7 +107,7 @@ router.post("/users/:id/update", (req, res) => {
 });
 
 router.get("/users/:id/goals", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   if (req.xhr) {
     let query = {};
     query.table = findTable(req.url);
@@ -129,7 +129,7 @@ router.get("/users/:id/goals", (req, res) => {
 });
 
 router.get("/users/:id/goals/:goal_id", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   if (req.xhr) {
     let query = {};
     query.table = findTable(req.url);

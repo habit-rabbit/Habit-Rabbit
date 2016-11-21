@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const db = require("../api/query_class.js");
 const bcrypt = require('bcrypt');
-const Response = require('../api/response.js');
+const ResponseData = require('../api/response.js');
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
 
 router.post('/login', (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   const pw = req.body.data.password;
   const query = {};
   query.data = {};
@@ -38,7 +38,7 @@ router.post('/login', (req, res) => {
         if(result) {
           //setcookie
           req.session["user-id"] = user.id;
-          r.setData({first_name: user.first_name, id: user.id});
+          r.setData({id: user.id});
           // res.redirect("/");
         }
         responder();

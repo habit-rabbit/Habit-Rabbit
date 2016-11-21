@@ -4,9 +4,9 @@ import Register from './Register.jsx';
 
 class Nav extends Component {
 
+
   render() {
     console.log("Rendering <Nav/>");
-
     return (
       <nav className="navbar navbar-default">
         <div className="container-fluid">
@@ -31,7 +31,7 @@ class Nav extends Component {
 
             <ul className="nav navbar-nav navbar-right">
              <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
-             <Login />
+             <Login setUserId={this.props.setUserId}/>
              <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
              <Register />
               <li className="dropdown">

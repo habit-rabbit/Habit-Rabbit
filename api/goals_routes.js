@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const db = require("./query_class.js");
-const Response = require("./response.js");
+const ResponseData = require("./response.js");
 const findTable = require("./utilities/find_table.js");
 const validates = require("./utilities/validations.js");
 //routes that serve the data base and return json
 
 
 router.post("/goals/create", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   //this route implies we are looking to insert into goals table
   if(req.xhr) {
     let query = req.body;
@@ -23,7 +23,7 @@ router.post("/goals/create", (req, res) => {
 });
 
 router.get("/goals", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   if(req.xhr) {
     let query = req.query;
     query.table = "goals";
@@ -38,7 +38,7 @@ router.get("/goals", (req, res) => {
 });
 
 router.get("/goals/:id", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   if(req.xhr) {
     let query = req.query;
     query.table = "goals";
@@ -59,7 +59,7 @@ router.get("/goals/:id", (req, res) => {
 });
 
 router.post("/goals/:id/delete", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   if(req.xhr) {
     let query = req.body;
     query.table = "goals";
@@ -76,7 +76,7 @@ router.post("/goals/:id/delete", (req, res) => {
 });
 
 router.get("/goals/:id/tasks", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   if (req.xhr) {
     let query = {};
     query.table = findTable(req.url);

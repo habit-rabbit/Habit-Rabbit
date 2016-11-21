@@ -20,10 +20,7 @@ ReactDOM.render(
   // ie   <IndexRedirect to="/welcome" />
 
   <Router history={hashHistory} >
-    <Route path="/">
-      <IndexRedirect to="/hero" />
-        <Route path="/hero" component={Hero} />
-  </Route>
+
   <Route path="/home" component={App} />
     <Route path="/goals" component={Carousel} />
   </Router>
