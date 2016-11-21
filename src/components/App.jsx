@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       goals: [],
-      users: [],
+      users: [], //userId: null
       tasks: [],
       isLoggedIn: false
     }
