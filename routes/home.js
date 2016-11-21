@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const db = require("../api/query_class.js");
 const bcrypt = require('bcrypt');
-const Response = require('../api/response.js')
+const Response = require('../api/response.js');
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -17,14 +17,16 @@ router.post('/login', (req, res) => {
   query.data.email = req.body.data.email;
   //query data base for user, if found grab hash and compare to pw
   db.getRow(query, (err, data) => {
+    const responder = function() {res.json(r);}
     //if err, the query was made with an invalid email;
     if (err) {
       r.setErrorMsg("Invalid credentials, please try again or signup");
-    }
-    if (!data) {
+      responder();
+    } else if (!data.length) {
       //if data is empty that means the email supplied did not match
       // a record in the db
       r.setErrorMsg(`Incorrect email or password!`);
+      responder();
     } else {
       //database found user
       let user = data[0];
@@ -39,11 +41,10 @@ router.post('/login', (req, res) => {
           r.setData({first_name: user.first_name, id: user.id});
           // res.redirect("/");
         }
-        res.json(r);
+        responder();
       });
     }
   });
 
 });
->>>>>>> master
 module.exports = router;
