@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const db = require("./query_class.js");
 const Response = require("./response.js");
-const findTable = require("./utilities/find_table.js")
+const findTable = require("./utilities/find_table.js");
 //routes that serve the data base and return a response object r
 
 
