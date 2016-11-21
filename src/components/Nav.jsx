@@ -34,7 +34,7 @@ class Nav extends Component {
 
             <ul className="nav navbar-nav navbar-right">
              <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
-             <Login isLoggedIn={this.props.loggedIn}/>
+             <Login setUserId={this.props.setUserId}/>
              <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
              <Register />
               <li className="dropdown">

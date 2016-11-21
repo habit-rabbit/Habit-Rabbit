@@ -23,8 +23,8 @@ class Login extends Component {
     if (id === "password") {
       this.setState({password: value});
     }
-      console.log(this.state.email)
-      console.log(this.state.password)
+      // console.log(this.state.email)
+      // console.log(this.state.password)
   }
 
  handleSubmit(event) {
@@ -40,8 +40,8 @@ class Login extends Component {
           password: this.state.password
         }
       }
-    }).then( (data) => {
-      console.log("DAATAA", data)
+    }).then( (result) => {
+      this.props.setUserId(result.data.id);
     });
 
 

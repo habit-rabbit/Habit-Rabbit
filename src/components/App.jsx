@@ -11,6 +11,7 @@ class App extends Component {
       userId: null
     }
     this.setUserId = this.setUserId.bind(this);
+    this.getUserId = this.getUserId.bind(this);
   }
 
 
@@ -24,13 +25,13 @@ class App extends Component {
     //   }
     // }
   setUserId(userId) {
-    console.log("USER ID!!!!!!!!!!!!!!!!!!!!!!!!")
     this.setState({'userId': userId});
-    console.log(this.state)
+  }
+  getUserId(userId) {
+    return this.state.userId;
   }
   render() {
     console.log("Rendering <App/>");
-    console.log(this.state, "rendered state")
 
 
         // {this.loggedIn()}
