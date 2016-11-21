@@ -81,6 +81,7 @@ class App extends Component {
     console.log("Rendering <App/>");
 
 
+        // {this.loggedIn()}
     return (
       <div className="wrapper">
         <Nav />
@@ -88,7 +89,6 @@ class App extends Component {
           goalInfo={this.state.goals}
           taskInfo={this.state.tasks}
         />
-        {this.loggedIn()}
       </div>
     );
   }

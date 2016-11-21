@@ -15,19 +15,20 @@ class Login extends Component {
 
   handleChange(event) {
     let id = event.target.id;
-    let value = event.target.value.trim();
+    let value = event.target.value;
 
     if (id === "email") {
       this.setState({email: value});
-      console.log(this.state.email)
     }
     if (id === "password") {
       this.setState({password: value});
-      console.log(this.state.password)
     }
+      console.log(this.state.email)
+      console.log(this.state.password)
   }
 
  handleSubmit(event) {
+    event.preventDefault();
 
     $.ajax({
       method: 'post',
@@ -35,13 +36,13 @@ class Login extends Component {
       data: {
         data: {
           email: this.state.email,
-          password: this.state.password,
+          password: this.state.password
         }
       }
     }).then( (data) => {
       console.log("DAATAA", data)
     });
-    event.preventDefault();
+
 
     // this.setState({dismiss: "modal"});
   }
