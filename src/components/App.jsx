@@ -8,36 +8,37 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      // goals: [],
-      // users: [], //userId: null
-      // tasks: [],
-      // isLoggedIn: false
+      userId: null
     }
-    // this.loggedIn = this.loggedIn.bind(this);
+    this.setUserId = this.setUserId.bind(this);
+    this.getUserId = this.getUserId.bind(this);
+    this.renderPage = this.renderPage.bind(this);
+  }
+//this renders appropriate component if user is not logged in
+  renderPage() {
+    if (this.state.userId === null) {
+      return <Hero />;
+    } else {
+      return  <Carousel />;
+    }
   }
 
-
-
-//THIS LOGIC IS IN BETA TESTING - cecia and nat were attempting to get login routes working
-    // loggedIn() {
-    //   if (this.state.isLoggedIn) {
-    //     return <Goals goalInfo={this.state.goals}/>
-    //   } else {
-    //     return <Hero />
-    //   }
-    // }
-
+  setUserId(userId) {
+    this.setState({'userId': userId});
+  }
+  getUserId(userId) {
+    return this.state.userId;
+  }
   render() {
     console.log("Rendering <App/>");
-
-
-        // {this.loggedIn()}
     return (
       <div className="wrapper">
-        <Nav />
-        <Carousel/>
+        <Nav setUserId={this.setUserId} />
+        {this.renderPage()}
       </div>
     );
+
+        // {this.loggedIn()}
   }
 
 }

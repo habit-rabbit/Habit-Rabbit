@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Nav from './Nav.jsx';
 
 
 class Hero extends Component {
@@ -9,7 +8,6 @@ class Hero extends Component {
 
     return (
       <div id="hero-page">
-        <Nav />
           <div className="container">
             <div className="row">
               <div className="col-lg-12 text-center">
