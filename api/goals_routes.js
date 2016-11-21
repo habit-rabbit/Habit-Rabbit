@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const db = require("./query_class.js");
 const Response = require("./response.js");
+const findTable = require("./utilities/find_table.js");
+
 //routes that serve the data base and return json
 
 
@@ -67,6 +69,28 @@ router.post("/goals/:id/delete", (req, res) => {
       if (err) r.setErrorMsg("Something went wrong and we couldn't delete your goal. GUESS YOU HAVE TO DO IT NOW, SUCKER!");
       r.setData(data);
       res.send(r);
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
+router.get("/goals/:id/tasks", (req, res) => {
+  const r = new Response();
+  if (req.xhr) {
+    let query = {};
+    query.table = findTable(req.url);
+    query.data = {goal_id: req.params.id}
+    db.getAllWhere(query, (err, data) => {
+      if (err) {
+        // If there's an error here, the query has an invalid format
+        r.setErrorMsg("You're trying to do a thing that isn't a thing. STAHP.");
+        res.send(r);
+      } else {
+        // If there's an error here, the format is valid but the goal doesn't exist
+        data.length ? r.setData(data) : r.setErrorMsg ("Sources say this goal doesn't exist. But you could make it exist. You have the power.");
+        res.send(r);
+      }
     });
   } else {
     res.redirect("/");
