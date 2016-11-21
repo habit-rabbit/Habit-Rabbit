@@ -8,9 +8,10 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.users = {};
-    this.state = {email: "", password: ""};
+    this.state = {email: "", password: "", loginError:""};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderError = this.renderError.bind(this);
   }
 
   handleChange(event) {
@@ -26,7 +27,15 @@ class Login extends Component {
       // console.log(this.state.email)
       // console.log(this.state.password)
   }
-
+  renderError() {
+    if (this.state.loginError) {
+      return (
+          <div className="alert alert-warning">
+            {this.state.loginError}
+          </div>
+        )
+    }
+  }
  handleSubmit(event) {
     event.preventDefault();
 
@@ -41,15 +50,18 @@ class Login extends Component {
         }
       }
     }).then( (result) => {
-      this.props.setUserId(result.data.id);
+      if (result.data.id) {
+        this.props.setUserId(result.data.id);
+        this.setState({email: "", password: "", loginError: null});
+        $("#login-modal").modal("hide");
+      } else if (result.error.msg) {
+        this.setState({loginError: result.error.msg})
+      }
     });
 
-
-    // this.setState({dismiss: "modal"});
   }
 
   render() {
-    console.log("Rendering <Login/>");
 
     return (
       <div className="modal fade" id="login-modal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -62,9 +74,11 @@ class Login extends Component {
             </div>
 
             <div id="login-body" className="modal-body">
+            {this.renderError()}
             <form onSubmit={this.handleSubmit}>
+
               <div className="form-group">
-                <input id="email" type="text" value={this.state.value} onChange={this.handleChange} name="email" placeholder="Email"/>
+                <input id="email" type="text" value={this.state.email} onChange={this.handleChange} name="email" placeholder="Email"/>
               </div>
 
               <div className="form-group">
