@@ -26,13 +26,16 @@ Validations.prototype.validatesEmail = function() {
 }
 Validations.prototype.validatesUnique = function(column, table) {
   const query = {};
-  const query.table = table;
+  query.table = table;
 
   db.getAll(query, (err, data) => {
-    data.forEach((elm) => {
-      console.log(elm, "yay");
-    })
+   let result = data.every((elm) => {
+      return elm[column] !== this.data;
+    });
+   console.log(result, "result is")
+   this.tests.push(result);
   });
+  return this;
 }
 Validations.prototype.check = function() {
   let result = this.tests.every(function(elm) {
@@ -44,4 +47,8 @@ var v = new Validations(13);
 var t = new Validations("");
 console.log(v.validatesNumber().check());
 console.log(t.validatesNumber().validatesEmpty().check());
-
+var e = new Validations("bobdole@bobdole.com")
+  .validatesEmpty()
+  .validatesUnique("email", "users")
+  .check();
+console.log(e);
