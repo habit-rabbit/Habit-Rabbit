@@ -7,6 +7,7 @@ class Goals extends Component {
     this.goalType = this.goalType.bind(this);
     this.renderGoals = this.renderGoals.bind(this);
     this.updateTask = this.updateTask.bind(this);
+    this.getCurrentTask = this.getCurrentTask.bind(this);
     this.state = {
       goals: [],
       tasks: [],
@@ -21,7 +22,7 @@ class Goals extends Component {
     method: "get",
     url: "/api/goals",
   }).done((data) => {
-    console.log("DATA:",data)
+    console.log("DATA:",data);
     this.setState({goals: data});
   });
 
@@ -29,7 +30,7 @@ class Goals extends Component {
     method: "get",
     url: "/api/goals/5/tasks"
   }).done((data) => {
-    console.log(data)
+    console.log(data);
     this.setState({tasks: data});
   });
   }
@@ -44,6 +45,10 @@ class Goals extends Component {
         <h4 className="goal-type"> Private </h4>
       )
     }
+  }
+
+  getCurrentTask () {
+
   }
 
   updateTask () {
