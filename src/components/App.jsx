@@ -8,12 +8,9 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      // goals: [],
-      // users: [], //userId: null
-      // tasks: [],
-      // isLoggedIn: false
+      userId: null
     }
-    // this.loggedIn = this.loggedIn.bind(this);
+    this.loggedIn = this.loggedIn.bind(this);
   }
 
 
@@ -26,7 +23,9 @@ class App extends Component {
     //     return <Hero />
     //   }
     // }
-
+    function loggedIn(userId) {
+      this.setState({userId: userId});
+    }
   render() {
     console.log("Rendering <App/>");
 
@@ -34,7 +33,7 @@ class App extends Component {
         // {this.loggedIn()}
     return (
       <div className="wrapper">
-        <Nav />
+        <Nav isLoggedIn={this.loggedIn}/>
         <Carousel/>
       </div>
     );
