@@ -3,10 +3,7 @@ import Login from './Login.jsx';
 import Register from './Register.jsx';
 
 class Nav extends Component {
-  componentDidMount() {
-  this.props.setUserId("blahh");
 
-  }
 
   render() {
     console.log("Rendering <Nav/>");
