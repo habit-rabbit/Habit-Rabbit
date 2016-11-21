@@ -3,10 +3,13 @@ import Login from './Login.jsx';
 import Register from './Register.jsx';
 
 class Nav extends Component {
+  componentDidMount() {
+  this.props.setUserId("blahh");
+
+  }
 
   render() {
     console.log("Rendering <Nav/>");
-
     return (
       <nav className="navbar navbar-default">
         <div className="container-fluid">
@@ -31,7 +34,7 @@ class Nav extends Component {
 
             <ul className="nav navbar-nav navbar-right">
              <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
-             <Login />
+             <Login isLoggedIn={this.props.loggedIn}/>
              <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
              <Register />
               <li className="dropdown">

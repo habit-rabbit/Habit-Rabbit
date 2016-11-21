@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       userId: null
     }
-    this.loggedIn = this.loggedIn.bind(this);
+    this.setUserId = this.setUserId.bind(this);
   }
 
 
@@ -23,17 +23,20 @@ class App extends Component {
     //     return <Hero />
     //   }
     // }
-    function loggedIn(userId) {
-      this.setState({userId: userId});
-    }
+  setUserId(userId) {
+    console.log("USER ID!!!!!!!!!!!!!!!!!!!!!!!!")
+    this.setState({'userId': userId});
+    console.log(this.state)
+  }
   render() {
     console.log("Rendering <App/>");
+    console.log(this.state, "rendered state")
 
 
         // {this.loggedIn()}
     return (
       <div className="wrapper">
-        <Nav isLoggedIn={this.loggedIn}/>
+        <Nav setUserId={this.setUserId}></Nav>
         <Carousel/>
       </div>
     );
