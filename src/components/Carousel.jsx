@@ -33,6 +33,7 @@ class Carousel extends Component {
         <div className="carousel-inner">
           <div className="item active">
             <div className="container main-content">
+              <h1 className="container-title"> ~ Your Current Goals ~ </h1>
               <Goals
                 goalInfo={this.props.goalInfo.data}
                 taskInfo={this.props.taskInfo.data}

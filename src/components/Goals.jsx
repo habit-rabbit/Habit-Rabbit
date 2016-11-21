@@ -44,7 +44,7 @@ class Goals extends Component {
           {this.props.goalInfo.map((goal, index) => {
             console.log("GOOOOOOAAAAALLLLLL " + goal)
             return (
-              <div className="goals-template row" key={index}>
+              <div className="goals-template row " key={index}>
                 <div className="col-md-3">
                   <h1> {goal.name} </h1>
                   {this.goalType(goal)}
