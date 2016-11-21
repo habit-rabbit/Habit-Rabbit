@@ -21,14 +21,13 @@ class Nav extends Component {
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
             <form className="navbar-form">
               <div className="form-group">
                 <input type="text" className="form-control" placeholder="What is your new goal?" />
               </div>
               <button type="submit" className="btn btn-default">Create Goal!</button>
             </form>
+
 
             <ul className="nav navbar-nav navbar-right">
              <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
