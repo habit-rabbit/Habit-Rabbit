@@ -1,23 +1,23 @@
 import React, {Component} from 'react';
-
+import Goals from './Goals.jsx';
 class Carousel extends Component {
 
   constructor(props){
     super(props);
-    this.goalType = this.goalType.bind(this);
+    // this.goalType = this.goalType.bind(this);
   }
 
-  goalType (goal) {
-    if(goal.private === false){
-      return (
-        <h5> Public </h5>
-      )
-    } else {
-      return (
-        <h5> Private </h5>
-      )
-    }
-  }
+  // goalType (goal) {
+  //   if(goal.private === false){
+  //     return (
+  //       <h5> Public </h5>
+  //     )
+  //   } else {
+  //     return (
+  //       <h5> Private </h5>
+  //     )
+  //   }
+  // }
 
   render() {
     console.log("Rendering Carousel")
@@ -33,25 +33,11 @@ class Carousel extends Component {
         <div className="carousel-inner">
           <div className="item active">
             <div className="container main-content">
-                {this.props.goalInfo.map((goal, index) => {
-                  return (
-                    <div className="goals-template" key={index}>
-                      <h1> {goal.name} </h1>
-                      {this.goalType(goal)}
-                      <div className="progress">
-                        <div className="progress-bar progress-bar-success" style={{width: "33%"}}>
-                          <span className="sr-only">33% Complete (success)</span>
-                        </div>
-                        <div className="progress-bar progress-bar-warning" style={{width: "20%"}}>
-                          <span className="sr-only">20% Complete (warning)</span>
-                        </div>
-                        <div className="progress-bar progress-bar-danger" style={{width: "10%"}}>
-                          <span className="sr-only">10% Complete (danger)</span>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
+            {console.log("In Carousel, goals:", this.props.goalInfo.data)}
+              <Goals
+                goalInfo={this.props.goalInfo.data}
+                taskInfo={this.props.taskInfo.data}
+              />
             </div>
             <div className="carousel-caption">
               <h1>Slide 1</h1>
