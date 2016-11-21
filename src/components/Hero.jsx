@@ -2,7 +2,67 @@ import React, {Component} from 'react';
 
 
 class Hero extends Component {
+  constructor(props) {
+    super(props);
+    this.users = {};
+    this.state = {
+      first_name: "",
+      last_name:"",
+      email: "",
+      password: "",
+      password_confirmation: ""
+    };
 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    let id = event.target.id;
+    let value = event.target.value;
+
+    if (id === "first_name") {
+      this.setState({first_name: value});
+    }
+    if (id === "last_name") {
+      this.setState({last_name: value});
+    }
+    if (id === "email") {
+      this.setState({email: value});
+    }
+    if (id === "password") {
+      this.setState({password: value});
+    }
+    if (id === "password_confirmation") {
+      this.setState({password_confirmation: value});
+    }
+
+  }
+
+ handleSubmit(event) {
+
+    $.ajax({
+      method: 'post',
+      url: 'api/users/create',
+      data: {
+        data: {
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
+          email: this.state.email,
+          password: this.state.password,
+          password_confirmation: this.state.password_confirmation
+        }
+      }
+    }).then( (result) => {
+      if(result.data.id) {
+
+        this.props.setUserId(result.data.id);
+      }
+    });
+    event.preventDefault();
+
+    // this.setState({dismiss: "modal"});
+  }
     render() {
     console.log("Rendering <Hero/>");
 
@@ -30,26 +90,26 @@ class Hero extends Component {
 
           <div className="col-lg-4">
             <div id="register-body">
-            <form className="form-horizontal">
-              <div className="form-group">
-                <input type="text" name="first_name" placeholder="First Name"/>
-              </div>
-              <div className="form-group">
-                <input type="text" name="last_name" placeholder="Last Name"/>
-              </div>
-              <div className="form-group">
-                <input type="text" name="email" placeholder="Email"/>
-              </div>
-              <div className="form-group">
-                <input type="password" name="password" placeholder="Password"/>
-              </div>
-              <div className="form-group">
-                <input type="password" name="password_confirmation" placeholder="Password Confirmation"/>
-              </div>
-              <div className="form-group">
-                <input type="submit" name="register" className="btn btn-default" value="Sign On Up!" data-dismiss="modal"/>
-              </div>
-            </form>
+              <form className="form-horizontal" onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  <input type="text" id="first_name" name="first_name" placeholder="First Name" value={this.state.value} onChange={this.handleChange}/>
+                </div>
+                <div className="form-group">
+                  <input type="text" id="last_name" name="last_name" placeholder="Last Name" value={this.state.value} onChange={this.handleChange}/>
+                </div>
+                <div className="form-group">
+                  <input type="text" id="email" name="email" placeholder="Email" value={this.state.value} onChange={this.handleChange}/>
+                </div>
+                <div className="form-group">
+                  <input type="password" id="password" name="password" placeholder="Password" value={this.state.value} onChange={this.handleChange}/>
+                </div>
+                <div className="form-group">
+                  <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Password Confirmation" value={this.state.value} onChange={this.handleChange}/>
+                </div>
+                <div className="form-group">
+                  <input type="submit" name="register" className="btn btn-default" value="Sign On Up!" />
+                </div>
+              </form>
             </div>
           </div>
           </div>
