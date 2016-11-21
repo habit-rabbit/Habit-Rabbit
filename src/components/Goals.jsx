@@ -22,7 +22,8 @@ class Goals extends Component {
   }
 
   renderGoals() {
-    if(this.props.goalInfo == false) {
+    console.log("Rendering <Goals/>");
+    if(this.props.goalInfo === undefined) {
     console.log("if" +this.props.goalInfo)
       return (
         <div>
@@ -34,7 +35,7 @@ class Goals extends Component {
       return(
         <div>
           {console.log(this.props, "these r thr props")}
-          {this.props.goalInfo.data.map((goal, index) => {
+          {this.props.goalInfo.map((goal, index) => {
             console.log("GOOOOOOAAAAALLLLLL " + goal)
             return (
               <div className="goals-template" key={index}>
@@ -45,6 +46,11 @@ class Goals extends Component {
                     60%
                   </div>
                 </div>
+                {this.props.taskInfo.map((task, index) => {
+                  return (
+                    <p className="task" key={index}> {task.name} </p>
+                  )
+                })}
               </div>
             )
           })}
