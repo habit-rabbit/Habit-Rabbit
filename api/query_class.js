@@ -42,4 +42,13 @@ database.prototype.getAll = function (query, callback) {
     .update(query.data)
     .asCallback(callback);
 }
+
+  database.prototype.getAllWhere = function (query, callback) {
+    console.log(query, "db query");
+    this.knex
+      .select()
+      .table(query.table)
+      .where(query.data)
+      .asCallback(callback);
+  }
 module.exports = new database();
