@@ -1,8 +1,8 @@
 
-// const ENV = process.env.ENV || "development";
 require('dotenv').config({silent: true});
+const ENV = process.env.ENV || "development";
 const knexConfig    = require("../knexfile");
-const k          = require("knex")(knexConfig);
+const k          = require("knex")(knexConfig[ENV]);
 
 
 function database() {
