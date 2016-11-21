@@ -26,7 +26,8 @@ router.post("/users/create", (req, res) => {
       db.insertRow(query,  (err, data) => {
         if (err) r.setErrorMsg("Unable to save user, bad credentials!");
         //set data into responseData object 'r'
-        r.setData(data);
+        // with user id
+        r.setData({id: data[0].id});
         res.send(r);
       });
     });
