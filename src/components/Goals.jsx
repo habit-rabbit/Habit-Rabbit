@@ -5,9 +5,33 @@ class Goals extends Component {
   constructor(props){
     super(props);
     this.goalType = this.goalType.bind(this);
-    // this.renderGoals = this.renderGoals.bind(this);
+    this.renderGoals = this.renderGoals.bind(this);
     this.updateTask = this.updateTask.bind(this);
+    this.state = {
+      goals: [],
+      tasks: [],
+      userId: null
+    }
 
+  }
+
+  componentWillMount () {
+
+  let goals = $.ajax({
+    method: "get",
+    url: "/api/goals",
+  }).done((data) => {
+    console.log("DATA:",data)
+    this.setState({goals: data});
+  });
+
+  let tasks = $.ajax({
+    method: "get",
+    url: "/api/goals/5/tasks"
+  }).done((data) => {
+    console.log(data)
+    this.setState({tasks: data});
+  });
   }
 
   goalType (goal) {
@@ -29,19 +53,20 @@ class Goals extends Component {
 
   renderGoals() {
     console.log("Rendering <Goals/>");
-    if(this.props.goalInfo === undefined) {
-    console.log("if" +this.props.goalInfo)
+    console.log(this.state);
+    if(this.state.goals.length === 0) {
+      console.log("if" +this.state.goals);
       return (
         <div>
           Goals Loading...
         </div>
       )
     } else {
-      console.log("else" +this.props.goalInfo)
+      console.log("else" +this.state.goals);
       return(
         <div>
-          {console.log(this.props, "these r thr props")}
-          {this.props.goalInfo.map((goal, index) => {
+          {console.log(this.state, "these r thr props")}
+          {this.state.goals.data.map((goal, index) => {
             console.log("GOOOOOOAAAAALLLLLL " + goal)
             return (
               <div className="goals-template row " key={index}>
@@ -62,13 +87,11 @@ class Goals extends Component {
                     )
                   })*/}
                   <h4 className="task-list"> Next Task: </h4>
-                  <p>{this.props.taskInfo[0].name}</p>
+                  <p>{this.state.tasks.data[0].name}</p>
                   <span>Finished already? </span>
-                  {/*<div className="checkbox">}*/}
                     <label>
                       <input type="checkbox" onChange={this.updateTask}/>
                     </label>
-                  {/*</div>*/}
                 </div>
               </div>
             )
@@ -79,7 +102,6 @@ class Goals extends Component {
   }
 
   render() {
-    // console.log (this.props.goalInfo.data)
     return (
       <div>
        {this.renderGoals()}
