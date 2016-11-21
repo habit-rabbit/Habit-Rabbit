@@ -6,19 +6,25 @@ class Goals extends Component {
     super(props);
     this.goalType = this.goalType.bind(this);
     // this.renderGoals = this.renderGoals.bind(this);
+    this.updateTask = this.updateTask.bind(this);
 
   }
 
   goalType (goal) {
     if(goal.private === false){
       return (
-        <h5> Public </h5>
+        <h4 className="goal-type"> Challenge </h4>
       )
     } else {
       return (
-        <h5> Private </h5>
+        <h4 className="goal-type"> Private </h4>
       )
     }
+  }
+
+  updateTask () {
+    console.log("You checked a checkbox! Look at you go!");
+    // needs an ajax call to update the task table (is_done = true)
   }
 
   renderGoals() {
@@ -38,19 +44,32 @@ class Goals extends Component {
           {this.props.goalInfo.map((goal, index) => {
             console.log("GOOOOOOAAAAALLLLLL " + goal)
             return (
-              <div className="goals-template" key={index}>
-                <h1> {goal.name} </h1>
-                {this.goalType(goal)}
-                <div className="progress">
-                  <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                    60%
+              <div className="goals-template row" key={index}>
+                <div className="col-md-3">
+                  <h1> {goal.name} </h1>
+                  {this.goalType(goal)}
+                </div>
+                <div className="col-md-6">
+                  <div className="progress">
+                    <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width: "20%"}}>
+                    </div>
                   </div>
                 </div>
-                {this.props.taskInfo.map((task, index) => {
-                  return (
-                    <p className="task" key={index}> {task.name} </p>
-                  )
-                })}
+                <div className="col-md-3">
+                  {/*this.props.taskInfo.map((task, index) => {
+                    return (
+                      <p className="task" key={index}> {task.name} </p>
+                    )
+                  })*/}
+                  <h4 className="task-list"> Next Task: </h4>
+                  <p>{this.props.taskInfo[0].name}</p>
+                  <span>Finished already? </span>
+                  {/*<div className="checkbox">}*/}
+                    <label>
+                      <input type="checkbox" onChange={this.updateTask}/>
+                    </label>
+                  {/*</div>*/}
+                </div>
               </div>
             )
           })}
