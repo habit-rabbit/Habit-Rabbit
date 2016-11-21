@@ -1,16 +1,26 @@
 import React, {Component} from 'react';
-
+import Goals from './Goals.jsx';
 class Carousel extends Component {
 
   constructor(props){
     super(props);
+    // this.goalType = this.goalType.bind(this);
   }
+
+  // goalType (goal) {
+  //   if(goal.private === false){
+  //     return (
+  //       <h5> Public </h5>
+  //     )
+  //   } else {
+  //     return (
+  //       <h5> Private </h5>
+  //     )
+  //   }
+  // }
 
   render() {
     console.log("Rendering Carousel")
-    console.log("???", this.props.goalInfo);
-    let goal = this.props.goalInfo[0];
-    console.log("MAYBE:???", goal.name);
 
     return (
       <div id="carousel-example-generic" className="carousel slide">
@@ -23,15 +33,14 @@ class Carousel extends Component {
         <div className="carousel-inner">
           <div className="item active">
             <div className="container main-content">
-              <div className="goals-template">
-                <h1> Name Goes Here</h1>
-                <h2> Type Goes Here</h2>
-                <h3> Here they are{this.props.goalInfo[0].name} right here</h3>
-              </div>
+              <Goals
+                goalInfo={this.props.goalInfo.data}
+                taskInfo={this.props.taskInfo.data}
+              />
             </div>
             <div className="carousel-caption">
-              <h1>Slide 1</h1>
-              <p>Slide 1 Description</p>
+              <h1></h1>
+              <p></p>
             </div>
          </div>
 
