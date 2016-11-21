@@ -1,18 +1,31 @@
 .goals-template {
 
-  padding: 3em;
-  margin: 1em;
+  .goal-type {
+  }
 
   h1 {
-
+    color: #595959;
+    text-align: center;
   }
 
   h4 {
-
+    color: #595959;
+    text-align: center;
   }
+
+  margin: 3em;
 
   p {
-
+    font-size: 1em;
   }
 
+  .progress {
+    margin: auto;
+    position: absolute;
+    top: 54px; left: 0; bottom: 0; right: 0;
+  }
+
+  .task-list {
+    text-align: left;
+  }
 }

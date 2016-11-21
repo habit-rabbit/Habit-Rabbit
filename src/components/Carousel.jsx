@@ -39,8 +39,8 @@ class Carousel extends Component {
               />
             </div>
             <div className="carousel-caption">
-              <h1>Slide 1</h1>
-              <p>Slide 1 Description</p>
+              <h1></h1>
+              <p></p>
             </div>
          </div>
 
