@@ -1,4 +1,3 @@
-
 _Rabeet_, the Rabid Habit Rabbit, has has quite enough of your excuses. _Rabeet_ has died for your laziness, and now you need to ressurect her.
 
 To make up for your years of wishy-washy flakiness, it's time to set (and acheive), some doggone goals!
@@ -40,3 +39,4 @@ Welp, our job here is done.
 Thanks!
 
 <3
+

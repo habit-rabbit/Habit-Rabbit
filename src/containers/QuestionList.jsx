@@ -1,32 +1,32 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import Question from '../components/Question.jsx'
+// import React, {Component} from 'react'
+// import { connect } from 'react-redux'
+// import Question from '../components/Question.jsx'
 
-class QuestionList extends Component {
-  render() {
-    var questions = this.props.questions;
-    return (
-      <ul className="questions">
-        <li>Default</li>
-      {questions.map(question =>
-        <Question text={question.text} who={question.who} key={question.id}/>
-      )}
-      </ul>
-    );
-  }
-}
+// class QuestionList extends Component {
+//   render() {
+//     var questions = this.props.questions;
+//     return (
+//       <ul className="questions">
+//         <li>Default</li>
+//       {questions.map(question =>
+//         <Question text={question.text} who={question.who} key={question.id}/>
+//       )}
+//       </ul>
+//     );
+//   }
+// }
 
-QuestionList.propTypes = {
-  questions: React.PropTypes.array
-}
+// QuestionList.propTypes = {
+//   questions: React.PropTypes.array
+// }
 
-const mapStateToProps = (state) => ({
-  questions: state.questions
-})
+// const mapStateToProps = (state) => ({
+//   questions: state.questions
+// })
 
-const mapDispatchToProps = ({
+// const mapDispatchToProps = ({
 
-})
+// })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionList);
+// export default connect(mapStateToProps, mapDispatchToProps)(QuestionList);
