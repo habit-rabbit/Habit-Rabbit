@@ -24,8 +24,6 @@ class Login extends Component {
     if (id === "password") {
       this.setState({password: value});
     }
-      // console.log(this.state.email)
-      // console.log(this.state.password)
   }
   renderError() {
     if (this.state.loginError) {

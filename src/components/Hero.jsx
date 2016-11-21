@@ -10,11 +10,13 @@ class Hero extends Component {
       last_name:"",
       email: "",
       password: "",
-      password_confirmation: ""
+      password_confirmation: "",
+      signupError: null
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderError = this.renderError.bind(this);
   }
 
   handleChange(event) {
@@ -55,13 +57,28 @@ class Hero extends Component {
       }
     }).then( (result) => {
       if(result.data.id) {
-
+        this.setState({
+          first_name: "",
+          last_name: "",
+          email: "",
+          password: "",
+          password_confirmation: ""
+          signupError: null});
         this.props.setUserId(result.data.id);
+      } else if(result.error.msg) {
+        this.setState(signupError: result.error.msg);
       }
     });
     event.preventDefault();
-
-    // this.setState({dismiss: "modal"});
+  }
+  renderError() {
+    if (this.state.signupError) {
+      return (
+        <div className="alert alert-warning">
+          {this.state.signupError}
+        </div>
+      )
+    }
   }
     render() {
     console.log("Rendering <Hero/>");
@@ -90,6 +107,7 @@ class Hero extends Component {
 
           <div className="col-lg-4">
             <div id="register-body">
+              {renderError()}
               <form className="form-horizontal" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <input type="text" id="first_name" name="first_name" placeholder="First Name" value={this.state.value} onChange={this.handleChange}/>
