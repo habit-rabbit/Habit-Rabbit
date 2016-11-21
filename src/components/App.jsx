@@ -33,7 +33,10 @@ class App extends Component {
     console.log("Rendering <App/>");
     return (
       <div className="wrapper">
-        <Nav setUserId={this.setUserId} />
+        <Nav
+          setUserId={this.setUserId}
+          userId={this.state.userId}
+         />
         {this.renderPage()}
       </div>
     );

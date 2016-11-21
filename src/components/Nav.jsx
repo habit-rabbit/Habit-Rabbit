@@ -4,6 +4,35 @@ import Register from './Register.jsx';
 
 class Nav extends Component {
 
+  constructor(props){
+    super(props);
+    this.createNavLinks = this.createNavLinks.bind(this);
+    this.logOut = this.logOut.bind(this);
+  }
+
+  // if user logged in show username in nav bar, else show
+  createNavLinks(){
+    if(this.props.userId){
+      return (
+        <div>
+          <li><a href="">Name!!!!</a></li>
+          <li><a href="">Logout!!!!</a></li>
+        </div>
+      )
+    } else {
+      return(
+        <div>
+          <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
+          <Login setUserId={this.props.setUserId}/>
+          <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
+          <Register />
+        </div>
+      )
+    }
+  }
+
+  //logs out user when they click the logout link
+  logOut(){}
 
   render() {
     console.log("Rendering <Nav/>");
@@ -30,10 +59,7 @@ class Nav extends Component {
 
 
             <ul className="nav navbar-nav navbar-right">
-             <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
-             <Login setUserId={this.props.setUserId}/>
-             <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
-             <Register />
+              {createNavLinks()}
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
                 <ul className="dropdown-menu">
