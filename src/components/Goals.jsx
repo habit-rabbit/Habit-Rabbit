@@ -12,11 +12,11 @@ class Goals extends Component {
   goalType (goal) {
     if(goal.private === false){
       return (
-        <h5> Public </h5>
+        <h4> Public </h4>
       )
     } else {
       return (
-        <h5> Private </h5>
+        <h4> Private </h4>
       )
     }
   }
@@ -38,19 +38,27 @@ class Goals extends Component {
           {this.props.goalInfo.map((goal, index) => {
             console.log("GOOOOOOAAAAALLLLLL " + goal)
             return (
-              <div className="goals-template" key={index}>
-                <h1> {goal.name} </h1>
-                {this.goalType(goal)}
-                <div className="progress">
-                  <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+              <div className="goals-template row" key={index}>
+                <div className="col-md-4">
+                  <h1> {goal.name} </h1>
+                  {this.goalType(goal)}
+                </div>
+                <div className="col-md-5">
+                  <div className="progress">
+                    <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
                     60%
+                    </div>
                   </div>
                 </div>
-                {this.props.taskInfo.map((task, index) => {
-                  return (
-                    <p className="task" key={index}> {task.name} </p>
-                  )
-                })}
+                <div className="col-md-3">
+                  {/*this.props.taskInfo.map((task, index) => {
+                    return (
+                      <p className="task" key={index}> {task.name} </p>
+                    )
+                  })*/}
+                  <h4> Next Task: </h4>
+                  <p>{this.props.taskInfo[0].name}</p>
+                </div>
               </div>
             )
           })}

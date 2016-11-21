@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import Nav from './Nav.jsx';
 import Goals from './Goals.jsx';
-<<<<<<< HEAD
 import Carousel from './Carousel.jsx';
-=======
 import Hero from './Hero.jsx';
-
->>>>>>> master
 
 class App extends Component {
   constructor(props){
@@ -14,11 +10,8 @@ class App extends Component {
     this.state = {
       goals: [],
       users: [],
-<<<<<<< HEAD
       tasks: [],
-=======
       isLoggedIn: false
->>>>>>> master
     }
     this.queryDatabase = this.queryDatabase.bind(this);
     this.loggedIn = this.loggedIn.bind(this);
@@ -88,6 +81,7 @@ class App extends Component {
     console.log("Rendering <App/>");
 
 
+        // {this.loggedIn()}
     return (
       <div className="wrapper">
         <Nav />
@@ -95,7 +89,6 @@ class App extends Component {
           goalInfo={this.state.goals}
           taskInfo={this.state.tasks}
         />
-        {this.loggedIn()}
       </div>
     );
   }

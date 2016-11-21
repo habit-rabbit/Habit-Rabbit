@@ -33,7 +33,6 @@ class Carousel extends Component {
         <div className="carousel-inner">
           <div className="item active">
             <div className="container main-content">
-            {console.log("In Carousel, goals:", this.props.goalInfo.data)}
               <Goals
                 goalInfo={this.props.goalInfo.data}
                 taskInfo={this.props.taskInfo.data}
