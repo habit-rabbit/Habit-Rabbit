@@ -17,7 +17,7 @@ class App extends Component {
 //this renders appropriate component if user is not logged in
   renderPage() {
     if (this.state.userId === null) {
-      return <Hero />;
+      return <Hero setUserId={this.setUserId}/>;
     } else {
       return  <Carousel />;
     }
