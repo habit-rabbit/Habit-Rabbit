@@ -42,6 +42,7 @@ class Hero extends Component {
   }
 
  handleSubmit(event) {
+    event.preventDefault();
 
     $.ajax({
       method: 'post',
@@ -56,20 +57,23 @@ class Hero extends Component {
         }
       }
     }).then( (result) => {
+      //clear text fields
+      console.log(result);
+      this.setState({
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        signupError: null});
       if(result.data.id) {
-        this.setState({
-          first_name: "",
-          last_name: "",
-          email: "",
-          password: "",
-          password_confirmation: ""
-          signupError: null});
+        console.log("worked")
+        //set user state for App
         this.props.setUserId(result.data.id);
       } else if(result.error.msg) {
-        this.setState(signupError: result.error.msg);
+        this.setState({signupError: result.error.msg});
       }
     });
-    event.preventDefault();
   }
   renderError() {
     if (this.state.signupError) {
@@ -77,7 +81,7 @@ class Hero extends Component {
         <div className="alert alert-warning">
           {this.state.signupError}
         </div>
-      )
+      );
     }
   }
     render() {
@@ -107,7 +111,7 @@ class Hero extends Component {
 
           <div className="col-lg-4">
             <div id="register-body">
-              {renderError()}
+              {this.renderError()}
               <form className="form-horizontal" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <input type="text" id="first_name" name="first_name" placeholder="First Name" value={this.state.value} onChange={this.handleChange}/>
