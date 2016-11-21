@@ -10,12 +10,18 @@ h1, h2, h3, h4, h5, h6, p {
 
 #carousel-example-generic {
   position: relative;
-  top: 120px;
   height: 80%;
+  background: #BDFCC9;
 
 
   .carousel-inner > .item {
       margin: 0 auto;
+  }
+
+  .container-title {
+    text-align: center;
+    font-size: 3em;
+    padding-top: 42px;
   }
 }
 @media (min-width: 640px) {

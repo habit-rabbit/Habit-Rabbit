@@ -4,24 +4,13 @@ class Carousel extends Component {
 
   constructor(props){
     super(props);
-    // this.goalType = this.goalType.bind(this);
   }
-
-  // goalType (goal) {
-  //   if(goal.private === false){
-  //     return (
-  //       <h5> Public </h5>
-  //     )
-  //   } else {
-  //     return (
-  //       <h5> Private </h5>
-  //     )
-  //   }
-  // }
 
   render() {
     console.log("Rendering Carousel")
 
+                  // goalInfo={this.props.goalInfo.data}
+                  // taskInfo={this.props.taskInfo.data}
     return (
       <div id="carousel-example-generic" className="carousel slide">
         <ol className="carousel-indicators">
@@ -33,10 +22,9 @@ class Carousel extends Component {
         <div className="carousel-inner">
           <div className="item active">
             <div className="container main-content">
-              <Goals
-                goalInfo={this.props.goalInfo.data}
-                taskInfo={this.props.taskInfo.data}
-              />
+              <h1 className="container-title"> ~ Your Current Goals ~ </h1>
+                <Goals
+                />
             </div>
             <div className="carousel-caption">
               <h1></h1>
