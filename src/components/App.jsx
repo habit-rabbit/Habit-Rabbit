@@ -8,11 +8,14 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      userId: null
+      userId: null,
+      loggedIn: false
     }
     this.setUserId = this.setUserId.bind(this);
     this.getUserId = this.getUserId.bind(this);
     this.renderPage = this.renderPage.bind(this);
+    this.loggedIn = this.loggedIn.bind(this);
+
   }
 //this renders appropriate component if user is not logged in
   renderPage() {
@@ -23,8 +26,12 @@ class App extends Component {
     }
   }
 
+  loggedIn(){
+    this.setState({loggedIn: true});
+    }
+
   setUserId(userId) {
-    this.setState({'userId': userId});
+    this.setState({userId: userId});
   }
   getUserId(userId) {
     return this.state.userId;
