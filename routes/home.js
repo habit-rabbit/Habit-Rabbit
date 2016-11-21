@@ -22,15 +22,10 @@ router.post('/login', (req, res) => {
       r.setErrorMsg("Invalid credentials, please try again or signup")
       res.send(r);
     }
-    if (!data) {
-      //if data is empty that means the email supplied did not match
-      // a record in the db
-      r.setErrorMsg(`Incorrect email or password!`);
-      res.send(r);
-    } else {
+    if (data.length) {
       //database found user
       let user = data[0];
-      // compare password to has...
+      // compare password to hash...
       bcrypt.compare(pw, user.password_digest, function(err, result) {
         if(err) {
           throw err;
@@ -43,6 +38,11 @@ router.post('/login', (req, res) => {
           res.send(r);
         }
       });
+    } else {
+      //if data is empty that means the email supplied did not match
+      // a record in the db
+      r.setErrorMsg(`Incorrect email or password!`);
+      res.send(r);
     }
   })
 

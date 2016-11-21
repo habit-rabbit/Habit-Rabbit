@@ -21,7 +21,7 @@ const db = require('../query_class.js');
 // var valid = new Validation("test@test.com")
 // .empty()
 // .email()
-// .unique()
+// .unique("users", "email")
 // .check()
 // ~~~~~~~~>will return a boolean whether or not it passed each validation!
 
