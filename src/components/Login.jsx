@@ -33,6 +33,7 @@ class Login extends Component {
     $.ajax({
       method: 'post',
       url: '/login',
+      dataType: 'json',
       data: {
         data: {
           email: this.state.email,
