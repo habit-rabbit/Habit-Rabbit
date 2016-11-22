@@ -7,11 +7,14 @@ class Nav extends Component {
   constructor(props){
     super(props);
     this.state = {
+      name: "",
       loggedIn: false
     }
     this.createNavLinks = this.createNavLinks.bind(this);
     this.updateNavLinks = this.updateNavLinks.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   // if user logged in show username in nav bar, else show
@@ -35,10 +38,18 @@ class Nav extends Component {
     }
   }
 
+  handleChange(event) {
+    let id = event.target.id;
+    let value = event.target.value;
+
+    if (id === "goal-name") {
+      this.setState({name: value});
+    }
+  }
 
  handleSubmit(event) {
     event.preventDefault();
-
+    console.log("DO I LIVE HERE??")
     $.ajax({
       method: 'post',
       url: '/api/goals/create',
@@ -51,8 +62,13 @@ class Nav extends Component {
           deadline: "2016-12-14"
         }
       }
-    })
+    }).then((result) => {
+      console.log("RESULTTTTAN OF SWING", result);
+        // $(this).find('form-group').resetForm();
+        $('#goal-name').val("")
+        })
   }
+
 
 
 
@@ -81,11 +97,11 @@ class Nav extends Component {
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form className="navbar-form">
+            <form onSubmit={this.handleSubmit} className="navbar-form">
               <div className="form-group">
-                <input type="text" className="form-control" placeholder="What is your new goal?" />
+                <input type="text" id="goal-name" className="form-control" onChange={this.handleChange} placeholder="What is your new goal?" />
               </div>
-              <button type="submit" data-target="#carousel-example-generic" data-slide-to="1" className="btn btn-default" >Create Goal!</button>
+              <input type="submit" className="btn btn-default" value="Create Goal!"/>
             </form>
             {this.createNavLinks()}
           </div>

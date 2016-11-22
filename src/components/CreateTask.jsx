@@ -67,7 +67,7 @@ console.log("THIS STAAATE", this.state)
 
         <div className="form-group row">
           <div className="col-xs-10">
-            <input className="form-control" type="text" placeholder="I'm a task!" id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
+            <input className="form-control" type="text" placeholder="Uhhh... I'M a task." id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
           </div>
         </div>
         <div className="form-group row">
@@ -77,7 +77,7 @@ console.log("THIS STAAATE", this.state)
         </div>
         <div className="form-group row">
           <div className="col-xs-10">
-            <input className="form-control" type="text" placeholder="ugh, you're BOTH wrong, I'M a task!" id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
+            <input className="form-control" type="text" placeholder="ugh, you're all wrong, I'M a task!" id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
           </div>
         </div>
         <div className="form-group row">
@@ -88,7 +88,7 @@ console.log("THIS STAAATE", this.state)
 
         <div className="form-group row">
           <div className="col-md-8 col-md-offset-4">
-          <button type="submit" name="register" className="btn btn-default" id="create-goal-button" >A Goal! A Goal! My Queendom for a Goal!</button>
+          <button type="submit" name="register" className="btn btn-default" id="create-goal-button" >I'm a button! Make a Goal!</button>
         </div>
         </div>
 
