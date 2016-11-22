@@ -38,6 +38,7 @@ class App extends Component {
   }
   render() {
     console.log("Rendering <App/>");
+    console.log("user id is:", this.state.userId)
     return (
       <div className="wrapper">
         <Nav
