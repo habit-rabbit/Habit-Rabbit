@@ -66,6 +66,7 @@ class Hero extends Component {
           password: "",
           password_confirmation: "",
           signupError: null});
+        $(".form-horizontal").trigger("reset");
       if(result.data.id) {
         console.log("worked")
         //set user state for App
