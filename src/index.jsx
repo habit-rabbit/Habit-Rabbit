@@ -21,7 +21,7 @@ ReactDOM.render(
 
   <Router history={hashHistory} >
 
-  <Route path="/home" component={App} />
+  <Route path="/" component={App} />
     <Route path="/goals" component={Carousel} />
   </Router>
 , document.getElementById('react-root'));

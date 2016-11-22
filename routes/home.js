@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const ResponseData = require('../api/response.js');
 
 router.get('/', (req, res) => {
+  console.log("COOOOOOOKKKKKKIIIIIIEEEEEEE",req.session);
   res.render('index');
 });
 
@@ -39,7 +40,7 @@ router.post('/login', (req, res) => {
           //setcookie
           req.session["user-id"] = user.id;
           r.setData({id: user.id});
-          // res.redirect("/");
+
         }
         responder();
       });
