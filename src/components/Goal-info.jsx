@@ -10,7 +10,7 @@ class GoalInfo extends Component {
   }
   renderTaskTable(task) {
     return(<tr>
-              <th scope="row">sdf/th>
+              <th scope="row">sdf</th>
               <td>sdf</td>
             </tr>);
 
