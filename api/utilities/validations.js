@@ -24,8 +24,15 @@ const db = require('../query_class.js');
 // .unique("users", "email")
 // .check()
 // ~~~~~~~~>will return a boolean whether or not it passed each validation!
+//================update===========================
+// added some more flexablity to this class:
+// you can now instantiate a validation and call validate with
+// either and array or comma seperated arguments
 
-
+//  var v = new Validation("test@test.com")
+//    .validate("empty", "email").check() ~~> returns boolean
+//  OR
+//
 
 
 function Validations(data) {
@@ -35,44 +42,37 @@ function Validations(data) {
   this.fields = ['name', 'email', 'password'];
 
   if(typeof data === 'object') {
-    console.log("BLAHHHH", this.data)
     this.validateObj(this.data);
   }
-  console.log(typeof data);
-
 }
 
  Validations.prototype.validateObj = function(object) {
-    console.log(object, "this is the object!!")
     const keyArr = Object.keys(object);
-    console.log("fields", this.fields)
     this.fields.forEach((elm) =>  {
-      console.log("testing obj func", keyArr, elm)
       let re = new RegExp(elm);
       keyArr.forEach((keys) => {
         if(re.test(keys)) {
           this.data = object[keys];
-          console.log("testing obj func", this.data, keys)
-          // mustTest(elm);
+          this.mustTest(elm);
         }
       })
     });
 }
-  function mustTest(field) {
+Validations.prototype.mustTest =  function(field) {
     switch (field) {
       case 'name':
-        this.validates('empty');
+        this.validate('empty');
         break;
       case 'email':
-        this.validates('empty', 'email');
+        this.validate('empty', 'email');
         break;
       case 'password':
-        this.validates('password', 'empty');
+        this.validate('password', 'empty');
         break;
       default:
         return;
     }
-  }
+}
 
 Validations.prototype.check = function() {
   let result = this.tests.every(function(elm) {
@@ -137,15 +137,17 @@ Validations.prototype.validate = function (args) {
   // if args are comman seperated it is turned into an array
   const  argsArr = (args instanceof Array) ? args : Array.from(arguments);
   argsArr.forEach((elm, index) => {
-    console.log(elm, "this is the elm");
     this[elm]();
+    console.log("function being called is", elm, "() ",  " for: ", this.data)
+    console.log("current test array is", this.tests)
   });
   return this;
 }
 v = new Validations("test");
 // console.log(v.validate(["empty", "email"]));
 // console.log(v.validate("empty", "email"));
-b = new Validations({first_name: "blah"})
+b = new Validations({first_name: "blah", last_name: "dobleblah", email: "yoyoy=.com"}).check()
+console.log(b);
 // console.log(v.validate("", "empty"));
 c = new Validations("test")
 d = new Validations(9)
