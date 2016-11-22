@@ -5,18 +5,34 @@ import Carousel from './Carousel.jsx';
 import Hero from './Hero.jsx';
 
 class App extends Component {
+
   constructor(props){
     super(props);
     this.state = {
       userId: null,
-      loggedIn: false
+      isLoggedIn: false
     }
     this.setUserId = this.setUserId.bind(this);
     this.getUserId = this.getUserId.bind(this);
     this.renderPage = this.renderPage.bind(this);
-    this.loggedIn = this.loggedIn.bind(this);
+    this.isLoggedIn = this.isLoggedIn.bind(this);
 
   }
+
+  componentWillMount(){
+    this.isLoggedIn();
+  }
+
+  isLoggedIn(){
+    $.ajax({
+      method: "get",
+      url: "/app",
+    }).done((data) => {
+      console.log("DATA:", data);
+      // this.setState({isLoggedIn: isLoggedIn});
+    });
+  }
+
 //this renders appropriate component if user is not logged in
   renderPage() {
     if (this.state.userId === null) {
@@ -26,16 +42,14 @@ class App extends Component {
     }
   }
 
-  loggedIn(){
-    this.setState({loggedIn: true});
-    }
-
   setUserId(userId) {
     this.setState({userId: userId});
   }
+
   getUserId(userId) {
     return this.state.userId;
   }
+
   render() {
     console.log("Rendering <App/>");
     return (
@@ -47,8 +61,6 @@ class App extends Component {
         {this.renderPage()}
       </div>
     );
-
-        // {this.loggedIn()}
   }
 
 }
