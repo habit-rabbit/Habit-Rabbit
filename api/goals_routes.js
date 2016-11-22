@@ -13,6 +13,7 @@ router.post("/goals/create", (req, res) => {
     let query = req.body;
     query.table = "goals"; //for definition required by db (need to dry up)
     db.insertRow(query,  (err, data) => {
+      console.log("THIS IS THE ERRRRR", err)
       if (err) r.setErrorMsg("Unable to save the goal :(");
       r.setData(data);
       res.send(r);

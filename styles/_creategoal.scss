@@ -1,10 +1,16 @@
 
 .goals-form-control {
   padding-top: 50px;
+  position: absolute;
 }
 
 #create-goal-input {
-  margin: 0 auto;
+  margin: auto;
   text-align: center;
-  width: 100%
+  width: 80%
+}
+
+#create-goal-button {
+  position: absolute;
+  margin-top: 20px;
 }
