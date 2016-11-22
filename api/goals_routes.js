@@ -98,7 +98,7 @@ router.get("/goals/:id/tasks", (req, res) => {
 });
 
 router.post("/goals/:id/tasks/:task_id/update", (req, res) => {
-  const r = new Response();
+  const r = new ResponseData();
   if (req.xhr) {
     let query = {};
     query.table = findTable(req.url);
