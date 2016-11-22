@@ -29,7 +29,7 @@ router.post("/users/create", (req, res) => {
           if (err) r.setErrorMsg("Unable to save user, bad credentials!");
           //set data into responseData object 'r'
           // with user id
-          r.setData({id: data[0].id});
+          data ? r.setData({id: data[0].id}) : r.setErrorMsg("Email already used");
           res.send(r);
         });
       });
