@@ -92,7 +92,8 @@ class SingleGoal extends Component {
           </div>
           <div className="col-md-6">
             <div className="progress">
-              <ProgressBar />
+              <ProgressBar
+              taskArray={this.state.tasks}/>
             </div>
           </div>
           <div className="col-md-3">
