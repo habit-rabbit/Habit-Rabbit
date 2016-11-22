@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Goals from './Goals.jsx';
+import CreateGoal from './CreateGoal.jsx';
+
 class Carousel extends Component {
 
   constructor(props){
@@ -29,12 +31,14 @@ class Carousel extends Component {
             </div>
          </div>
 
-          <div className="item">
+             <div className="item">
             <div className="container main-content">
+
+              <h1 className="container-title"> Holy Guacamole! Let's Set a Goal, Ye! </h1>
+              <CreateGoal
+              />
             </div>
             <div className="carousel-caption">
-              <h1>Slide 2</h1>
-              <p>Slide 2 Description</p>
             </div>
           </div>
 

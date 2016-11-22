@@ -41,7 +41,7 @@ class CreateGoal extends Component {
 
     $.ajax({
       method: 'post',
-      url: '/goals/create',
+      url: '/api/goals/create',
       dataType: 'json',
       data: {
         data: {
@@ -58,46 +58,43 @@ class CreateGoal extends Component {
 
       return (
 
-
       <div className="goals-form-control">
         <div className="form-group row">
-          <label for="example-text-input" className="col-xs-2 col-form-label"></label>
           <div className="col-xs-10">
-            <input className="form-control" type="text" value="I'm a Goal name! I'm the best!" id="example-text-input"/>
+            <input className="form-control" type="text" value="I'm a Goal name! I'm the best!" id="create-goal-input"/>
           </div>
         </div>
 
         <div className="form-group row">
-          <label for="example-date-input" className="col-xs-2 col-form-label"></label>
           <div className="col-xs-10">
-            <input className="form-control" type="date" value="2016-12-14" id="example-date-input"/>
+            <input className="form-control" type="text" value="I'm a task!" id="create-goal-input"/>
+          </div>
+        </div>
+        <div className="form-group row">
+          <div className="col-xs-10">
+            <input className="form-control" type="text" value="No, I'M a task!" id="create-goal-input"/>
+          </div>
+        </div>
+        <div className="form-group row">
+          <div className="col-xs-10">
+            <input className="form-control" type="text" value="ugh, you're BOTH wrong, I'M a task!" id="create-goal-input"/>
+          </div>
+        </div>
+        <div className="form-group row">
+          <div className="col-xs-10">
+            <input className="form-control" type="text" value="OMG. YOU'RE ALL TASKS." id="create-goal-input"/>
           </div>
         </div>
 
-        <div className="form-group row">
-          <label for="example-url-input" className="col-xs-2 col-form-label"></label>
-          <div className="col-xs-10">
-            <input className="form-control" type="text" value="I'm a task!" id="example-url-input"/>
+          <div className="img-container">
+            <div className="row">
+            <div className="col-md-8 col-md-offset-3">
+            <img src="http://i.imgur.com/dmYCfcX.png" />
+              <h5><p>Well well well. Look who we have here, it is our dear friend, string.interpolation. The bravery and courage you have shown by setting a new Goal has given Rabeet a little *bounce* back! When she is pleased her goat is bright. Do not slack on your Goals though, or Rabeet will start turning back into a rabid lazy trash monster.</p></h5>
+              <h6><p><em>I bet you were being a lazy little trash monster last night, wernt you!!</em></p></h6>
+            </div>
+            </div>
           </div>
-        </div>
-        <div className="form-group row">
-          <label for="example-url-input" className="col-xs-2 col-form-label"></label>
-          <div className="col-xs-10">
-            <input className="form-control" type="text" value="No, I'M a task!" id="example-url-input"/>
-          </div>
-        </div>
-        <div className="form-group row">
-          <label for="example-url-input" className="col-xs-2 col-form-label"></label>
-          <div className="col-xs-10">
-            <input className="form-control" type="text" value="ugh, you're BOTH wrong, I'M a task!" id="example-url-input"/>
-          </div>
-        </div>
-        <div className="form-group row">
-          <label for="example-url-input" className="col-xs-2 col-form-label"></label>
-          <div className="col-xs-10">
-            <input className="form-control" type="text" value="OMG. YOU'RE ALL TASKS." id="example-url-input"/>
-          </div>
-        </div>
 
       </div>
 

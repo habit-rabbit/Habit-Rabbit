@@ -64,7 +64,7 @@ class Nav extends Component {
               <div className="form-group">
                 <input type="text" className="form-control" placeholder="What is your new goal?" />
               </div>
-              <button type="submit" className="btn btn-default">Create Goal!</button>
+              <button type="submit" className="btn btn-default" >Create Goal!</button>
             </form>
             {this.createNavLinks()}
           </div>
