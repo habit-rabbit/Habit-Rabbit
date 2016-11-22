@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NextTask from './NextTask.jsx';
+import ProgressBar from './ProgressBar.jsx';
 
 class SingleGoal extends Component {
 
@@ -91,8 +92,8 @@ class SingleGoal extends Component {
           </div>
           <div className="col-md-6">
             <div className="progress">
-              <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width: "20%"}}>
-              </div>
+              <ProgressBar
+              taskArray={this.state.tasks}/>
             </div>
           </div>
           <div className="col-md-3">
