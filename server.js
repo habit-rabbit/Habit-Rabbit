@@ -27,8 +27,8 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieSession({
   name: 'session',
-  //to be changed
-  secret: "liamneeson"
+
+  secret: process.env.SECRET
 }));
 app.use(require("webpack-hot-middleware")(compiler));
 
