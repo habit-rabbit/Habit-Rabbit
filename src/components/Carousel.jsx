@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Goals from './Goals.jsx';
-import CreateGoal from './CreateGoal.jsx';
+import CreateTask from './CreateTask.jsx';
 
 class Carousel extends Component {
 
@@ -20,7 +20,7 @@ class Carousel extends Component {
         </ol>
 
         <div className="carousel-inner">
-          <div className="item active">
+          <div className="item active" id="goals-home">
             <div className="container main-content">
               <h1 className="container-title"> ~ Your Current Goals ~ </h1>
                 <Goals/>
@@ -31,18 +31,17 @@ class Carousel extends Component {
             </div>
          </div>
 
-             <div className="item">
+             <div className="item" id="goals-create">
             <div className="container main-content">
-
               <h1 className="container-title"> Holy Guacamole! Let's Set a Goal, Ye! </h1>
-              <CreateGoal
+              <CreateTask
               />
             </div>
             <div className="carousel-caption">
             </div>
           </div>
 
-          <div className="item">
+          <div className="item" id="open-slide">
             <div className="container main-content">
             </div>
             <div className="carousel-caption">
@@ -52,14 +51,14 @@ class Carousel extends Component {
           </div>
 
         </div>
-      <a className="left carousel-control " href="#carousel-example-generic" role="button" data-slide="prev">
-        <span className="glyphicon glyphicon-chevron-left white" aria-hidden="true"></span>
-        <span className="sr-only">Previous</span>
-      </a>
-      <a className="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span className="glyphicon glyphicon-chevron-right white" aria-hidden="true"></span>
-        <span className="sr-only">Next</span>
-      </a>
+          <a className="left carousel-control " href="#carousel-example-generic" role="button" data-slide="prev">
+            <span className="glyphicon glyphicon-chevron-left white" aria-hidden="true"></span>
+            <span className="sr-only">Previous</span>
+          </a>
+          <a className="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span className="glyphicon glyphicon-chevron-right white" aria-hidden="true"></span>
+            <span className="sr-only">Next</span>
+          </a>
       </div>
     );
   }

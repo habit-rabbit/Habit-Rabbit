@@ -8,7 +8,11 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.users = {};
-    this.state = {email: "", password: "", loginError:""};
+    this.state = {
+      email: "",
+      password: "",
+      loginError:""
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderError = this.renderError.bind(this);
@@ -53,7 +57,8 @@ class Login extends Component {
         this.setState({email: "", password: "", loginError: null});
         $("#login-modal").modal("hide");
         //call function to update navbar here
-        this.props.updateNavLinks()
+        this.props.verifyLogin();
+        this.props.updateNavLinks();
       } else if (result.error.msg) {
         this.setState({loginError: result.error.msg})
       }
