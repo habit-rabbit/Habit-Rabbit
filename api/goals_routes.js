@@ -11,7 +11,7 @@ router.post("/goals/create", (req, res) => {
   //this route implies we are looking to insert into goals table
   if(req.xhr) {
     let query = req.body;
-    query.table = "goals"; //for definition required by db (need to dry up)
+    query.table = findTable(req.url); //for definition required by db (need to dry up)
     db.insertRow(query,  (err, data) => {
       console.log("THIS IS THE ERRRRR", err)
       if (err) r.setErrorMsg("Unable to save the goal :(");
@@ -27,7 +27,7 @@ router.get("/goals", (req, res) => {
   const r = new ResponseData();
   if(req.xhr) {
     let query = req.query;
-    query.table = "goals";
+    query.table = findTable(req.url);
     query.data = {user_id: req.session['user-id']};
     db.getAllWhere(query,  (err, data) => {
       if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
@@ -43,7 +43,7 @@ router.get("/goals/:id", (req, res) => {
   const r = new ResponseData();
   if(req.xhr) {
     let query = req.query;
-    query.table = "goals";
+    query.table = findTable(req.url);
     // we can assign the req.params.id to our data object, but as there is no
     // data object being passed in from the ajax call we create an empty one
     //this preserves the formatting required for the database class
@@ -64,7 +64,7 @@ router.post("/goals/:id/delete", (req, res) => {
   const r = new ResponseData();
   if(req.xhr) {
     let query = req.body;
-    query.table = "goals";
+    query.table = findTable(req.url);
     query.data = {};
     query.data.id = req.params.id;
     db.delRow(query,  (err, data) => {
