@@ -3,6 +3,7 @@ import Nav from './Nav.jsx';
 import Goals from './Goals.jsx';
 import Carousel from './Carousel.jsx';
 import Hero from './Hero.jsx';
+import CreateGoal from './CreateGoal.jsx';
 
 class App extends Component {
   constructor(props){
@@ -22,7 +23,7 @@ class App extends Component {
     if (this.state.userId === null) {
       return <Hero setUserId={this.setUserId}/>;
     } else {
-      return  <Carousel />;
+      return <Carousel />;
     }
   }
 
