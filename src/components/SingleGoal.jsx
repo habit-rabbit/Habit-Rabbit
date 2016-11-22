@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import NextTask from './NextTask.jsx';
+import ProgressBar from './ProgressBar.jsx';
 
 class SingleGoal extends Component {
 
@@ -12,7 +14,6 @@ class SingleGoal extends Component {
       tasks: {},
       currentTask: {},
       userId: null,
-      updating: false
     }
     this.initializeTaskData();
   }
@@ -35,6 +36,8 @@ class SingleGoal extends Component {
       });
       console.log("SORTED TASKS:", tasks);
       this.setState({tasks: data});
+      let currTask = this.getCurrentTask();
+      this.setState({currentTask: currTask});
     });
   }
 
@@ -61,24 +64,17 @@ class SingleGoal extends Component {
   }
 
   updateCurrentTask (goalId, taskId) {
-    // console.log("You checked a checkbox! Look at you go!");
-    console.log("SENDING TASK UPDATE");
-    console.log(`Goal id: ${goalId}, task id: ${taskId}`);
+    // console.log(`Goal id: ${goalId}, task id: ${taskId}`);
     let taskUpdate = $.ajax({
       method: "post",
       url: `api/goals/${goalId}/tasks/${taskId}/update`,
       data: {is_done: true}
     }).done((data) => {
-      console.log("In .done of updateCurrentTaskf");
       this.initializeTaskData();
-      // this.setState({updating: true});
-      // let taskUpdate = this.getCurrentTask();
     });
   }
 
   renderGoals() {
-    console.log("In renderGoals function of SingleGoal ");
-    console.log("State Tasks:", this.state.tasks);
     if(!this.state.tasks.data) {
       console.log("if" +this.state.tasks);
       return (
@@ -96,17 +92,16 @@ class SingleGoal extends Component {
           </div>
           <div className="col-md-6">
             <div className="progress">
-              <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width: "20%"}}>
-              </div>
+              <ProgressBar
+              taskArray={this.state.tasks}/>
             </div>
           </div>
           <div className="col-md-3">
             <h4 className="task-list"> Next Task: </h4>
-            <p>{this.getCurrentTask().name}</p>
-            <span>Finished already? </span>
-            <label>
-              <input type="checkbox" onChange={()=>{this.updateCurrentTask(this.props.goalInfo.id, this.getCurrentTask().id)}}/>
-            </label>
+            <NextTask
+            taskInfo={this.state.currentTask}
+            updateCurrentTask={this.updateCurrentTask}
+            goalInfo={this.props.goalInfo} />
           </div>
         </div>
       );
