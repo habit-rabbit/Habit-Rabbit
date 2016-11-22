@@ -31,10 +31,48 @@ const db = require('../query_class.js');
 function Validations(data) {
   this.tests = [];
   this.data = data;
-  this.isNumber = function() {
-    return Number.isInteger(this.data);
+  //fields common to database tables
+  this.fields = ['name', 'email', 'password'];
+
+  if(typeof data === 'object') {
+    console.log("BLAHHHH", this.data)
+    this.validateObj(this.data);
   }
+  console.log(typeof data);
+
 }
+
+ Validations.prototype.validateObj = function(object) {
+    console.log(object, "this is the object!!")
+    const keyArr = Object.keys(object);
+    console.log("fields", this.fields)
+    this.fields.forEach((elm) =>  {
+      console.log("testing obj func", keyArr, elm)
+      let re = new RegExp(elm);
+      keyArr.forEach((keys) => {
+        if(re.test(keys)) {
+          this.data = object[keys];
+          console.log("testing obj func", this.data, keys)
+          // mustTest(elm);
+        }
+      })
+    });
+}
+  function mustTest(field) {
+    switch (field) {
+      case 'name':
+        this.validates('empty');
+        break;
+      case 'email':
+        this.validates('empty', 'email');
+        break;
+      case 'password':
+        this.validates('password', 'empty');
+        break;
+      default:
+        return;
+    }
+  }
 
 Validations.prototype.check = function() {
   let result = this.tests.every(function(elm) {
@@ -94,19 +132,24 @@ Validations.prototype.password = function() {
 }
 // a more flexible version that allows an array of arguments
 // v = new Validation().validate("testdata", "empty", "email") -> false
-Validations.prototype.validate = function (data, args) {
-  this.data = data;
-  Array.from(arguments).forEach((test, index) => {
-    if (index > 0) {
-      this[test]
-    }
+Validations.prototype.validate = function (args) {
+  //if args is an array, it is not mutated
+  // if args are comman seperated it is turned into an array
+  const  argsArr = (args instanceof Array) ? args : Array.from(arguments);
+  argsArr.forEach((elm, index) => {
+    console.log(elm, "this is the elm");
+    this[elm]();
   });
-    console.log("blahh")
-    return this.check();
+  return this;
 }
-v = new Validations();
-console.log(v.validate("test", "empty", "email"));
-console.log(v.validate("test2", "email"));
+v = new Validations("test");
+// console.log(v.validate(["empty", "email"]));
+// console.log(v.validate("empty", "email"));
+b = new Validations({first_name: "blah"})
+// console.log(v.validate("", "empty"));
+c = new Validations("test")
+d = new Validations(9)
+cc = new Validations(false)
 module.exports = Validations
-b = new Validations("test").email().check();
-console.log(b)
+// b = new Validations("test").email().check();
+// console.log(b)
