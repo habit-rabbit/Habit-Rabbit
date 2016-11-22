@@ -12,9 +12,8 @@ router.post("/users/create", (req, res) => {
   //this route implies we are looking to insert into users table
   let r = new ResponseData();
   let isValidCredentials = new Validations(req.body.data).check();
-  let isUniqueEmail = new Validations(req.body.data.email).unique().check();
   if(req.body.data.password === req.body.data.password_confirmation) {
-    if (isValidCredentials  && isUniqueEmail) {
+    if (isValidCredentials) {
       bcrypt.hash(req.body.data.password, 10, (err, hash) => {
         //set up query object..
         const query = {};
