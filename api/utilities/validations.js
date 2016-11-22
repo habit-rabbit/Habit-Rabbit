@@ -24,18 +24,73 @@ const db = require('../query_class.js');
 // .unique("users", "email")
 // .check()
 // ~~~~~~~~>will return a boolean whether or not it passed each validation!
+//================update===========================
+// added some more flexablity to this class:
+// you can now instantiate a validation and call validate with
+// either and array or comma seperated arguments
 
-
-
+//  var v = new Validation("test@test.com")
+//    .validate("empty", "email").check() ~~> returns boolean
+//  OR
+//  var v = new Validation("test@test.com")
+//      .validate(["empty", "email"]).check() ~~> returns boolean
+//
+//  OR ! YOu can input an object and the class will iterate
+//      over each key and test it for appropriate validations related
+//      to that key.
+//      currently any key containing name, email, or password are supported
+//  var v = new Validation({first_name: "tod",
+//       "last_name": bob,
+//       "extraname" : "bobby",
+//       "email" : "bobbybab@gmail.com"
+//      }).check() ~~~~> returns boolean
 
 function Validations(data) {
   this.tests = [];
   this.data = data;
-  this.isNumber = function() {
-    return Number.isInteger(this.data);
+  //fields common to database tables
+  this.fields = ['name', 'email', 'password'];
+
+  if(typeof data === 'object') {
+    this.validateObj(this.data);
   }
 }
 
+ Validations.prototype.validateObj = function(object) {
+    const keyArr = Object.keys(object);
+    this.fields.forEach((elm) =>  {
+      let re = new RegExp(elm);
+      keyArr.forEach((keys) => {
+        if(re.test(keys)) {
+          console.log("testing key: ", keys);
+          this.data = object[keys];
+          this.mustTest(elm);
+        }
+      })
+    });
+}
+Validations.prototype.mustTest =  function(field) {
+    switch (field) {
+      case 'name':
+        this.validate('empty');
+        break;
+      case 'email':
+        this.validate('empty', 'email');
+        break;
+      case 'password':
+        this.validate('password', 'empty');
+        break;
+      default:
+        return;
+    }
+}
+
+Validations.prototype.check = function() {
+  let result = this.tests.every(function(elm) {
+    return elm == true;
+  })
+  return result;
+}
 Validations.prototype.empty = function() {
   let string = this.data.trim();
   this.tests.push(string.length > 0);
@@ -86,11 +141,28 @@ Validations.prototype.password = function() {
   this.empty();
   return this;
 }
-Validations.prototype.check = function() {
-  let result = this.tests.every(function(elm) {
-    return elm == true;
-  })
-  return result;
+// a more flexible version that allows an array of arguments
+// v = new Validation().validate("testdata", "empty", "email") -> false
+Validations.prototype.validate = function (args) {
+  //if args is an array, it is not mutated
+  // if args are comman seperated it is turned into an array
+  const  argsArr = (args instanceof Array) ? args : Array.from(arguments);
+  argsArr.forEach((elm, index) => {
+    this[elm]();
+    console.log("function being called is", elm, "() ",  " for: ", this.data)
+    console.log("current test array is", this.tests)
+  });
+  return this;
 }
-
+// v = new Validations("test");
+// // console.log(v.validate(["empty", "email"]));
+// // console.log(v.validate("empty", "email"));
+// b = new Validations({first_name: "blah", last_name: "dobleblah", email: "yoyoy=.com"}).check()
+// console.log(b);
+// // console.log(v.validate("", "empty"));
+// c = new Validations("test")
+// d = new Validations(9)
+// cc = new Validations(false)
 module.exports = Validations
+// b = new Validations("test").email().check();
+// console.log(b)
