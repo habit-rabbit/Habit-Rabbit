@@ -83,10 +83,6 @@ class Nav extends Component {
 
 
 
-  //logs out user when they click the logout link
-  logOut(){
-    this.setState({loggedIn: false});
-  }
 
 
   render() {
