@@ -36,6 +36,12 @@ function Validations(data) {
   }
 }
 
+Validations.prototype.check = function() {
+  let result = this.tests.every(function(elm) {
+    return elm == true;
+  })
+  return result;
+}
 Validations.prototype.empty = function() {
   let string = this.data.trim();
   this.tests.push(string.length > 0);
@@ -86,11 +92,21 @@ Validations.prototype.password = function() {
   this.empty();
   return this;
 }
-Validations.prototype.check = function() {
-  let result = this.tests.every(function(elm) {
-    return elm == true;
-  })
-  return result;
+// a more flexible version that allows an array of arguments
+// v = new Validation().validate("testdata", "empty", "email") -> false
+Validations.prototype.validate = function (data, args) {
+  this.data = data;
+  Array.from(arguments).forEach((test, index) => {
+    if (index > 0) {
+      this[test]
+    }
+  });
+    console.log("blahh")
+    return this.check();
 }
-
+v = new Validations();
+console.log(v.validate("test", "empty", "email"));
+console.log(v.validate("test2", "email"));
 module.exports = Validations
+b = new Validations("test").email().check();
+console.log(b)
