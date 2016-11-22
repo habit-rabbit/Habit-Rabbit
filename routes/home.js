@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
           //setcookie
           req.session["user-id"] = user.id;
           r.setData({id: user.id});
-          // res.redirect("/");
+
         }
         responder();
       });
