@@ -52,6 +52,8 @@ class Login extends Component {
         this.props.setUserId(result.data.id);
         this.setState({email: "", password: "", loginError: null});
         $("#login-modal").modal("hide");
+        //call function to update navbar here
+        this.props.updateNavLinks()
       } else if (result.error.msg) {
         this.setState({loginError: result.error.msg})
       }
