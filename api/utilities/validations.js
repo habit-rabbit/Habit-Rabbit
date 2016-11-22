@@ -32,8 +32,18 @@ const db = require('../query_class.js');
 //  var v = new Validation("test@test.com")
 //    .validate("empty", "email").check() ~~> returns boolean
 //  OR
+//  var v = new Validation("test@test.com")
+//      .validate(["empty", "email"]).check() ~~> returns boolean
 //
-
+//  OR ! YOu can input an object and the class will iterate
+//      over each key and test it for appropriate validations related
+//      to that key.
+//      currently any key containing name, email, or password are supported
+//  var v = new Validation({first_name: "tod",
+//       "last_name": bob,
+//       "extraname" : "bobby",
+//       "email" : "bobbybab@gmail.com"
+//      }).check() ~~~~> returns boolean
 
 function Validations(data) {
   this.tests = [];
@@ -143,15 +153,15 @@ Validations.prototype.validate = function (args) {
   });
   return this;
 }
-v = new Validations("test");
-// console.log(v.validate(["empty", "email"]));
-// console.log(v.validate("empty", "email"));
-b = new Validations({first_name: "blah", last_name: "dobleblah", email: "yoyoy=.com"}).check()
-console.log(b);
-// console.log(v.validate("", "empty"));
-c = new Validations("test")
-d = new Validations(9)
-cc = new Validations(false)
+// v = new Validations("test");
+// // console.log(v.validate(["empty", "email"]));
+// // console.log(v.validate("empty", "email"));
+// b = new Validations({first_name: "blah", last_name: "dobleblah", email: "yoyoy=.com"}).check()
+// console.log(b);
+// // console.log(v.validate("", "empty"));
+// c = new Validations("test")
+// d = new Validations(9)
+// cc = new Validations(false)
 module.exports = Validations
 // b = new Validations("test").email().check();
 // console.log(b)
