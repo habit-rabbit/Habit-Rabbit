@@ -26,7 +26,7 @@ class Goals extends Component {
     });
   }
 
-  render() {
+  renderGoals () {
     console.log("Rendering Goals.jsx");
     console.log("this.state.goals:", this.state.goals);
     if (!this.state.goals.data) {
@@ -34,13 +34,20 @@ class Goals extends Component {
       return (
         <h3> Loading Goals... </h3>
       )
+    } else if (this.state.goals.data.length === 0) {
+      return (
+        <div>
+          <h3> You haven't created any goals yet!</h3>
+          <h3>GET ON IT.</h3>
+          <h3>WHAT ARE YOU EVEN DOING HERE?!?</h3>
+        </div>
+      )
     } else {
-      console.log(this.state.goals.data);
       return (
         <div>
           {this.state.goals.data.map((goal, index) => {
             return (
-              <div className="goals-template row " key={index}>
+              <div className="goals-template row well" key={index}>
                <SingleGoal goalInfo={goal} />
               </div>
             )
@@ -48,6 +55,10 @@ class Goals extends Component {
         </div>
       );
     }
+  }
+
+  render () {
+    {this.renderGoals()}
   }
 }
 
