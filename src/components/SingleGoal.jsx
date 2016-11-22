@@ -21,7 +21,7 @@ class SingleGoal extends Component {
   initializeTaskData () {
     $.ajax({
       method: "get",
-      url: "/api/goals/5/tasks"
+      url: `/api/goals/${this.props.goalInfo.id}/tasks`
     }).done((data) => {
       console.log(data);
       let tasks = data.data;
