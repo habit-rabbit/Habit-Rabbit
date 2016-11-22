@@ -35,6 +35,27 @@ class Nav extends Component {
     }
   }
 
+
+ handleSubmit(event) {
+    event.preventDefault();
+
+    $.ajax({
+      method: 'post',
+      url: '/api/goals/create',
+      dataType: 'json',
+      data: {
+        data: {
+          name: this.state.name,
+          user_id: this.props.userId,
+          private: true,
+          deadline: "2016-12-14"
+        }
+      }
+    })
+  }
+
+
+
   updateNavLinks(){
     this.setState({loggedIn: true});
   }
@@ -64,7 +85,7 @@ class Nav extends Component {
               <div className="form-group">
                 <input type="text" className="form-control" placeholder="What is your new goal?" />
               </div>
-              <button type="submit" className="btn btn-default" >Create Goal!</button>
+              <button type="submit" data-target="#carousel-example-generic" data-slide-to="1" className="btn btn-default" >Create Goal!</button>
             </form>
             {this.createNavLinks()}
           </div>
