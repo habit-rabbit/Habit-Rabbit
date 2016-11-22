@@ -16,27 +16,41 @@ class App extends Component {
     this.setUserId = this.setUserId.bind(this);
     this.getUserId = this.getUserId.bind(this);
     this.renderPage = this.renderPage.bind(this);
-    this.isLoggedIn = this.isLoggedIn.bind(this);
+    this.verifyLogin = this.verifyLogin.bind(this);
+    // this.logOut = this.logOut.bind(this);
 
   }
 
   componentWillMount(){
-    this.isLoggedIn();
+    this.verifyLogin();
   }
 
-  isLoggedIn(){
+  verifyLogin(){
     $.ajax({
       method: "get",
-      url: "/app",
+      url: "/login",
+      dataType: 'json'
     }).done((data) => {
-      console.log("DATA:", data);
-      // this.setState({isLoggedIn: isLoggedIn});
+      console.log("Am I logged in?:", data.isLoggedIn);
+      this.setState({isLoggedIn: data.isLoggedIn});
     });
   }
 
+  // logOut(){
+  //   console.log("=====do i enven get to the logout function?======");
+  //    $.ajax({
+  //     method: "post",
+  //     url: "/logout",
+  //     dataType: 'json'
+  //   }).done((data) => {
+  //     console.log("============Am I logged OUT=========?:");
+  //     this.setState({isLoggedIn: data.isLoggedIn});
+  //   });
+  // }
+
 //this renders appropriate component if user is not logged in
   renderPage() {
-    if (this.state.userId === null) {
+    if (this.state.isLoggedIn === false) {
       return <Hero setUserId={this.setUserId}/>;
     } else {
       return <Carousel />;
@@ -59,6 +73,8 @@ class App extends Component {
         <Nav
           setUserId={this.setUserId}
           userId={this.state.userId}
+          isLoggedIn={this.state.isLoggedIn}
+          verifyLogin={this.verifyLogin}
          />
         {this.renderPage()}
       </div>

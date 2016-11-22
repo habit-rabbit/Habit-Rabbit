@@ -8,9 +8,8 @@ router.get('/', (req, res) => {
   res.render('index');
 });
 
-router.get('/app', (req, res) => {
+router.get('/login', (req, res) => {
   let isLoggedIn;
-  let name;
   console.log("session: " + req.session['user-id']);
   if(req.session['user-id']){
     isLoggedIn = true;
@@ -19,7 +18,13 @@ router.get('/app', (req, res) => {
 
     isLoggedIn = false;
   }
-  res.json({isLogggedIn: isLoggedIn});
+  res.json({isLoggedIn: isLoggedIn});
+});
+
+router.post('/logout', (req, res) =>{
+  req.session = null;
+  res.json({isLoggedIn: false});
+
 });
 
 
@@ -54,7 +59,7 @@ router.post('/login', (req, res) => {
         if(result) {
           //setcookie
           req.session["user-id"] = user.id;
-          r.setData({id: user.id});
+          r.setData({id: user.id, isLoggedIn: true});
 
         }
         responder();
