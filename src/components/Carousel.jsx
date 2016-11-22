@@ -21,8 +21,7 @@ class Carousel extends Component {
           <div className="item active">
             <div className="container main-content">
               <h1 className="container-title"> ~ Your Current Goals ~ </h1>
-                <Goals
-                />
+                <Goals/>
             </div>
             <div className="carousel-caption">
               <h1></h1>
