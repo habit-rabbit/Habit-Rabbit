@@ -3,7 +3,7 @@ import Nav from './Nav.jsx';
 import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
 
 
-class CreateGoal extends Component {
+class CreateTask extends Component {
   constructor(props) {
     super(props);
     this.users = {};
@@ -21,7 +21,7 @@ class CreateGoal extends Component {
   handleChange(event) {
     let id = event.target.id;
     let value = event.target.value;
-
+console.log("THIS STAAATE", this.state)
     if (id === "name") {
       this.setState({name: value});
     }
@@ -54,20 +54,20 @@ class CreateGoal extends Component {
     })
   }
   render() {
-      console.log("Rendering <CreateGoal/>");
+      console.log("Rendering <CreateTask/>");
 
       return (
 
       <div className="goals-form-control">
         <div className="form-group row">
           <div className="col-xs-10">
-            <input className="form-control" type="text" placeholder="I'm a Goal name! I'm the best!" id="create-goal-input" value={this.state.value} onChange={this.handleChange}/>
+            <input className="form-control" type="text" placeholder="I'm a cool task!" id="create-goal-input" value={this.state.value} onChange={this.handleChange}/>
           </div>
         </div>
 
         <div className="form-group row">
           <div className="col-xs-10">
-            <input className="form-control" type="text" placeholder="I'm a task!" id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
+            <input className="form-control" type="text" placeholder="Uhhh... I'M a task." id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
           </div>
         </div>
         <div className="form-group row">
@@ -77,7 +77,7 @@ class CreateGoal extends Component {
         </div>
         <div className="form-group row">
           <div className="col-xs-10">
-            <input className="form-control" type="text" placeholder="ugh, you're BOTH wrong, I'M a task!" id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
+            <input className="form-control" type="text" placeholder="ugh, you're all wrong, I'M a task!" id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
           </div>
         </div>
         <div className="form-group row">
@@ -88,7 +88,7 @@ class CreateGoal extends Component {
 
         <div className="form-group row">
           <div className="col-md-8 col-md-offset-4">
-          <input type="submit" name="register" className="btn btn-default" id="create-goal-button" value="A Goal! A Goal! My Queendom for a Goal!" />
+          <button type="submit" name="register" className="btn btn-default" id="create-goal-button" >I'm a button! Make a Goal!</button>
         </div>
         </div>
 
@@ -109,4 +109,4 @@ class CreateGoal extends Component {
     }
 
 }
-export default CreateGoal;
+export default CreateTask;
