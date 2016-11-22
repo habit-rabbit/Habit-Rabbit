@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const ResponseData = require('../api/response.js');
 
 router.get('/', (req, res) => {
+  console.log("COOOOOOOKKKKKKIIIIIIEEEEEEE",req.session);
   res.render('index');
 });
 
