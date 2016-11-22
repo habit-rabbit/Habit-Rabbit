@@ -4,6 +4,45 @@ import Register from './Register.jsx';
 
 class Nav extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      loggedIn: false
+    }
+    this.createNavLinks = this.createNavLinks.bind(this);
+    this.updateNavLinks = this.updateNavLinks.bind(this);
+    this.logOut = this.logOut.bind(this);
+  }
+
+  // if user logged in show username in nav bar, else show
+  createNavLinks(){
+    if(this.state.loggedIn){
+      return (
+        <ul className="nav navbar-nav navbar-right">
+          <li><a href="">{this.props.userId}</a></li>
+          <li><a href="/#/home" onClick={this.logOut}>Logout</a></li>
+        </ul>
+      )
+    } else {
+      return(
+        <ul className="nav navbar-nav navbar-right">
+          <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
+          <Login setUserId={this.props.setUserId} updateNavLinks = {this.updateNavLinks}/>
+          <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
+          <Register />
+        </ul>
+      )
+    }
+  }
+
+  updateNavLinks(){
+    this.setState({loggedIn: true});
+  }
+
+  //logs out user when they click the logout link
+  logOut(){
+    this.setState({loggedIn: false});
+  }
 
   render() {
     console.log("Rendering <Nav/>");
@@ -27,24 +66,7 @@ class Nav extends Component {
               </div>
               <button type="submit" className="btn btn-default">Create Goal!</button>
             </form>
-
-
-            <ul className="nav navbar-nav navbar-right">
-             <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
-             <Login setUserId={this.props.setUserId}/>
-             <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
-             <Register />
-              <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
-                <ul className="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" className="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                </ul>
-              </li>
-            </ul>
+            {this.createNavLinks()}
           </div>
         </div>
       </nav>
