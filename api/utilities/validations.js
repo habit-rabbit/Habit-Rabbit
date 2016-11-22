@@ -62,6 +62,7 @@ function Validations(data) {
       let re = new RegExp(elm);
       keyArr.forEach((keys) => {
         if(re.test(keys)) {
+          console.log("testing key: ", keys);
           this.data = object[keys];
           this.mustTest(elm);
         }
