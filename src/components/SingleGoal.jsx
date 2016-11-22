@@ -14,6 +14,7 @@ class SingleGoal extends Component {
       tasks: {},
       currentTask: {},
       userId: null,
+      goalComplete: false
     }
     this.initializeTaskData();
   }
@@ -34,7 +35,6 @@ class SingleGoal extends Component {
         }
         return 0;
       });
-      console.log("SORTED TASKS:", tasks);
       this.setState({tasks: data});
       let currTask = this.getCurrentTask();
       this.setState({currentTask: currTask});
@@ -54,13 +54,16 @@ class SingleGoal extends Component {
   }
 
   getCurrentTask () {
-    console.log("GETTING CURRENT TASK");
     function findNextTask(task) {
       return !task.is_done
     }
     let taskName = this.state.tasks.data.find(findNextTask);
-    console.log("getCurrentTaskResult:", taskName.name);
-    return taskName;
+    if (!taskName) {
+      this.setState({goalComplete: true});
+    } else {
+      console.log("getCurrentTaskResult:", taskName.name);
+      return taskName;
+    }
   }
 
   updateCurrentTask (goalId, taskId) {
@@ -76,14 +79,12 @@ class SingleGoal extends Component {
 
   renderGoals() {
     if(!this.state.tasks.data) {
-      console.log("if" +this.state.tasks);
       return (
         <div>
           Goals Loading...
         </div>
       )
     } else {
-      console.log("else" +this.state.tasks);
       return(
         <div>
           <div className="col-md-3">
@@ -101,7 +102,8 @@ class SingleGoal extends Component {
             <NextTask
             taskInfo={this.state.currentTask}
             updateCurrentTask={this.updateCurrentTask}
-            goalInfo={this.props.goalInfo} />
+            goalInfo={this.props.goalInfo}
+            goalComplete={this.state.goalComplete} />
           </div>
         </div>
       );
