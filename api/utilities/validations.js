@@ -12,8 +12,6 @@ const db = require('../query_class.js');
 //  v.empty().check() -> checks if argument is not an empty string
 //  v.number().check() -> checks if argument is an integer
 //  v.email().check() -> checks if argument is an email address
-//  v.unique(table, column).check() -> queries database and checks if
-//    argument is unique against a column in that table
 //
 // =======where the magic happens is that you can chain these=======
 //  eg: my data is an email address : "test@test.com"
@@ -51,6 +49,9 @@ function Validations(data) {
   this.fields = ['name', 'email', 'password'];
 
   if(typeof data === 'object') {
+    if(data.password && data.password_confirmation) {
+      this.isEqual(data.password, data.password_confirmation)
+    }
     this.validateObj(this.data);
   }
 }
@@ -91,7 +92,10 @@ Validations.prototype.check = function() {
   })
   return result;
 }
-
+Validations.prototype.isEqual = function(arg1, arg2) {
+  this.tests.push(arg1 === arg2);
+  return this;
+}
 Validations.prototype.empty = function() {
   let string = this.data.trim();
   this.tests.push(string.length > 0);
