@@ -10,15 +10,24 @@ router.post("/goals/create", (req, res) => {
   const r = new ResponseData();
   //this route implies we are looking to insert into goals table
   if(req.xhr) {
-    let query = req.body;
-    query.data = req.body;
-    query.table = findTable(req.url); //for definition required by db (need to dry up)
-    db.insertRow(query,  (err, data) => {
-      console.log("THIS IS THE ERRRRR", err)
-      if (err) r.setErrorMsg("Unable to save the goal :(");
-      r.setData(data);
-      res.send(r);
-    });
+    if(req.session['user-id']){
+      console.log("REQ BODY", req.body);
+      let query = {};
+      query.table = findTable(req.url);
+      query.data = {
+        name: req.body.data.name,
+        private: req.body.data.private,
+        user_id: req.session['user-id']
+      }
+      // query.data.id = req.session['user-id'];
+      console.log("QUEYR", query); //for definition required by db (need to dry up)
+      db.insertRow(query,  (err, data) => {
+        console.log("THIS IS THE ERRRRR", err)
+        if (err) r.setErrorMsg("Unable to save the goal :(");
+        r.setData(data);
+        res.send(r);
+      });
+    }
   } else {
     res.redirect("/");
   }
@@ -92,6 +101,34 @@ router.get("/goals/:id/tasks", (req, res) => {
       } else {
         // If there's an error here, the format is valid but the goal doesn't exist
         data.length ? r.setData(data) : r.setErrorMsg ("Sources say this goal doesn't exist. But you could make it exist. You have the power.");
+        res.send(r);
+      }
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
+router.post("/goals/:id/tasks/create", (req, res) => {
+  const r = new ResponseData();
+  if (req.xhr) {
+    if (!req.session['user-id']){
+      res.redirect("/");
+    }
+    let query = {};
+    query.table = findTable(req.url);
+    query.data = {
+      name: req.body.data.taskName,
+      task_order: 1,
+      is_done: false,
+      goal_id: req.params.id
+    };
+    db.insertRow(query, (err, data) => {
+      if (err) {
+        r.setErrorMsg("Your task didn't save i'm so sorry so sad oh noo");
+        res.send(r);
+      } else {
+        data.length ? r.setData(data) : r.setErrorMsg("A different error message idk");
         res.send(r);
       }
     });
