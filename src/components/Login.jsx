@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Nav from './Nav.jsx';
-import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
+// import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
 
 
 class Login extends Component {
