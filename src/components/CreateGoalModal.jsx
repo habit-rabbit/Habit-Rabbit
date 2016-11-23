@@ -59,7 +59,6 @@ class CreateGoalModal extends Component {
     });
   }
 
-            // {this.renderError()}
   render() {
 
     return (
@@ -93,55 +92,6 @@ class CreateGoalModal extends Component {
         </div>
       </div>
     );
-
-    // return (
-
-    //   <div className="goals-form-control" id="task-form-control">
-    //   <form className="task-form" onSubmit={this.handleSubmit} >
-    //     <div className="form-group row">
-    //       <div className="col-xs-10">
-    //         <input className="form-control" type="text" placeholder="I'm a cool task!" id="create-goal-input" value={this.state.value} onChange={this.handleChange}/>
-    //       </div>
-    //     </div>
-
-    //     <div className="form-group row">
-    //       <div className="col-xs-10">
-    //         <input className="form-control" type="text" placeholder="Uhhh... I'M a task." id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
-    //       </div>
-    //     </div>
-    //     <div className="form-group row">
-    //       <div className="col-xs-10">
-    //         <input className="form-control" type="text" placeholder="No, I'M a task!" id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
-    //       </div>
-    //     </div>
-    //     <div className="form-group row">
-    //       <div className="col-xs-10">
-    //         <input className="form-control" type="text" placeholder="ugh, you're all wrong, I'M a task!" id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
-    //       </div>
-    //     </div>
-    //     <div className="form-group row">
-    //       <div className="col-xs-10">
-    //         <input className="form-control" type="text" placeholder="OMG. YOU'RE ALL TASKS." id="create-goal-input" value={this.state.value} onChange={this.handleChange} />
-    //       </div>
-    //     </div>
-
-    //     <div className="col-md-8 col-md-offset-4">
-    //       <input type="submit" className="btn btn-default" value="Create a New Goal!" />
-    //     </div>
-
-    //     <div className="img-container">
-    //       <div className="row">
-    //       <div className="col-md-8 col-centered">
-    //       <img src="http://i.imgur.com/dmYCfcX.png" />
-    //         <h5><p>Well well well. Look who we have here, it is our dear friend, string.interpolation. The bravery and courage you have shown by setting a new Goal has given Rabeet a little *bounce* in her step! When she is pleased, her coat is bright. Do not slack on your Goals though, or Rabeet will start turning back into a lazy rabid trash monster.</p></h5>
-    //         <h6><p><em>I bet you were being a lazy little trash monster last night, wernt you!!</em></p></h6>
-    //       </div>
-    //       </div>
-    //     </div>
-    //   </form>
-    //   </div>
-    //   );
-    // }
   }
 }
 
