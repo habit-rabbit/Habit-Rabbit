@@ -33,10 +33,18 @@ class Nav extends Component {
   createNavLinks(){
     if(this.props.isLoggedIn) {
       return (
+        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form onSubmit={this.handleSubmit} className="navbar-form">
+              <div className="form-group">
+                <input type="text" id="goal-name" className="form-control" onChange={this.handleChange} placeholder="What is your new goal?" />
+              </div>
+              <input type="submit" className="btn btn-default" value="Create Goal!"/>
+            </form>
         <ul className="nav navbar-nav navbar-right">
           <li><a href="">{this.props.userId}</a></li>
           <li><a href="" onClick={this.logOut}>Logout</a></li>
         </ul>
+        </div>
       )
     } else {
       return(
@@ -100,15 +108,9 @@ class Nav extends Component {
             <a className="navbar-brand" href="#">Habit Rabbit</a>
           </div>
 
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form onSubmit={this.handleSubmit} className="navbar-form">
-              <div className="form-group">
-                <input type="text" id="goal-name" className="form-control" onChange={this.handleChange} placeholder="What is your new goal?" />
-              </div>
-              <input type="submit" className="btn btn-default" value="Create Goal!"/>
-            </form>
+
             {this.createNavLinks()}
-          </div>
+
         </div>
       </nav>
     );
