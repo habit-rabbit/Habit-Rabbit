@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Nav from './Nav.jsx';
-import Goals from './Goals.jsx';
 import Carousel from './Carousel.jsx';
 import Hero from './Hero.jsx';
 
