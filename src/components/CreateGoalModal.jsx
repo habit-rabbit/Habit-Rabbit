@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
 
 import Nav from './Nav.jsx';
-import TaskForm from './TaskForm.jsx';
 
 
 class CreateGoalModal extends Component {
@@ -12,45 +11,25 @@ class CreateGoalModal extends Component {
     this.state = {
       goalName: this.props.goalName,
       private: true,
-      tasks: {0: ""},
+      tasks: [""],
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderForms = this.renderForms.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
+    this.updateTask = this.updateTask.bind(this);
   }
 
   handleChange(event) {
     let id = event.target.id;
     let value = event.target.value;
     console.log("THIS STAAATE", this.state)
-    if (id === "goal-name") {
-      this.setState({goalName: value});
-    }
-    else {
-      let tasks = this.state.tasks;
-      tasks[id] = value;
-      this.setState({tasks: tasks})
-    }
-  }
-
-  renderForms() {
-    let keys = [];
-    for(let key in this.state.tasks) {
-      if (this.state.tasks.hasOwnProperty(key)) {
-        keys.push(key)
-      }
-    }
-    return keys.map((index) => {
-      console.log(this.state.tasks[index])
-      console.log(index)
-      return <TaskForm value={this.state.tasks[index]} handleChange={this.handleChange} key={index} id={index} />
-    })
+    this.setState({goalName: value});
   }
 
  handleSubmit(event) {
-    event.preventDefault();
+  event.preventDefault();
 
     $.ajax({
       method: 'post',
@@ -69,7 +48,7 @@ class CreateGoalModal extends Component {
         dataType: 'json',
         data: {
           data: {
-            taskName: this.state.tasks
+            taskNames: this.state.tasks
           }
         }
       }).done ((data) => {
@@ -79,19 +58,25 @@ class CreateGoalModal extends Component {
     });
   }
 
-  handleAddTask(){
-    let keys = [];
-    for(let key in this.state.tasks) {
-      if (this.state.tasks.hasOwnProperty(key)) {
-        keys.push(key)
-      }
-    }
-    let key = keys.length;
+  updateTask(event, index) {
+    let value = event.target.value;
     let tasks = this.state.tasks;
-    tasks[key] = "";
-    this.setState({tasks: tasks})
+    tasks[index] = value;
+    this.setState({tasks: tasks});
   }
 
+  renderForms() {
+    return this.state.tasks.map((item, index) => {
+      return <input type="text" value={item} onChange={ (e) => {this.updateTask(e, index)} } name={`task-name-${index}`} key={index} placeholder="Task Name"/>
+    })
+  }
+
+  handleAddTask() {
+    let tasks = this.state.tasks;
+    tasks.push("");
+    this.setState({tasks: tasks});
+    console.log("IM A COOL TASK")
+  }
 
             // {this.renderError()}
   render() {
@@ -107,14 +92,16 @@ class CreateGoalModal extends Component {
             </div>
 
             <div id="create-goal-body" className="modal-body">
-            <form onSubmit={this.handleSubmit}>
+            <form className="form-horizontal" onSubmit={this.handleSubmit}>
 
               <div className="form-group">
                 <input id="goal-name" type="text" value={this.props.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name"/>
               </div>
 
-              {this.renderForms()}
 
+              <div className="form-group">
+              {this.renderForms()}
+              </div>
               <div className="form-group">
                 <input type="submit" name="create-goal" className="btn btn-default" value="Create Goal!" />
               </div>
