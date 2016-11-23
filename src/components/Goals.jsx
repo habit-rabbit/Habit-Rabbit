@@ -6,8 +6,9 @@ class Goals extends Component {
   constructor(props){
     super(props);
     this.initializeGoalData = this.initializeGoalData.bind(this);
+    this.renderGoals = this.renderGoals.bind(this);
     this.state = {
-      goals: [],
+      goals: {},
       tasks: {},
       userId: null,
       updating: false
@@ -26,21 +27,29 @@ class Goals extends Component {
     });
   }
 
-  render() {
+  renderGoals () {
     console.log("Rendering Goals.jsx");
     console.log("this.state.goals:", this.state.goals);
     if (!this.state.goals.data) {
       console.log("in if statement of Goals.jsx");
       return (
         <h3> Loading Goals... </h3>
-      )
+      );
+    } else if (this.state.goals.data.length === 0) {
+      console.log("in else if statement of goals.jsx");
+      return (
+        <div>
+          <h3> You haven't created any goals yet!</h3>
+          <h3>WHAT ARE YOU EVEN DOING HERE?!?</h3>
+          <h3>GET ON IT.</h3>
+        </div>
+      );
     } else {
-      console.log(this.state.goals.data);
       return (
         <div>
           {this.state.goals.data.map((goal, index) => {
             return (
-              <div className="goals-template row " key={index}>
+              <div className="goals-template row well" key={index}>
                <SingleGoal goalInfo={goal} />
               </div>
             )
@@ -48,6 +57,14 @@ class Goals extends Component {
         </div>
       );
     }
+  }
+
+  render () {
+    return (
+      <div>
+        {this.renderGoals()}
+      </div>
+    );
   }
 }
 

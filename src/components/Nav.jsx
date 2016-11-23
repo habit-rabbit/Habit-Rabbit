@@ -11,26 +11,38 @@ class Nav extends Component {
       loggedIn: false
     }
     this.createNavLinks = this.createNavLinks.bind(this);
-    this.updateNavLinks = this.updateNavLinks.bind(this);
     this.logOut = this.logOut.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
+
+  logOut(){
+    console.log("=====do i enven get to the logout function?======");
+     $.ajax({
+      method: "post",
+      url: "/logout",
+      dataType: 'json'
+    }).done((data) => {
+      console.log("============Am I logged OUT=========?:");
+      // this.setState({isLoggedIn: data.isLoggedIn});
+    });
+  }
+
   // if user logged in show username in nav bar, else show
   createNavLinks(){
-    if(this.state.loggedIn){
+    if(this.props.isLoggedIn) {
       return (
         <ul className="nav navbar-nav navbar-right">
           <li><a href="">{this.props.userId}</a></li>
-          <li><a href="/#/home" onClick={this.logOut}>Logout</a></li>
+          <li><a href="" onClick={this.logOut}>Logout</a></li>
         </ul>
       )
     } else {
       return(
         <ul className="nav navbar-nav navbar-right">
           <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
-          <Login setUserId={this.props.setUserId} updateNavLinks = {this.updateNavLinks}/>
+          <Login setUserId={this.props.setUserId} updateNavLinks={this.updateNavLinks} verifyLogin={this.props.verifyLogin}/>
           <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
           <Register />
         </ul>
@@ -72,14 +84,6 @@ class Nav extends Component {
 
 
 
-  updateNavLinks(){
-    this.setState({loggedIn: true});
-  }
-
-  //logs out user when they click the logout link
-  logOut(){
-    this.setState({loggedIn: false});
-  }
 
   render() {
     console.log("Rendering <Nav/>");

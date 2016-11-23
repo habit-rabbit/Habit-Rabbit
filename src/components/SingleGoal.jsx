@@ -24,7 +24,6 @@ class SingleGoal extends Component {
       method: "get",
       url: `/api/goals/${this.props.goalInfo.id}/tasks`
     }).done((data) => {
-      console.log(data);
       let tasks = data.data;
       tasks.sort((a, b) => {
         if (a.task_order > b.task_order) {
@@ -67,7 +66,6 @@ class SingleGoal extends Component {
   }
 
   updateCurrentTask (goalId, taskId) {
-    // console.log(`Goal id: ${goalId}, task id: ${taskId}`);
     let taskUpdate = $.ajax({
       method: "post",
       url: `api/goals/${goalId}/tasks/${taskId}/update`,
@@ -81,9 +79,11 @@ class SingleGoal extends Component {
     if(!this.state.tasks.data) {
       return (
         <div>
-          Goals Loading...
+          <h3>Let's talk about tasks... </h3>
+          <h3>YOU NEED TO MAKE SOME. </h3>
+          <h3>HOW DO YOU EVEN EXPECT TO ACCOMPLISH YOUR DREAMS WITHOUT A PLAN, BARBARA.</h3>
         </div>
-      )
+      );
     } else {
       return(
         <div>
