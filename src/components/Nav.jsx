@@ -66,6 +66,9 @@ class Nav extends Component {
 
     if (id === "goal-name") {
       this.setState({name: value});
+      console.log("The name of the goal you're trying to create is:", value);
+      console.log("It shows up in the state as:", this.state.name);
+      console.log("As a", typeof this.state.name);
     }
   }
 

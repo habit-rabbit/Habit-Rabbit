@@ -9,7 +9,6 @@ class CreateGoalModal extends Component {
     super(props);
     this.users = {};
     this.state = {
-      goalName: this.props.goalName,
       private: true,
       tasks: [""],
     };
@@ -24,12 +23,12 @@ class CreateGoalModal extends Component {
   handleChange(event) {
     let id = event.target.id;
     let value = event.target.value;
-    console.log("THIS STAAATE", this.state)
     this.setState({goalName: value});
   }
 
  handleSubmit(event) {
   event.preventDefault();
+  event.target.value = "";
 
     $.ajax({
       method: 'post',
@@ -37,7 +36,7 @@ class CreateGoalModal extends Component {
       dataType: 'json',
       data: {
         data: {
-          name: "Literally satan",
+          name: this.props.goalName,
           private: this.state.private,
         }
       }
