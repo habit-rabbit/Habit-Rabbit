@@ -78,7 +78,7 @@ class SingleGoal extends Component {
   renderGoals() {
     if(!this.state.tasks.data) {
       return (
-        <div>
+        <div> {/*this should render as an error message (the one we get back from the server*/}
           <h3>Let's talk about tasks... </h3>
           <h3>YOU NEED TO MAKE SOME. </h3>
           <h3>HOW DO YOU EVEN EXPECT TO ACCOMPLISH YOUR DREAMS WITHOUT A PLAN, BARBARA.</h3>

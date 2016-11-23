@@ -20,7 +20,7 @@ class CreateGoalModal extends Component {
   handleChange(event) {
     let id = event.target.id;
     let value = event.target.value;
-    console.log("THIS STAAATE", this.state)
+    // console.log("THIS STAAATE", this.state)
     if (id === "goal-name") {
       this.setState({goalName: value});
     }
@@ -54,8 +54,8 @@ class CreateGoalModal extends Component {
         }
       }).done ((data) => {
         $("#create-goal-modal").modal("hide");
-        console.log("HI BITCH HEY", data);
-      })
+        this.props.updateGoalsIndex();
+      });
     });
   }
 

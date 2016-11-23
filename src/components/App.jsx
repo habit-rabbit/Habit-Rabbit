@@ -9,18 +9,33 @@ class App extends Component {
     super(props);
     this.state = {
       userId: null,
-      isLoggedIn: false
+      isLoggedIn: false,
+      goalsAreCurrent: false,
+      goals: [],
     }
     this.setUserId = this.setUserId.bind(this);
     this.getUserId = this.getUserId.bind(this);
     this.renderPage = this.renderPage.bind(this);
     this.verifyLogin = this.verifyLogin.bind(this);
+    this.updateGoalsIndex = this.updateGoalsIndex.bind(this);
+    this.setDefault = this.setDefault.bind(this);
+    this.updateFromDatabase = this.updateFromDatabase.bind(this);
     // this.logOut = this.logOut.bind(this);
-
+    this.updateFromDatabase();
   }
 
   componentWillMount(){
     this.verifyLogin();
+  }
+
+  updateFromDatabase () {
+    $.ajax({
+      method: "get",
+      url: "/api/goals",
+    }).done((data) => {
+      console.log("===================DATA:=====================", data);
+      this.setState({goals: data.data});
+    });
   }
 
   verifyLogin(){
@@ -32,6 +47,17 @@ class App extends Component {
       console.log("Am I logged in?:", data.isLoggedIn);
       this.setState({isLoggedIn: data.isLoggedIn});
     });
+  }
+
+  setDefault () {
+    console.log("Set default called in app, value of state is:", this.state.goalsAreCurrent);
+    this.setState({goalsAreCurrent: true});
+    console.log("Finished setDefault in app, value of state is:", this.state.goalsAreCurrent);
+  }
+
+  updateGoalsIndex () {
+    console.log("SETTING STATE IN APP");
+    this.setState({goalsAreCurrent: false});
   }
 
   // logOut(){
@@ -51,7 +77,7 @@ class App extends Component {
     if (this.state.isLoggedIn === false) {
       return <Hero setUserId={this.setUserId}/>;
     } else {
-      return <Carousel />;
+      return <Carousel goalList={this.state.goals} goalsAreCurrent={this.state.goalsAreCurrent} setAppGoalsDefault={this.setDefault}/>;
     }
   }
 
@@ -73,6 +99,7 @@ class App extends Component {
           userId={this.state.userId}
           isLoggedIn={this.state.isLoggedIn}
           verifyLogin={this.verifyLogin}
+          updateGoalsIndex={this.updateFromDatabase}
          />
         {this.renderPage()}
       </div>
