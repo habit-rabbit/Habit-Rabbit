@@ -41,7 +41,7 @@ class Nav extends Component {
               </div>
               <input type="submit" className="btn btn-default" data-toggle="modal" data-target="#create-goal-modal" value="Create Goal!"/>
             </form>
-              <CreateGoalModal goalName={this.state.name}/>
+              <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
         <ul className="nav navbar-nav navbar-right">
           <li><a href="">{this.props.userId}</a></li>
           <li><a href="" onClick={this.logOut}>Logout</a></li>

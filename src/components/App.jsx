@@ -9,18 +9,29 @@ class App extends Component {
     super(props);
     this.state = {
       userId: null,
-      isLoggedIn: false
+      isLoggedIn: false,
+      goals: [],
     }
     this.setUserId = this.setUserId.bind(this);
     this.getUserId = this.getUserId.bind(this);
     this.renderPage = this.renderPage.bind(this);
     this.verifyLogin = this.verifyLogin.bind(this);
-    // this.logOut = this.logOut.bind(this);
+    this.updateFromDatabase = this.updateFromDatabase.bind(this);
 
+    this.updateFromDatabase();
   }
 
   componentWillMount(){
     this.verifyLogin();
+  }
+
+  updateFromDatabase () {
+    $.ajax({
+      method: "get",
+      url: "/api/goals",
+    }).done((response) => {
+      this.setState({goals: response.data});
+    });
   }
 
   verifyLogin(){
@@ -51,7 +62,7 @@ class App extends Component {
     if (this.state.isLoggedIn === false) {
       return <Hero setUserId={this.setUserId}/>;
     } else {
-      return <Carousel />;
+      return <Carousel goalList={this.state.goals} />;
     }
   }
 
@@ -73,6 +84,7 @@ class App extends Component {
           userId={this.state.userId}
           isLoggedIn={this.state.isLoggedIn}
           verifyLogin={this.verifyLogin}
+          updateGoalsIndex={this.updateFromDatabase}
          />
         {this.renderPage()}
       </div>
