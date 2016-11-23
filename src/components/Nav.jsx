@@ -9,11 +9,11 @@ class Nav extends Component {
     super(props);
     this.state = {
       name: "",
-      loggedIn: false
+      // loggedIn: false
     }
     this.createNavLinks = this.createNavLinks.bind(this);
     this.logOut = this.logOut.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -35,11 +35,11 @@ class Nav extends Component {
     if(this.props.isLoggedIn) {
       return (
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form className="navbar-form">
+            <form className="navbar-form" onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <input type="text" id="goal-name" className="form-control" onChange={this.handleChange} placeholder="What is your new goal?" />
               </div>
-              <input type="submit" className="btn btn-default" data-toggle="modal" data-target="#create-goal-modal" value="Create Goal!"/>
+              <input type="submit" id="goal-button" className="btn btn-default"  value="Create Goal!"/>
             </form>
               <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
         <ul className="nav navbar-nav navbar-right">
@@ -69,27 +69,14 @@ class Nav extends Component {
     }
   }
 
- // handleSubmit(event) {
- //    event.preventDefault();
- //    console.log("DO I LIVE HERE??")
- //    $.ajax({
- //      method: 'post',
- //      url: '/api/goals/create',
- //      dataType: 'json',
- //      data: {
- //        data: {
- //          name: this.state.name,
- //          user_id: this.props.userId,
- //          private: true,
- //          deadline: "2016-12-14"
- //        }
- //      }
- //    }).then((result) => {
- //      console.log("RESULTTTTAN OF SWING", result);
- //        // $(this).find('form-group').resetForm();
- //        $('#goal-name').val("")
- //        })
- //  }
+  handleSubmit(event) {
+    event.preventDefault();
+    $(document).ready(function(){
+      $("#goal-button").click(function(){
+        $("#create-goal-modal").modal();
+      });
+    });
+  }
 
 
 
@@ -107,7 +94,7 @@ class Nav extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">Habit Rabbit</a>
+            <a className="navbar-brand" href="">Habit Rabbit</a>
           </div>
 
 

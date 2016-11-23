@@ -7,23 +7,5 @@ require("../styles/application.scss");
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
-import Login from './components/Login.jsx';
-import Hero from './components/Hero.jsx';
-import Goals from './components/Goals.jsx';
-import Carousel from './components/Carousel.jsx';
 
-
-import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router'
-ReactDOM.render(
-
-  //here we would have our conditionals some ho that sets up the redirects
-  // ie   <IndexRedirect to="/welcome" />
-
-  <Router history={hashHistory} >
-
-  <Route path="/" component={App} />
-    <Route path="/goals" component={Carousel} />
-  </Router>
-, document.getElementById('react-root'));
-
-
+ReactDOM.render(<App />, document.getElementById('react-root'));
