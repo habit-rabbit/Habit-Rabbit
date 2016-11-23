@@ -116,22 +116,26 @@ router.post("/goals/:id/tasks/create", (req, res) => {
       res.redirect("/");
     }
     let query = {};
-    query.table = findTable(req.url);
-    query.data = {
-      name: req.body.data.taskName,
-      task_order: 1,
-      is_done: false,
-      goal_id: req.params.id
-    };
-    db.insertRow(query, (err, data) => {
-      if (err) {
-        r.setErrorMsg("Your task didn't save i'm so sorry so sad oh noo");
-        res.send(r);
-      } else {
-        data.length ? r.setData(data) : r.setErrorMsg("A different error message idk");
-        res.send(r);
-      }
+    taskNames = req.body.data.taskNames
+
+    taskNames.map((taskName, index) => {
+      query.table = findTable(req.url);
+      query.data = {
+        name: taskName,
+        task_order: index + 1,
+        is_done: false,
+        goal_id: req.params.id
+      };
+      db.insertRow(query, (err, data) => {
+        if (err) {
+          r.setErrorMsg("Your task didn't save i'm so sorry so sad oh noo");
+        } else {
+          data.length ? r.setData(data) : r.setErrorMsg("A different error message idk");
+        }
+      });
     });
+    res.send(r);
+
   } else {
     res.redirect("/");
   }
