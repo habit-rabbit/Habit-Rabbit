@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
+// import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
 
 import Nav from './Nav.jsx';
 
