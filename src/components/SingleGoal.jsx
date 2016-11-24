@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import NextTask from './NextTask.jsx';
 import ProgressBar from './ProgressBar.jsx';
-import SingleGoal from  './SingleGoal.jsx';
+import GoalInfo from './Goal-info.jsx';
 
 class SingleGoal extends Component {
 
   constructor(props){
     super(props);
     this.initializeTaskData = this.initializeTaskData.bind(this);
-    this.goalType = this.goalType.bind(this);
+    this.showGoalinfo = this.showGoalinfo.bind(this);
+    this.hideGoalInfo = this.hideGoalInfo.bind(this);
     this.getCurrentTask = this.getCurrentTask.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
     this.goalType = this.goalType.bind(this);
@@ -16,7 +17,8 @@ class SingleGoal extends Component {
       tasks: {},
       currentTask: {},
       userId: null,
-      goalComplete: false
+      goalComplete: false,
+      showGoalinfo: false
     }
     this.initializeTaskData();
   }
@@ -53,15 +55,11 @@ class SingleGoal extends Component {
       )
     }
   }
-  getGoalInfo() {
-
-    return (<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <SingleGoal goalInfo={this.props.goalInfo} tasks={this.props.tasks} />
-                </div>
-              </div>
-            </div>)
+  showGoalinfo() {
+    this.setState({showGoalinfo: true});
+  }
+  hideGoalInfo() {
+    this.setState({showGoalinfo: false});
   }
   getCurrentTask () {
     function findNextTask(task) {
@@ -71,7 +69,6 @@ class SingleGoal extends Component {
     if (!taskName) {
       this.setState({goalComplete: true});
     } else {
-      console.log("getCurrentTaskResult:", taskName.name);
       return taskName;
     }
   }
@@ -85,7 +82,9 @@ class SingleGoal extends Component {
       this.initializeTaskData();
     });
   }
-
+  toggleModal() {
+    this.props.renderGoalInfoModal(GoalInfo, this.props.goalInfo, this.state.tasks);
+  }
   renderGoals() {
     if(!this.state.tasks.data) {
       return (
@@ -99,8 +98,9 @@ class SingleGoal extends Component {
       return(
         <div>
           <div className="col-md-3">
-            <h1> {this.props.goalInfo.name} </h1>
-            {this.goalType(this.props.goalInfo)}
+            {this.state.showGoalinfo ? <GoalInfo goalInfo={this.props.goalInfo} tasks={this.state.tasks.data} hideGoalInfo={this.hideGoalinfo}/> : <h1 onClick={this.showGoalinfo}> {this.props.goalInfo.name} </h1>}
+
+
           </div>
           <div className="col-md-6">
             <div className="progress">
@@ -116,6 +116,7 @@ class SingleGoal extends Component {
             goalInfo={this.props.goalInfo}
             goalComplete={this.state.goalComplete} />
           </div>
+
         </div>
       );
     }

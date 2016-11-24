@@ -49,7 +49,7 @@ class Goals extends Component {
           {this.props.goalList.map((goal, index) => {
             return (
               <div className="goals-template row well" key={index}>
-               <SingleGoal goalInfo={goal} />
+               <SingleGoal goalInfo={goal} renderGoalInfoModal={this.renderGoalInfoModal}/>
               </div>
             )
           })}

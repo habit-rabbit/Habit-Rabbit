@@ -8,10 +8,10 @@ class GoalInfo extends Component {
     this.goalType = this.goalType.bind(this);
     this.renderTaskTable = this.renderTaskTable.bind(this);
   }
-  renderTaskTable(task) {
-    return(<tr>
-              <th scope="row">sdf</th>
-              <td>sdf</td>
+  renderTaskTable(task, id) {
+    return(<tr key={id}>
+              <th scope="row">{id}</th>
+              <td>{task.name}</td>
             </tr>);
 
   }
@@ -30,11 +30,10 @@ class GoalInfo extends Component {
 
 
   render() {
+    let counter = 0;
     return (
           <div className="col-md-3">
-            <h1> {this.props.goalInfo.name} </h1>
-            {this.goalType(this.props.goalInfo)}
-            <table className="table table-sm table-inverse">
+            <table className="table table-sm table-inverse" onClick={this.props.hideGoalInfo}>
               <thead>
                 <tr>
                   <th>#</th>
@@ -43,8 +42,8 @@ class GoalInfo extends Component {
               </thead>
               <tbody>
                 {this.props.tasks.map( (task) => {
-                  console.log(task, "task?")
-                  return this.renderTaskTable(task);
+                  counter++;
+                  return this.renderTaskTable(task, counter);
                 })}
               </tbody>
               </table>
