@@ -104,7 +104,7 @@ class CreateGoalModal extends Component {
               {this.renderForms()}
               </div>
 
-              <button type="button" class="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
+              <button type="button" className="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
                 <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
               </button>
 
