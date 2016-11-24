@@ -59,6 +59,7 @@ class Login extends Component {
         //call function to update navbar here
         this.props.verifyLogin();
         this.props.updateNavLinks();
+        this.props.updateGoals();
       } else if (result.error.msg) {
         this.setState({loginError: result.error.msg})
       }
