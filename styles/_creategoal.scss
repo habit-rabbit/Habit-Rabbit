@@ -4,13 +4,26 @@
   position: absolute;
 }
 
+#create-goal-button {
+  margin-top: 20px;
+  position: absolute;
+}
+
 #create-goal-input {
   margin: auto;
   text-align: center;
   width: 80%
 }
 
-#create-goal-button {
-  position: absolute;
-  margin-top: 20px;
+#create-goal-body button {
+    background-color: #BDFCC9;
+    box-shadow: 0px 0px 3px rgba(92, 184, 92, 0.87);
+    padding-bottom: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 6px;
+}
+
+#create-goal-body .glyphicon glyphicon-plus {
+  color: #fff;
 }
