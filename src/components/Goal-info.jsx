@@ -7,11 +7,14 @@ class GoalInfo extends Component {
 
     this.goalType = this.goalType.bind(this);
     this.renderTaskTable = this.renderTaskTable.bind(this);
+    this.hideGoalInfo = this.hideGoalInfo.bind(this);
   }
-  renderTaskTable(task) {
-    return(<tr>
-              <th scope="row">sdf</th>
-              <td>sdf</td>
+  renderTaskTable(task, id) {
+    let strikethroughClass = task.is_done ? "strikethrough" : "";
+
+    return(<tr key={id}>
+              <th scope="row">{id}</th>
+              <td className={strikethroughClass}>{task.name}</td>
             </tr>);
 
   }
@@ -27,14 +30,17 @@ class GoalInfo extends Component {
     }
   }
 
-
+  hideGoalInfo() {
+    this.props.hideGoalInfo(false);
+  }
 
   render() {
+    console.log(this.props, "goal info ");
+    let counter = 0;
     return (
-          <div className="col-md-3">
-            <h1> {this.props.goalInfo.name} </h1>
-            {this.goalType(this.props.goalInfo)}
-            <table className="table table-sm table-inverse">
+          <div>
+            <span onClick={this.hideGoalInfo}>{this.props.goalInfo.name}</span>
+            <table className="table table-sm table-inverse" >
               <thead>
                 <tr>
                   <th>#</th>
@@ -43,8 +49,8 @@ class GoalInfo extends Component {
               </thead>
               <tbody>
                 {this.props.tasks.map( (task) => {
-                  console.log(task, "task?")
-                  return this.renderTaskTable(task);
+                  counter++;
+                  return this.renderTaskTable(task, counter);
                 })}
               </tbody>
               </table>
