@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NextTask from './NextTask.jsx';
 import ProgressBar from './ProgressBar.jsx';
+import SingleGoal from  './SingleGoal.jsx';
 
 class SingleGoal extends Component {
 
@@ -10,6 +11,7 @@ class SingleGoal extends Component {
     this.goalType = this.goalType.bind(this);
     this.getCurrentTask = this.getCurrentTask.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
+    this.goalType = this.goalType.bind(this);
     this.state = {
       tasks: {},
       currentTask: {},
@@ -51,7 +53,16 @@ class SingleGoal extends Component {
       )
     }
   }
+  getGoalInfo() {
 
+    return (<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <SingleGoal goalInfo={this.props.goalInfo} tasks={this.props.tasks} />
+                </div>
+              </div>
+            </div>)
+  }
   getCurrentTask () {
     function findNextTask(task) {
       return !task.is_done
