@@ -9,7 +9,6 @@ class Nav extends Component {
     super(props);
     this.state = {
       name: "",
-      // loggedIn: false
     }
     this.createNavLinks = this.createNavLinks.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -19,15 +18,11 @@ class Nav extends Component {
 
 
   logOut(){
-    console.log("=====do i enven get to the logout function?======");
      $.ajax({
       method: "post",
       url: "/logout",
       dataType: 'json'
-    }).done((data) => {
-      console.log("============Am I logged OUT=========?:");
-      // this.setState({isLoggedIn: data.isLoggedIn});
-    });
+    })
   }
 
   // if user logged in show username in nav bar, else show
@@ -40,7 +35,7 @@ class Nav extends Component {
             </form>
               <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
         <ul className="nav navbar-nav navbar-right">
-          <li><a href="">{this.props.userId}</a></li>
+          <li><a href="">Hey {this.props.name}!</a></li>
           <li><a href="" onClick={this.logOut}>Logout</a></li>
         </ul>
         </div>
@@ -49,7 +44,7 @@ class Nav extends Component {
       return(
         <ul className="nav navbar-nav navbar-right">
           <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
-          <Login setUserId={this.props.setUserId} updateNavLinks={this.updateNavLinks} verifyLogin={this.props.verifyLogin}/>
+          <Login updateNavLinks={this.updateNavLinks} verifyLogin={this.props.verifyLogin}/>
           <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
           <Register />
         </ul>
