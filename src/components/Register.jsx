@@ -40,6 +40,7 @@ class Register extends Component {
   }
 
  handleSubmit(event) {
+    event.preventDefault();
 
     $.ajax({
       method: 'post',
@@ -54,11 +55,11 @@ class Register extends Component {
         }
       }
     }).then( (data) => {
-      console.log("DAATAA", data)
+      console.log(data);
+      this.setState({first_name: '', last_name: '', email: '', password: '', password_confirmation: ''});
+      this.props.verifyLogin();
+      $("#register-modal").modal("hide");
     });
-    event.preventDefault();
-
-    // this.setState({dismiss: "modal"});
   }
 
   render() {
