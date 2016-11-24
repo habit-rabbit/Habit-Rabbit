@@ -9,6 +9,7 @@ class CreateGoalModal extends Component {
     super(props);
     this.users = {};
     this.state = {
+      goalName: this.props.goalName,
       private: true,
       tasks: [""],
     };
@@ -21,7 +22,6 @@ class CreateGoalModal extends Component {
   }
 
   handleChange(event) {
-    let id = event.target.id;
     let value = event.target.value;
     this.setState({goalName: value});
   }
@@ -38,7 +38,7 @@ class CreateGoalModal extends Component {
       dataType: 'json',
       data: {
         data: {
-          name: this.props.goalName,
+          name: this.state.goalName,
           private: this.state.private,
         }
       }
@@ -95,7 +95,7 @@ class CreateGoalModal extends Component {
             <form id="create-goal-form" className="form-horizontal" onSubmit={this.handleSubmit}>
 
               <div className="form-group">
-                <input id="goal-name" type="text" value={this.props.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name"/>
+                <input id="goal-name" type="text" value={this.state.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name"/>
               </div>
 
               <div className="form-group">
