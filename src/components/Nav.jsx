@@ -35,11 +35,8 @@ class Nav extends Component {
     if(this.props.isLoggedIn) {
       return (
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form className="navbar-form" onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <input type="text" id="goal-name" className="form-control" onChange={this.handleChange} placeholder="What is your new goal?" />
-              </div>
-              <input type="submit" id="goal-button" className="btn btn-default"  value="Create Goal!"/>
+            <form className="navbar-form" onSubmit={this.handleSubmit} >
+              <input type="submit" id="goal-button" className="btn btn-default"  value="Create A New Goal!"/>
             </form>
               <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
         <ul className="nav navbar-nav navbar-right">
@@ -71,11 +68,7 @@ class Nav extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    $(document).ready(function(){
-      $("#goal-button").click(function(){
-        $("#create-goal-modal").modal();
-      });
-    });
+    $("#create-goal-modal").modal();
   }
 
 
@@ -96,10 +89,7 @@ class Nav extends Component {
             </button>
             <a className="navbar-brand" href="">Habit Rabbit</a>
           </div>
-
-
-            {this.createNavLinks()}
-
+          {this.createNavLinks()}
         </div>
       </nav>
     );
