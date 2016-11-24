@@ -16,14 +16,14 @@ class CreateGoalModal extends Component {
       taskNameErr: "",
     };
 
+    this.handleAddTask = this.handleAddTask.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderForms = this.renderForms.bind(this);
-    this.handleAddTask = this.handleAddTask.bind(this);
-    this.updateTask = this.updateTask.bind(this);
-    this.validateFormInputs = this.validateFormInputs.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+    this.renderForms = this.renderForms.bind(this);
     this.submitToDatabase = this.submitToDatabase.bind(this);
+    this.validateFormInputs = this.validateFormInputs.bind(this);
+    this.updateTask = this.updateTask.bind(this);
   }
 
   handleChange(event) {
@@ -36,6 +36,8 @@ class CreateGoalModal extends Component {
  handleSubmit(event) {
   event.preventDefault();
   let goalName = this.state.goalName.trim();
+  this.setState({goalNameErr: ""});
+  this.setState({taskNameErr: ""});
   this.validateFormInputs(goalName, this.submitToDatabase);
   }
 
@@ -63,10 +65,8 @@ class CreateGoalModal extends Component {
       }).done ((data) => {
         this.setState({goalName: ""});
         this.setState({tasks: [""]});
-        this.setState({goalNameErr: ""});
-
-        $("#create-goal-modal").modal("hide");
         this.props.updateGoalsIndex();
+        $("#create-goal-modal").modal("hide");
       });
     });
   }
@@ -88,24 +88,23 @@ class CreateGoalModal extends Component {
     let tasks = this.state.tasks;
     tasks.push("");
     this.setState({tasks: tasks});
-    console.log("IM A COOL TASK")
   }
 
   validateFormInputs(goalName, cb) {
     let tasks = this.state.tasks;
-
     let cleanTasks = tasks.map((elm) => {
       return elm.trim();
-    })
+    });
     cleanTasks = cleanTasks.filter(Boolean);
-
     if (goalName === "") {
       this.setState({goalNameErr: "Goal Name can't be blank, Frank!"});
-    }
+    };
+    if (cleanTasks.length < 1 ) {
+      this.setState({taskNameErr: "Tasks can't be clean, Maureen!"});
+    };
     if (goalName.length && cleanTasks.length) {
       cb(goalName, cleanTasks);
-    }
-
+    };
   }
 
   renderErrors() {
@@ -115,13 +114,17 @@ class CreateGoalModal extends Component {
           {this.state.goalNameErr}
         </div>
       )
+    } else if (this.state.taskNameErr !== "") {
+      return (
+        <div className="alert alert-warning">
+          {this.state.taskNameErr}
+        </div>
+      );
     }
-    // this.setState({goalNameErr: ""});
   }
 
 
   render() {
-    console.log("WHERE MY GOAAAAAL NAAAAME ERRRRR  MESSAGE AT", this.state.goalNameErr)
 
     return (
       <div className="modal fade" id="create-goal-modal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -156,7 +159,6 @@ class CreateGoalModal extends Component {
 
             </form>
             </div>
-
           </div>
         </div>
       </div>
