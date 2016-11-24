@@ -8,8 +8,7 @@ class SingleGoal extends Component {
   constructor(props){
     super(props);
     this.initializeTaskData = this.initializeTaskData.bind(this);
-    this.showGoalinfo = this.showGoalinfo.bind(this);
-    this.hideGoalInfo = this.hideGoalInfo.bind(this);
+    this.setGoalInfo = this.setGoalInfo.bind(this);
     this.getCurrentTask = this.getCurrentTask.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
     this.goalType = this.goalType.bind(this);
@@ -18,7 +17,8 @@ class SingleGoal extends Component {
       currentTask: {},
       userId: null,
       goalComplete: false,
-      showGoalinfo: false
+      showGoalinfo: false,
+      goalInfo: "show"
     }
     this.initializeTaskData();
   }
@@ -55,11 +55,11 @@ class SingleGoal extends Component {
       )
     }
   }
-  showGoalinfo() {
-    this.setState({showGoalinfo: true});
-  }
-  hideGoalInfo() {
-    this.setState({showGoalinfo: false});
+  setGoalInfo(bool, showhide) {
+    this.setState({
+      showGoalinfo: bool,
+      goalInfo: showhide
+    });
   }
   getCurrentTask () {
     function findNextTask(task) {
@@ -82,9 +82,7 @@ class SingleGoal extends Component {
       this.initializeTaskData();
     });
   }
-  toggleModal() {
-    this.props.renderGoalInfoModal(GoalInfo, this.props.goalInfo, this.state.tasks);
-  }
+
   renderGoals() {
     if(!this.state.tasks.data) {
       return (
@@ -98,7 +96,8 @@ class SingleGoal extends Component {
       return(
         <div>
           <div className="col-md-3">
-            {this.state.showGoalinfo ? <GoalInfo goalInfo={this.props.goalInfo} tasks={this.state.tasks.data} hideGoalInfo={this.hideGoalinfo}/> : <h1 onClick={this.showGoalinfo}> {this.props.goalInfo.name} </h1>}
+          <span onClick={()=>{ this.state.showGoalinfo ? this.setGoalInfo(false, "show") : this.setGoalInfo(true, "hide")} }>{this.state.goalInfo}</span>
+            {this.state.showGoalinfo ? <GoalInfo goalInfo={this.props.goalInfo} tasks={this.state.tasks.data} /> : <h1 onClick={this.showGoalinfo}> {this.props.goalInfo.name} </h1>}
 
 
           </div>

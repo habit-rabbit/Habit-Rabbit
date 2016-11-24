@@ -7,6 +7,7 @@ class GoalInfo extends Component {
 
     this.goalType = this.goalType.bind(this);
     this.renderTaskTable = this.renderTaskTable.bind(this);
+    this.hideGoalInfo = this.hideGoalInfo.bind(this);
   }
   renderTaskTable(task, id) {
     return(<tr key={id}>
@@ -27,13 +28,17 @@ class GoalInfo extends Component {
     }
   }
 
-
+  hideGoalInfo() {
+    this.props.hideGoalInfo(false);
+  }
 
   render() {
+    console.log(this.props, "goal info ");
     let counter = 0;
     return (
-          <div className="col-md-3">
-            <table className="table table-sm table-inverse" onClick={this.props.hideGoalInfo}>
+          <div>
+            <span onClick={this.hideGoalInfo}>{this.props.goalInfo.name}</span>
+            <table className="table table-sm table-inverse" >
               <thead>
                 <tr>
                   <th>#</th>
