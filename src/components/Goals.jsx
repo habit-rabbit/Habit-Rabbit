@@ -29,6 +29,7 @@ class Goals extends Component {
   renderGoals () {
     console.log("Rendering Goals.jsx");
     console.log("this.props.goallist:", this.props.goalList);
+
     if (!this.props.goalList) {
       console.log("in if statement of Goals.jsx");
       return (
@@ -47,9 +48,10 @@ class Goals extends Component {
       return (
         <div>
           {this.props.goalList.map((goal, index) => {
+            let goalClass = goal.is_done ? "goal-done" : "goal-not-done"
             return (
               <div className="goals-template row well" key={index}>
-               <SingleGoal goalInfo={goal} renderGoalInfoModal={this.renderGoalInfoModal}/>
+               <SingleGoal goalClass={goalClass} goalInfo={goal} renderGoalInfoModal={this.renderGoalInfoModal}/>
               </div>
             )
           })}
