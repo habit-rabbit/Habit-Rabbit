@@ -9,7 +9,6 @@ class Nav extends Component {
     super(props);
     this.state = {
       name: "",
-      // loggedIn: false
     }
     this.createNavLinks = this.createNavLinks.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -19,15 +18,11 @@ class Nav extends Component {
 
 
   logOut(){
-    console.log("=====do i enven get to the logout function?======");
      $.ajax({
       method: "post",
       url: "/logout",
       dataType: 'json'
-    }).done((data) => {
-      console.log("============Am I logged OUT=========?:");
-      // this.setState({isLoggedIn: data.isLoggedIn});
-    });
+    })
   }
 
   // if user logged in show username in nav bar, else show
@@ -35,12 +30,12 @@ class Nav extends Component {
     if(this.props.isLoggedIn) {
       return (
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form className="navbar-form" onSubmit={this.handleSubmit}>
+            <form className="navbar-form" onSubmit={this.handleSubmit} >
               <input type="submit" id="goal-button" className="btn btn-default"  value="Create A New Goal!"/>
             </form>
               <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
         <ul className="nav navbar-nav navbar-right">
-          <li><a href="">{this.props.userId}</a></li>
+          <li><a href="">Hey {this.props.name}!</a></li>
           <li><a href="" onClick={this.logOut}>Logout</a></li>
         </ul>
         </div>
@@ -49,7 +44,7 @@ class Nav extends Component {
       return(
         <ul className="nav navbar-nav navbar-right">
           <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
-          <Login setUserId={this.props.setUserId} updateNavLinks={this.updateNavLinks} verifyLogin={this.props.verifyLogin}/>
+          <Login updateNavLinks={this.updateNavLinks} verifyLogin={this.props.verifyLogin}/>
           <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
           <Register />
         </ul>
@@ -67,15 +62,8 @@ class Nav extends Component {
   }
 
   handleSubmit(event) {
-    console.log("Clicked the create goal button!");
     event.preventDefault();
-    // $(document).ready(function(){
-    //   console.log("document is ready");
-    //   $("#goal-button").click(function(){
-    //     console.log("in the function for modal opening goodness")
-    //     $("#create-goal-modal").modal();
-    //   });
-    // });
+    $("#create-goal-modal").modal();
   }
 
 
@@ -96,10 +84,7 @@ class Nav extends Component {
             </button>
             <a className="navbar-brand" href="">Habit Rabbit</a>
           </div>
-
-
-            {this.createNavLinks()}
-
+          {this.createNavLinks()}
         </div>
       </nav>
     );

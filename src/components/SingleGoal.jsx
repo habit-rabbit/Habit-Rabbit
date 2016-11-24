@@ -7,7 +7,7 @@ class SingleGoal extends Component {
   constructor(props){
     super(props);
     this.initializeTaskData = this.initializeTaskData.bind(this);
-    // this.goalType = this.goalType.bind(this); see below for why I didn't delete this
+    this.goalType = this.goalType.bind(this);
     this.getCurrentTask = this.getCurrentTask.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
     this.state = {
@@ -40,18 +40,17 @@ class SingleGoal extends Component {
     });
   }
 
-  //this is infrastructure for when (if) challenges are ever set up
-  // goalType (goal) {
-  //   if(goal.private === false){
-  //     return (
-  //       <h4 className="goal-type"> Challenge </h4>
-  //     )
-  //   } else {
-  //     return (
-  //       <h4 className="goal-type"> Private </h4>
-  //     )
-  //   }
-  // }
+  goalType (goal) {
+    if(goal.private === false){
+      return (
+        <h4 className="goal-type"> Challenge </h4>
+      )
+    } else {
+      return (
+        <h4 className="goal-type"> Private </h4>
+      )
+    }
+  }
 
   getCurrentTask () {
     function findNextTask(task) {
@@ -90,6 +89,7 @@ class SingleGoal extends Component {
         <div>
           <div className="col-md-3">
             <h1> {this.props.goalInfo.name} </h1>
+            {this.goalType(this.props.goalInfo)}
           </div>
           <div className="col-md-6">
             <div className="progress">

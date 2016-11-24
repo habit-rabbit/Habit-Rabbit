@@ -4,21 +4,32 @@ const bcrypt = require('bcrypt');
 const ResponseData = require('../api/response.js');
 
 router.get('/', (req, res) => {
-
   res.render('index');
 });
 
 router.get('/login', (req, res) => {
   let isLoggedIn;
-  console.log("session: " + req.session['user-id']);
-  if(req.session['user-id']){
+  let name;
+  if (req.session['user-id']){
     isLoggedIn = true;
-  }
-  else{
-
+    const query = {};
+    query.data = {};
+    query.table = 'users';
+    query.data.id = req.session['user-id'];
+    //query data base for user, if found grab hash and compare to pw
+    db.getRow(query, (err, data) => {
+      if (err) {
+        console.log("DB Error when querying user")
+      } else {
+        name = data[0].first_name;
+        res.json({name: name, isLoggedIn: isLoggedIn});
+      }
+    });
+  } else {
     isLoggedIn = false;
+    name = '';
+    res.json({name: name, isLoggedIn: isLoggedIn});
   }
-  res.json({isLoggedIn: isLoggedIn});
 });
 
 router.post('/logout', (req, res) =>{
@@ -26,8 +37,6 @@ router.post('/logout', (req, res) =>{
   res.json({isLoggedIn: false});
 
 });
-
-
 
 router.post('/login', (req, res) => {
   const r = new ResponseData();
@@ -59,13 +68,12 @@ router.post('/login', (req, res) => {
         if(result) {
           //setcookie
           req.session["user-id"] = user.id;
-          r.setData({id: user.id, isLoggedIn: true});
+          r.setData({isLoggedIn: true});
 
         }
         responder();
       });
     }
   });
-
 });
 module.exports = router;
