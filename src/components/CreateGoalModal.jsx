@@ -22,14 +22,15 @@ class CreateGoalModal extends Component {
   }
 
   handleChange(event) {
-    let id = event.target.id;
     let value = event.target.value;
-    console.log("THIS STAAATE", this.state)
     this.setState({goalName: value});
   }
 
  handleSubmit(event) {
   event.preventDefault();
+  console.log(event.target);
+  event.target.value = "";
+  //filter for empty tasks and GET RID OF THEM
 
     $.ajax({
       method: 'post',
@@ -37,7 +38,7 @@ class CreateGoalModal extends Component {
       dataType: 'json',
       data: {
         data: {
-          name: "Literally satan",
+          name: this.state.goalName,
           private: this.state.private,
         }
       }
@@ -87,20 +88,20 @@ class CreateGoalModal extends Component {
 
             <div className="modal-header">
               <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 className="modal-title" id="myModalLabel">Create Your New Goal</h1>
+              <h1 className="modal-title" id="myModalLabel">Create Your New Goal</h1>
             </div>
 
             <div id="create-goal-body" className="modal-body">
-            <form className="form-horizontal" onSubmit={this.handleSubmit}>
+            <form id="create-goal-form" className="form-horizontal" onSubmit={this.handleSubmit}>
 
               <div className="form-group">
-                <input id="goal-name" type="text" value={this.props.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name"/>
+                <input id="goal-name" type="text" value={this.state.goalName || this.props.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name"/>
               </div>
-
 
               <div className="form-group">
               {this.renderForms()}
               </div>
+
               <div className="form-group">
                 <input type="submit" name="create-goal" className="btn btn-default" value="Create Goal!" />
               </div>

@@ -36,10 +36,7 @@ class Nav extends Component {
       return (
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form className="navbar-form" onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <input type="text" id="goal-name" className="form-control" onChange={this.handleChange} placeholder="What is your new goal?" />
-              </div>
-              <input type="submit" id="goal-button" className="btn btn-default"  value="Create Goal!"/>
+              <input type="submit" id="goal-button" className="btn btn-default"  value="Create A New Goal!"/>
             </form>
               <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
         <ul className="nav navbar-nav navbar-right">
@@ -70,12 +67,15 @@ class Nav extends Component {
   }
 
   handleSubmit(event) {
+    console.log("Clicked the create goal button!");
     event.preventDefault();
-    $(document).ready(function(){
-      $("#goal-button").click(function(){
-        $("#create-goal-modal").modal();
-      });
-    });
+    // $(document).ready(function(){
+    //   console.log("document is ready");
+    //   $("#goal-button").click(function(){
+    //     console.log("in the function for modal opening goodness")
+    //     $("#create-goal-modal").modal();
+    //   });
+    // });
   }
 
 
