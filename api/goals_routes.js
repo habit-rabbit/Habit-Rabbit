@@ -9,25 +9,23 @@ const validates = require("./utilities/validations.js");
 router.post("/goals/create", (req, res) => {
   const r = new ResponseData();
   //this route implies we are looking to insert into goals table
-  if(req.xhr) {
-    if(req.session['user-id']){
-      console.log("REQ BODY", req.body);
-      let query = {};
-      query.table = findTable(req.url);
-      query.data = {
-        name: req.body.data.name,
-        private: req.body.data.private,
-        user_id: req.session['user-id']
-      }
-      // query.data.id = req.session['user-id'];
-      console.log("QUEYR", query); //for definition required by db (need to dry up)
-      db.insertRow(query,  (err, data) => {
-        console.log("THIS IS THE ERRRRR", err)
-        if (err) r.setErrorMsg("Unable to save the goal :(");
-        r.setData(data);
-        res.send(r);
-      });
+  if (req.xhr && req.session['user-id']) {
+    console.log("REQ BODY", req.body);
+    let query = {};
+    query.table = findTable(req.url);
+    query.data = {
+      name: req.body.data.name,
+      private: req.body.data.private,
+      user_id: req.session['user-id']
     }
+    // query.data.id = req.session['user-id'];
+    console.log("QUEYR", query); //for definition required by db (need to dry up)
+    db.insertRow(query,  (err, data) => {
+      console.log("THIS IS THE ERRRRR", err)
+      if (err) r.setErrorMsg("Unable to save the goal :(");
+      r.setData(data);
+      res.send(r);
+    });
   } else {
     res.redirect("/");
   }
@@ -35,7 +33,7 @@ router.post("/goals/create", (req, res) => {
 
 router.get("/goals", (req, res) => {
   const r = new ResponseData();
-  if(req.xhr) {
+  if (req.xhr && req.session['user-id']) {
     let query = req.query;
     query.table = findTable(req.url);
     query.data = {user_id: req.session['user-id']};
@@ -51,7 +49,7 @@ router.get("/goals", (req, res) => {
 
 router.get("/goals/:id", (req, res) => {
   const r = new ResponseData();
-  if(req.xhr) {
+  if (req.xhr && req.session['user-id']) {
     let query = req.query;
     query.table = findTable(req.url);
     // we can assign the req.params.id to our data object, but as there is no
@@ -72,7 +70,7 @@ router.get("/goals/:id", (req, res) => {
 
 router.post("/goals/:id/delete", (req, res) => {
   const r = new ResponseData();
-  if(req.xhr) {
+  if (req.xhr && req.session['user-id']) {
     let query = req.body;
     query.table = findTable(req.url);
     query.data = {};
@@ -89,7 +87,7 @@ router.post("/goals/:id/delete", (req, res) => {
 
 router.get("/goals/:id/tasks", (req, res) => {
   const r = new ResponseData();
-  if (req.xhr) {
+  if (req.xhr && req.session['user-id']) {
     let query = {};
     query.table = findTable(req.url);
     query.data = {goal_id: req.params.id}
@@ -111,10 +109,7 @@ router.get("/goals/:id/tasks", (req, res) => {
 
 router.post("/goals/:id/tasks/create", (req, res) => {
   const r = new ResponseData();
-  if (req.xhr) {
-    if (!req.session['user-id']){
-      res.redirect("/");
-    }
+  if (req.xhr && req.session['user-id']) {
     let query = {};
     taskNames = req.body.data.taskNames
 
@@ -143,7 +138,7 @@ router.post("/goals/:id/tasks/create", (req, res) => {
 
 router.post("/goals/:id/tasks/:task_id/update", (req, res) => {
   const r = new ResponseData();
-  if (req.xhr) {
+  if (req.xhr && req.session['user-id']) {
     let query = {};
     query.table = findTable(req.url);
     query.data = req.body;

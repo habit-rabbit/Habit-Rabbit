@@ -6,10 +6,7 @@ const findTable = require("./utilities/find_table.js");
 const Validations = require("./utilities/validations.js")
 //routes that serve the data base and return a response object r
 
-
 router.post("/users/create", (req, res) => {
-
-  //this route implies we are looking to insert into users table
   let r = new ResponseData();
   let isValidCredentials = new Validations(req.body.data).check();
   if(req.body.data.password === req.body.data.password_confirmation) {

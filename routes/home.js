@@ -4,18 +4,14 @@ const bcrypt = require('bcrypt');
 const ResponseData = require('../api/response.js');
 
 router.get('/', (req, res) => {
-
   res.render('index');
 });
 
 router.get('/login', (req, res) => {
   let isLoggedIn;
-  console.log("session: " + req.session['user-id']);
-  if(req.session['user-id']){
+  if (req.session['user-id']){
     isLoggedIn = true;
-  }
-  else{
-
+  } else {
     isLoggedIn = false;
   }
   res.json({isLoggedIn: isLoggedIn});
@@ -24,10 +20,7 @@ router.get('/login', (req, res) => {
 router.post('/logout', (req, res) =>{
   req.session = null;
   res.json({isLoggedIn: false});
-
 });
-
-
 
 router.post('/login', (req, res) => {
   const r = new ResponseData();
@@ -66,6 +59,5 @@ router.post('/login', (req, res) => {
       });
     }
   });
-
 });
 module.exports = router;
