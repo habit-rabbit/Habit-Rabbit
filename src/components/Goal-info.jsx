@@ -10,9 +10,11 @@ class GoalInfo extends Component {
     this.hideGoalInfo = this.hideGoalInfo.bind(this);
   }
   renderTaskTable(task, id) {
+    let strikethroughClass = task.is_done ? "strikethrough" : "";
+
     return(<tr key={id}>
               <th scope="row">{id}</th>
-              <td>{task.name}</td>
+              <td className={strikethroughClass}>{task.name}</td>
             </tr>);
 
   }
