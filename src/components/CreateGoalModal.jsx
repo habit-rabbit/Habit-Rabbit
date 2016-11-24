@@ -12,6 +12,8 @@ class CreateGoalModal extends Component {
       goalName: "",
       private: true,
       tasks: [""],
+      goalNameErr: "",
+      taskNameErr: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -19,6 +21,9 @@ class CreateGoalModal extends Component {
     this.renderForms = this.renderForms.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
     this.updateTask = this.updateTask.bind(this);
+    this.validateFormInputs = this.validateFormInputs.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
+    this.submitToDatabase = this.submitToDatabase.bind(this);
   }
 
   handleChange(event) {
@@ -30,14 +35,17 @@ class CreateGoalModal extends Component {
 
  handleSubmit(event) {
   event.preventDefault();
+  this.validateFormInputs(this.submitToDatabase);
+  }
 
+  submitToDatabase(goal, tasks) {
     $.ajax({
       method: 'post',
       url: '/api/goals/create',
       dataType: 'json',
       data: {
         data: {
-          name: this.state.goalName,
+          name: goal,
           private: this.state.private,
         }
       }
@@ -48,12 +56,13 @@ class CreateGoalModal extends Component {
         dataType: 'json',
         data: {
           data: {
-            taskNames: this.state.tasks
+            taskNames: tasks,
           }
         }
       }).done ((data) => {
         this.setState({goalName: ""});
         this.setState({tasks: [""]});
+        this.setState({goalNameErr: ""});
         $("#create-goal-modal").modal("hide");
         this.props.updateGoalsIndex();
       });
@@ -80,7 +89,33 @@ class CreateGoalModal extends Component {
     console.log("IM A COOL TASK")
   }
 
+  validateFormInputs(cb) {
+    console.log("SUP WITH THE STATE", this.state.tasks)
+    if (this.state.goalName === "") {
+      this.setState({goalNameErr: "Goal Name can't be blank, Frank!"});
+    }
+    let tasks = this.state.tasks;
+    let cleanTasks = tasks.filter(Boolean);
+    console.log("CLEAN ME UP BUTTERCUP", cleanTasks)
+    if (this.state.goalNameErr === "") {
+      cb(this.state.goalName, cleanTasks);
+    }
+  }
+
+  renderErrors() {
+    if (this.state.goalNameErr !== "") {
+      return (
+        <div className="alert alert-warning">
+          {this.state.goalNameErr}
+        </div>
+      )
+    }
+    // this.setState({goalNameErr: ""});
+  }
+
+
   render() {
+    console.log("WHERE MY GOAAAAAL NAAAAME ERRRRR  MESSAGE AT", this.state.goalNameErr)
 
     return (
       <div className="modal fade" id="create-goal-modal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -93,6 +128,7 @@ class CreateGoalModal extends Component {
             </div>
 
             <div id="create-goal-body" className="modal-body">
+            {this.renderErrors()}
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
 
               <div className="form-group">
@@ -104,7 +140,7 @@ class CreateGoalModal extends Component {
               {this.renderForms()}
               </div>
 
-              <button type="button" class="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
+              <button type="button" className="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
                 <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
               </button>
 
