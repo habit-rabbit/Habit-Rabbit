@@ -2,12 +2,13 @@ const router = require('express').Router();
 const db = require("./query_class.js");
 const ResponseData = require("./response.js");
 const findTable = require("./utilities/find_table.js");
-const validates = require("./utilities/validations.js");
+const Validations = require("./utilities/validations.js");
 //routes that serve the data base and return json
 
 
 router.post("/goals/create", (req, res) => {
   const r = new ResponseData();
+  let isValidCredentials = new Validations(req.body.data).check();
   //this route implies we are looking to insert into goals table
   if (req.xhr && req.session['user-id']) {
     console.log("REQ BODY", req.body);
@@ -121,6 +122,7 @@ router.post("/goals/:id/tasks/create", (req, res) => {
         is_done: false,
         goal_id: req.params.id
       };
+      let v = new Validations(query.data);
       db.insertRow(query, (err, data) => {
         if (err) {
           r.setErrorMsg("Your task didn't save i'm so sorry so sad oh noo");

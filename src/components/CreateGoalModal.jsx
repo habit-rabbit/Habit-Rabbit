@@ -35,7 +35,8 @@ class CreateGoalModal extends Component {
 
  handleSubmit(event) {
   event.preventDefault();
-  this.validateFormInputs(this.submitToDatabase);
+  let goalName = this.state.goalName.trim();
+  this.validateFormInputs(goalName, this.submitToDatabase);
   }
 
   submitToDatabase(goal, tasks) {
@@ -63,6 +64,7 @@ class CreateGoalModal extends Component {
         this.setState({goalName: ""});
         this.setState({tasks: [""]});
         this.setState({goalNameErr: ""});
+
         $("#create-goal-modal").modal("hide");
         this.props.updateGoalsIndex();
       });
@@ -89,16 +91,14 @@ class CreateGoalModal extends Component {
     console.log("IM A COOL TASK")
   }
 
-  validateFormInputs(cb) {
-    console.log("SUP WITH THE STATE", this.state.tasks)
-    if (this.state.goalName === "") {
-      this.setState({goalNameErr: "Goal Name can't be blank, Frank!"});
-    }
+  validateFormInputs(goalName, cb) {
     let tasks = this.state.tasks;
     let cleanTasks = tasks.filter(Boolean);
-    console.log("CLEAN ME UP BUTTERCUP", cleanTasks)
-    if (this.state.goalNameErr === "") {
-      cb(this.state.goalName, cleanTasks);
+    if (goalName === "") {
+      this.setState({goalNameErr: "Goal Name can't be blank, Frank!"});
+    }
+    if (goalName.length) {
+      cb(goalName, cleanTasks);
     }
   }
 
