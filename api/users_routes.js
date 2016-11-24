@@ -25,11 +25,9 @@ router.post("/users/create", (req, res) => {
         db.insertRow(query,  (err, data) => {
           if (err) {
             r.setErrorMsg("Unable to save user, bad credentials!");
+            res.send(r);
           } else {
-          //set data into responseData object 'r'
-          // with user id
-          // data ? r.setData({id: data[0].id}) : r.setErrorMsg("Email already used");
-          console.log("registration data ", data[0].id);
+
           req.session["user-id"] = data[0].id;
           r.setData({isLoggedIn: true});
           res.send(r);
@@ -38,7 +36,7 @@ router.post("/users/create", (req, res) => {
         });
       });
     } else {
-      r.setErrorMsg("You fudged up");
+      r.setErrorMsg("Unable to save user.");
       res.send(r);
     }
   } else {
