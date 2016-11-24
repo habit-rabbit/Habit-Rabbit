@@ -67,7 +67,6 @@ class Nav extends Component {
   }
 
   handleSubmit(event) {
-    console.log("Clicked the create goal button!");
     event.preventDefault();
     $("#create-goal-modal").modal();
   }
