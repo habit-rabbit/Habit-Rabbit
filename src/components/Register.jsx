@@ -45,7 +45,7 @@ class Register extends Component {
     event.preventDefault();
 
 
-    if (this.state.first_name && this.state.last_name && this.state.email && this.state.password != "") {
+    if (this.state.first_name && this.state.last_name && this.state.email && this.state.password) {
 
       $.ajax({
         method: 'post',
