@@ -122,14 +122,19 @@ router.post("/goals/:id/tasks/create", (req, res) => {
         is_done: false,
         goal_id: req.params.id
       };
-      let v = new Validations(query.data);
-      db.insertRow(query, (err, data) => {
-        if (err) {
-          r.setErrorMsg("Your task didn't save i'm so sorry so sad oh noo");
-        } else {
-          data.length ? r.setData(data) : r.setErrorMsg("A different error message idk");
-        }
-      });
+      let v = new Validations(query.data).check();
+      //check tasks for validations
+      if(v) {
+        db.insertRow(query, (err, data) => {
+          if (err) {
+            r.setErrorMsg("Your task didn't save i'm so sorry so sad oh noo");
+          } else {
+            data.length ? r.setData(data) : r.setErrorMsg("A different error message idk");
+          }
+        });
+      } else {
+        r.setErrorMsg("Could not save your task, is it blank?");
+      }
     });
     res.send(r);
 

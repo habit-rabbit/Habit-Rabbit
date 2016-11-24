@@ -93,13 +93,19 @@ class CreateGoalModal extends Component {
 
   validateFormInputs(goalName, cb) {
     let tasks = this.state.tasks;
-    let cleanTasks = tasks.filter(Boolean);
+
+    let cleanTasks = tasks.map((elm) => {
+      return elm.trim();
+    })
+    cleanTasks = cleanTasks.filter(Boolean);
+
     if (goalName === "") {
       this.setState({goalNameErr: "Goal Name can't be blank, Frank!"});
     }
-    if (goalName.length) {
+    if (goalName.length && cleanTasks.length) {
       cb(goalName, cleanTasks);
     }
+
   }
 
   renderErrors() {
