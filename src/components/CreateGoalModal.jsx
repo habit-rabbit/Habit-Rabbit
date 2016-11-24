@@ -101,10 +101,15 @@ class CreateGoalModal extends Component {
               <div className="form-group">
               {this.renderForms()}
               </div>
+
+              <button type="button" class="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
+                <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+
               <div className="form-group">
                 <input type="submit" name="create-goal" className="btn btn-default" value="Create Goal!" />
               </div>
-                <input type="button" name="add-task" onClick={this.handleAddTask} className="btn btn-default" value="ANOTHER!" />
+
             </form>
             </div>
 
