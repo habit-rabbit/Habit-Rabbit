@@ -9,17 +9,33 @@ router.get('/', (req, res) => {
 
 router.get('/login', (req, res) => {
   let isLoggedIn;
+  let name;
   if (req.session['user-id']){
     isLoggedIn = true;
+    const query = {};
+    query.data = {};
+    query.table = 'users';
+    query.data.id = req.session['user-id'];
+    //query data base for user, if found grab hash and compare to pw
+    db.getRow(query, (err, data) => {
+      if (err) {
+        console.log("DB Error when querying user")
+      } else {
+        name = data[0].first_name;
+        res.json({name: name, isLoggedIn: isLoggedIn});
+      }
+    });
   } else {
     isLoggedIn = false;
+    name = '';
+    res.json({name: name, isLoggedIn: isLoggedIn});
   }
-  res.json({isLoggedIn: isLoggedIn});
 });
 
 router.post('/logout', (req, res) =>{
   req.session = null;
   res.json({isLoggedIn: false});
+
 });
 
 router.post('/login', (req, res) => {
@@ -52,7 +68,7 @@ router.post('/login', (req, res) => {
         if(result) {
           //setcookie
           req.session["user-id"] = user.id;
-          r.setData({id: user.id, isLoggedIn: true});
+          r.setData({isLoggedIn: true});
 
         }
         responder();

@@ -8,12 +8,12 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      userId: null,
+      name: "",
       isLoggedIn: false,
       goals: [],
     }
-    this.setUserId = this.setUserId.bind(this);
-    this.getUserId = this.getUserId.bind(this);
+    // this.setUserId = this.setUserId.bind(this);
+    // this.getUserId = this.getUserId.bind(this);
     this.renderPage = this.renderPage.bind(this);
     this.verifyLogin = this.verifyLogin.bind(this);
     this.updateFromDatabase = this.updateFromDatabase.bind(this);
@@ -42,23 +42,11 @@ class App extends Component {
       url: "/login",
       dataType: 'json'
     }).done((data) => {
-      console.log("Am I logged in?:", data.isLoggedIn);
-      this.setState({isLoggedIn: data.isLoggedIn});
+      console.log("Am I logged in?:", data);
+      this.setState({isLoggedIn: data.isLoggedIn, name: data.name});
       this.updateFromDatabase();
     });
   }
-
-  // logOut(){
-  //   console.log("=====do i enven get to the logout function?======");
-  //    $.ajax({
-  //     method: "post",
-  //     url: "/logout",
-  //     dataType: 'json'
-  //   }).done((data) => {
-  //     console.log("============Am I logged OUT=========?:");
-  //     this.setState({isLoggedIn: data.isLoggedIn});
-  //   });
-  // }
 
 //this renders appropriate component if user is not logged in
   renderPage() {
@@ -69,22 +57,21 @@ class App extends Component {
     }
   }
 
-  setUserId(userId) {
-    this.setState({userId: userId});
-  }
+  // setUserId(userId) {
+  //   this.setState({userId: userId});
+  // }
 
-  getUserId(userId) {
-    return this.state.userId;
-  }
+  // getUserId(userId) {
+  //   return this.state.userId;
+  // }
 
   render() {
     console.log("Rendering <App/>");
-    console.log("user id is:", this.state.userId)
+    // console.log("user id is:", this.state.userId)
     return (
       <div className="wrapper">
         <Nav
-          setUserId={this.setUserId}
-          userId={this.state.userId}
+          name={this.state.name}
           isLoggedIn={this.state.isLoggedIn}
           verifyLogin={this.verifyLogin}
           updateGoalsIndex={this.updateFromDatabase}

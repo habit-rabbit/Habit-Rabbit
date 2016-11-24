@@ -52,8 +52,8 @@ class Login extends Component {
         }
       }
     }).then( (result) => {
-      if (result.data.id) {
-        this.props.setUserId(result.data.id);
+      console.log(result.data.isLoggedIn);
+      if (result.data.isLoggedIn) {
         this.setState({email: "", password: "", loginError: null});
         $("#login-modal").modal("hide");
         //call function to update navbar here
