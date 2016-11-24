@@ -52,6 +52,8 @@ class CreateGoalModal extends Component {
           }
         }
       }).done ((data) => {
+        this.setState({goalName: ""});
+        this.setState({tasks: [""]});
         $("#create-goal-modal").modal("hide");
         this.props.updateGoalsIndex();
       });
