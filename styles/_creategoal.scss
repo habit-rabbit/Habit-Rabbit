@@ -1,3 +1,4 @@
+@import 'mixins';
 
 .goals-form-control {
   padding-top: 50px;
@@ -17,13 +18,23 @@
 
 #create-goal-body button {
     background-color: #BDFCC9;
+    background-image: none;
     box-shadow: 0px 0px 3px rgba(92, 184, 92, 0.87);
     padding-bottom: 6px;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 6px;
+
+    &:hover {
+      transition: all 0.3s ease-in-out;
+      background-color: darken(saturate(#BDFCC9, 10%), 10%);
+    }
+    &:focus {
+    outline: 1px dotted BDFCC9;
+
+    }
 }
 
-#create-goal-body .glyphicon glyphicon-plus {
-  color: #fff;
+.progress-bar.progress-bar-info {
+  @include linear-gradient(left, rgb(177, 223, 255) 0, rgba(204, 0, 255, 0.68) 130%);
 }

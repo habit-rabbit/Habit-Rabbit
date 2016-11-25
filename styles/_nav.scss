@@ -1,3 +1,6 @@
+@import 'mixins';
+
+
 .navbar-form {
   display: inline-block;
   float: none;
@@ -8,6 +11,7 @@
   margin: 0px;
   padding: 10px;
   text-align: center;
+  @include linear-gradient(bottom, rgba(242, 242, 13, 0.06), rgba(189, 252, 201, 0.41), white);
 }
 
 .navbar .form-control {
