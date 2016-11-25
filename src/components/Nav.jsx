@@ -14,6 +14,8 @@ class Nav extends Component {
     this.logOut = this.logOut.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleLinks = this.handleLinks.bind(this);
+
   }
 
 
@@ -33,11 +35,14 @@ class Nav extends Component {
             <form className="navbar-form" onSubmit={this.handleSubmit} >
               <input type="submit" id="goal-button" className="btn btn-default"  value="Create A New Goal!"/>
             </form>
-              <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
-        <ul className="nav navbar-nav navbar-right">
-          <li><a href="">Hey {this.props.name}!</a></li>
-          <li><a href="" onClick={this.logOut}>Logout</a></li>
-        </ul>
+          <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
+          <ul className="nav navbar-nav navbar-right">
+            <li><a href="">Hey {this.props.name}!</a></li>
+            <li><a href="" id="ltGoals" onClick={this.handleLinks}>Long Term Goals</a></li>
+            <li><a href="" id="dailyGoals" onClick={this.handleLinks}>Daily Goals</a></li>
+            <li><a href="" id="badges" onClick={this.handleLinks}>Badges</a></li>
+            <li><a href="" onClick={this.logOut}>Logout</a></li>
+          </ul>
         </div>
       )
     } else {
@@ -64,6 +69,20 @@ class Nav extends Component {
   handleSubmit(event) {
     event.preventDefault();
     $("#create-goal-modal").modal();
+  }
+
+  handleLinks(event) {
+    event.preventDefault();
+    let id = event.target.id;
+    if (id === "ltGoals"){
+      this.props.setView(1);
+    }
+    if (id === "dailyGoals"){
+      this.props.setView(2);
+    }
+    if (id === "badges"){
+      this.props.setView(3);
+    }
   }
 
 
