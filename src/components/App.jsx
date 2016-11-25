@@ -53,7 +53,7 @@ class App extends Component {
     if (this.state.isLoggedIn === false) {
       return <Hero setUserId={this.setUserId} verifyLogin={this.verifyLogin}/>;
     } else {
-      return <Carousel goalList={this.state.goals} />;
+      return <Carousel goalList={this.state.goals} update={this.updateFromDatabase}/>;
     }
   }
 

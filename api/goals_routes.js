@@ -67,7 +67,24 @@ router.get("/goals/:id", (req, res) => {
     res.redirect("/");
   }
 });
-
+router.post("/goals/:id/update", (req, res) => {
+  const r = new ResponseData();
+  if(req.xhr && req.session['user-id']) {
+    let query = req.body;
+    query.table = findTable(req.url);
+    query.data.id = req.params.id;
+    db.updateRow(query, (err, data) => {
+      if(err) {
+        r.setErrorMsg("unable to update");
+      } else {
+        r.setData(data);
+      }
+      res.send(r);
+    });
+  } else {
+    res.redirect("/");
+  }
+});
 router.post("/goals/:id/delete", (req, res) => {
   const r = new ResponseData();
   if (req.xhr && req.session['user-id']) {

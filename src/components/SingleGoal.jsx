@@ -7,11 +7,12 @@ class SingleGoal extends Component {
 
   constructor(props){
     super(props);
+    this.getCurrentTask = this.getCurrentTask.bind(this);
+    this.goalType = this.goalType.bind(this);
     this.initializeTaskData = this.initializeTaskData.bind(this);
     this.setGoalInfo = this.setGoalInfo.bind(this);
-    this.getCurrentTask = this.getCurrentTask.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
-    this.goalType = this.goalType.bind(this);
+    this.updateGoal = this.updateGoal.bind(this);
     this.state = {
       tasks: {},
       currentTask: {},
@@ -61,13 +62,27 @@ class SingleGoal extends Component {
       goalInfo: showhide
     });
   }
+  updateGoal() {
+    $.ajax({
+      method: 'post',
+      url: `/api/goals/${this.props.goalInfo.id}/update`,
+      data: {
+        data: {
+          is_done : true
+        }
+      }
+    }).then((data) => {
+         this.setState({goalComplete: true});
+         this.props.update();
+    });
+  }
   getCurrentTask () {
     function findNextTask(task) {
       return !task.is_done
     }
     let taskName = this.state.tasks.data.find(findNextTask);
     if (!taskName) {
-      this.setState({goalComplete: true});
+      this.updateGoal();
     } else {
       return taskName;
     }

@@ -21,12 +21,6 @@
   p {
     font-size: 1em;
   }
-  .goal-is-done {
-    opacity: .5;
-  }
-  .goal-not-done {
-
-  }
   .progress {
     margin: auto;
     position: absolute;
@@ -49,4 +43,9 @@
   }
 }
 
+  .goal-is-done {
+    opacity: .2;
+  }
+  .goal-not-done {
+  }
 /* Strikethrough */
