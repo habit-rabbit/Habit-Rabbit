@@ -5,6 +5,7 @@ import Nav from './Nav.jsx';
 
 
 class CreateGoalModal extends Component {
+
   constructor(props) {
     super(props);
     this.users = {};
@@ -21,6 +22,7 @@ class CreateGoalModal extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
     this.renderForms = this.renderForms.bind(this);
+    this.handleAddTask = this.handleAddTask.bind(this);
     this.submitToDatabase = this.submitToDatabase.bind(this);
     this.validateFormInputs = this.validateFormInputs.bind(this);
     this.updateTask = this.updateTask.bind(this);
@@ -86,8 +88,12 @@ class CreateGoalModal extends Component {
 
   handleAddTask() {
     let tasks = this.state.tasks;
+    if (tasks[tasks.length - 1] === "") {
+      console.log('YOU CANT DO THAT RIGHT NOW');
+    } else {
     tasks.push("");
     this.setState({tasks: tasks});
+    }
   }
 
   validateFormInputs(goalName, cb) {
@@ -156,7 +162,6 @@ class CreateGoalModal extends Component {
               <div className="form-group">
                 <input type="submit" name="create-goal" className="btn btn-default" value="Create Goal!" />
               </div>
-
             </form>
             </div>
           </div>
