@@ -5,6 +5,7 @@ import Nav from './Nav.jsx';
 
 
 class CreateGoalModal extends Component {
+
   constructor(props) {
     super(props);
     this.users = {};
@@ -18,7 +19,6 @@ class CreateGoalModal extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderForms = this.renderForms.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
-    this.updateTask = this.updateTask.bind(this);
   }
 
   handleChange(event) {
@@ -30,7 +30,6 @@ class CreateGoalModal extends Component {
 
  handleSubmit(event) {
   event.preventDefault();
-
     $.ajax({
       method: 'post',
       url: '/api/goals/create',
@@ -75,9 +74,13 @@ class CreateGoalModal extends Component {
 
   handleAddTask() {
     let tasks = this.state.tasks;
+    if (tasks[tasks.length - 1] === "") {
+      console.log('YOU CANT DO THAT RIGHT NOW');
+    } else {
     tasks.push("");
     this.setState({tasks: tasks});
     console.log("IM A COOL TASK")
+    }
   }
 
   render() {
@@ -104,17 +107,15 @@ class CreateGoalModal extends Component {
               {this.renderForms()}
               </div>
 
-              <button type="button" class="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
+              <button type="button" className="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
                 <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
               </button>
 
               <div className="form-group">
                 <input type="submit" name="create-goal" className="btn btn-default" value="Create Goal!" />
               </div>
-
             </form>
             </div>
-
           </div>
         </div>
       </div>
