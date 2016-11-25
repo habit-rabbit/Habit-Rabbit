@@ -148,13 +148,11 @@ router.post("/goals/:id/tasks/:task_id/update", (req, res) => {
     let query = {};
     query.table = findTable(req.url);
     query.data = req.body;
-    console.log("Query Data: ", query.data);
     query.data.id = req.params.task_id;
     db.updateRow(query, (err, data) => {
       if (err) {
-        console.log(err);
+        r.setErrorMsg("Could not update!");
       } else {
-        console.log(data);
         r.setData(data);
         res.send(r);
       }
