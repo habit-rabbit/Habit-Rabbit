@@ -44,37 +44,31 @@ class Hero extends Component {
  handleSubmit(event) {
     event.preventDefault();
 
-    $.ajax({
-      method: 'post',
-      url: 'api/users/create',
-      data: {
+    if (this.state.first_name && this.state.last_name && this.state.email && this.state.password) {
+      $.ajax({
+        method: 'post',
+        url: 'api/users/create',
         data: {
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
-          email: this.state.email,
-          password: this.state.password,
-          password_confirmation: this.state.password_confirmation
+          data: {
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            email: this.state.email,
+            password: this.state.password,
+            password_confirmation: this.state.password_confirmation
+          }
         }
-      }
-    }).then( (result) => {
-      //clear text fields
-      console.log(result);
-        // this.setState({
-        //   first_name: "",
-        //   last_name: "",
-        //   email: "",
-        //   password: "",
-        //   password_confirmation: "",
-        //   signupError: null});
-        $(".form-horizontal").trigger("reset");
-      if(result.data.id) {
-        console.log("worked")
-        //set user state for App
-        this.props.setUserId(result.data.id);
-      } else if(result.error.msg) {
-        this.setState({signupError: result.error.msg});
-      }
-    });
+      }).then( (result) => {
+          // $(".form-horizontal").trigger("reset");
+      if (result.data.isLoggedIn) {
+          this.setState({first_name: '', last_name: '', email: '', password: '', password_confirmation: '', signupError: null});
+          this.props.verifyLogin();
+        } else if(result.error.msg) {
+          this.setState({signupError: result.error.msg});
+        }
+      });
+    } else {
+      this.setState({signupError: "Please complete all fields"})
+    }
   }
   renderError() {
     if (this.state.signupError) {

@@ -46,7 +46,7 @@ class Nav extends Component {
           <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
           <Login updateNavLinks={this.updateNavLinks} verifyLogin={this.props.verifyLogin}/>
           <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
-          <Register />
+          <Register verifyLogin={this.props.verifyLogin}/>
         </ul>
       )
     }

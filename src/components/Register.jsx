@@ -10,11 +10,13 @@ class Register extends Component {
       last_name:"",
       email: "",
       password: "",
-      password_confirmation: ""
+      password_confirmation: "",
+      regError: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderError = this.renderError.bind(this);
   }
 
   handleChange(event) {
@@ -40,25 +42,46 @@ class Register extends Component {
   }
 
  handleSubmit(event) {
-
-    $.ajax({
-      method: 'post',
-      url: 'api/users/create',
-      data: {
-        data: {
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
-          email: this.state.email,
-          password: this.state.password,
-          password_confirmation: this.state.password_confirmation
-        }
-      }
-    }).then( (data) => {
-      console.log("DAATAA", data)
-    });
     event.preventDefault();
 
-    // this.setState({dismiss: "modal"});
+
+    if (this.state.first_name && this.state.last_name && this.state.email && this.state.password) {
+
+      $.ajax({
+        method: 'post',
+        url: 'api/users/create',
+        data: {
+          data: {
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            email: this.state.email,
+            password: this.state.password,
+            password_confirmation: this.state.password_confirmation
+          }
+        }
+      }).then( (result) => {
+        if (result.data.isLoggedIn) {
+          this.setState({first_name: '', last_name: '', email: '', password: '', password_confirmation: '', regError: null});
+          this.props.verifyLogin();
+          $("#register-modal").modal("hide");
+        } else if (result.error.msg) {
+          this.setState({regError: result.error.msg})
+        }
+      });
+
+    } else {
+      this.setState({regError: "Please complete all fields"})
+    }
+  }
+
+  renderError() {
+    if (this.state.regError) {
+      return (
+          <div className="alert alert-warning">
+            {this.state.regError}
+          </div>
+        )
+    }
   }
 
   render() {
@@ -75,6 +98,7 @@ class Register extends Component {
             </div>
 
             <div id="register-body">
+            {this.renderError()}
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <input type="text" id="first_name" name="first_name" placeholder="First Name" value={this.state.value} onChange={this.handleChange}/>

@@ -1,20 +1,24 @@
 import React, {Component} from 'react';
 import NextTask from './NextTask.jsx';
 import ProgressBar from './ProgressBar.jsx';
+import GoalInfo from './Goal-info.jsx';
 
 class SingleGoal extends Component {
 
   constructor(props){
     super(props);
     this.initializeTaskData = this.initializeTaskData.bind(this);
-    this.goalType = this.goalType.bind(this);
+    this.setGoalInfo = this.setGoalInfo.bind(this);
     this.getCurrentTask = this.getCurrentTask.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
+    this.goalType = this.goalType.bind(this);
     this.state = {
       tasks: {},
       currentTask: {},
       userId: null,
-      goalComplete: false
+      goalComplete: false,
+      showGoalinfo: false,
+      goalInfo: "show"
     }
     this.initializeTaskData();
   }
@@ -51,7 +55,12 @@ class SingleGoal extends Component {
       )
     }
   }
-
+  setGoalInfo(bool, showhide) {
+    this.setState({
+      showGoalinfo: bool,
+      goalInfo: showhide
+    });
+  }
   getCurrentTask () {
     function findNextTask(task) {
       return !task.is_done
@@ -60,7 +69,6 @@ class SingleGoal extends Component {
     if (!taskName) {
       this.setState({goalComplete: true});
     } else {
-      console.log("getCurrentTaskResult:", taskName.name);
       return taskName;
     }
   }
@@ -86,10 +94,12 @@ class SingleGoal extends Component {
       );
     } else {
       return(
-        <div>
+        <div className={this.props.goalClass}>
           <div className="col-md-3">
-            <h1> {this.props.goalInfo.name} </h1>
-            {this.goalType(this.props.goalInfo)}
+          <span onClick={()=>{ this.state.showGoalinfo ? this.setGoalInfo(false, "show") : this.setGoalInfo(true, "hide")} }>{this.state.goalInfo}</span>
+            {this.state.showGoalinfo ? <GoalInfo goalInfo={this.props.goalInfo} tasks={this.state.tasks.data} /> : <h1 onClick={this.showGoalinfo}> {this.props.goalInfo.name} </h1>}
+
+
           </div>
           <div className="col-md-6">
             <div className="progress">
@@ -105,6 +115,7 @@ class SingleGoal extends Component {
             goalInfo={this.props.goalInfo}
             goalComplete={this.state.goalComplete} />
           </div>
+
         </div>
       );
     }

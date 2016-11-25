@@ -27,7 +27,7 @@ class NextTask extends Component {
     } else {
       return (
         <div>
-          <p>{this.props.taskInfo.name}</p>
+          <p class="tasks">{this.props.taskInfo.name}</p>
           <span>Finished already? </span>
           <label>
             <input type="checkbox" onChange={this.handleCheck} checked={this.state.done}/>
