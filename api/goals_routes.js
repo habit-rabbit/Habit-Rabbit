@@ -2,31 +2,31 @@ const router = require('express').Router();
 const db = require("./query_class.js");
 const ResponseData = require("./response.js");
 const findTable = require("./utilities/find_table.js");
-const validates = require("./utilities/validations.js");
+const Validations = require("./utilities/validations.js");
 //routes that serve the data base and return json
 
 
 router.post("/goals/create", (req, res) => {
   const r = new ResponseData();
-  //this route implies we are looking to insert into goals table
+  let isValidCredentials = new Validations(req.body.data).check();
   if (req.xhr && req.session['user-id']) {
-    console.log("REQ BODY", req.body);
     let query = {};
     query.table = findTable(req.url);
-    query.data = {
-      name: req.body.data.name,
-      private: req.body.data.private,
-      user_id: req.session['user-id']
-    }
-    // query.data.id = req.session['user-id'];
-    console.log("QUEYR", query); //for definition required by db (need to dry up)
-    db.insertRow(query,  (err, data) => {
-      console.log("THIS IS THE ERRRRR", err)
-      if (err) r.setErrorMsg("Unable to save the goal :(");
-      r.setData(data);
+    query.data = req.body.data;
+    query.data.user_id = req.session['user-id'];
+    if(isValidCredentials) {
+      db.insertRow(query,  (err, data) => {
+        if(err){
+        r.setErrorMsg("Unable to save the goal :(");
+        }
+        r.setData(data);
+        res.send(r);
+      });
+    } else {
+      r.setErrorMsg("Goal needs to have a name");
       res.send(r);
-    });
-  } else {
+    }
+  } else { //if not authenticated
     res.redirect("/");
   }
 });
@@ -111,9 +111,10 @@ router.post("/goals/:id/tasks/create", (req, res) => {
   const r = new ResponseData();
   if (req.xhr && req.session['user-id']) {
     let query = {};
-    taskNames = req.body.data.taskNames
+    taskNames = req.body.data.taskNames;
 
     taskNames.map((taskName, index) => {
+      let isValidCredentials = new Validations(query.data).check();
       query.table = findTable(req.url);
       query.data = {
         name: taskName,
@@ -121,13 +122,18 @@ router.post("/goals/:id/tasks/create", (req, res) => {
         is_done: false,
         goal_id: req.params.id
       };
-      db.insertRow(query, (err, data) => {
-        if (err) {
-          r.setErrorMsg("Your task didn't save i'm so sorry so sad oh noo");
-        } else {
-          data.length ? r.setData(data) : r.setErrorMsg("A different error message idk");
-        }
-      });
+      //check tasks for validations
+      if(isValidCredentials) {
+        db.insertRow(query, (err, data) => {
+          if (err) {
+            r.setErrorMsg("Your task didn't save i'm so sorry so sad oh noo");
+          } else {
+            data.length ? r.setData(data) : r.setErrorMsg("A different error message idk");
+          }
+        });
+      } else {
+        r.setErrorMsg("Could not save your task, is it blank?");
+      }
     });
     res.send(r);
 
@@ -142,13 +148,11 @@ router.post("/goals/:id/tasks/:task_id/update", (req, res) => {
     let query = {};
     query.table = findTable(req.url);
     query.data = req.body;
-    console.log("Query Data: ", query.data);
     query.data.id = req.params.task_id;
     db.updateRow(query, (err, data) => {
       if (err) {
-        console.log(err);
+        r.setErrorMsg("Could not update!");
       } else {
-        console.log(data);
         r.setData(data);
         res.send(r);
       }

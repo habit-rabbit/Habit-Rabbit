@@ -91,12 +91,12 @@ class Hero extends Component {
               </div>
             </div>
             <div className="img-container">
-              <img src="http://needlemedia.com/images-portfolio/vside-sticker-evil-bunny.png" />
+              <img src="/bunnysmirk.png" alt="image-of-zombie-rabbit"/>
             </div>
           </div>
 
           <div className="row">
-            <div className="col-lg-4 col-lg-offset-2">
+            <div id="about-rabeet" className="col-lg-4 col-lg-offset-2">
               <p>Today is a big day for Rabeet.</p>
               <p>Today, Rabeet is going to get out of her burrow.</p>
               <p>Rabeet is going to turn off Netflix, regardless of how far through a fresh binge she is. Also how dare you think that's an accomplishment.</p>
