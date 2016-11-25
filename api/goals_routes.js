@@ -9,25 +9,24 @@ const Validations = require("./utilities/validations.js");
 router.post("/goals/create", (req, res) => {
   const r = new ResponseData();
   let isValidCredentials = new Validations(req.body.data).check();
-  //this route implies we are looking to insert into goals table
   if (req.xhr && req.session['user-id']) {
-    console.log("REQ BODY", req.body);
     let query = {};
     query.table = findTable(req.url);
-    query.data = {
-      name: req.body.data.name,
-      private: req.body.data.private,
-      user_id: req.session['user-id']
-    }
-    // query.data.id = req.session['user-id'];
-    console.log("QUEYR", query); //for definition required by db (need to dry up)
-    db.insertRow(query,  (err, data) => {
-      console.log("THIS IS THE ERRRRR", err)
-      if (err) r.setErrorMsg("Unable to save the goal :(");
-      r.setData(data);
+    query.data = req.body.data;
+    query.data.user_id = req.session['user-id'];
+    if(isValidCredentials) {
+      db.insertRow(query,  (err, data) => {
+        if(err){
+        r.setErrorMsg("Unable to save the goal :(");
+        }
+        r.setData(data);
+        res.send(r);
+      });
+    } else {
+      r.setErrorMsg("Goal needs to have a name");
       res.send(r);
-    });
-  } else {
+    }
+  } else { //if not authenticated
     res.redirect("/");
   }
 });
@@ -112,9 +111,10 @@ router.post("/goals/:id/tasks/create", (req, res) => {
   const r = new ResponseData();
   if (req.xhr && req.session['user-id']) {
     let query = {};
-    taskNames = req.body.data.taskNames
+    taskNames = req.body.data.taskNames;
 
     taskNames.map((taskName, index) => {
+      let isValidCredentials = new Validations(query.data).check();
       query.table = findTable(req.url);
       query.data = {
         name: taskName,
@@ -122,9 +122,8 @@ router.post("/goals/:id/tasks/create", (req, res) => {
         is_done: false,
         goal_id: req.params.id
       };
-      let v = new Validations(query.data).check();
       //check tasks for validations
-      if(v) {
+      if(isValidCredentials) {
         db.insertRow(query, (err, data) => {
           if (err) {
             r.setErrorMsg("Your task didn't save i'm so sorry so sad oh noo");
