@@ -30,7 +30,6 @@ class Carousel extends Component {
       <div>
         {this.renderView(this.props.view)}
       </div>
-
     );
   }
 

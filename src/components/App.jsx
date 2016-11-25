@@ -75,7 +75,7 @@ class App extends Component {
           transitionName="background"
           transitionEnterTimeout={1000}
           transitionLeaveTimeout={1000}>
-          <Carousel goalList={this.state.goals} view={this.state.view} key={this.state.view}/>
+          <Carousel goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase}/>
         </ReactCSSTransitionGroup>);
     }
   }
