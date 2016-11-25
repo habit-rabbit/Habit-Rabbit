@@ -8,6 +8,7 @@ const config = require('./webpack.config');
 const compiler = webpack(config);
 const cookieSession = require('cookie-session')
 const bodyParser  = require("body-parser");
+const path = require('path');
 
 require('dotenv').config({silent: true});
 
@@ -37,6 +38,8 @@ app.use(require('./routes/home'));
 // database api
 
 app.use(require('./api/routes'));
+// required to serve publib/img file
+app.use(express.static(path.resolve(__dirname, './public')));
 
 // configure slack
 // (function() {
