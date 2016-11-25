@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Nav from './Nav.jsx';
 import Carousel from './Carousel.jsx';
 import Hero from './Hero.jsx';
+
 
 class App extends Component {
 
@@ -11,18 +13,33 @@ class App extends Component {
       name: "",
       isLoggedIn: false,
       goals: [],
+      view: "AllGoals",
     }
     // this.setUserId = this.setUserId.bind(this);
     // this.getUserId = this.getUserId.bind(this);
     this.renderPage = this.renderPage.bind(this);
     this.verifyLogin = this.verifyLogin.bind(this);
     this.updateFromDatabase = this.updateFromDatabase.bind(this);
+    this.setView = this.setView.bind(this);
+
 
     this.updateFromDatabase();
   }
 
   componentWillMount(){
     this.verifyLogin();
+  }
+
+  setView(view){
+    if (view === 1){
+      this.setState({view: "AllGoals"});
+    }
+    if (view === 2){
+      this.setState({view: "DailyGoals"});
+    }
+    if (view === 3){
+      this.setState({view: "Badges"});
+    }
   }
 
   updateFromDatabase () {
@@ -53,7 +70,13 @@ class App extends Component {
     if (this.state.isLoggedIn === false) {
       return <Hero setUserId={this.setUserId} verifyLogin={this.verifyLogin}/>;
     } else {
-      return <Carousel goalList={this.state.goals} update={this.updateFromDatabase}/>;
+      return (
+        <ReactCSSTransitionGroup
+          transitionName="background"
+          transitionEnterTimeout={1000}
+          transitionLeaveTimeout={1000}>
+          <Carousel goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase}/>
+        </ReactCSSTransitionGroup>);
     }
   }
 
@@ -75,6 +98,7 @@ class App extends Component {
           isLoggedIn={this.state.isLoggedIn}
           verifyLogin={this.verifyLogin}
           updateGoalsIndex={this.updateFromDatabase}
+          setView={this.setView}
          />
         {this.renderPage()}
       </div>
