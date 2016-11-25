@@ -73,6 +73,7 @@ class SingleGoal extends Component {
       }
     }).then((data) => {
          this.setState({goalComplete: true});
+         this.props.update();
     });
   }
   getCurrentTask () {
