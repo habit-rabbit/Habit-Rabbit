@@ -48,10 +48,10 @@ class Goals extends Component {
       return (
         <div>
           {this.props.goalList.map((goal, index) => {
-            let goalClass = goal.is_done ? "goal-done" : "goal-not-done"
+            let goalClass = goal.is_done ? "goal-is-done" : "goal-not-done"
             return (
               <div className="goals-template row well" key={index}>
-               <SingleGoal goalClass={goalClass} goalInfo={goal} renderGoalInfoModal={this.renderGoalInfoModal}/>
+               <SingleGoal update={this.props.update} goalClass={goalClass} goalInfo={goal} renderGoalInfoModal={this.renderGoalInfoModal}/>
               </div>
             )
           })}

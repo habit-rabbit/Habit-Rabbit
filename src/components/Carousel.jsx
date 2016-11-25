@@ -23,7 +23,7 @@ class Carousel extends Component {
           <div className="item active" id="goals-home">
             <div className="container main-content">
               <h1 className="container-title"> ~ Your Current Goals ~ </h1>
-                <Goals goalList={this.props.goalList} goalsAreCurrent={this.props.goalsAreCurrent} setAppGoalsDefault={this.props.setAppGoalsDefault}/>
+                <Goals update={this.props.update} goalList={this.props.goalList} goalsAreCurrent={this.props.goalsAreCurrent} setAppGoalsDefault={this.props.setAppGoalsDefault}/>
             </div>
             <div className="carousel-caption">
               <h1></h1>
