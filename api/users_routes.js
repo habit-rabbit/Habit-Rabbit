@@ -9,7 +9,6 @@ const Validations = require("./utilities/validations.js")
 router.post("/users/create", (req, res) => {
   let r = new ResponseData();
   let isValidCredentials = new Validations(req.body.data).check();
-  if(req.body.data.password === req.body.data.password_confirmation) {
     if (isValidCredentials) {
       bcrypt.hash(req.body.data.password, 10, (err, hash) => {
         //set up query object..
@@ -36,14 +35,9 @@ router.post("/users/create", (req, res) => {
         });
       });
     } else {
-      r.setErrorMsg("Unable to save user.");
+      r.setErrorMsg("Please check your credentials, something went wrong");
       res.send(r);
     }
-  } else {
-    //passwords didn't match
-    r.setErrorMsg("The passwords do not match");
-    res.send(r);
-  }
 });
 
 module.exports = router;
