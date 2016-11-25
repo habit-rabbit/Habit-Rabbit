@@ -33,11 +33,19 @@ class Nav extends Component {
             <form className="navbar-form" onSubmit={this.handleSubmit} >
               <input type="submit" id="goal-button" className="btn btn-default"  value="Create A New Goal!"/>
             </form>
-              <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
-        <ul className="nav navbar-nav navbar-right">
-          <li><a href="">Hey {this.props.name}!</a></li>
-          <li><a href="" onClick={this.logOut}>Logout</a></li>
-        </ul>
+          <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
+          <ul className="nav navbar-nav navbar-right">
+            <li><a href="">Hey {this.props.name}!</a></li>
+            <li><a href="" onClick={this.logOut}>Logout</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="">Long Term Goals</a></li>
+                <li><a href="">Daily Goals</a></li>
+                <li><a href="">Badges</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
       )
     } else {
