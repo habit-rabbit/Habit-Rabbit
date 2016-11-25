@@ -71,6 +71,8 @@ class SingleGoal extends Component {
           is_done : true
         }
       }
+    }).then((data) => {
+         this.setState({goalComplete: true});
     });
   }
   getCurrentTask () {
@@ -80,7 +82,6 @@ class SingleGoal extends Component {
     let taskName = this.state.tasks.data.find(findNextTask);
     if (!taskName) {
       this.updateGoal();
-      this.setState({goalComplete: true});
     } else {
       return taskName;
     }
