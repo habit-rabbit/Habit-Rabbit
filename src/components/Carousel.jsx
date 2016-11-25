@@ -14,7 +14,7 @@ class Carousel extends Component {
   renderView(view) {
     if (view === "AllGoals"){
       console.log("I made it into Carousel!!!!");
-      return(<AllGoals goalList={this.props.goalList} />);
+      return(<AllGoals goalList={this.props.goalList} update={this.props.update} />);
     }
     if (view === "Badges"){
       return(<Badges />);
