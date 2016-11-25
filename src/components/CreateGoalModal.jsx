@@ -12,12 +12,17 @@ class CreateGoalModal extends Component {
       goalName: "",
       private: true,
       tasks: [""],
+      goalNameErr: "",
+      taskNameErr: "",
     };
 
+    this.handleAddTask = this.handleAddTask.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
     this.renderForms = this.renderForms.bind(this);
-    this.handleAddTask = this.handleAddTask.bind(this);
+    this.submitToDatabase = this.submitToDatabase.bind(this);
+    this.validateFormInputs = this.validateFormInputs.bind(this);
     this.updateTask = this.updateTask.bind(this);
   }
 
@@ -30,14 +35,20 @@ class CreateGoalModal extends Component {
 
  handleSubmit(event) {
   event.preventDefault();
+  let goalName = this.state.goalName.trim();
+  this.setState({goalNameErr: ""});
+  this.setState({taskNameErr: ""});
+  this.validateFormInputs(goalName, this.submitToDatabase);
+  }
 
+  submitToDatabase(goal, tasks) {
     $.ajax({
       method: 'post',
       url: '/api/goals/create',
       dataType: 'json',
       data: {
         data: {
-          name: this.state.goalName,
+          name: goal,
           private: this.state.private,
         }
       }
@@ -48,14 +59,14 @@ class CreateGoalModal extends Component {
         dataType: 'json',
         data: {
           data: {
-            taskNames: this.state.tasks
+            taskNames: tasks,
           }
         }
       }).done ((data) => {
         this.setState({goalName: ""});
         this.setState({tasks: [""]});
-        $("#create-goal-modal").modal("hide");
         this.props.updateGoalsIndex();
+        $("#create-goal-modal").modal("hide");
       });
     });
   }
@@ -77,8 +88,41 @@ class CreateGoalModal extends Component {
     let tasks = this.state.tasks;
     tasks.push("");
     this.setState({tasks: tasks});
-    console.log("IM A COOL TASK")
   }
+
+  validateFormInputs(goalName, cb) {
+    let tasks = this.state.tasks;
+    let cleanTasks = tasks.map((elm) => {
+      return elm.trim();
+    });
+    cleanTasks = cleanTasks.filter(Boolean);
+    if (goalName === "") {
+      this.setState({goalNameErr: "Goal Name can't be blank, Frank!"});
+    };
+    if (cleanTasks.length < 1 ) {
+      this.setState({taskNameErr: "Tasks can't be clean, Maureen!"});
+    };
+    if (goalName.length && cleanTasks.length) {
+      cb(goalName, cleanTasks);
+    };
+  }
+
+  renderErrors() {
+    if (this.state.goalNameErr !== "") {
+      return (
+        <div className="alert alert-warning">
+          {this.state.goalNameErr}
+        </div>
+      )
+    } else if (this.state.taskNameErr !== "") {
+      return (
+        <div className="alert alert-warning">
+          {this.state.taskNameErr}
+        </div>
+      );
+    }
+  }
+
 
   render() {
 
@@ -93,6 +137,7 @@ class CreateGoalModal extends Component {
             </div>
 
             <div id="create-goal-body" className="modal-body">
+            {this.renderErrors()}
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
 
               <div className="form-group">
@@ -114,7 +159,6 @@ class CreateGoalModal extends Component {
 
             </form>
             </div>
-
           </div>
         </div>
       </div>
