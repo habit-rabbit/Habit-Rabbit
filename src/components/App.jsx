@@ -15,13 +15,11 @@ class App extends Component {
       goals: [],
       view: "AllGoals",
     }
-    // this.setUserId = this.setUserId.bind(this);
-    // this.getUserId = this.getUserId.bind(this);
+
     this.renderPage = this.renderPage.bind(this);
     this.verifyLogin = this.verifyLogin.bind(this);
     this.updateFromDatabase = this.updateFromDatabase.bind(this);
     this.setView = this.setView.bind(this);
-
 
     this.updateFromDatabase();
   }
@@ -72,25 +70,18 @@ class App extends Component {
     } else {
       return (
         <ReactCSSTransitionGroup
+          className="slide-animation"
+          component="div"
           transitionName="background"
           transitionEnterTimeout={1000}
           transitionLeaveTimeout={1000}>
-          <Carousel goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase}/>
+          <Carousel goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase} component="animated-component"/>
         </ReactCSSTransitionGroup>);
     }
   }
 
-  // setUserId(userId) {
-  //   this.setState({userId: userId});
-  // }
-
-  // getUserId(userId) {
-  //   return this.state.userId;
-  // }
-
   render() {
     console.log("Rendering <App/>");
-    // console.log("user id is:", this.state.userId)
     return (
       <div className="wrapper">
         <Nav

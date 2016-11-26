@@ -1,4 +1,4 @@
-  @function mirror ($direction) {
+@function mirror ($direction) {
   @each $d in $direction {
     @if($direction == 'top') { @return 'bottom'; }
     @if($direction == 'bottom') { @return 'top'; }
