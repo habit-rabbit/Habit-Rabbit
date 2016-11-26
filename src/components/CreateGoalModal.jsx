@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 // import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
 
 import Nav from './Nav.jsx';
@@ -15,6 +16,7 @@ class CreateGoalModal extends Component {
       tasks: [""],
       goalNameErr: "",
       taskNameErr: "",
+
     };
 
     this.handleAddTask = this.handleAddTask.bind(this);
@@ -26,6 +28,12 @@ class CreateGoalModal extends Component {
     this.submitToDatabase = this.submitToDatabase.bind(this);
     this.validateFormInputs = this.validateFormInputs.bind(this);
     this.updateTask = this.updateTask.bind(this);
+  }
+
+  componentDidMount () {
+    $('#create-goal-modal').on('shown.bs.modal', function () {
+      $('#goal-name').focus();
+    });
   }
 
   handleChange(event) {
@@ -82,11 +90,12 @@ class CreateGoalModal extends Component {
 
   renderForms() {
     return this.state.tasks.map((item, index) => {
-      return <input type="text" value={item} onChange={ (e) => {this.updateTask(e, index)} } name={`task-name-${index}`} key={index} placeholder="Task Name"/>
+      return <input id="task-name" type="text" value={item} onChange={ (e) => {this.updateTask(e, index)} } name={`task-name-${index}`} key={index} placeholder="Task Name"/>
     })
   }
 
   handleAddTask() {
+    // this.adjustAutoFocus('#task-name')
     let tasks = this.state.tasks;
     if (tasks[tasks.length - 1] === "") {
       console.log('YOU CANT DO THAT RIGHT NOW');
@@ -147,7 +156,7 @@ class CreateGoalModal extends Component {
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
 
               <div className="form-group">
-                <input id="goal-name" type="text" value={this.state.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name"/>
+                <input id="goal-name" type="text" value={this.state.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name" />
               </div>
 
 

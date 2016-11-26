@@ -11,8 +11,10 @@ class DailyGoals extends Component {
   render() {
 
     return (
-      <div className="container main-content">
-        <h1>Daily Goals</h1>
+      <div className="background-layout">
+        <div className="container main-content">
+          <h1 className="container-title">Daily Goals</h1>
+        </div>
       </div>
     );
   }
