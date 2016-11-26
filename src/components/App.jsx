@@ -41,12 +41,12 @@ class App extends Component {
   }
 
   updateFromDatabase () {
-    console.log("Calling DB from App");
+    // console.log("Calling DB from App");
     $.ajax({
       method: "get",
       url: "/api/goals",
     }).done((response) => {
-      console.log("Finished DB call in App");
+      // console.log("Finished DB call in App");
       this.setState({goals: response.data});
     });
   }
@@ -57,7 +57,7 @@ class App extends Component {
       url: "/login",
       dataType: 'json'
     }).done((data) => {
-      console.log("Am I logged in?:", data);
+      // console.log("Am I logged in?:", data);
       this.setState({isLoggedIn: data.isLoggedIn, name: data.name});
       this.updateFromDatabase();
     });

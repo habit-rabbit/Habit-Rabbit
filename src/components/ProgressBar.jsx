@@ -12,7 +12,7 @@ class ProgressBar extends Component {
   // }
 
   calculateProgress () {
-    console.log("calculateProgress of progress bar");
+    // console.log("calculateProgress of progress bar");
     let tasks = this.props.taskArray.data;
     let finishedTasks = 0;
     for (let i = 0; i < tasks.length; i++){
@@ -26,7 +26,7 @@ class ProgressBar extends Component {
   }
 
   render () {
-    console.log("Rendering progress-bar");
+    // console.log("Rendering progress-bar");
     return (
       <div className="progress-bar progress-bar-info"
       role="progressbar"

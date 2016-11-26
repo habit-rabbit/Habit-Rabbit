@@ -138,7 +138,7 @@ class SingleGoal extends Component {
 
 
   render() {
-    console.log("Rendering SingleGoal.jsx");
+    // console.log("Rendering SingleGoal.jsx");
     return (
       <div>
        {this.renderGoals()}

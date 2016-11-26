@@ -39,7 +39,7 @@ class CreateGoalModal extends Component {
   handleChange(event) {
     let id = event.target.id;
     let value = event.target.value;
-    console.log("THIS STAAATE", this.state)
+    // console.log("THIS STAAATE", this.state)
     this.setState({goalName: value});
   }
 
@@ -98,7 +98,7 @@ class CreateGoalModal extends Component {
     // this.adjustAutoFocus('#task-name')
     let tasks = this.state.tasks;
     if (tasks[tasks.length - 1] === "") {
-      console.log('YOU CANT DO THAT RIGHT NOW');
+      // console.log('YOU CANT DO THAT RIGHT NOW');
     } else {
     tasks.push("");
     this.setState({tasks: tasks});

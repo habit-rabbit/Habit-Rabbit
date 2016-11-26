@@ -21,7 +21,7 @@ class CreateTask extends Component {
   handleChange(event) {
     let id = event.target.id;
     let value = event.target.value;
-console.log("THIS STAAATE", this.state)
+// console.log("THIS STAAATE", this.state)
     if (id === "name") {
       this.setState({name: value});
     }
