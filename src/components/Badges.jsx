@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+
 class Badges extends Component {
 
   constructor(props){
@@ -26,13 +27,19 @@ class Badges extends Component {
         <h1>Badges</h1>
       </div>
       <div>
-        <table class="table">
-          <p><h1>HELLO</h1></p>
-            <tr class="active">HIHI</tr>
-            <tr class="success">HOHO</tr>
-            <tr class="warning">CUTE</tr>
-            <tr class="danger">DOG FISH AND CAT FISH</tr>
-            <tr class="info">ITS NOT EASY BEING CHEEESY</tr>
+        <h1>HELLO</h1>
+        <table className="table">
+          <tbody>
+            <tr>
+              <td><img src="/bunnysmirk.png" className="img-rounded"/><span>First Goal Complete!</span></td>
+              <td><img src="/bunnysmirk.png" className="img-rounded"/></td>
+            </tr>
+              <tr><td>test</td><td>test2</td></tr>
+              <tr><td>test</td><td>test2</td></tr>
+              <tr><td>test</td><td>test2</td></tr>
+              <tr><td>test</td><td>test2</td></tr>
+
+          </tbody>
         </table>
       </div>
       </div>
