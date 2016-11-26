@@ -85,10 +85,6 @@ class Nav extends Component {
     }
   }
 
-
-
-
-
   render() {
     console.log("Rendering <Nav/>");
     return (

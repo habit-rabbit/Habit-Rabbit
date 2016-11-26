@@ -67,6 +67,7 @@ router.get("/goals/:id", (req, res) => {
     res.redirect("/");
   }
 });
+
 router.post("/goals/:id/update", (req, res) => {
   const r = new ResponseData();
   if(req.xhr && req.session['user-id']) {
@@ -175,6 +176,47 @@ router.post("/goals/:id/tasks/:task_id/update", (req, res) => {
       }
     });
   } else {
+    res.redirect("/");
+  }
+});
+
+router.get("/daily_goals", (req, res) => {
+  const r = new ResponseData();
+  if (req.xhr && req.session['user-id']) {
+    let query = {};
+    query.table = findTable(req.url);
+    query.data = {user_id: req.session['user-id']};
+    db.getAllWhere(query,  (err, data) => {
+      if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
+      r.setData(data);
+      res.send(r);
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
+router.post("/daily_goals/create", (req, res) => {
+  const r = new ResponseData();
+  let isValidCredentials = new Validations(req.body.data).check();
+  if (req.xhr && req.session['user-id']) {
+    let query = {};
+    query.table = findTable(req.url);
+    query.data = req.body.data;
+    query.data.user_id = req.session['user-id'];
+    if(isValidCredentials) {
+      db.insertRow(query,  (err, data) => {
+        if(err){
+        r.setErrorMsg("Unable to save the daily goal :(");
+        }
+        r.setData(data);
+        res.send(r);
+      });
+    } else {
+      r.setErrorMsg("You can't just not type anything. That's totally pointless. What were you thinking?");
+      res.send(r);
+    }
+  } else { //if not authenticated
     res.redirect("/");
   }
 });
