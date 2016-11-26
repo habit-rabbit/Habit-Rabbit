@@ -38,7 +38,7 @@ class NextTask extends Component {
   }
 
   render () {
-    console.log("Rendering NextTask.jsx");
+    // console.log("Rendering NextTask.jsx");
     return (
       <div>
         {this.renderTasks()}
