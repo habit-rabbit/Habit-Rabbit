@@ -11,11 +11,12 @@ class AllGoals extends Component {
   render() {
 
     return (
-      <div className="container main-content">
-        <h1 className="container-title"> ~ Your Current Goals ~ </h1>
-        <Goals update={this.props.update} goalList={this.props.goalList} goalsAreCurrent={this.props.goalsAreCurrent} setAppGoalsDefault={this.props.setAppGoalsDefault}/>
+      <div className="background-layout">
+        <div className="container main-content">
+          <h1 className="container-title"> ~ Your Current Goals ~ </h1>
+          <Goals update={this.props.update} goalList={this.props.goalList} goalsAreCurrent={this.props.goalsAreCurrent} setAppGoalsDefault={this.props.setAppGoalsDefault}/>
+        </div>
       </div>
-
     );
   }
 

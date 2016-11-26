@@ -7,6 +7,11 @@
     height: 100%;
 }
 
-.wrapper {
-  background-color: blue;
+.background-layout {
+  background-color: #8cffc1;
+
+  .container-title {
+    text-align: center;
+    padding-top: 42px;
+  }
 }
