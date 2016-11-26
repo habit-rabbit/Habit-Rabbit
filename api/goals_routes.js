@@ -221,4 +221,20 @@ router.post("/daily_goals/create", (req, res) => {
   }
 });
 
+router.get("/badges", (req, res) => {
+  const r = new ResponseData();
+  if (req.xhr && req.session['user-id']) {
+    let query = {};
+    query.table = findTable(req.url);
+    query.data = {user_id: req.session['user-id']};
+    db.getAllWhere(query,  (err, data) => {
+      if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
+      r.setData(data);
+      res.send(r);
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
 module.exports = router;

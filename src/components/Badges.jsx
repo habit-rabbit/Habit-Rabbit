@@ -6,6 +6,18 @@ class Badges extends Component {
     super(props);
   }
 
+  componentDidMount(){
+
+    $.ajax({
+      method: "get",
+      url: "/api/badges",
+      dataType: 'json'
+    }).done((data) => {
+      console.log("Badge data:", data);
+    });
+  }
+
+
   render() {
 
     return (

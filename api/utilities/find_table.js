@@ -1,4 +1,4 @@
-const tables = ["users", "tasks", "goals", "challenges", "daily_goals"];
+const tables = ["users", "tasks", "goals", "challenges", "daily_goals", "badges"];
 //finds the table that is required for a database query
 //based on the restful route that calls this function;
 function findTable(url) {
