@@ -43,12 +43,12 @@ class CreateGoalModal extends Component {
     this.setState({goalName: value});
   }
 
- handleSubmit(event) {
-  event.preventDefault();
-  let goalName = this.state.goalName.trim();
-  this.setState({goalNameErr: ""});
-  this.setState({taskNameErr: ""});
-  this.validateFormInputs(goalName, this.submitToDatabase);
+  handleSubmit(event) {
+    event.preventDefault();
+    let goalName = this.state.goalName.trim();
+    this.setState({goalNameErr: ""});
+    this.setState({taskNameErr: ""});
+    this.validateFormInputs(goalName, this.submitToDatabase);
   }
 
   submitToDatabase(goal, tasks) {
