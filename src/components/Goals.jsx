@@ -5,33 +5,17 @@ class Goals extends Component {
 
   constructor(props){
     super(props);
-    // this.initializeGoalData = this.initializeGoalData.bind(this);
     this.renderGoals = this.renderGoals.bind(this);
     this.state = {
       tasks: {},
       updating: false
     }
-    // this.initializeGoalData();
   }
 
-  // componentWillMount () {
-  //   console.log("componentWillMount=========================");
-  //   $.ajax({
-  //     method: "get",
-  //     url: "/api/goals",
-  //   }).done((data) => {
-  //     console.log("===================DATA:=====================", data);
-  //     this.setState({goals: data});
-  //     this.props.setAppGoalsDefault();
-  //   });
-  // }
 
   renderGoals () {
-    console.log("Rendering Goals.jsx");
-    console.log("this.props.goallist:", this.props.goalList);
 
     if (!this.props.goalList) {
-      console.log("in if statement of Goals.jsx");
       return (
         <h3> Loading Goals... </h3>
       );
