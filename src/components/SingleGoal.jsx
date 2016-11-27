@@ -8,43 +8,17 @@ class SingleGoal extends Component {
   constructor(props){
     super(props);
     this.getCurrentTask = this.getCurrentTask.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
     this.goalType = this.goalType.bind(this);
-    this.initializeTaskData = this.initializeTaskData.bind(this);
     this.setGoalInfo = this.setGoalInfo.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
     this.updateGoal = this.updateGoal.bind(this);
     this.state = {
-      tasks: {},
-      currentTask: {},
-      userId: null,
-      goalComplete: false,
       showGoalinfo: false,
       goalInfo: "show"
     }
-    this.initializeTaskData();
   }
-
-  initializeTaskData () {
-    $.ajax({
-      method: "get",
-      url: `/api/goals/${this.props.goalInfo.id}/tasks`
-    }).done((data) => {
-      let tasks = data.data;
-      tasks.sort((a, b) => {
-        if (a.task_order > b.task_order) {
-          return 1;
-        }
-        if (a.task_order < b.task_order) {
-          return -1;
-        }
-        return 0;
-      });
-      this.setState({tasks: data});
-      let currTask = this.getCurrentTask();
-      this.setState({currentTask: currTask});
-    });
-  }
-
+ //=================show-hide goal details===============================
   goalType (goal) {
     if(goal.private === false){
       return (
@@ -62,6 +36,8 @@ class SingleGoal extends Component {
       goalInfo: showhide
     });
   }
+  // ====================================================================
+  //============== update database: goal.is_done = true==================
   updateGoal() {
     $.ajax({
       method: 'post',
@@ -71,37 +47,56 @@ class SingleGoal extends Component {
           is_done : true
         }
       }
-    }).then((data) => {
-         this.setState({goalComplete: true});
-         this.props.update();
+    }).then(() => {
+      this.props.update();
     });
   }
+
+  //==============================For Tasks==============================
   getCurrentTask () {
-    function findNextTask(task) {
-      return !task.is_done
-    }
-    let taskName = this.state.tasks.data.find(findNextTask);
-    if (!taskName) {
-      this.updateGoal();
+    let task = this.props.goalInfo.tasks.find((task) => {return !task.is_done});
+    //if task is undefined, it means there are no more tasks to complete
+    //at this point we update the goal and set its is_done flag to true
+    if (!task) {
+        if(!this.props.goalInfo.is_done) {
+          this.updateGoal();
+        }
+        return <p> You've finished your goal! Rabeet is screeching with delight. </p>
     } else {
-      return taskName;
+      return (  <div>
+                  <p className="tasks">{task.name}</p>
+                  <span>Finished already? </span>
+                  <label>
+                    <input data-taskId={task.id} onChange={this.handleCheck} type="checkbox"/>
+                  </label>
+                </div>)
     }
   }
 
+  handleCheck (e) {
+    e.preventDefault();
+    this.setState({done: true});
+    setTimeout(() => {
+      this.setState({done: false});
+    }, 200);
+    this.updateCurrentTask(this.props.goalInfo.id, e.target.dataset.taskid);
+  }
+
   updateCurrentTask (goalId, taskId) {
-    let taskUpdate = $.ajax({
+   $.ajax({
       method: "post",
       url: `api/goals/${goalId}/tasks/${taskId}/update`,
       data: {is_done: true}
     }).done((data) => {
-      this.initializeTaskData();
+      this.props.update();
     });
   }
-
+//========================================================================
+//===========================Render the goal component====================
   renderGoals() {
-    if(!this.state.tasks.data) {
+    if(!this.props.goalInfo.tasks) {
       return (
-        <div> {/*this should render as an error message (the one we get back from the server*/}
+        <div>
           <h3>Let's talk about tasks... </h3>
           <h3>YOU NEED TO MAKE SOME. </h3>
           <h3>HOW DO YOU EVEN EXPECT TO ACCOMPLISH YOUR DREAMS WITHOUT A PLAN, BARBARA.</h3>
@@ -112,33 +107,28 @@ class SingleGoal extends Component {
         <div className={this.props.goalClass}>
           <div className="col-md-3">
           <span onClick={()=>{ this.state.showGoalinfo ? this.setGoalInfo(false, "show") : this.setGoalInfo(true, "hide")} }>{this.state.goalInfo}</span>
-            {this.state.showGoalinfo ? <GoalInfo goalInfo={this.props.goalInfo} tasks={this.state.tasks.data} /> : <h1 onClick={this.showGoalinfo}> {this.props.goalInfo.name} </h1>}
+            {this.state.showGoalinfo ? <GoalInfo goalInfo={this.props.goalInfo} /> : <h1 onClick={this.showGoalinfo}> {this.props.goalInfo.name} </h1>}
 
 
           </div>
           <div className="col-md-6">
             <div className="progress">
               <ProgressBar
-              taskArray={this.state.tasks}/>
+              taskArray={this.props.goalInfo.tasks}/>
             </div>
           </div>
           <div className="col-md-3">
             <h4 className="task-list"> Next Task: </h4>
-            <NextTask
-            taskInfo={this.state.currentTask}
-            updateCurrentTask={this.updateCurrentTask}
-            goalInfo={this.props.goalInfo}
-            goalComplete={this.state.goalComplete} />
+            {this.getCurrentTask()}
           </div>
 
         </div>
       );
     }
   }
-
+//========================================================================
 
   render() {
-    // console.log("Rendering SingleGoal.jsx");
     return (
       <div>
        {this.renderGoals()}

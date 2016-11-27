@@ -47,6 +47,7 @@ class App extends Component {
       url: "/api/goals",
     }).done((response) => {
       // console.log("Finished DB call in App");
+      // console.log(response.data, "response")
       this.setState({goals: response.data});
     });
   }
@@ -81,7 +82,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('==================Goals: ', this.state.goals, ' ============================');
+    // console.log('==================Goals: ', this.state.goals, ' ============================');
 
     console.log("Rendering <App/>");
     return (
