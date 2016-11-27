@@ -34,15 +34,15 @@ router.post("/goals/create", (req, res) => {
 router.get("/goals", (req, res) => {
   const r = new ResponseData();
   if (req.xhr && req.session['user-id']) {
-    // let query = req.query;
-    // query.table = findTable(req.url);
-    // query.data = {user_id: req.session['user-id']};
+    let query = req.query;
+    query.table = findTable(req.url);
+    query.data = {user_id: req.session['user-id']};
     // db.getAllWhere(query,  (err, data) => {
     //   if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
     //   r.setData(data.sort((goalA, goalB) => {return goalB.id - goalA.id;}));
     //   res.send(r);
     // });
-      db.getGoalsWithTasks((err, data) => {
+      db.getGoalsWithTasks(query,(err, data) => {
         if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
         r.setData(data.sort((goalA, goalB) => {return goalA.is_done ? 1 : -1;}));
         res.send(r)

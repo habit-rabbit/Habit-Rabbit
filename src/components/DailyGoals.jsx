@@ -21,19 +21,18 @@ class DailyGoals extends Component {
     this.updateFromDatabase();
   }
 
-  handleCheck (e) {
-    console.log("I've been clicked! ME! A good Christian Woman!");
+  handleCheck (e, id) {
     e.preventDefault();
     $.ajax({
       method: "post",
-      url: `/api/daily_goals/${this.dailyGoal.id}/update`,
+      url: `/api/daily_goals/${id.id}/update`,
       data: {
         data: {
           is_done: true
         }
       }
     }).done(() => {
-      console.log(`Updated goal ${dailyGoal.name}, status is_done is ${dailyGoal.is_done}`);
+      this.updateFromDatabase ();
     });
   }
 
@@ -70,14 +69,15 @@ class DailyGoals extends Component {
       return (
         <div>
           {this.state.dailies.map((dailyGoal, index) => {
+            let goalClass = dailyGoal.is_done ? "goal-is-done" : "goal-not-done";
             return (
-              <div className="daily-goals-template row well" key={index}>
+              <div className="daily-goals-template row well {goalClass}" key={index}>
                 <div className="col-md-7">
                   <h1 className="daily-goal"> {dailyGoal.name} </h1>
                 </div>
                 <div className="col-md-5">
                   <div className="daily-goals-icons">
-                    <i className="fa fa-check-square" aria-hidden="true" onClick={this.handleCheck}></i>
+                    <i className="fa fa-check-square" aria-hidden="true" onClick={()=>{this.handleCheck(event, dailyGoal)}}></i>
                     <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
                     <i className="fa fa-trash" aria-hidden="true"></i>
                   </div>
