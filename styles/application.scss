@@ -1,10 +1,11 @@
 // This is the top-level scss file. Import all other files in here.
 @import 'app';
+@import 'badges';
 @import 'carousel';
+@import 'creategoal';
+@import 'goals';
 @import 'hero';
 @import 'nav';
 @import 'questions';
 @import 'register';
-@import 'goals';
-@import 'creategoal';
 @import 'transitions';
