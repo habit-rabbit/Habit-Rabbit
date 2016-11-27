@@ -20,18 +20,19 @@ class CreateDailyGoalModal extends Component {
     });
   }
 
-  handleChange (e) {
-    let value = e.target.value;
+  handleChange (event) {
+    let value = event.target.value;
     this.setState({dailyGoalName: value});
   }
 
-  handleSubmit () {
+  handleSubmit (event) {
     event.preventDefault();
     let dailyGoalName = this.state.dailyGoalName.trim();
     this.validateFormInputs(dailyGoalName, this.submitToDatabase);
   }
 
   submitToDatabase (goal) {
+    console.log("submitting to database");
     $.ajax({
       method: 'post',
       url: '/api/daily_goals/create',
@@ -43,10 +44,14 @@ class CreateDailyGoalModal extends Component {
       }
     }).done ((response) => {
       console.log("Got the response from CreateDailyGoalModal! Its:", response);
+      this.setState({dailyGoalName: ""});
+      this.props.updateDailies();
+      $("#create-daily-goal-modal").modal("hide");
     });
   }
 
   validateFormInputs(goal, cb) {
+    console.log("validating form inputs");
     if (goal === "") {
       this.setState({dailyGoalNameErr: "Well this is awkward. You have to WRITE SOMETHING."});
     } else {
@@ -55,6 +60,7 @@ class CreateDailyGoalModal extends Component {
   }
 
   renderErrors () {
+    console.log("render errors:", this.state.dailyGoalNameErr);
     if (this.state.dailyGoalNameErr !== "") {
       return (
         <div className="alert alert-warning">

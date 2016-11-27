@@ -13,15 +13,11 @@ class DailyGoals extends Component {
     this.renderDailyGoals = this.renderDailyGoals.bind(this);
     // this.handleCheck = this.handleCheck.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateFromDatabase = this.updateFromDatabase.bind(this);
   }
 
   componentDidMount () {
-    $.ajax({
-      method: "get",
-      url: "/api/daily_goals",
-    }).done((response) => {
-      this.setState({dailies: response.data});
-    });
+    this.updateFromDatabase();
   }
 
   handleSubmit(event) {
@@ -30,10 +26,17 @@ class DailyGoals extends Component {
     console.log("You clicked me! At least buy me dinner first! RUDE");
   }
 
+  updateFromDatabase () {
+    $.ajax({
+      method: "get",
+      url: "/api/daily_goals",
+    }).done((response) => {
+      this.setState({dailies: response.data});
+    });
+  }
+
   renderDailyGoals () {
-    console.log("In renderDailyGoals===================================================")
     if(!this.state.dailies) {
-      console.log("In the if statement of renderDailyGoals====================================================");
       return (
         <div>
           <h3> You don't have any daily goals yet! </h3>
@@ -64,7 +67,7 @@ class DailyGoals extends Component {
             <form className="daily-goals-form" onSubmit={this.handleSubmit}>
               <input type="submit" className="btn btn-default" value="Create A New Daily Goal!" />
             </form>
-            <CreateDailyGoalModal />
+            <CreateDailyGoalModal updateDailies={this.updateFromDatabase}/>
           </div>
         </div>
       );
