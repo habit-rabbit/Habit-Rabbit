@@ -8,20 +8,19 @@ class SingleGoal extends Component {
   constructor(props){
     super(props);
     this.getCurrentTask = this.getCurrentTask.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
+
     this.goalType = this.goalType.bind(this);
     this.initializeTaskData = this.initializeTaskData.bind(this);
     this.setGoalInfo = this.setGoalInfo.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
     this.updateGoal = this.updateGoal.bind(this);
     this.state = {
-      tasks: {},
-      currentTask: {},
       userId: null,
       goalComplete: false,
       showGoalinfo: false,
       goalInfo: "show"
     }
-    this.initializeTaskData();
   }
 
   initializeTaskData () {
@@ -45,8 +44,7 @@ class SingleGoal extends Component {
   componentWillMount() {
     // console.log(this.props.goalInfo.tasks, "props are and for goal", this.props.goalInfo)
     //   this.setState({tasks: this.props.goalInfo.tasks});
-      let currTask = this.getCurrentTask();
-      this.setState({currentTask: currTask});
+
       // console.log("component mounted with props,", this.props.goalInfo.tasks)
   }
   componentDidMount() {
@@ -84,39 +82,43 @@ class SingleGoal extends Component {
     });
   }
   getCurrentTask () {
-    // function findNextTask(task) {
-    //   return !task.is_done
-    // }
-    // console.log(this.state, "this state")
-    console.log(this.props.goalInfo.name, "in get currentTask, props should be for task name ", this.props.goalInfo.tasks.name)
-    let taskName = this.props.goalInfo.tasks.find((task) => {return task.is_done});
-    if (!taskName) {
-      this.updateGoal();
+    let task = this.props.goalInfo.tasks.find((task) => {return !task.is_done});
+    if (!task) {
+      return <p> You've finished your goal! Rabeet is screeching with delight. </p>
     } else {
-      console.log(taskName, "task name?")
-      return taskName;
+      return (  <div>
+                  <p className="tasks">{task.name}</p>
+                  <span>Finished already? </span>
+                  <label>
+                    <input data-taskId={task.id} onChange={this.handleCheck} type="checkbox"/>
+                  </label>
+                </div>)
     }
+  }
+  handleCheck (e) {
+    debugger;
+    e.preventDefault();
+    this.setState({done: true});
+    setTimeout(() => {
+      this.setState({done: false});
+    }, 200);
+    this.updateCurrentTask(this.props.goalInfo.id, e.target.dataset.taskid);
   }
 
   updateCurrentTask (goalId, taskId) {
-    let taskUpdate = $.ajax({
+   $.ajax({
       method: "post",
       url: `api/goals/${goalId}/tasks/${taskId}/update`,
       data: {is_done: true}
     }).done((data) => {
-      let taskIndex = this.props.goalInfo.tasks.findIndex((elm) => {
-        return elm.id === taskId
-      });
-      let tasks = this.state.tasks;
-      tasks[taskIndex].is_done = true;
-
-      this.setState({tasks: tasks});
+      this.props.update();
+      //need to update state of App here.
       // this.initializeTaskData();
     });
   }
 
   renderGoals() {
-    if(!this.state.tasks) {
+    if(!this.props.goalInfo.tasks) {
       return (
         <div> {/*this should render as an error message (the one we get back from the server*/}
           <h3>Let's talk about tasks... </h3>
@@ -136,11 +138,12 @@ class SingleGoal extends Component {
           <div className="col-md-6">
             <div className="progress">
               <ProgressBar
-              taskArray={this.state.tasks}/>
+              taskArray={this.props.goalInfo.tasks}/>
             </div>
           </div>
           <div className="col-md-3">
             <h4 className="task-list"> Next Task: </h4>
+            {this.getCurrentTask()}
           </div>
 
         </div>
