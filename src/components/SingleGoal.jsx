@@ -9,47 +9,16 @@ class SingleGoal extends Component {
     super(props);
     this.getCurrentTask = this.getCurrentTask.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
-
     this.goalType = this.goalType.bind(this);
-    this.initializeTaskData = this.initializeTaskData.bind(this);
     this.setGoalInfo = this.setGoalInfo.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
     this.updateGoal = this.updateGoal.bind(this);
     this.state = {
-      userId: null,
-      goalComplete: false,
       showGoalinfo: false,
       goalInfo: "show"
     }
   }
-
-  initializeTaskData () {
-    // console.log(this.props.goalInfo.name, "intializing goal")
-    // $.ajax({
-    //   method: "get",
-    //   url: `/api/goals/${this.props.goalInfo.id}/tasks`
-    // }).done((data) => {
-    //   let tasks = data.data;
-    //   tasks.sort((a, b) => {
-    //     if (a.task_order > b.task_order) {
-    //       return 1;
-    //     }
-    //     if (a.task_order < b.task_order) {
-    //       return -1;
-    //     }
-    //     return 0;
-    //   });
-    // });
-  }
-  componentWillMount() {
-    // console.log(this.props.goalInfo.tasks, "props are and for goal", this.props.goalInfo)
-    //   this.setState({tasks: this.props.goalInfo.tasks});
-
-      // console.log("component mounted with props,", this.props.goalInfo.tasks)
-  }
-  componentDidMount() {
-    // console.log("state of goal/**/, ", this.state.tasks)
-  }
+ //=================show-hide goal details===============================
   goalType (goal) {
     if(goal.private === false){
       return (
@@ -67,6 +36,8 @@ class SingleGoal extends Component {
       goalInfo: showhide
     });
   }
+  // ====================================================================
+  //============== update database: goal.is_done = true==================
   updateGoal() {
     $.ajax({
       method: 'post',
@@ -76,15 +47,21 @@ class SingleGoal extends Component {
           is_done : true
         }
       }
-    }).then((data) => {
-         this.setState({goalComplete: true});
-         this.props.update();
+    }).then(() => {
+      this.props.update();
     });
   }
+
+  //==============================For Tasks==============================
   getCurrentTask () {
     let task = this.props.goalInfo.tasks.find((task) => {return !task.is_done});
+    //if task is undefined, it means there are no more tasks to complete
+    //at this point we update the goal and set its is_done flag to true
     if (!task) {
-      return <p> You've finished your goal! Rabeet is screeching with delight. </p>
+        if(!this.props.goalInfo.is_done) {
+          this.updateGoal();
+        }
+        return <p> You've finished your goal! Rabeet is screeching with delight. </p>
     } else {
       return (  <div>
                   <p className="tasks">{task.name}</p>
@@ -95,8 +72,8 @@ class SingleGoal extends Component {
                 </div>)
     }
   }
+
   handleCheck (e) {
-    debugger;
     e.preventDefault();
     this.setState({done: true});
     setTimeout(() => {
@@ -112,15 +89,14 @@ class SingleGoal extends Component {
       data: {is_done: true}
     }).done((data) => {
       this.props.update();
-      //need to update state of App here.
-      // this.initializeTaskData();
     });
   }
-
+//========================================================================
+//===========================Render the goal component====================
   renderGoals() {
     if(!this.props.goalInfo.tasks) {
       return (
-        <div> {/*this should render as an error message (the one we get back from the server*/}
+        <div>
           <h3>Let's talk about tasks... </h3>
           <h3>YOU NEED TO MAKE SOME. </h3>
           <h3>HOW DO YOU EVEN EXPECT TO ACCOMPLISH YOUR DREAMS WITHOUT A PLAN, BARBARA.</h3>
@@ -150,11 +126,9 @@ class SingleGoal extends Component {
       );
     }
   }
-
+//========================================================================
 
   render() {
-    console.log("Rendering SingleGoal.jsx");
-    // console.log(this.state.tasks, "tasks are for goal," , this.props.goalInfo.name)
     return (
       <div>
        {this.renderGoals()}
