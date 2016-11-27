@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Goals from './Goals.jsx';
 import CreateTask from './CreateTask.jsx';
+import CreateDailyGoalModal from './CreateDailyGoalModal.jsx';
 
 class DailyGoals extends Component {
 
@@ -25,7 +26,7 @@ class DailyGoals extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // $("#create-daily-goal-modal").modal();
+    $("#create-daily-goal-modal").modal();
     console.log("You clicked me! At least buy me dinner first! RUDE");
   }
 
@@ -63,6 +64,7 @@ class DailyGoals extends Component {
             <form className="daily-goals-form" onSubmit={this.handleSubmit}>
               <input type="submit" className="btn btn-default" value="Create A New Daily Goal!" />
             </form>
+            <CreateDailyGoalModal />
           </div>
         </div>
       );
