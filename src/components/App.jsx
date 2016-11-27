@@ -76,7 +76,7 @@ class App extends Component {
           transitionName="background"
           transitionEnterTimeout={1000}
           transitionLeaveTimeout={1000}>
-          <Carousel goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase} component="animated-component"/>
+          <Carousel updateGoalsIndex={this.updateFromDatabase} goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase} component="animated-component"/>
         </ReactCSSTransitionGroup>);
     }
   }
@@ -91,7 +91,6 @@ class App extends Component {
           name={this.state.name}
           isLoggedIn={this.state.isLoggedIn}
           verifyLogin={this.verifyLogin}
-          updateGoalsIndex={this.updateFromDatabase}
           setView={this.setView}
          />
         {this.renderPage()}

@@ -20,7 +20,7 @@ p {
 #about-rabeet {
   margin-top: 10px;
   padding-right: 30px;
-  @include linear-gradient(right, #0df2b8, rgba(0, 139, 153, 0.6), rgba(77, 77, 255, 0.52));
+  // @include linear-gradient(right, #0df2b8, rgba(0, 139, 153, 0.6), rgba(77, 77, 255, 0.52));
 
   p {
     &:first-of-type {
@@ -32,5 +32,5 @@ p {
 }
 
 #hero-page {
-  background-color: #f8f8f8;
+  // background-color: #f8f8f8;
 }
