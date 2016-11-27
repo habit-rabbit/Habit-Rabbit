@@ -34,7 +34,7 @@ class CreateGoalModal extends Component {
     $('#create-goal-modal').on('shown.bs.modal', function () {
       $('#goal-name').focus();
     });
-    $('#create-goal-modal').click(function () {
+    $('body').on('click', '#add-task-button', function () {
       $('#task-name').focus();
     });
   }
@@ -167,7 +167,7 @@ class CreateGoalModal extends Component {
               </div>
 
               <button type="button" className="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
-                <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span id="add-task-form" className="glyphicon glyphicon-plus" aria-hidden="true"></span>
               </button>
 
               <div className="form-group">
