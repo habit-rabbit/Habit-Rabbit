@@ -82,7 +82,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('==================Goals: ', this.state.goals, ' ============================');
+    // console.log('==================Goals: ', this.state.goals, ' ============================');
 
     console.log("Rendering <App/>");
     return (

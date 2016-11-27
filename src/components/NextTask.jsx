@@ -8,7 +8,7 @@ class NextTask extends Component {
     this.state = {
       done: false
     }
-    console.log(this.props.taskInfo, "task info?")
+    // console.log(this.props.taskInfo, "task info?")
   }
 
   handleCheck (e) {

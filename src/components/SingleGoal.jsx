@@ -25,7 +25,7 @@ class SingleGoal extends Component {
   }
 
   initializeTaskData () {
-    console.log(this.props.goalInfo.name, "intializing goal")
+    // console.log(this.props.goalInfo.name, "intializing goal")
     // $.ajax({
     //   method: "get",
     //   url: `/api/goals/${this.props.goalInfo.id}/tasks`
@@ -43,8 +43,8 @@ class SingleGoal extends Component {
     // });
   }
   componentWillMount() {
-    console.log(this.props.goalInfo.tasks, "props are and for goal", this.props.goalInfo)
-      this.setState({tasks: this.props.goalInfo.tasks});
+    // console.log(this.props.goalInfo.tasks, "props are and for goal", this.props.goalInfo)
+    //   this.setState({tasks: this.props.goalInfo.tasks});
       let currTask = this.getCurrentTask();
       this.setState({currentTask: currTask});
       // console.log("component mounted with props,", this.props.goalInfo.tasks)
@@ -84,11 +84,12 @@ class SingleGoal extends Component {
     });
   }
   getCurrentTask () {
-    function findNextTask(task) {
-      return !task.is_done
-    }
+    // function findNextTask(task) {
+    //   return !task.is_done
+    // }
     // console.log(this.state, "this state")
-    let taskName = this.props.goalInfo.tasks.find(findNextTask);
+    console.log(this.props.goalInfo.name, "in get currentTask, props should be for task name ", this.props.goalInfo.tasks.name)
+    let taskName = this.props.goalInfo.tasks.find((task) => {return task.is_done});
     if (!taskName) {
       this.updateGoal();
     } else {
@@ -103,7 +104,7 @@ class SingleGoal extends Component {
       url: `api/goals/${goalId}/tasks/${taskId}/update`,
       data: {is_done: true}
     }).done((data) => {
-      let taskIndex = this.state.tasks.findIndex((elm) => {
+      let taskIndex = this.props.goalInfo.tasks.findIndex((elm) => {
         return elm.id === taskId
       });
       let tasks = this.state.tasks;
@@ -128,7 +129,7 @@ class SingleGoal extends Component {
         <div className={this.props.goalClass}>
           <div className="col-md-3">
           <span onClick={()=>{ this.state.showGoalinfo ? this.setGoalInfo(false, "show") : this.setGoalInfo(true, "hide")} }>{this.state.goalInfo}</span>
-            {this.state.showGoalinfo ? <GoalInfo goalInfo={this.props.goalInfo} tasks={this.state.tasks.data} /> : <h1 onClick={this.showGoalinfo}> {this.props.goalInfo.name} </h1>}
+            {this.state.showGoalinfo ? <GoalInfo goalInfo={this.props.goalInfo} /> : <h1 onClick={this.showGoalinfo}> {this.props.goalInfo.name} </h1>}
 
 
           </div>
@@ -140,11 +141,6 @@ class SingleGoal extends Component {
           </div>
           <div className="col-md-3">
             <h4 className="task-list"> Next Task: </h4>
-            <NextTask
-            taskInfo={this.state.currentTask}
-            updateCurrentTask={this.updateCurrentTask}
-            goalInfo={this.props.goalInfo}
-            goalComplete={this.state.goalComplete} />
           </div>
 
         </div>
@@ -155,7 +151,7 @@ class SingleGoal extends Component {
 
   render() {
     console.log("Rendering SingleGoal.jsx");
-    console.log(this.state.tasks, "tasks are for goal," , this.props.goalInfo.name)
+    // console.log(this.state.tasks, "tasks are for goal," , this.props.goalInfo.name)
     return (
       <div>
        {this.renderGoals()}

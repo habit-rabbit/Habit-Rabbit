@@ -8,7 +8,7 @@ class ProgressBar extends Component {
   calculateProgress () {
     // console.log("calculateProgress of progress bar");
     let tasks = this.props.taskArray;
-    console.log(tasks, "tasks in progress")
+    // console.log(tasks, "tasks in progress")
     let finishedTasks = 0;
     for (let i = 0; i < tasks.length; i++){
       if (tasks[i].is_done === true) {
