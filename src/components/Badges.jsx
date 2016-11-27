@@ -18,7 +18,7 @@ class Badges extends Component {
     }
 
   buildBunnyArray(){
-      let bunnyArray =["/bunnysmirk.png","/bunnysmirk.png","/bunnysmirk.png","/bunnysmirk.png","/bunnysmirk.png","/bunnysmirk.png","/bunnysmirk.png","/bunnysmirk.png","/bunnysmirk.png"]
+      let bunnyArray =["/bunnysmirk.png","/rabeetpurple.png","/rabeetZebra.png","/RabeetOrangeTubby.png","/rabeetpolkaglasses.png","/rabeetgreenbean.png","/rabeetpig.png","/rabeetsneakypinky.png","/rabeetdon.png"]
       let numberComplete = this.goalsComplete();
       if (numberComplete < 9) {
         let slicedBunnyArray = bunnyArray.slice(0, numberComplete);
