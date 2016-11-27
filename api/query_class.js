@@ -62,6 +62,7 @@ database.prototype.getGoalsWithTasks = function(callback) {
   ])
   .innerJoin('tasks','goals.id','tasks.goal_id')
   .groupBy('goals.id')
+  .orderBy("goals.id", "desc")
   .asCallback(callback)
 }
 module.exports = new database();
