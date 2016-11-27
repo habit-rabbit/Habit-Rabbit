@@ -44,7 +44,7 @@ router.get("/goals", (req, res) => {
     // });
       db.getGoalsWithTasks((err, data) => {
         if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
-        r.setData(data.sort((goalA, goalB) => {return goalB.id - goalA.id;}));
+        r.setData(data.sort((goalA, goalB) => {return goalA.is_done ? 1 : -1;}));
         res.send(r)
       });
   } else {

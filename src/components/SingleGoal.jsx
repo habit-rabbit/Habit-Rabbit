@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import NextTask from './NextTask.jsx';
 import ProgressBar from './ProgressBar.jsx';
 import GoalInfo from './Goal-info.jsx';
 
