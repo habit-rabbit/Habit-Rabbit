@@ -13,7 +13,21 @@
 #create-goal-input {
   margin: auto;
   text-align: center;
-  width: 80%
+  width: 80%;
+  position: absolute;
+}
+
+#create-daily-goal-modal {
+  margin: auto;
+  text-align: center;
+  width: 80%;
+}
+
+#daily-goal-name {
+  margin: 1px;
+  margin-top: 10px;
+  padding: 10px;
+  width: 80%;
 }
 
 #create-goal-body button {
