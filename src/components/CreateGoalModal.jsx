@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 // import { Router, Route, Link, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
-
 import Nav from './Nav.jsx';
 
 
@@ -16,7 +15,6 @@ class CreateGoalModal extends Component {
       tasks: [""],
       goalNameErr: "",
       taskNameErr: "",
-
     };
 
     this.handleAddTask = this.handleAddTask.bind(this);
@@ -30,13 +28,16 @@ class CreateGoalModal extends Component {
     this.updateTask = this.updateTask.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     $('#create-goal-modal').on('shown.bs.modal', function () {
       $('#goal-name').focus();
     });
-    $('body').on('click', '#add-task-button', function () {
-      $('#task-name').focus();
-    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.tasks !== this.state.tasks) {
+      focus = true;
+    };
   }
 
   handleChange(event) {
@@ -92,19 +93,18 @@ class CreateGoalModal extends Component {
 
   renderForms() {
     return this.state.tasks.map((item, index) => {
-      return <input id="task-name" type="text" value={item} onChange={ (e) => {this.updateTask(e, index)} } name={`task-name-${index}`} key={index} placeholder="Task Name"/>
-    })
+      return <input autoFocus={focus} className="task-name" type="text" value={item} onChange={ (e) => {this.updateTask(e, index)} } name={`task-name-${index}`} key={index} placeholder="Task Name"/>
+    });
   }
 
   handleAddTask() {
     // this.adjustAutoFocus('#task-name')
     let tasks = this.state.tasks;
     if (tasks[tasks.length - 1] === "") {
-      // console.log('YOU CANT DO THAT RIGHT NOW');
     } else {
     tasks.push("");
     this.setState({tasks: tasks});
-    }
+    };
   }
 
   validateFormInputs(goalName, cb) {
@@ -136,8 +136,8 @@ class CreateGoalModal extends Component {
         <div className="alert alert-warning">
           {this.state.taskNameErr}
         </div>
-      );
-    }
+      )
+    };
   }
 
 
@@ -161,13 +161,12 @@ class CreateGoalModal extends Component {
                 <input id="goal-name" type="text" value={this.state.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name" />
               </div>
 
-
-              <div id="add-task-button" className="form-group">
+              <div className="form-group">
               {this.renderForms()}
               </div>
 
-              <button type="button" className="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
-                <span id="add-task-form" className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              <button id="add-task-button" type="button" className="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
+                <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
               </button>
 
               <div className="form-group">
