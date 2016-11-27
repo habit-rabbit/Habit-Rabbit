@@ -49,11 +49,11 @@ class Badges extends Component {
     return (
       <div className="background-layout">
       <div className="container main-content">
-      <div>
+      <div className="page-header">
         <h1 className="container-title">Badges</h1>
       </div>
       <div>
-        <table className="table">
+        <table className="table no-border">
           <tbody>
             <tr>
               <td><div className="full-circle badge1">{this.renderImage(0)}</div></td>

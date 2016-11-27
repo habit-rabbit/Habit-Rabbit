@@ -3,7 +3,7 @@
   -moz-border-radius: 110px;
   -webkit-border-radius: 110px;
   width: 220px;
-  z-index: +99;
+  // z-index: +99;
 }
 
 .badge1{
@@ -32,4 +32,8 @@
 }
 .badge9{
   background-color: #ff9900;
+}
+
+.table.no-border tr td, .table.no-border tr th {
+  border-width: 0;
 }
