@@ -1,24 +1,18 @@
-@import 'mixins';
+// @import 'mixins';
 
 
-.navbar-form {
-  display: inline-block;
-  float: none;
-  vertical-align: top;
-}
 
-.navbar {
-  margin: 0px;
-  padding: 10px;
-  text-align: center;
-  @include linear-gradient(bottom, rgba(242, 242, 13, 0.06), rgba(189, 252, 201, 0.41), white);
-}
 
-.navbar .form-control {
-  width: 180px;
-}
+// .navbar {
+//   margin: 0px;
+//   padding: 10px;
+//   text-align: center;
+//   @include linear-gradient(bottom, rgba(242, 242, 13, 0.06), rgba(189, 252, 201, 0.41), white);
+// }
 
-.greeting {
-  line-height: 20px;
-  padding: 15px;
-}
+
+
+// .greeting {
+//   line-height: 20px;
+//   padding: 15px;
+// }
