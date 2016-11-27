@@ -26,26 +26,32 @@ class SingleGoal extends Component {
 
   initializeTaskData () {
     console.log(this.props.goalInfo.name, "intializing goal")
-    $.ajax({
-      method: "get",
-      url: `/api/goals/${this.props.goalInfo.id}/tasks`
-    }).done((data) => {
-      let tasks = data.data;
-      tasks.sort((a, b) => {
-        if (a.task_order > b.task_order) {
-          return 1;
-        }
-        if (a.task_order < b.task_order) {
-          return -1;
-        }
-        return 0;
-      });
-      this.setState({tasks: data});
+    // $.ajax({
+    //   method: "get",
+    //   url: `/api/goals/${this.props.goalInfo.id}/tasks`
+    // }).done((data) => {
+    //   let tasks = data.data;
+    //   tasks.sort((a, b) => {
+    //     if (a.task_order > b.task_order) {
+    //       return 1;
+    //     }
+    //     if (a.task_order < b.task_order) {
+    //       return -1;
+    //     }
+    //     return 0;
+    //   });
+    // });
+  }
+  componentWillMount() {
+    // console.log(this.props.goalInfo.tasks, "props are")
+      this.setState({tasks: this.props.goalInfo.tasks});
+      console.log("component mounted with props,", this.props.goalInfo.tasks)
+  }
+  componentDidMount() {
+    // console.log("state of goal/**/, ", this.state.tasks)
       let currTask = this.getCurrentTask();
       this.setState({currentTask: currTask});
-    });
   }
-
   goalType (goal) {
     if(goal.private === false){
       return (
@@ -81,10 +87,12 @@ class SingleGoal extends Component {
     function findNextTask(task) {
       return !task.is_done
     }
-    let taskName = this.state.tasks.data.find(findNextTask);
+    // console.log(this.state, "this state")
+    let taskName = this.props.goalInfo.tasks.find(findNextTask);
     if (!taskName) {
       this.updateGoal();
     } else {
+      console.log(taskName, "task name?")
       return taskName;
     }
   }
@@ -100,7 +108,7 @@ class SingleGoal extends Component {
   }
 
   renderGoals() {
-    if(!this.state.tasks.data) {
+    if(!this.state.tasks) {
       return (
         <div> {/*this should render as an error message (the one we get back from the server*/}
           <h3>Let's talk about tasks... </h3>

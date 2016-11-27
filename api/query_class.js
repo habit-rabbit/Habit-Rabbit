@@ -50,7 +50,7 @@ database.prototype.getAllWhere = function (query, callback) {
     .where(query.data)
     .asCallback(callback);
 }
-database.prototype.getGoalandTasks = function(callback) {
+database.prototype.getGoalsWithTasks = function(callback) {
   //queries database for all goals and joins their respective
   // tasks to the goal as an array of JSON objects
   // contained in a property names 'tasks' for a goal
@@ -65,8 +65,3 @@ database.prototype.getGoalandTasks = function(callback) {
   .asCallback(callback)
 }
 module.exports = new database();
-d = new database();
-d.getGoalandTasks((err, res) => {
-    console.log(err, res);
-    console.log(res[0].tasks)
-    if (err) throw err});

@@ -5,15 +5,10 @@ class ProgressBar extends Component {
     super(props);
     this.calculateProgress = this.calculateProgress.bind(this);
   }
-
-  // componentDidMount () {
-  //   console.log("calculate progress in component did mount")
-  //   this.calculateProgress();
-  // }
-
   calculateProgress () {
     // console.log("calculateProgress of progress bar");
-    let tasks = this.props.taskArray.data;
+    let tasks = this.props.taskArray;
+    console.log(tasks, "tasks in progress")
     let finishedTasks = 0;
     for (let i = 0; i < tasks.length; i++){
       if (tasks[i].is_done === true) {
