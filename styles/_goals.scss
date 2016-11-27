@@ -31,7 +31,7 @@
     text-decoration: line-through;
   }
   .tasks {
-    word-wrap: breakword;
+    overflow-wrap: break-word;
   }
   .task-list {
     text-align: left;
