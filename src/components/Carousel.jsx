@@ -17,7 +17,7 @@ class Carousel extends Component {
       return(<AllGoals goalList={this.props.goalList} update={this.props.update} className="component-render"/>);
     }
     if (view === "Badges"){
-      return(<Badges className="component-render"/>);
+      return(<Badges goalList={this.props.goalList} className="component-render"/>);
     }
     if (view === "DailyGoals"){
       return(<DailyGoals className="component-render"/>);
