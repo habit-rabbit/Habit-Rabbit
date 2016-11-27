@@ -37,11 +37,16 @@ class Nav extends Component {
             </form>
           <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
           <ul className="nav navbar-nav navbar-right">
-            <li><a href="">Hey {this.props.name}!</a></li>
-            <li><a href="" id="ltGoals" onClick={this.handleLinks}>Long Term Goals</a></li>
-            <li><a href="" id="dailyGoals" onClick={this.handleLinks}>Daily Goals</a></li>
-            <li><a href="" id="badges" onClick={this.handleLinks}>Badges</a></li>
-            <li><a href="" onClick={this.logOut}>Logout</a></li>
+            <li className="dropdown">
+              <a href="" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hey {this.props.name}!<span className="caret"></span></a>
+              <ul className="dropdown-menu">
+                <li><a href="" id="ltGoals" onClick={this.handleLinks}>Long Term Goals</a></li>
+                <li><a href="" id="dailyGoals" onClick={this.handleLinks}>Daily Goals</a></li>
+                <li><a href="" id="badges" onClick={this.handleLinks}>Badges</a></li>
+                <li role="separator" className="divider"></li>
+                <li><a href="" onClick={this.logOut}>Logout</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       )
@@ -97,7 +102,7 @@ class Nav extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="">Habit Rabbit</a>
+            <a className="navbar-brand">Habit Rabbit</a>
           </div>
           {this.createNavLinks()}
         </div>
