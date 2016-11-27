@@ -37,7 +37,7 @@ class Nav extends Component {
             </form>
           <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
           <ul className="nav navbar-nav navbar-right">
-            <li><a href="">Hey {this.props.name}!</a></li>
+            <li className="greeting">Hey {this.props.name}!</li>
             <li><a href="" id="ltGoals" onClick={this.handleLinks}>Long Term Goals</a></li>
             <li><a href="" id="dailyGoals" onClick={this.handleLinks}>Daily Goals</a></li>
             <li><a href="" id="badges" onClick={this.handleLinks}>Badges</a></li>

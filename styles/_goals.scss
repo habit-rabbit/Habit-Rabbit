@@ -1,6 +1,5 @@
 .goals-template {
 
-
   h1 {
     color: #595959;
     text-align: center;
@@ -49,3 +48,34 @@
   .goal-not-done {
   }
 /* Strikethrough */
+.daily-goal {
+  color: turquoise;
+  vertical-align: center;
+}
+.daily-goals-icons {
+  float: right;
+  font-size: 2em;
+
+  i {
+    margin: 10px;
+    color: turquoise;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
