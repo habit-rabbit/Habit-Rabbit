@@ -20,7 +20,7 @@ class Goals extends Component {
         <h3> Loading Goals... </h3>
       );
     } else if (this.props.goalList.length === 0) {
-      console.log("in else if statement of goals.jsx");
+      // console.log("in else if statement of goals.jsx");
       return (
         <div>
           <h3> You haven't created any goals yet!</h3>

@@ -39,7 +39,7 @@ router.get("/goals", (req, res) => {
     query.data = {user_id: req.session['user-id']};
     db.getAllWhere(query,  (err, data) => {
       if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
-      r.setData(data);
+      r.setData(data.sort((goalA, goalB) => {return goalB.id - goalA.id;}));
       res.send(r);
     });
   } else {
@@ -217,6 +217,22 @@ router.post("/daily_goals/create", (req, res) => {
       res.send(r);
     }
   } else { //if not authenticated
+    res.redirect("/");
+  }
+});
+
+router.get("/badges", (req, res) => {
+  const r = new ResponseData();
+  if (req.xhr && req.session['user-id']) {
+    let query = {};
+    query.table = findTable(req.url);
+    query.data = {user_id: req.session['user-id']};
+    db.getAllWhere(query,  (err, data) => {
+      if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
+      r.setData(data);
+      res.send(r);
+    });
+  } else {
     res.redirect("/");
   }
 });
