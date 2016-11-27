@@ -34,12 +34,14 @@ class CreateGoalModal extends Component {
     $('#create-goal-modal').on('shown.bs.modal', function () {
       $('#goal-name').focus();
     });
+    $('#create-goal-modal').click(function () {
+      $('#task-name').focus();
+    });
   }
 
   handleChange(event) {
     let id = event.target.id;
     let value = event.target.value;
-    // console.log("THIS STAAATE", this.state)
     this.setState({goalName: value});
   }
 
@@ -160,7 +162,7 @@ class CreateGoalModal extends Component {
               </div>
 
 
-              <div className="form-group">
+              <div id="add-task-button" className="form-group">
               {this.renderForms()}
               </div>
 
