@@ -11,7 +11,7 @@ class DailyGoals extends Component {
       dailies: [],
     }
     this.renderDailyGoals = this.renderDailyGoals.bind(this);
-    // this.handleCheck = this.handleCheck.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateFromDatabase = this.updateFromDatabase.bind(this);
   }
@@ -20,10 +20,13 @@ class DailyGoals extends Component {
     this.updateFromDatabase();
   }
 
+  handleCheck () {
+
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     $("#create-daily-goal-modal").modal();
-    console.log("You clicked me! At least buy me dinner first! RUDE");
   }
 
   updateFromDatabase () {
@@ -53,12 +56,14 @@ class DailyGoals extends Component {
             return (
               <div className="daily-goals-template row well" key={index}>
                 <div className="col-md-7">
-                  <h1> {dailyGoal.name} </h1>
+                  <h1 className="daily-goal"> {dailyGoal.name} </h1>
                 </div>
-                <div className="daily-goals-icons">
-                  <i className="fa fa-check-square" aria-hidden="true" onClick={this.handleCheck}></i>
-                  <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <i className="fa fa-trash" aria-hidden="true"></i>
+                <div className="col-md-5">
+                  <div className="daily-goals-icons">
+                    <i className="fa fa-check-square" aria-hidden="true" onClick={this.handleCheck}></i>
+                    <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i className="fa fa-trash" aria-hidden="true"></i>
+                  </div>
                 </div>
               </div>
             );
