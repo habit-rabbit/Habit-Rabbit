@@ -1,22 +1,32 @@
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.create {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  display: inline-block;
+  line-height: 34px;
+  margin-right: 20px;
+}
+
 .slide-animation {
     position: relative;
 }
+
 .slide-animation > div {
     position: absolute;
     width: 100%;
     height: 100%;
-}
-
-.background-layout {
-  background-color: #8cffc1;
-
-  .container-title {
-    text-align: center;
-    padding-top: 42px;
-    overflow: auto;
-  }
-}
-
-body {
-  background-color: #8cffc1;
 }

@@ -99,12 +99,6 @@ class DailyGoals extends Component {
               </div>
             );
           })}
-          <div>
-            <form className="daily-goals-form" onSubmit={this.handleSubmit}>
-              <input type="submit" className="btn btn-default" value="Create A New Daily Goal!" />
-            </form>
-            <CreateDailyGoalModal updateDailies={this.updateFromDatabase}/>
-          </div>
         </div>
       );
     }
@@ -115,7 +109,13 @@ class DailyGoals extends Component {
     return (
       <div className="background-layout">
         <div className="container main-content">
-          <h1 className="container-title">Daily Goals</h1>
+          <div className="page-header">
+            <h1>Daily Goals</h1>
+             <form className="create daily" onSubmit={this.handleSubmit}>
+              <input type="submit" className="btn btn-default" value="Create A New Daily Goal!" />
+            </form>
+            <CreateDailyGoalModal updateDailies={this.updateFromDatabase}/>
+          </div>
           {this.renderDailyGoals()}
         </div>
       </div>
