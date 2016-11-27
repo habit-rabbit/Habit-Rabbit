@@ -48,7 +48,7 @@ class GoalInfo extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.props.tasks.map( (task) => {
+                {this.props.goalInfo.tasks.map( (task) => {
                   counter++;
                   return this.renderTaskTable(task, counter);
                 })}
