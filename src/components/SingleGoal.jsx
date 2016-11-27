@@ -43,14 +43,14 @@ class SingleGoal extends Component {
     // });
   }
   componentWillMount() {
-    // console.log(this.props.goalInfo.tasks, "props are")
+    console.log(this.props.goalInfo.tasks, "props are and for goal", this.props.goalInfo)
       this.setState({tasks: this.props.goalInfo.tasks});
-      console.log("component mounted with props,", this.props.goalInfo.tasks)
+      let currTask = this.getCurrentTask();
+      this.setState({currentTask: currTask});
+      // console.log("component mounted with props,", this.props.goalInfo.tasks)
   }
   componentDidMount() {
     // console.log("state of goal/**/, ", this.state.tasks)
-      let currTask = this.getCurrentTask();
-      this.setState({currentTask: currTask});
   }
   goalType (goal) {
     if(goal.private === false){
@@ -103,7 +103,14 @@ class SingleGoal extends Component {
       url: `api/goals/${goalId}/tasks/${taskId}/update`,
       data: {is_done: true}
     }).done((data) => {
-      this.initializeTaskData();
+      let taskIndex = this.state.tasks.findIndex((elm) => {
+        return elm.id === taskId
+      });
+      let tasks = this.state.tasks;
+      tasks[taskIndex].is_done = true;
+
+      this.setState({tasks: tasks});
+      // this.initializeTaskData();
     });
   }
 
@@ -148,6 +155,7 @@ class SingleGoal extends Component {
 
   render() {
     console.log("Rendering SingleGoal.jsx");
+    console.log(this.state.tasks, "tasks are for goal," , this.props.goalInfo.name)
     return (
       <div>
        {this.renderGoals()}

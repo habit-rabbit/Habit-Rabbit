@@ -8,6 +8,7 @@ class NextTask extends Component {
     this.state = {
       done: false
     }
+    console.log(this.props.taskInfo, "task info?")
   }
 
   handleCheck (e) {
@@ -24,7 +25,7 @@ class NextTask extends Component {
       return (
         <p> You've finished your goal! Rabeet is screeching with delight. </p>
       );
-    } else {
+    } else if (this.props.taskInfo) {
       return (
         <div>
           <p className="tasks">{this.props.taskInfo.name}</p>
