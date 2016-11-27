@@ -90,9 +90,12 @@ class DailyGoals extends Component {
                   </div>
                   <div className="col-md-5">
                     <div className="daily-goals-icons">
-                      <i className="fa fa-check-square" aria-hidden="true" onClick={()=>{this.handleCheck(event, dailyGoal)}}></i>
-                      <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-                      <i className="fa fa-trash" aria-hidden="true" onClick={()=>{this.handleDelete(event, dailyGoal)}}></i>
+                      <button type="button" className="btn btn-default" aria-label="Checkbox">
+                        <span className="glyphicon glyphicon-check" aria-hidden="true" onClick={()=>{this.handleCheck(event, dailyGoal)}}></span>
+                      </button>
+                      <button type="button" className="btn btn-default" aria-label="Trash">
+                        <span className="glyphicon glyphicon-trash" aria-hidden="true" onClick={()=>{this.handleDelete(event, dailyGoal)}}></span>
+                      </button>
                     </div>
                   </div>
                 </div>
