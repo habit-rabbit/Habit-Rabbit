@@ -86,6 +86,7 @@ router.post("/goals/:id/update", (req, res) => {
     res.redirect("/");
   }
 });
+
 router.post("/goals/:id/delete", (req, res) => {
   const r = new ResponseData();
   if (req.xhr && req.session['user-id']) {
@@ -217,6 +218,42 @@ router.post("/daily_goals/create", (req, res) => {
       res.send(r);
     }
   } else { //if not authenticated
+    res.redirect("/");
+  }
+});
+
+router.post("/daily_goals/:id/update", (req, res) => {
+  const r = new ResponseData();
+  if(req.xhr && req.session['user-id']) {
+    let query = req.body;
+    query.table = findTable(req.url);
+    query.data.id = req.params.id;
+    db.updateRow(query, (err, data) => {
+      if(err) {
+        r.setErrorMsg("unable to update");
+      } else {
+        r.setData(data);
+      }
+      res.send(r);
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
+router.post("/daily_goals/:id/delete", (req, res) => {
+  const r = new ResponseData();
+  if (req.xhr && req.session['user-id']) {
+    let query = req.body;
+    query.table = findTable(req.url);
+    query.data = {};
+    query.data.id = req.params.id;
+    db.delRow(query,  (err, data) => {
+      if (err) r.setErrorMsg("Something went wrong and we couldn't delete your goal. GUESS YOU HAVE TO DO IT NOW, SUCKER!");
+      r.setData(data);
+      res.send(r);
+    });
+  } else {
     res.redirect("/");
   }
 });

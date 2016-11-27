@@ -13,6 +13,7 @@ class DailyGoals extends Component {
     this.renderDailyGoals = this.renderDailyGoals.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.updateFromDatabase = this.updateFromDatabase.bind(this);
   }
 
@@ -20,7 +21,23 @@ class DailyGoals extends Component {
     this.updateFromDatabase();
   }
 
-  handleCheck () {
+  handleCheck (e) {
+    console.log("I've been clicked! ME! A good Christian Woman!");
+    e.preventDefault();
+    $.ajax({
+      method: "post",
+      url: `/api/daily_goals/${this.dailyGoal.id}/update`,
+      data: {
+        data: {
+          is_done: true
+        }
+      }
+    }).done(() => {
+      console.log(`Updated goal ${dailyGoal.name}, status is_done is ${dailyGoal.is_done}`);
+    });
+  }
+
+  handleDelete (e) {
 
   }
 

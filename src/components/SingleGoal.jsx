@@ -68,7 +68,7 @@ class SingleGoal extends Component {
       url: `/api/goals/${this.props.goalInfo.id}/update`,
       data: {
         data: {
-          is_done : true
+          is_done: true
         }
       }
     }).then((data) => {
