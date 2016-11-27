@@ -10,17 +10,6 @@ class Badges extends Component {
     this.goalsComplete = this.goalsComplete.bind(this)
   }
 
-  componentDidMount(){
-
-    $.ajax({
-      method: "get",
-      url: "/api/badges",
-      dataType: 'json'
-    }).done((data) => {
-      console.log("Badge data:", data);
-    });
-  }
-
   renderImage(i){
     let bunnyImages=this.buildBunnyArray()
       return(
