@@ -73,7 +73,7 @@ class Hero extends Component {
   renderError() {
     if (this.state.signupError) {
       return (
-        <div className="alert alert-warning">
+        <div className="alert alert-warning hero-alert">
           {this.state.signupError}
         </div>
       );

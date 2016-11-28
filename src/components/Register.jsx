@@ -97,25 +97,25 @@ class Register extends Component {
                 <h1 className="modal-title" id="myModalLabel">Sign Up For Your Account</h1>
             </div>
 
-            <div id="register-body">
+            <div id="register-body" className="modal-body">
             {this.renderError()}
-            <form className="form-horizontal" onSubmit={this.handleSubmit}>
-              <div className="form-group">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group form-group-modal">
                 <input type="text" id="first_name" name="first_name" placeholder="First Name" value={this.state.value} onChange={this.handleChange}/>
               </div>
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input type="text" id="last_name" name="last_name" placeholder="Last Name" value={this.state.value} onChange={this.handleChange}/>
               </div>
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input type="text" id="email" name="email" placeholder="Email" value={this.state.value} onChange={this.handleChange}/>
               </div>
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input type="password" id="password" name="password" placeholder="Password" value={this.state.value} onChange={this.handleChange}/>
               </div>
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Password Confirmation" value={this.state.value} onChange={this.handleChange}/>
               </div>
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input type="submit" name="register" className="btn btn-default" value="Sign On Up!" />
               </div>
             </form>
