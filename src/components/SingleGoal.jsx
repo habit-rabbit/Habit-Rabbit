@@ -38,17 +38,21 @@ class SingleGoal extends Component {
   // ====================================================================
   //============== update database: goal.is_done = true==================
   updateGoal() {
-    $.ajax({
-      method: 'post',
-      url: `/api/goals/${this.props.goalInfo.id}/update`,
-      data: {
+    setTimeout(() => {
+      $.ajax({
+        method: 'post',
+        url: `/api/goals/${this.props.goalInfo.id}/update`,
         data: {
-          is_done: true
+          data: {
+            is_done: true
+          }
         }
-      }
-    }).then(() => {
-      this.props.update();
-    });
+      }).then(() => {
+        setTimeout(() => {
+          this.props.update();
+        }, 200);
+      });
+     }, 500);
   }
 
   //==============================For Tasks==============================
@@ -57,27 +61,25 @@ class SingleGoal extends Component {
     //if task is undefined, it means there are no more tasks to complete
     //at this point we update the goal and set its is_done flag to true
     if (!task) {
-        if(!this.props.goalInfo.is_done) {
-          this.updateGoal();
-        }
-        return <p> You've finished your goal! Rabeet is screeching with delight. </p>
+      if(!this.props.goalInfo.is_done) {
+        this.updateGoal();
+      }
+      return <p> You've finished your goal! Rabeet is screeching with delight. </p>
     } else {
-      return (  <div>
-                  <p className="tasks">{task.name}</p>
-                  <span>Finished already? </span>
-                  <label>
-                    <input data-taskId={task.id} onChange={this.handleCheck} type="checkbox"/>
-                  </label>
-                </div>)
-    }
+        return (
+          <div>
+            <p className="tasks">{task.name}</p>
+            <span>Finished already? </span>
+             <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
+              <span className="glyphicon glyphicon-check" aria-hidden="true" data-taskid={task.id}></span>
+            </button>
+          </div>
+        );
+      }
   }
 
   handleCheck (e) {
     e.preventDefault();
-    this.setState({done: true});
-    setTimeout(() => {
-      this.setState({done: false});
-    }, 200);
     this.updateCurrentTask(this.props.goalInfo.id, e.target.dataset.taskid);
   }
 
