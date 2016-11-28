@@ -9,7 +9,7 @@ const cron = require("node-cron");
 
 //reset daily_goals every day at midnight so they show as false
 //get those habits built!!!
-cron.schedule('* 59 23 * *', () => {
+cron.schedule('59 23 * * *', () => {
   let query = {};
   query.table = "daily_goals";
   query.data = {is_done: false};
