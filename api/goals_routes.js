@@ -37,13 +37,7 @@ router.get("/goals", (req, res) => {
     let query = req.query;
     query.table = findTable(req.url);
     query.data = {user_id: req.session['user-id']};
-    // db.getAllWhere(query,  (err, data) => {
-    //   if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
-    //   r.setData(data.sort((goalA, goalB) => {return goalB.id - goalA.id;}));
-    //   res.send(r);
-    // });
       db.getGoalsWithTasks(query,(err, data) => {
-        console.log(JSON.stringify(data[0].tasks), "in get /goals")
         if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
         r.setData(data.sort((goalA, goalB) => {return goalA.is_done ? 1 : -1;}));
         res.send(r)
@@ -138,9 +132,7 @@ router.post("/goals/:id/tasks/create", (req, res) => {
     let taskNames = req.body.data.taskNames;
     let query = {};
     query.table = findTable(req.url);
-    console.log("tasks area", JSON.stringify(taskNames));
-    taskNames.map((taskName, index) => {
-      console.log("tasknames", taskName)
+    taskNames.forEach((taskName, index) => {
       query.data = {
         name: taskName,
         task_order: index + 1,
@@ -156,12 +148,15 @@ router.post("/goals/:id/tasks/create", (req, res) => {
           } else {
             data.length ? r.setData(data) : r.setErrorMsg("A different error message idk");
           }
+          if(index === taskNames.length - 1) {
+            res.send(r);
+          }
         });
       } else {
         r.setErrorMsg("Could not save your task, is it blank?");
+        res.send(r);
       }
     });
-    res.send(r);
 
   } else {
     res.redirect("/");
