@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   updateFromDatabase () {
-    // console.log("Calling DB from App");
+    console.log("Calling DB from App");
     $.ajax({
       method: "get",
       url: "/api/goals",
