@@ -41,7 +41,7 @@ class AllGoals extends Component {
             </form>
             <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
           </div>
-          <Goals update={this.props.update} goalList={this.props.goalList} goalsAreCurrent={this.props.goalsAreCurrent} setAppGoalsDefault={this.props.setAppGoalsDefault}/>
+          <Goals updateBadge={this.props.updateBadge} update={this.props.update} goalList={this.props.goalList} goalsAreCurrent={this.props.goalsAreCurrent} setAppGoalsDefault={this.props.setAppGoalsDefault}/>
         </div>
       </div>
     );

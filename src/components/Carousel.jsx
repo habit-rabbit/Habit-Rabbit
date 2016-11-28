@@ -14,10 +14,10 @@ class Carousel extends Component {
   renderView(view) {
     if (view === "AllGoals"){
       // console.log("I made it into Carousel!!!!");
-      return(<AllGoals updateGoalsIndex={this.props.updateGoalsIndex} goalList={this.props.goalList} update={this.props.update} className="component-render"/>);
+      return(<AllGoals updateBadge={this.props.updateBadge} updateGoalsIndex={this.props.updateGoalsIndex} goalList={this.props.goalList} update={this.props.update} className="component-render"/>);
     }
     if (view === "Badges"){
-      return(<Badges goalList={this.props.goalList} className="component-render"/>);
+      return(<Badges badges={this.props.badges} goalList={this.props.goalList} className="component-render"/>);
     }
     if (view === "DailyGoals"){
       return(<DailyGoals className="component-render"/>);

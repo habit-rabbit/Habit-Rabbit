@@ -7,7 +7,7 @@ class Badges extends Component {
     super(props);
     this.renderImage = this.renderImage.bind(this);
     this.buildBunnyArray = this.buildBunnyArray.bind(this);
-    this.goalsComplete = this.goalsComplete.bind(this);
+    // this.goalsComplete = this.goalsComplete.bind(this);
     this.buildTextArray = this.buildTextArray.bind(this);
   }
 
@@ -26,8 +26,9 @@ class Badges extends Component {
   }
 
   buildBunnyArray(){
+    console.log('====================Here are the number of badges:', this.props.badges, '====================')
     let bunnyArray =["/rabeetzombie.png","/rabeetpurple.png","/rabeetbluezebra.png","/rabeetorangetub.png","/rabeetnerd.png","/rabeetgreen.png","/rabeetpig.png","/rabeetpinky.png","/rabeetdon.png"];
-    let numberComplete = this.goalsComplete();
+    let numberComplete = this.props.badges;
     if (numberComplete < 9) {
       let slicedBunnyArray = bunnyArray.slice(0, numberComplete);
       return slicedBunnyArray;
@@ -36,19 +37,19 @@ class Badges extends Component {
     };
   }
 
-  goalsComplete(){
-    let numberComplete = 0;
-    for (let goal of this.props.goalList) {
-      if (goal.is_done === true) {
-        numberComplete += 1;
-      };
-    };
-    return numberComplete
-  }
+  // goalsComplete(){
+  //   let numberComplete = 0;
+  //   for (let goal of this.props.goalList) {
+  //     if (goal.is_done === true) {
+  //       numberComplete += 1;
+  //     };
+  //   };
+  //   return numberComplete
+  // }
 
   buildTextArray(){
     let textArray = ["Bed yu sought yu wuz reed of mee!!", "Iz diz Hockey? Cuz I iz GOALee!", "SHRIIIIIIIEEEEEEEEEEEEK", "I reward each Goal widda SnaX!", "u shamshed ur Goalz, AND my glasses.", "Yu iz so gr8!! I boleeeve in yu!", "Frankly, Susan, I don't give a damn.","P4TR1CK4NDTH35W4YZ35", "Proper Planning Prevents Poor Progress"]
-    let numberComplete = this.goalsComplete();
+    let numberComplete = this.props.badges;
     if (numberComplete < 9) {
       let slicedTextArray = textArray.slice(0, numberComplete);
       // consolelog("SLICED ARRRAAAY", slicedTextArray)
