@@ -41,15 +41,6 @@ app.use(require('./api/routes'));
 // required to serve publib/img file
 app.use(express.static(path.resolve(__dirname, './public')));
 
-// configure slack
-// (function() {
-//   var Slack = require('./lib/slack');
-//   var slack = new Slack(process.env.SLACK_TOKEN);
-//   slack.on('message', function(message) {
-//     console.log("Message:", message.user.name, message.channel.name, message.text);
-//   });
-// })();
-
 // spin up our express server
 app.listen(port, function () {
   console.log('Example app listening on port:', port);
