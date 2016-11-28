@@ -35,10 +35,15 @@ database.prototype.getAll = function (query, callback) {
     .table(query.table)
     .asCallback(callback);
 }
-
 database.prototype.updateRow = function (query, callback) {
   this.knex(query.table)
     .where("id", query.data.id)
+    .update(query.data)
+    .asCallback(callback);
+}
+
+database.prototype.updateTable = function (query, callback) {
+  this.knex(query.table)
     .update(query.data)
     .asCallback(callback);
 }

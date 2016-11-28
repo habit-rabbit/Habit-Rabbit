@@ -3,7 +3,24 @@ const db = require("./query_class.js");
 const ResponseData = require("./response.js");
 const findTable = require("./utilities/find_table.js");
 const Validations = require("./utilities/validations.js");
+const cron = require("node-cron");
 //routes that serve the data base and return json
+
+
+//reset daily_goals every day at midnight so they show as false
+//get those habits built!!!
+cron.schedule('* 59 23 * *', () => {
+  let query = {};
+  query.table = "daily_goals";
+  query.data = {is_done: false};
+  db.updateTable(query, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data);
+    }
+  })
+});
 
 
 router.post("/goals/create", (req, res) => {
