@@ -13,7 +13,7 @@ class App extends Component {
       name: "",
       isLoggedIn: false,
       goals: [],
-      view: "AllGoals",
+      view: "DailyGoals",
     }
 
     this.renderPage = this.renderPage.bind(this);
