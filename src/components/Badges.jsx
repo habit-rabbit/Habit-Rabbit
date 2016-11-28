@@ -21,7 +21,7 @@ class Badges extends Component {
   renderText(i){
     let textSlogans=this.buildTextArray()
       return(
-        <p> {textSlogans[i]} </p>
+        <p>{textSlogans[i]}</p>
       );
   }
 
@@ -47,7 +47,7 @@ class Badges extends Component {
   }
 
   buildTextArray(){
-    let textArray = ["Bet you thought you were rid of me!", "Is this Hockey? Cuz I'm a GOALie!", "I love! Selling! GOAAAALS!", "Hello bunny 4", "bunny 5", "bunny 6", "bunny 7", "nunny8"]
+    let textArray = ["Bed yu sought yu wuz reed of mee!!", "Iz diz Hockey? Cuz I iz GOALee!", "SHRIIIIIIIEEEEEEEEEEEEK", "I reward each Goal widda SnaX!", "u shamshed ur Goalz, AND my glasses.", "Yu iz so gr8!! I boleeeve in yu!", "Frankly, Susan, I don't give a damn.","P4TR1CK4NDTH35W4YZ35", "Proper Planning Prevents Poor Progress"]
     let numberComplete = this.goalsComplete();
     if (numberComplete < 9) {
       let slicedTextArray = textArray.slice(0, numberComplete);
@@ -71,19 +71,19 @@ class Badges extends Component {
         <table className="table no-border">
           <tbody>
             <tr>
-              <td><div className="full-circle badge1">{this.renderImage(0)}</div>{this.renderText(0)}</td>
-              <td><div className="full-circle badge2">{this.renderImage(1)}</div>{this.renderText(1)}</td>
-              <td><div className="full-circle badge3">{this.renderImage(2)}</div>{this.renderText(2)}</td>
+              <td><div className="full-circle badge1">{this.renderImage(0)}</div><h4>{this.renderText(0)}</h4></td>
+              <td><div className="full-circle badge2">{this.renderImage(1)}</div><h4>{this.renderText(1)}</h4></td>
+              <td><div className="full-circle badge3">{this.renderImage(2)}</div><h4>{this.renderText(2)}</h4></td>
             </tr>
             <tr>
-              <td><div className="full-circle badge4">{this.renderImage(3)}</div>{this.renderText(3)}</td>
-              <td><div className="full-circle badge5">{this.renderImage(4)}</div>{this.renderText(4)}</td>
-              <td><div className="full-circle badge6">{this.renderImage(5)}</div>{this.renderText(5)}</td>
+              <td><div className="full-circle badge4">{this.renderImage(3)}</div><h4>{this.renderText(3)}</h4></td>
+              <td><div className="full-circle badge5">{this.renderImage(4)}</div><h4>{this.renderText(4)}</h4></td>
+              <td><div className="full-circle badge6">{this.renderImage(5)}</div><h4>{this.renderText(5)}</h4></td>
             </tr>
             <tr>
-              <td><div className="full-circle badge7">{this.renderImage(6)}</div>{this.renderText(6)}</td>
-              <td><div className="full-circle badge8">{this.renderImage(7)}</div>{this.renderText(7)}</td>
-              <td><div className="full-circle badge9">{this.renderImage(8)}</div>{this.renderText(8)}</td>
+              <td><div className="full-circle badge7">{this.renderImage(6)}</div><h4>{this.renderText(6)}</h4></td>
+              <td><div className="full-circle badge8">{this.renderImage(7)}</div><h4>{this.renderText(7)}</h4></td>
+              <td><div className="full-circle badge9">{this.renderImage(8)}</div><h4>{this.renderText(8)}</h4></td>
             </tr>
           </tbody>
         </table>
