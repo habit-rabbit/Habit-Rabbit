@@ -1,5 +1,4 @@
 @import 'mixins';
-
 .goals-template {
 
   h1 {
@@ -49,12 +48,14 @@
   animation: slideDown 1s;
   @keyframes slideDown{
     from {
+
       transform: translateY(50%);
     }
     to {
       transform: translateY(0);
     }
   }
+  transition: top 1s;
 }
   .goal-is-done {
     opacity: .2;
@@ -100,17 +101,20 @@
 
   }
 }
+.goalInfo-appear {
+  opacity: 0;
+}
 
-.goalInfo-content{
+.goalInfo-appear.goalInfo-appear-active {
+  opacity: 1;
+  transition: opacity 1s;
 }
 
 .goalInfo-inner{
   overflow: hidden;
-  max-height: 800px;
   padding: 0 15px;
 
 }
-
 .goalInfo-toggle{
   -webkit-transition: background .1s linear;
   -moz-transition: background .1s linear;

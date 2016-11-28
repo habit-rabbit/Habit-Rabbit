@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ProgressBar from './ProgressBar.jsx';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class SingleGoal extends Component {
 
@@ -28,14 +29,22 @@ class SingleGoal extends Component {
   renderGoalInfo() {
     let counter = 0;
     if(this.state.goalInfo === "show") {
-      return(
-              <div className="goalInfo-inner">
-                {this.props.goalInfo.tasks.map((task) => {
-                  let taskClass = task.is_done ? "strikethrough" : "";
-                  counter++;
-                  return <p className={taskClass} key={counter}>{counter}: {task.name}  </p>
-                })}
+      return( <div>
+              <ReactCSSTransitionGroup
+                transitionName="goalInfo"
+                transitionAppear={true}
+                transitionAppearTimeout={1000}
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}>
+              <div className="goalInfo-content">
+                  {this.props.goalInfo.tasks.map((task) => {
+                    let taskClass = task.is_done ? "strikethrough" : "";
+                    counter++;
+                    return <p className={taskClass} key={counter}>{counter}: {task.name}  </p>
+                  })}
               </div>
+              </ReactCSSTransitionGroup>
+            </div>
         );
     } else {
       return null;
@@ -114,6 +123,7 @@ class SingleGoal extends Component {
     } else {
       return(
         <div className={this.props.goalClass}>
+
           <div className="col-md-3">
           <h1> {this.props.goalInfo.name} </h1>
 
