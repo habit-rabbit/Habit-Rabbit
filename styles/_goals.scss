@@ -44,6 +44,15 @@
   .well {
     background-color: #96C8A2;
   }
+  -webkit-transition: max-height 1s ease-in;
+  -moz-transition: max-height 1s ease-in;
+  -ms-transition: max-height 1s ease-in;
+  -o-transition: max-height 1s ease-in;
+  transition: max-height 1s ease-in;
+  // background: #e5feff;
+  overflow: hidden;
+  // "height: 0" not work with css transitions
+  max-height: 800px;
 }
 
   .goal-is-done {
@@ -92,15 +101,6 @@
 }
 
 .goalInfo-content{
-  -webkit-transition: max-height 1s;
-  -moz-transition: max-height 1s;
-  -ms-transition: max-height 1s;
-  -o-transition: max-height 1s;
-  transition: max-height 1s;
-  background: #e5feff;
-  overflow: hidden;
-  // "height: 0" not work with css transitions
-  max-height: 0;
 }
 
 .goalInfo-inner{
@@ -139,6 +139,14 @@
 
 
 
-
+// div > ul {
+//   visibility: hidden;
+//   opacity: 0;
+//   transition: visibility 0s, opacity 0.5s linear;
+// }
+// div:hover > ul {
+//   visibility: visible;
+//   opacity: 1;
+// }
 
 

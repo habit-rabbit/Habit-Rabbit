@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ProgressBar from './ProgressBar.jsx';
-import GoalInfo from './Goal-info.jsx';
 
 class SingleGoal extends Component {
 
@@ -8,8 +7,6 @@ class SingleGoal extends Component {
     super(props);
     this.getCurrentTask = this.getCurrentTask.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
-    this.goalType = this.goalType.bind(this);
-    this.setGoalInfo = this.setGoalInfo.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
     this.updateGoal = this.updateGoal.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
@@ -20,28 +17,29 @@ class SingleGoal extends Component {
     }
   }
  //=================show-hide goal details===============================
-  goalType (goal) {
-    if(goal.private === false){
-      return (
-        <h4 className="goal-type"> Challenge </h4>
-      )
-    } else {
-      return (
-        <h4 className="goal-type"> Private </h4>
-      )
-    }
-  }
-  setGoalInfo(bool, showhide) {
-    this.setState({
-      showGoalinfo: bool,
-      goalInfo: showhide
-    });
-  }
+
   handleMouseEnter() {
     this.setState({goalInfo: "show"});
   }
   handleMouseLeave() {
     this.setState({goalInfo: "hide"});
+  }
+
+  renderGoalInfo() {
+    let counter = 0;
+    if(this.state.goalInfo === "show") {
+      return(
+              <div className="goalInfo-inner">
+                {this.props.goalInfo.tasks.map((task) => {
+                  let taskClass = task.is_done ? "strikethrough" : "";
+                  counter++;
+                  return <p className={taskClass} key={counter}>{counter}: {task.name}  </p>
+                })}
+              </div>
+        );
+    } else {
+      return null;
+    }
   }
   // ====================================================================
   //============== update database: goal.is_done = true==================
@@ -130,9 +128,7 @@ class SingleGoal extends Component {
           <div className="row goalInfo">
             <div className="col-md-9 col-centered">
               <a href="#" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > More Info </a>
-              <div className="goalInfo-inner">
-                <p>test </p>
-              </div>
+              {this.renderGoalInfo()}
             </div>
           </div>
         </div>
