@@ -86,7 +86,7 @@ class DailyGoals extends Component {
               <div className="daily-goals-template row well" key={index}>
                 <div className={goalClass}>
                   <div className="col-md-7">
-                    <h1 className="daily-goal"> {dailyGoal.name} </h1>
+                    <h1 className="daily-goal" className="align-middle"> {dailyGoal.name} </h1>
                   </div>
                   <div className="col-md-5">
                     <div className="daily-goals-icons">
