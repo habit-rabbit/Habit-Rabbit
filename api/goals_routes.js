@@ -43,6 +43,7 @@ router.get("/goals", (req, res) => {
     //   res.send(r);
     // });
       db.getGoalsWithTasks(query,(err, data) => {
+        console.log(JSON.stringify(data[0].tasks), "in get /goals")
         if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
         r.setData(data.sort((goalA, goalB) => {return goalA.is_done ? 1 : -1;}));
         res.send(r)
@@ -134,18 +135,19 @@ router.get("/goals/:id/tasks", (req, res) => {
 router.post("/goals/:id/tasks/create", (req, res) => {
   const r = new ResponseData();
   if (req.xhr && req.session['user-id']) {
+    let taskNames = req.body.data.taskNames;
     let query = {};
-    taskNames = req.body.data.taskNames;
-
+    query.table = findTable(req.url);
+    console.log("tasks area", JSON.stringify(taskNames));
     taskNames.map((taskName, index) => {
-      let isValidCredentials = new Validations(query.data).check();
-      query.table = findTable(req.url);
+      console.log("tasknames", taskName)
       query.data = {
         name: taskName,
         task_order: index + 1,
         is_done: false,
         goal_id: req.params.id
       };
+      let isValidCredentials = new Validations(query.data).check();
       //check tasks for validations
       if(isValidCredentials) {
         db.insertRow(query, (err, data) => {

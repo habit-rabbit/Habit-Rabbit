@@ -46,8 +46,6 @@ class App extends Component {
       method: "get",
       url: "/api/goals",
     }).done((response) => {
-      // console.log("Finished DB call in App");
-      // console.log(response.data, "response")
       this.setState({goals: response.data});
     });
   }
