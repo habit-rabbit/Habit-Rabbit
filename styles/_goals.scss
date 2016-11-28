@@ -1,5 +1,4 @@
 @import 'mixins';
-
 .goals-template {
   margin: 3em;
 
@@ -35,6 +34,12 @@
     margin-top: -18px;
     position: absolute;
     top: 54px; left: 0; bottom: 0; right: 0;
+
+    .progress-bar {
+      -webkit-transition: none;
+      -o-transition: none;
+      transition: none;
+    }
   }
 
   .strikethrough {
@@ -62,6 +67,31 @@
 
 .goals-template.row.well {
   padding: 0px;
+
+  .well {
+    background-color: #96C8A2;
+  }
+  animation: slideDown 1s;
+  @keyframes slideDown{
+    from {
+
+      transform: translateY(50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  transition: top 1s;
+}
+  .goal-is-done {
+    opacity: .2;
+  }
+  .goal-not-done {
+  }
+/* Strikethrough */
+.daily-goal {
+  color: turquoise;
+  vertical-align: center;
 }
 
 .goal-is-done {
@@ -89,17 +119,26 @@ background-color: #d8f7ff;
   }
 }
 
+.goalInfo-appear {
+  opacity: 0;
+}
+
 .glyphicon-check {
   color: turquoise;
 }
 
 .goalInfo-content{
+  .goalInfo-appear.goalInfo-appear-active {
+    opacity: 1;
+    transition: opacity 1s;
+  }
 }
 
 .goalInfo-inner{
+  overflow: hidden;
   padding: 0 15px;
-}
 
+}
 .goalInfo-toggle{
   -webkit-transition: background .1s linear;
   -moz-transition: background .1s linear;

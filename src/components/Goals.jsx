@@ -20,7 +20,6 @@ class Goals extends Component {
         <h3> Loading Goals... </h3>
       );
     } else if (this.props.goalList.length === 0) {
-      // console.log("in else if statement of goals.jsx");
       return (
         <div>
           <h3> You haven't created any goals yet!</h3>
@@ -35,6 +34,7 @@ class Goals extends Component {
             // console.log("which goals are in here?", goal)
             let goalClass = goal.is_done ? "goal-is-done" : "goal-not-done"
             return (
+
               <div className="goals-template row well" key={index}>
                <SingleGoal update={this.props.update} goalClass={goalClass} goalInfo={goal} renderGoalInfoModal={this.renderGoalInfoModal}/>
               </div>

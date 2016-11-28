@@ -67,7 +67,7 @@ class Nav extends Component {
     return (
       <nav className="navbar navbar-default">
         <div className="container-fluid">
-          <a className="navbar-brand">Habit Rabbit</a>
+          <a className="navbar-brand" href="" id="dailyGoals" onClick={this.handleLinks}>Habit Rabbit</a>
           {this.createNavLinks()}
         </div>
       </nav>
