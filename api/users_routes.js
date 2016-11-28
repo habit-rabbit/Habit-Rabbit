@@ -40,4 +40,24 @@ router.post("/users/create", (req, res) => {
     }
 });
 
+router.post("/users/update", (req, res) => {
+    const r = new ResponseData();
+  if(req.xhr && req.session['user-id']) {
+    let query = req.body;
+    query.table = findTable(req.url);
+    query.data.id = req.session['user-id'];
+    db.updateRow(query, (err, data) => {
+      if(err) {
+        r.setErrorMsg("unable to update");
+      } else {
+        r.setData(data);
+      }
+      res.send(r);
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
+
 module.exports = router;

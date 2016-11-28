@@ -14,12 +14,14 @@ class App extends Component {
       isLoggedIn: false,
       goals: [],
       view: "DailyGoals",
+      badges: 0,
     }
 
     this.renderPage = this.renderPage.bind(this);
     this.verifyLogin = this.verifyLogin.bind(this);
     this.updateFromDatabase = this.updateFromDatabase.bind(this);
     this.setView = this.setView.bind(this);
+    this.updateBadge = this.updateBadge.bind(this);
 
     this.updateFromDatabase();
   }
@@ -56,9 +58,26 @@ class App extends Component {
       url: "/login",
       dataType: 'json'
     }).done((data) => {
-      this.setState({isLoggedIn: data.isLoggedIn, name: data.name});
+      this.setState({isLoggedIn: data.isLoggedIn, name: data.name, badges: data.badges});
       this.updateFromDatabase();
     });
+  }
+
+  updateBadge(){
+    let badges = this.state.badges + 1;
+    console.log('==========inside update badges============== ', badges);
+
+    $.ajax({
+        method: 'post',
+        url: `/api/users/update`,
+        data: {
+          data: {
+            badges: badges
+          }
+        }
+      }).done(() => {
+        this.setState({badges: badges});
+      });
   }
 
 //this renders appropriate component if user is not logged in
@@ -73,7 +92,7 @@ class App extends Component {
           transitionName="background"
           transitionEnterTimeout={1000}
           transitionLeaveTimeout={1000}>
-          <Carousel updateGoalsIndex={this.updateFromDatabase} goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase} component="animated-component"/>
+          <Carousel badges={this.state.badges} updateBadge={this.updateBadge} updateGoalsIndex={this.updateFromDatabase} goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase} component="animated-component"/>
         </ReactCSSTransitionGroup>);
     }
   }
