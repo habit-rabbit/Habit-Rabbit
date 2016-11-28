@@ -46,17 +46,16 @@
   .well {
     background-color: #96C8A2;
   }
-  -webkit-transition: max-height 1s ease-in;
-  -moz-transition: max-height 1s ease-in;
-  -ms-transition: max-height 1s ease-in;
-  -o-transition: max-height 1s ease-in;
-  transition: max-height 1s ease-in;
-  // background: #e5feff;
-  overflow: hidden;
-  // "height: 0" not work with css transitions
-  max-height: 800px;
+  animation: slideDown 1s;
+  @keyframes slideDown{
+    from {
+      transform: translateY(50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 }
-
   .goal-is-done {
     opacity: .2;
   }
@@ -106,7 +105,10 @@
 }
 
 .goalInfo-inner{
+  overflow: hidden;
+  max-height: 800px;
   padding: 0 15px;
+
 }
 
 .goalInfo-toggle{
