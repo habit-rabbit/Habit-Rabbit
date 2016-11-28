@@ -5,6 +5,8 @@
   h1 {
     color: #595959;
     text-align: center;
+    overflow-wrap: break-word;
+    display: block;
   }
 
   h3 {
@@ -37,7 +39,6 @@
       transition: none;
     }
   }
-
 
   .strikethrough {
     position: relative;
