@@ -113,9 +113,9 @@ class DailyGoals extends Component {
       <div className="background-layout">
         <div className="container main-content">
           <div className="page-header">
-            <h1>Daily Goals</h1>
+            <h1>Daily Reminders</h1>
              <form className="create daily" onSubmit={this.handleSubmit}>
-              <input type="submit" className="btn btn-default" value="Create A New Daily Goal!" />
+              <input type="submit" className="btn btn-default" value="Create A New Daily Reminder!" />
             </form>
             <CreateDailyGoalModal updateDailies={this.updateFromDatabase}/>
           </div>
