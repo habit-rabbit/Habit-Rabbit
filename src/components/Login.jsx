@@ -18,6 +18,12 @@ class Login extends Component {
     this.renderError = this.renderError.bind(this);
   }
 
+ componentDidMount() {
+    $('#login-modal').on('shown.bs.modal', function () {
+      $('#email').focus();
+    });
+  }
+
   handleChange(event) {
     let id = event.target.id;
     let value = event.target.value;

@@ -11,12 +11,18 @@ class Register extends Component {
       email: "",
       password: "",
       password_confirmation: "",
-      regError: ""
+      regError: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderError = this.renderError.bind(this);
+  }
+
+ componentDidMount() {
+    $('#register-modal').on('shown.bs.modal', function () {
+      $('#first_name').focus();
+    });
   }
 
   handleChange(event) {
@@ -38,12 +44,10 @@ class Register extends Component {
     if (id === "password_confirmation") {
       this.setState({password_confirmation: value});
     }
-
   }
 
  handleSubmit(event) {
     event.preventDefault();
-
 
     if (this.state.first_name && this.state.last_name && this.state.email && this.state.password) {
 
@@ -56,7 +60,7 @@ class Register extends Component {
             last_name: this.state.last_name,
             email: this.state.email,
             password: this.state.password,
-            password_confirmation: this.state.password_confirmation
+            password_confirmation: this.state.password_confirmation,
           }
         }
       }).then( (result) => {
@@ -68,10 +72,9 @@ class Register extends Component {
           this.setState({regError: result.error.msg})
         }
       });
-
     } else {
       this.setState({regError: "Please complete all fields"})
-    }
+    };
   }
 
   renderError() {
@@ -81,7 +84,7 @@ class Register extends Component {
             {this.state.regError}
           </div>
         )
-    }
+    };
   }
 
   render() {
