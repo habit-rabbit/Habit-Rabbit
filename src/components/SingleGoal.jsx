@@ -62,6 +62,7 @@ class SingleGoal extends Component {
   //============== update database: goal.is_done = true==================
   updateGoal() {
     console.log("Goal completed, sending post request");
+
     setTimeout(() => {
       $.ajax({
         method: 'post',
@@ -74,10 +75,15 @@ class SingleGoal extends Component {
       }).then(() => {
         setTimeout(() => {
           this.props.update();
+          this.props.updateBadge();
+
         }, 200);
       });
      }, 500);
   }
+
+
+
 
   //==============================For Tasks==============================
   getCurrentTask () {

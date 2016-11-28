@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 router.get('/login', (req, res) => {
   let isLoggedIn;
   let name;
+  let badges;
   if (req.session['user-id']){
     isLoggedIn = true;
     const query = {};
@@ -22,13 +23,15 @@ router.get('/login', (req, res) => {
         console.log("DB Error when querying user")
       } else {
         name = data[0].first_name;
-        res.json({name: name, isLoggedIn: isLoggedIn});
+        badges = data[0].badges;
+        res.json({name: name, isLoggedIn: isLoggedIn, badges: badges});
       }
     });
   } else {
     isLoggedIn = false;
     name = '';
-    res.json({name: name, isLoggedIn: isLoggedIn});
+    badges = 0;
+    res.json({name: name, isLoggedIn: isLoggedIn, badges: badges});
   }
 });
 
