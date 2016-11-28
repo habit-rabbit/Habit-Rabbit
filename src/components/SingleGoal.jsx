@@ -11,11 +11,28 @@ class SingleGoal extends Component {
     this.updateGoal = this.updateGoal.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.state = {
       showGoalinfo: false,
       goalInfo: "hide"
     }
   }
+
+  handleDelete (event) {
+    event.preventDefault();
+    $.ajax({
+      method: "post",
+      url: `/api/goals/${this.props.goalInfo.id}/delete`,
+      data: {
+        data: {
+          id: this.props.goalInfo.id
+        }
+      }
+    }).done(() => {
+      this.props.update();
+    });
+  }
+
  //=================show-hide goal details===============================
 
   handleMouseEnter() {
@@ -128,6 +145,9 @@ class SingleGoal extends Component {
           <div className="col-md-3">
             <h4 className="task-list"> Next Task: </h4>
             {this.getCurrentTask()}
+            <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
+              <span className="glyphicon glyphicon-trash" aria-hidden="true" ></span>
+            </button>
           </div>
           <div className="row goalInfo">
             <div className="col-md-9 col-centered">
