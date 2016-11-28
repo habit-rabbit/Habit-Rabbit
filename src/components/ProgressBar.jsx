@@ -14,7 +14,9 @@ class ProgressBar extends Component {
   //   this.calculateProgress();
   // }
   calculateProgress () {
+    // console.log("===============================TaskArray in ProgressBar is", this.props.taskArray);
     let tasks = this.props.taskArray;
+    console.log("Calculating progress of", tasks[0].name + "===================================")
     let finishedTasks = 0;
     for (let i = 0; i < tasks.length; i++){
       if (tasks[i].is_done === true) {

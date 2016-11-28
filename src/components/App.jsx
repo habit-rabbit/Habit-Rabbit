@@ -13,7 +13,7 @@ class App extends Component {
       name: "",
       isLoggedIn: false,
       goals: [],
-      view: "AllGoals",
+      view: "DailyGoals",
     }
 
     this.renderPage = this.renderPage.bind(this);
@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   updateFromDatabase () {
-    // console.log("Calling DB from App");
+    console.log("Calling DB from App");
     $.ajax({
       method: "get",
       url: "/api/goals",

@@ -80,7 +80,7 @@ class CreateDailyGoalModal extends Component {
 
             <div className="modal-header">
               <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 className="modal-title" id="myModalLabel">Create Your New Goal</h1>
+                <h1 className="modal-title" id="myModalLabel">Create Your New Daily Reminder</h1>
             </div>
 
             <div id="create-daily-goal-body" className="modal-body">
@@ -88,7 +88,7 @@ class CreateDailyGoalModal extends Component {
             <form onSubmit={this.handleSubmit}>
 
               <div className="form-group form-group-modal">
-                <input id="daily-goal-name" type="text" value={this.state.dailyGoalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name" />
+                <input id="daily-goal-name" type="text" value={this.state.dailyGoalName} onChange={this.handleChange} name="goalName" placeholder="Daily Reminder" />
               </div>
 
               <div className="form-group form-group-modal">

@@ -78,6 +78,7 @@ class CreateGoalModal extends Component {
       }).done ((data) => {
         this.setState({goalName: ""});
         this.setState({tasks: [""]});
+        console.log("Created a goal, sending to app for a db update!");
         this.props.updateGoalsIndex();
         $("#create-goal-modal").modal("hide");
       });
