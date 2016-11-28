@@ -5,43 +5,38 @@ class Badges extends Component {
 
   constructor(props){
     super(props);
-    this.renderImage = this.renderImage.bind(this)
-    this.buildBunnyArray = this.buildBunnyArray.bind(this)
-    this.goalsComplete = this.goalsComplete.bind(this)
+    this.renderImage = this.renderImage.bind(this);
+    this.buildBunnyArray = this.buildBunnyArray.bind(this);
+    this.goalsComplete = this.goalsComplete.bind(this);
   }
 
   renderImage(i){
     let bunnyImages=this.buildBunnyArray()
       return(
         <img src={bunnyImages[i]}/>
-        );
+      );
     }
 
   buildBunnyArray(){
-      let bunnyArray =["/rabeetzombie.png","/rabeetpurple.png","/rabeetbluezebra.png","/rabeetorangetub.png","/rabeetnerd.png","/rabeetgreen.png","/rabeetpig.png","/rabeetpinky.png","/rabeetdon.png"]
-      let numberComplete = this.goalsComplete();
-      if (numberComplete < 9) {
-        let slicedBunnyArray = bunnyArray.slice(0, numberComplete);
-        return slicedBunnyArray;
-      } else {
-        return bunnyArray;
-      }
+    let bunnyArray =["/rabeetzombie.png","/rabeetpurple.png","/rabeetbluezebra.png","/rabeetorangetub.png","/rabeetnerd.png","/rabeetgreen.png","/rabeetpig.png","/rabeetpinky.png","/rabeetdon.png"];
+    let numberComplete = this.goalsComplete();
+    if (numberComplete < 9) {
+      let slicedBunnyArray = bunnyArray.slice(0, numberComplete);
+      return slicedBunnyArray;
+    } else {
+      return bunnyArray;
+    };
   }
 
   goalsComplete(){
-
     let numberComplete = 0;
     for (let goal of this.props.goalList) {
       if (goal.is_done === true) {
         numberComplete += 1;
-      }
-    }
-
+      };
+    };
     return numberComplete
   }
-
-
-
 
 
   render() {
@@ -70,13 +65,11 @@ class Badges extends Component {
               <td><div className="full-circle badge8">{this.renderImage(7)}</div></td>
               <td><div className="full-circle badge9">{this.renderImage(8)}</div></td>
             </tr>
-
           </tbody>
         </table>
       </div>
       </div>
       </div>
-
     );
   }
 
