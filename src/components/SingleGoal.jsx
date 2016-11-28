@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ProgressBar from './ProgressBar.jsx';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class SingleGoal extends Component {
 
@@ -45,14 +46,22 @@ class SingleGoal extends Component {
   renderGoalInfo() {
     let counter = 0;
     if(this.state.goalInfo === "show") {
-      return(
-              <div className="goalInfo-inner">
-                {this.props.goalInfo.tasks.map((task) => {
-                  let taskClass = task.is_done ? "strikethrough" : "";
-                  counter++;
-                  return <p className={taskClass} key={counter}>{counter}: {task.name}  </p>
-                })}
+      return( <div>
+              <ReactCSSTransitionGroup
+                transitionName="goalInfo"
+                transitionAppear={true}
+                transitionAppearTimeout={1000}
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}>
+              <div className="goalInfo-content">
+                  {this.props.goalInfo.tasks.map((task) => {
+                    let taskClass = task.is_done ? "strikethrough" : "";
+                    counter++;
+                    return <p className={taskClass} key={counter}>{counter}: {task.name}  </p>
+                  })}
               </div>
+              </ReactCSSTransitionGroup>
+            </div>
         );
     } else {
       return null;
@@ -99,10 +108,12 @@ class SingleGoal extends Component {
         return (
           <div>
             <p className="tasks">{task.name}</p>
-            <span>Finished already? </span>
+            <div id="finished-task-button">
+            <span>Task Done? </span>
              <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
               <span className="glyphicon glyphicon-check" aria-hidden="true" data-taskid={task.id}></span>
             </button>
+            </div>
           </div>
         );
       }
@@ -136,6 +147,7 @@ class SingleGoal extends Component {
     } else {
       return(
         <div className={this.props.goalClass}>
+
           <div className="col-md-3">
           <h1> {this.props.goalInfo.name} </h1>
 
@@ -155,8 +167,8 @@ class SingleGoal extends Component {
             </button>
           </div>
           <div className="row goalInfo">
-            <div className="col-md-9 col-centered">
-              <a href="#" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > More Info </a>
+            <div className="col-xs-4 col-xs-offset-4">
+              <a href="#" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}> show my tasks </a>
               {this.renderGoalInfo()}
             </div>
           </div>
