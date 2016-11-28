@@ -12,9 +12,11 @@ class SingleGoal extends Component {
     this.setGoalInfo = this.setGoalInfo.bind(this);
     this.updateCurrentTask = this.updateCurrentTask.bind(this);
     this.updateGoal = this.updateGoal.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.state = {
       showGoalinfo: false,
-      goalInfo: "show"
+      goalInfo: "hide"
     }
   }
  //=================show-hide goal details===============================
@@ -34,6 +36,12 @@ class SingleGoal extends Component {
       showGoalinfo: bool,
       goalInfo: showhide
     });
+  }
+  handleMouseEnter() {
+    this.setState({goalInfo: "show"});
+  }
+  handleMouseLeave() {
+    this.setState({goalInfo: "hide"});
   }
   // ====================================================================
   //============== update database: goal.is_done = true==================
@@ -119,7 +127,14 @@ class SingleGoal extends Component {
             <h4 className="task-list"> Next Task: </h4>
             {this.getCurrentTask()}
           </div>
-
+          <div className="row goalInfo">
+            <div className="col-md-9 col-centered">
+              <a href="#" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > More Info </a>
+              <div className="goalInfo-inner">
+                <p>test </p>
+              </div>
+            </div>
+          </div>
         </div>
       );
     }
