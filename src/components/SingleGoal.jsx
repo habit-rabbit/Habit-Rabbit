@@ -38,17 +38,19 @@ class SingleGoal extends Component {
   // ====================================================================
   //============== update database: goal.is_done = true==================
   updateGoal() {
-    $.ajax({
-      method: 'post',
-      url: `/api/goals/${this.props.goalInfo.id}/update`,
-      data: {
+    // setTimeout(() => {
+      $.ajax({
+        method: 'post',
+        url: `/api/goals/${this.props.goalInfo.id}/update`,
         data: {
-          is_done: true
+          data: {
+            is_done: true
+          }
         }
-      }
-    }).then(() => {
-      this.props.update();
-    });
+      }).then(() => {
+        this.props.update();
+      });
+     // }, 200);
   }
 
   //==============================For Tasks==============================
@@ -62,29 +64,37 @@ class SingleGoal extends Component {
         }
         return <p> You've finished your goal! Rabeet is screeching with delight. </p>
     } else {
+      console.log("=======TASK ID IN GET CURRENT TASK IS ===============", task.id);
       return (  <div>
                   <p className="tasks">{task.name}</p>
                   <span>Finished already? </span>
-                  <label>
+                   <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
+                   {console.log("=====================TASK ID IN RENDER FUNCTION ============", task.id)}
+                    <span className="glyphicon glyphicon-check" aria-hidden="true" data-taskid={task.id}></span>
+                  </button>
+                  {/*<label>
                     <input data-taskId={task.id} onChange={this.handleCheck} type="checkbox"/>
-                  </label>
+                  </label>*/}
                 </div>)
     }
   }
 
   handleCheck (e) {
+    console.log("Got to handleCheck in SingleGoal");
     e.preventDefault();
-    this.setState({done: true});
-    setTimeout(() => {
-      this.setState({done: false});
-    }, 200);
+    console.log("================SETTING STATE IN HANDLE CHECK", e.target.dataset.taskid);
+    console.log(e.target.dataset);
+    // setTimeout(() => {
+    // }, 200);
     this.updateCurrentTask(this.props.goalInfo.id, e.target.dataset.taskid);
   }
 
-  updateCurrentTask (goalId, taskId) {
+  updateCurrentTask (goalId, taskid) {
+    console.log("Wandered into updateCurrentTask");
+    console.log("goalId is " + goalId + " taskid is " +  taskid );
    $.ajax({
       method: "post",
-      url: `api/goals/${goalId}/tasks/${taskId}/update`,
+      url: `api/goals/${goalId}/tasks/${taskid}/update`,
       data: {is_done: true}
     }).done((data) => {
       this.props.update();
