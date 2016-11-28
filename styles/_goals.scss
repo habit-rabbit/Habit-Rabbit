@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .goals-template {
 
   h1 {
@@ -128,6 +130,9 @@
 
 }
 
+.progress-bar.progress-bar-info {
+  @include linear-gradient(left, rgb(177, 223, 255) 0, rgba(204, 0, 255, 0.68) 130%);
+}
 
 
 
@@ -137,16 +142,5 @@
 
 
 
-
-
-// div > ul {
-//   visibility: hidden;
-//   opacity: 0;
-//   transition: visibility 0s, opacity 0.5s linear;
-// }
-// div:hover > ul {
-//   visibility: visible;
-//   opacity: 1;
-// }
 
 
