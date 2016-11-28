@@ -29,7 +29,14 @@
     margin: auto;
     position: absolute;
     top: 54px; left: 0; bottom: 0; right: 0;
+
+    .progress-bar {
+      -webkit-transition: none;
+      -o-transition: none;
+      transition: none;
+    }
   }
+
 
   .strikethrough {
     position: relative;
