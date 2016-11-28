@@ -29,13 +29,17 @@ class GoalInfo extends Component {
       )
     }
   }
-
+  shouldComponentUpdate(nextProps, nextState) {
+    if(this.props.goalInfo.tasks.length !== nextProps.tasks.length) {
+      return true;
+    }
+  }
   hideGoalInfo() {
     this.props.hideGoalInfo(false);
   }
 
   render() {
-    console.log(this.props, "goal info ");
+    console.log(this.props.goalInfo.tasks, "goal info ");
     let counter = 0;
     return (
           <div>

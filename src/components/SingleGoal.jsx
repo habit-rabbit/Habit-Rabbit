@@ -105,8 +105,7 @@ class SingleGoal extends Component {
       return(
         <div className={this.props.goalClass}>
           <div className="col-md-3">
-          <span onClick={()=>{ this.state.showGoalinfo ? this.setGoalInfo(false, "show") : this.setGoalInfo(true, "hide")} }>{this.state.goalInfo}</span>
-            {this.state.showGoalinfo ? <GoalInfo goalInfo={this.props.goalInfo} /> : <h1 onClick={this.showGoalinfo}> {this.props.goalInfo.name} </h1>}
+          <h1> {this.props.goalInfo.name} </h1>
 
 
           </div>
