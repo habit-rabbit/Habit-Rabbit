@@ -1,5 +1,4 @@
 @import 'mixins';
-
 .goals-template {
 
   h1 {
@@ -53,17 +52,18 @@
   .well {
     background-color: #96C8A2;
   }
-  -webkit-transition: max-height 1s ease-in;
-  -moz-transition: max-height 1s ease-in;
-  -ms-transition: max-height 1s ease-in;
-  -o-transition: max-height 1s ease-in;
-  transition: max-height 1s ease-in;
-  // background: #e5feff;
-  overflow: hidden;
-  // "height: 0" not working with css transitions
-  max-height: 800px;
-}
+  animation: slideDown 1s;
+  @keyframes slideDown{
+    from {
 
+      transform: translateY(50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  transition: top 1s;
+}
   .goal-is-done {
     opacity: .2;
   }
@@ -108,14 +108,20 @@
 
   }
 }
+.goalInfo-appear {
+  opacity: 0;
+}
 
-.goalInfo-content{
+.goalInfo-appear.goalInfo-appear-active {
+  opacity: 1;
+  transition: opacity 1s;
 }
 
 .goalInfo-inner{
+  overflow: hidden;
   padding: 0 15px;
-}
 
+}
 .goalInfo-toggle{
   -webkit-transition: background .1s linear;
   -moz-transition: background .1s linear;
