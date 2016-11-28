@@ -6,7 +6,7 @@ class ProgressBar extends Component {
     this.calculateProgress = this.calculateProgress.bind(this);
   }
 
-  componentWillMount() {
+  componentDidUpdate() {
     this.calculateProgress();
   }
 
