@@ -55,7 +55,6 @@ class SingleGoal extends Component {
           }
         }
       }).then(() => {
-        console.log("Post request finished, sending update to app");
         setTimeout(() => {
           this.props.update();
         }, 200);
@@ -144,7 +143,7 @@ class SingleGoal extends Component {
   render() {
     return (
       <div>
-       {this.renderGoals()}
+        {this.renderGoals()}
       </div>
     );
   }

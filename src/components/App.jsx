@@ -56,7 +56,6 @@ class App extends Component {
       url: "/login",
       dataType: 'json'
     }).done((data) => {
-      // console.log("Am I logged in?:", data);
       this.setState({isLoggedIn: data.isLoggedIn, name: data.name});
       this.updateFromDatabase();
     });
@@ -80,8 +79,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log('==================Goals: ', this.state.goals, ' ============================');
-
     console.log("Rendering <App/>");
     return (
       <div id="wrapper">
