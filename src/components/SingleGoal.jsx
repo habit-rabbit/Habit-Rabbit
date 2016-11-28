@@ -85,10 +85,12 @@ class SingleGoal extends Component {
         return (
           <div>
             <p className="tasks">{task.name}</p>
-            <span>Finished already? </span>
+            <div id="finished-task-button">
+            <span>Task Done? </span>
              <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
               <span className="glyphicon glyphicon-check" aria-hidden="true" data-taskid={task.id}></span>
             </button>
+            </div>
           </div>
         );
       }
@@ -139,8 +141,8 @@ class SingleGoal extends Component {
             {this.getCurrentTask()}
           </div>
           <div className="row goalInfo">
-            <div className="col-md-9 col-centered">
-              <a href="#" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > More Info </a>
+            <div className="col-xs-4 col-xs-offset-4">
+              <a href="#" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}> show my tasks </a>
               {this.renderGoalInfo()}
             </div>
           </div>
