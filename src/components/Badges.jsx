@@ -5,43 +5,58 @@ class Badges extends Component {
 
   constructor(props){
     super(props);
-    this.renderImage = this.renderImage.bind(this)
-    this.buildBunnyArray = this.buildBunnyArray.bind(this)
-    this.goalsComplete = this.goalsComplete.bind(this)
+    this.renderImage = this.renderImage.bind(this);
+    this.buildBunnyArray = this.buildBunnyArray.bind(this);
+    this.goalsComplete = this.goalsComplete.bind(this);
+    this.buildTextArray = this.buildTextArray.bind(this);
   }
 
   renderImage(i){
     let bunnyImages=this.buildBunnyArray()
       return(
         <img src={bunnyImages[i]}/>
-        );
-    }
+      );
+  }
+
+  renderText(i){
+    let textSlogans=this.buildTextArray()
+      return(
+        <p>{textSlogans[i]}</p>
+      );
+  }
 
   buildBunnyArray(){
-      let bunnyArray =["/bunnysmirk.png","/rabeetpurple.png","/rabeetZebra.png","/RabeetOrangeTubby.png","/rabeetpolkaglasses.png","/rabeetgreenbean.png","/rabeetpig.png","/rabeetsneakypinky.png","/rabeetdon.png"]
-      let numberComplete = this.goalsComplete();
-      if (numberComplete < 9) {
-        let slicedBunnyArray = bunnyArray.slice(0, numberComplete);
-        return slicedBunnyArray;
-      } else {
-        return bunnyArray;
-      }
+    let bunnyArray =["/rabeetzombie.png","/rabeetpurple.png","/rabeetbluezebra.png","/rabeetorangetub.png","/rabeetnerd.png","/rabeetgreen.png","/rabeetpig.png","/rabeetpinky.png","/rabeetdon.png"];
+    let numberComplete = this.goalsComplete();
+    if (numberComplete < 9) {
+      let slicedBunnyArray = bunnyArray.slice(0, numberComplete);
+      return slicedBunnyArray;
+    } else {
+      return bunnyArray;
+    };
   }
 
   goalsComplete(){
-
     let numberComplete = 0;
     for (let goal of this.props.goalList) {
       if (goal.is_done === true) {
         numberComplete += 1;
-      }
-    }
-
+      };
+    };
     return numberComplete
   }
 
-
-
+  buildTextArray(){
+    let textArray = ["Bed yu sought yu wuz reed of mee!!", "Iz diz Hockey? Cuz I iz GOALee!", "SHRIIIIIIIEEEEEEEEEEEEK", "I reward each Goal widda SnaX!", "u shamshed ur Goalz, AND my glasses.", "Yu iz so gr8!! I boleeeve in yu!", "Frankly, Susan, I don't give a damn.","P4TR1CK4NDTH35W4YZ35", "Proper Planning Prevents Poor Progress"]
+    let numberComplete = this.goalsComplete();
+    if (numberComplete < 9) {
+      let slicedTextArray = textArray.slice(0, numberComplete);
+      // consolelog("SLICED ARRRAAAY", slicedTextArray)
+      return slicedTextArray;
+    } else {
+      return textArray;
+    };
+  }
 
 
   render() {
@@ -56,27 +71,25 @@ class Badges extends Component {
         <table className="table no-border">
           <tbody>
             <tr>
-              <td><div className="full-circle badge1">{this.renderImage(0)}</div></td>
-              <td><div className="full-circle badge2">{this.renderImage(1)}</div></td>
-              <td><div className="full-circle badge3">{this.renderImage(2)}</div></td>
+              <td><div className="full-circle badge1">{this.renderImage(0)}</div><h4>{this.renderText(0)}</h4></td>
+              <td><div className="full-circle badge2">{this.renderImage(1)}</div><h4>{this.renderText(1)}</h4></td>
+              <td><div className="full-circle badge3">{this.renderImage(2)}</div><h4>{this.renderText(2)}</h4></td>
             </tr>
             <tr>
-              <td><div className="full-circle badge4">{this.renderImage(3)}</div></td>
-              <td><div className="full-circle badge5">{this.renderImage(4)}</div></td>
-              <td><div className="full-circle badge6">{this.renderImage(5)}</div></td>
+              <td><div className="full-circle badge4">{this.renderImage(3)}</div><h4>{this.renderText(3)}</h4></td>
+              <td><div className="full-circle badge5">{this.renderImage(4)}</div><h4>{this.renderText(4)}</h4></td>
+              <td><div className="full-circle badge6">{this.renderImage(5)}</div><h4>{this.renderText(5)}</h4></td>
             </tr>
             <tr>
-              <td><div className="full-circle badge7">{this.renderImage(6)}</div></td>
-              <td><div className="full-circle badge8">{this.renderImage(7)}</div></td>
-              <td><div className="full-circle badge9">{this.renderImage(8)}</div></td>
+              <td><div className="full-circle badge7">{this.renderImage(6)}</div><h4>{this.renderText(6)}</h4></td>
+              <td><div className="full-circle badge8">{this.renderImage(7)}</div><h4>{this.renderText(7)}</h4></td>
+              <td><div className="full-circle badge9">{this.renderImage(8)}</div><h4>{this.renderText(8)}</h4></td>
             </tr>
-
           </tbody>
         </table>
       </div>
       </div>
       </div>
-
     );
   }
 
