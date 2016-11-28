@@ -37,11 +37,6 @@ router.get("/goals", (req, res) => {
     let query = req.query;
     query.table = findTable(req.url);
     query.data = {user_id: req.session['user-id']};
-    // db.getAllWhere(query,  (err, data) => {
-    //   if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
-    //   r.setData(data.sort((goalA, goalB) => {return goalB.id - goalA.id;}));
-    //   res.send(r);
-    // });
       db.getGoalsWithTasks(query,(err, data) => {
         if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
         r.setData(data.sort((goalA, goalB) => {return goalA.is_done ? 1 : -1;}));
@@ -134,18 +129,17 @@ router.get("/goals/:id/tasks", (req, res) => {
 router.post("/goals/:id/tasks/create", (req, res) => {
   const r = new ResponseData();
   if (req.xhr && req.session['user-id']) {
+    let taskNames = req.body.data.taskNames;
     let query = {};
-    taskNames = req.body.data.taskNames;
-
-    taskNames.map((taskName, index) => {
-      let isValidCredentials = new Validations(query.data).check();
-      query.table = findTable(req.url);
+    query.table = findTable(req.url);
+    taskNames.forEach((taskName, index) => {
       query.data = {
         name: taskName,
         task_order: index + 1,
         is_done: false,
         goal_id: req.params.id
       };
+      let isValidCredentials = new Validations(query.data).check();
       //check tasks for validations
       if(isValidCredentials) {
         db.insertRow(query, (err, data) => {
@@ -154,12 +148,15 @@ router.post("/goals/:id/tasks/create", (req, res) => {
           } else {
             data.length ? r.setData(data) : r.setErrorMsg("A different error message idk");
           }
+          if(index === taskNames.length - 1) {
+            res.send(r);
+          }
         });
       } else {
         r.setErrorMsg("Could not save your task, is it blank?");
+        res.send(r);
       }
     });
-    res.send(r);
 
   } else {
     res.redirect("/");

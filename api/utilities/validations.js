@@ -62,7 +62,7 @@ Validations.prototype.validateObj = function(object) {
     let re = new RegExp(elm);
     keyArr.forEach((keys) => {
       if(re.test(keys)) {
-        console.log("testing key: ", keys);
+        // console.log("testing key: ", keys);
         this.data = object[keys];
         this.mustTest(elm);
       }
@@ -155,8 +155,8 @@ Validations.prototype.validate = function (args) {
   const  argsArr = (args instanceof Array) ? args : Array.from(arguments);
   argsArr.forEach((elm, index) => {
     this[elm]();
-    console.log("function being called is", elm, "() ",  " for: ", this.data)
-    console.log("current test array is", this.tests)
+    // console.log("function being called is", elm, "() ",  " for: ", this.data)
+    // console.log("current test array is", this.tests)
   });
   return this;
 }
