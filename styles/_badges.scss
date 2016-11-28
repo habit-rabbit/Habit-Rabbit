@@ -3,6 +3,7 @@
   -moz-border-radius: 110px;
   -webkit-border-radius: 110px;
   width: 220px;
+  margin: auto;
   // z-index: +99;
 }
 
@@ -32,6 +33,10 @@
 }
 .badge9{
   background-color: #ff9900;
+}
+
+.badge-text {
+  text-align: center;
 }
 
 .table.no-border tr td, .table.no-border tr th {
