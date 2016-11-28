@@ -91,7 +91,7 @@ class Hero extends Component {
               </div>
             </div>
             <div className="img-container">
-              <img src="/bunnysmirk.png" alt="image-of-zombie-rabbit"/>
+              <img src="/rabeetzombie.png" alt="image-of-zombie-rabbit"/>
             </div>
           </div>
 

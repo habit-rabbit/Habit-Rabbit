@@ -44,7 +44,9 @@ class CreateDailyGoalModal extends Component {
       }
     }).done ((response) => {
       console.log("Got the response from CreateDailyGoalModal! Its:", response);
+      console.log("current state of goalname:", this.state.dailyGoalName);
       this.setState({dailyGoalName: ""});
+      console.log("after setting state of goalname:", this.state.dailyGoalName);
       this.props.updateDailies();
       $("#create-daily-goal-modal").modal("hide");
     });
@@ -86,7 +88,7 @@ class CreateDailyGoalModal extends Component {
             <form onSubmit={this.handleSubmit}>
 
               <div className="form-group form-group-modal">
-                <input id="daily-goal-name" type="text" value={this.state.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name" />
+                <input id="daily-goal-name" type="text" value={this.state.dailyGoalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name" />
               </div>
 
               <div className="form-group form-group-modal">

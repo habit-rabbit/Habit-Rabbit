@@ -20,6 +20,10 @@
   p {
     font-size: 1em;
   }
+  .col-centered {
+    float: none;
+    margin: 0 auto;
+  }
   .progress {
     margin: auto;
     position: absolute;
@@ -31,7 +35,7 @@
     text-decoration: line-through;
   }
   .tasks {
-    word-wrap: breakword;
+    overflow-wrap: break-word;
   }
   .task-list {
     text-align: left;
@@ -40,6 +44,15 @@
   .well {
     background-color: #96C8A2;
   }
+  -webkit-transition: max-height 1s ease-in;
+  -moz-transition: max-height 1s ease-in;
+  -ms-transition: max-height 1s ease-in;
+  -o-transition: max-height 1s ease-in;
+  transition: max-height 1s ease-in;
+  // background: #e5feff;
+  overflow: hidden;
+  // "height: 0" not work with css transitions
+  max-height: 800px;
 }
 
   .goal-is-done {
@@ -60,6 +73,59 @@
     margin: 10px;
     color: turquoise;
   }
+
+  .btn {
+    margin: 10px;
+    font-size: 16px;
+    color: turquoise;
+  }
+}
+
+
+
+.goalInfo{
+  display: inline-block;
+  text-align: left;
+  margin: 1%;
+  width: 100%;
+
+  &:hover{
+
+    // max-height technique
+    .goalInfo-content{
+      // If use the "height: auto", the effect not works. Is necessary some value for the CSS create a CSS animate, and we can use "max-height" with a great value for emulate this effect.
+      max-height: 400px;
+    }
+
+  }
+}
+
+.goalInfo-content{
+}
+
+.goalInfo-inner{
+  padding: 0 15px;
+}
+
+.goalInfo-toggle{
+  -webkit-transition: background .1s linear;
+  -moz-transition: background .1s linear;
+  -ms-transition: background .1s linear;
+  -o-transition: background .1s linear;
+  transition: background .1s linear;
+  background: #00b8c9;
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  font-size: 30px;
+  margin: 0 0 10px;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover{
+    background: darken(#00b8c9, 15%);
+  }
+
 }
 
 
@@ -73,9 +139,14 @@
 
 
 
-
-
-
-
+// div > ul {
+//   visibility: hidden;
+//   opacity: 0;
+//   transition: visibility 0s, opacity 0.5s linear;
+// }
+// div:hover > ul {
+//   visibility: visible;
+//   opacity: 1;
+// }
 
 

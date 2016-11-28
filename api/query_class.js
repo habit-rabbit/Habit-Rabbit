@@ -50,7 +50,7 @@ database.prototype.getAllWhere = function (query, callback) {
     .where(query.data)
     .asCallback(callback);
 }
-database.prototype.getGoalsWithTasks = function(callback) {
+database.prototype.getGoalsWithTasks = function(query, callback) {
   //queries database for all goals and joins their respective
   // tasks to the goal as an array of JSON objects
   // contained in a property names 'tasks' for a goal
@@ -60,6 +60,7 @@ database.prototype.getGoalsWithTasks = function(callback) {
     'goals.*',
     this.knex.raw("JSON_AGG(JSON_BUILD_OBJECT('id',tasks.id, 'name', tasks.name, 'is_done', tasks.is_done) order by tasks.id) as tasks")
   ])
+  .where(query.data)
   .innerJoin('tasks','goals.id','tasks.goal_id')
   .groupBy('goals.id')
   .orderBy("goals.id", "desc")

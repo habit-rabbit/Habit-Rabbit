@@ -13,6 +13,7 @@ class DailyGoals extends Component {
     this.renderDailyGoals = this.renderDailyGoals.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.updateFromDatabase = this.updateFromDatabase.bind(this);
   }
 
@@ -20,8 +21,34 @@ class DailyGoals extends Component {
     this.updateFromDatabase();
   }
 
-  handleCheck () {
+  handleCheck (e, dailyGoal) {
+    e.preventDefault();
+    $.ajax({
+      method: "post",
+      url: `/api/daily_goals/${dailyGoal.id}/update`,
+      data: {
+        data: {
+          is_done: true
+        }
+      }
+    }).done(() => {
+      this.updateFromDatabase ();
+    });
+  }
 
+  handleDelete (e, dailyGoal) {
+    e.preventDefault();
+    $.ajax({
+      method: "post",
+      url: `/api/daily_goals/${dailyGoal.id}/delete`,
+      data: {
+        data: {
+          id: dailyGoal.id
+        }
+      }
+    }).done(() => {
+      this.updateFromDatabase();
+    });
   }
 
   handleSubmit(event) {
@@ -35,6 +62,7 @@ class DailyGoals extends Component {
       url: "/api/daily_goals",
     }).done((response) => {
       this.setState({dailies: response.data});
+      console.log(response);
     });
   }
 
@@ -53,16 +81,22 @@ class DailyGoals extends Component {
       return (
         <div>
           {this.state.dailies.map((dailyGoal, index) => {
+            let goalClass = dailyGoal.is_done ? "goal-is-done" : "goal-not-done";
             return (
               <div className="daily-goals-template row well" key={index}>
-                <div className="col-md-7">
-                  <h1 className="daily-goal"> {dailyGoal.name} </h1>
-                </div>
-                <div className="col-md-5">
-                  <div className="daily-goals-icons">
-                    <i className="fa fa-check-square" aria-hidden="true" onClick={this.handleCheck}></i>
-                    <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    <i className="fa fa-trash" aria-hidden="true"></i>
+                <div className={goalClass}>
+                  <div className="col-md-7">
+                    <h1 className="daily-goal"> {dailyGoal.name} </h1>
+                  </div>
+                  <div className="col-md-5">
+                    <div className="daily-goals-icons">
+                      <button type="button" className="btn btn-default" aria-label="Checkbox">
+                        <span className="glyphicon glyphicon-check" aria-hidden="true" onClick={()=>{this.handleCheck(event, dailyGoal)}}></span>
+                      </button>
+                      <button type="button" className="btn btn-default" aria-label="Trash">
+                        <span className="glyphicon glyphicon-trash" aria-hidden="true" onClick={()=>{this.handleDelete(event, dailyGoal)}}></span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

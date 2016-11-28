@@ -95,7 +95,7 @@ class CreateTask extends Component {
         <div className="img-container">
           <div className="row">
           <div className="col-md-8 col-centered">
-          <img src="http://i.imgur.com/dmYCfcX.png" />
+          <img src="/rabeetzombie.png" />
             <h5><p>Well well well. Look who we have here, it is our dear friend, string.interpolation. The bravery and courage you have shown by setting a new Goal has given Rabeet a little *bounce* in her step! When she is pleased, her coat is bright. Do not slack on your Goals though, or Rabeet will start turning back into a lazy rabid trash monster.</p></h5>
             <h6><p><em>I bet you were being a lazy little trash monster last night, wernt you!!</em></p></h6>
           </div>
