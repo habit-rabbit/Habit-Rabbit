@@ -30,7 +30,14 @@
     margin: auto;
     position: absolute;
     top: 54px; left: 0; bottom: 0; right: 0;
+
+    .progress-bar {
+      -webkit-transition: none;
+      -o-transition: none;
+      transition: none;
+    }
   }
+
 
   .strikethrough {
     position: relative;
@@ -53,7 +60,7 @@
   transition: max-height 1s ease-in;
   // background: #e5feff;
   overflow: hidden;
-  // "height: 0" not work with css transitions
+  // "height: 0" not working with css transitions
   max-height: 800px;
 }
 
