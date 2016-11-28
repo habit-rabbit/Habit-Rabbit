@@ -155,20 +155,22 @@ class CreateGoalModal extends Component {
             {this.renderErrors()}
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
 
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input id="goal-name" type="text" value={this.state.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name" />
               </div>
 
 
-              <div className="form-group">
+              <div className="form-group form-group-modal">
               {this.renderForms()}
               </div>
 
-              <button type="button" className="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
-                <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              </button>
+              <div className="form-group form-group-modal">
+                <button type="button" className="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
+                  <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+              </div>
 
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input type="submit" name="create-goal" className="btn btn-default" value="Create Goal!" />
               </div>
             </form>

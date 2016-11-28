@@ -1,0 +1,87 @@
+
+
+/*#login-body input {
+  margin: 1px;
+  padding: 10px;
+  width: 80%;
+}*/
+
+.alert {
+  width: 80%;
+  margin: auto;
+}
+
+.form-group-modal {
+  margin: auto;
+  text-align: center;
+
+  input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+  }
+
+
+}
+/*#create-goal-body input {
+  margin: 1px;
+  margin-top: 10px;
+  padding: 10px;
+  width: 80%;
+}
+*/
+@import 'mixins';
+
+/*.goals-form-control {
+  padding-top: 50px;
+  position: absolute;
+  margin: auto;
+}
+*/
+#create-goal {
+  margin-top: 20px;
+  position: absolute;
+}
+
+/*#create-goal-input {
+  margin: auto;
+  text-align: center;
+  width: 80%;
+  position: absolute;
+}
+
+#create-daily-goal-modal {
+  margin: auto;
+  text-align: center;
+  width: 80%;
+}*/
+
+#daily-goal-name {
+  margin: 1px;
+  margin-top: 10px;
+  padding: 10px;
+  width: 80%;
+}
+
+#create-goal-body button {
+    background-color: #BDFCC9;
+    background-image: none;
+    box-shadow: 0px 0px 3px rgba(92, 184, 92, 0.87);
+    padding-bottom: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 6px;
+
+    &:hover {
+      transition: all 0.3s ease-in-out;
+      background-color: darken(saturate(#BDFCC9, 10%), 10%);
+    }
+    &:focus {
+    outline: 1px dotted BDFCC9;
+
+    }
+}
+
+.progress-bar.progress-bar-info {
+  @include linear-gradient(left, rgb(177, 223, 255) 0, rgba(204, 0, 255, 0.68) 130%);
+}

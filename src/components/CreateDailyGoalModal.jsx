@@ -83,13 +83,13 @@ class CreateDailyGoalModal extends Component {
 
             <div id="create-daily-goal-body" className="modal-body">
             {this.renderErrors()}
-            <form className="form-horizontal" onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
 
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input id="daily-goal-name" type="text" value={this.state.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name" />
               </div>
 
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input type="submit" name="create-goal" className="btn btn-default" value="Get Cracking!" />
               </div>
             </form>

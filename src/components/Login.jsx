@@ -83,15 +83,15 @@ class Login extends Component {
             {this.renderError()}
             <form onSubmit={this.handleSubmit}>
 
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input id="email" type="text" value={this.state.email} onChange={this.handleChange} name="email" placeholder="Email"/>
               </div>
 
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input id="password" type="password" value={this.state.password} onChange={this.handleChange} name="password" placeholder="Password"/>
               </div>
 
-              <div className="form-group">
+              <div className="form-group form-group-modal">
                 <input type="submit" name="login" className="btn btn-default" value="Login" />
               </div>
               </form>
