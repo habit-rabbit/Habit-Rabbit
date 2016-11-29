@@ -99,7 +99,7 @@ class Dashboard extends Component {
                       <p className="goalInfo-toggle" data-id='2' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
                     <div>
-                        <img src="/rabeetzombie.png" alt="image-of-zombie-rabbit"/>
+                        <img src="/rabeetdv.png" alt="image-of-zombie-rabbit"/>
                     </div>
                 </div>
         break;
@@ -116,7 +116,7 @@ class Dashboard extends Component {
                       <p className="goalInfo-toggle" data-id='3' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
                     <div>
-                        <img src="/rabeetnerd.png" alt="image-of-zombie-rabbit"/>
+                        <img src="/rabeetdv.png" alt="image-of-zombie-rabbit"/>
                     </div>
                 </div>
         break;
@@ -136,7 +136,7 @@ class Dashboard extends Component {
                       <p className="goalInfo-toggle" data-id='4' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
                     <div>
-                        <img src="/rabeetpig.png" alt="image-of-zombie-rabbit"/>
+                        <img src="/rabeetdv.png" alt="image-of-zombie-rabbit"/>
                     </div>
                 </div>
         break;
@@ -152,7 +152,7 @@ class Dashboard extends Component {
                       <p className="goalInfo-toggle" data-id='end' onClick={this.handleClick} >Press Enter or click here to end </p>
                     </div>
                     <div>
-                        <img src="/rabeetgreen.png" alt="image-of-zombie-rabbit"/>
+                        <img src="/rabeetdv.png" alt="image-of-zombie-rabbit"/>
                     </div>
                 </div>
         break;
