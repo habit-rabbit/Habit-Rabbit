@@ -1,0 +1,54 @@
+.text-center {
+  text-align: center;
+  h1 {
+    font-size: 2em;
+  }
+}
+
+// .fade-in {
+//   animation: fadeIn 2s;
+//   @keyframes fadeIn {
+//     from {
+//       opacity: .2;
+//     }
+//     to {
+//       opacity: 1;
+//     }
+//   }
+// }
+.example-enter {
+  opacity: .001;
+}
+
+.example-enter.example-enter-active {
+  font-size: 1em;
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.example-appear {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
+}
+.example-appear.example-appear-active {
+  opacity: 1;
+}
+
+
+  @keyframes hightlight {
+    from {
+      color: grey;
+    }
+    to {
+      color: #00b8c9
+    }
+  }
