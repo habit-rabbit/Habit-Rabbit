@@ -4,6 +4,9 @@ class ProgressBar extends Component {
   constructor(props) {
     super(props);
     this.calculateProgress = this.calculateProgress.bind(this);
+    this.state = {
+      width: "0%"
+    }
   }
 
   calculateProgress () {
@@ -27,7 +30,7 @@ class ProgressBar extends Component {
       aria-valuenow="0"
       aria-valuemin="0"
       aria-valuemax="100"
-      style={{width: this.calculateProgress()}}>
+      style={this.state}>
       </div>
     )
   }
