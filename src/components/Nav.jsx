@@ -10,6 +10,7 @@ class Nav extends Component {
     this.logOut = this.logOut.bind(this);
     this.handleLinks = this.handleLinks.bind(this)
     this.handleKey = this.handleKey.bind(this);
+    this.newBadge = this.newBadge.bind(this);
   }
 
   componentWillMount() {
@@ -42,6 +43,7 @@ class Nav extends Component {
     if(this.props.isLoggedIn) {
       return (
         <ul className="nav navbar-nav navbar-right">
+        {this.newBadge()}
           <li className="dropdown">
             <a href="" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hey {this.props.name}!<span className="caret"></span></a>
             <ul className="dropdown-menu">
@@ -69,14 +71,29 @@ class Nav extends Component {
   handleLinks(event) {
     event.preventDefault();
     let id = event.target.id;
+    let className = event.target.className
+
     if (id === "ltGoals"){
       this.props.setView(1);
     }
     if (id === "dailyGoals"){
       this.props.setView(2);
     }
-    if (id === "badges"){
+    if (id === "badges" || id === "new-badge"){
       this.props.setView(3);
+      this.props.resetBadgeAlert();
+    }
+  }
+
+  newBadge(){
+    if (this.props.newBadge === true){
+      return (
+        <li>
+          <a href="" id="new-badge" onClick={this.handleLinks}>
+            <span id="new-badge" onClick={this.handleLinks} className="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </a>
+        </li>
+      );
     }
   }
 

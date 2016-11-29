@@ -15,6 +15,7 @@ class App extends Component {
       goals: [],
       view: "DailyGoals",
       badges: 0,
+      newBadge: false,
     }
 
     this.renderPage = this.renderPage.bind(this);
@@ -22,6 +23,7 @@ class App extends Component {
     this.updateFromDatabase = this.updateFromDatabase.bind(this);
     this.setView = this.setView.bind(this);
     this.updateBadge = this.updateBadge.bind(this);
+    this.resetBadgeAlert = this.resetBadgeAlert.bind(this);
 
     this.updateFromDatabase();
   }
@@ -65,7 +67,6 @@ class App extends Component {
 
   updateBadge(){
     let badges = this.state.badges + 1;
-    console.log('==========inside update badges============== ', badges);
 
     $.ajax({
         method: 'post',
@@ -76,14 +77,20 @@ class App extends Component {
           }
         }
       }).done(() => {
-        this.setState({badges: badges});
+        this.setState({badges: badges, newBadge: true});
       });
+  }
+
+  resetBadgeAlert(){
+        this.setState({newBadge: false});
   }
 
 //this renders appropriate component if user is not logged in
   renderPage() {
     if (this.state.isLoggedIn === false) {
-      return <Hero setUserId={this.setUserId} verifyLogin={this.verifyLogin}/>;
+      return (<Hero
+        setUserId={this.setUserId}
+        verifyLogin={this.verifyLogin} />);
     } else {
       return (
         <ReactCSSTransitionGroup
@@ -92,7 +99,15 @@ class App extends Component {
           transitionName="background"
           transitionEnterTimeout={1000}
           transitionLeaveTimeout={1000}>
-          <Carousel badges={this.state.badges} updateBadge={this.updateBadge} updateGoalsIndex={this.updateFromDatabase} goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase} component="animated-component"/>
+          <Carousel
+          badges={this.state.badges}
+          updateBadge={this.updateBadge}
+          updateGoalsIndex={this.updateFromDatabase}
+          goalList={this.state.goals}
+          view={this.state.view}
+          key={this.state.view}
+          update={this.updateFromDatabase}
+          component="animated-component"/>
         </ReactCSSTransitionGroup>);
     }
   }
@@ -106,6 +121,8 @@ class App extends Component {
           isLoggedIn={this.state.isLoggedIn}
           verifyLogin={this.verifyLogin}
           setView={this.setView}
+          newBadge={this.state.newBadge}
+          resetBadgeAlert={this.resetBadgeAlert}
          />
         {this.renderPage()}
       </div>
