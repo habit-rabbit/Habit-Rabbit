@@ -61,7 +61,7 @@ class Nav extends Component {
       return(
         <ul className="nav navbar-nav navbar-right">
           <li><a href= "" data-toggle="modal" data-target="#login-modal">Login</a></li>
-          <Login updateNavLinks={this.updateNavLinks} verifyLogin={this.props.verifyLogin}/>
+          <Login updateNavLinks={this.updateNavLinks} updateGoals={this.props.updateGoals}verifyLogin={this.props.verifyLogin}/>
           <li><a href= "" data-toggle="modal" data-target="#register-modal">Register</a></li>
           <Register verifyLogin={this.props.verifyLogin}/>
         </ul>
@@ -83,7 +83,7 @@ class Nav extends Component {
       this.props.setView(3);
       this.props.resetBadgeAlert();
     }
-    if (id === "dashboard") {
+    if (id === "dashboard" || id === "nav-header") {
       this.props.setView(4)
     }
   }
@@ -97,9 +97,6 @@ class Nav extends Component {
           </a>
         </li>
       );
-    }
-    if (id === "ltGoals") {
-      this.props.setView(4);
     }
   }
 
