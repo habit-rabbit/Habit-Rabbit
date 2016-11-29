@@ -32,6 +32,16 @@ class App extends Component {
     this.verifyLogin();
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    if(this.state.goals !== nextState.goals) {
+      return true;
+    } else if (this.state.view !== nextState.view) {
+      return true;
+    } else if (this.state.newBadge !== nextState.newBadge){
+      return true;
+    }
+    return false;
+  }
 
   setView(view){
     if (view === 1) {
@@ -91,6 +101,8 @@ class App extends Component {
 
 //this renders appropriate component if user is not logged in
   renderPage() {
+          console.log("GOAL LIST App :", this.state.goals)
+
     if (this.state.isLoggedIn === false) {
       return (<Hero
         setUserId={this.setUserId}

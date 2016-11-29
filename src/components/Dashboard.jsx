@@ -10,7 +10,7 @@ class Dashboard extends Component {
     this.handleEnter = this.handleEnter.bind(this);
     this.state = {
       renderState: 'intro',
-      tutorialSlides: ['intro', 'start', 'dailyGoals', 'goals', 'badges', 'end'],
+      tutorialSlides: ['intro', 'start', 'dailyGoals', 'goals', 'badges'],
       showTutorial: false
     }
   }
@@ -23,36 +23,47 @@ class Dashboard extends Component {
       this.setState({showTutorial: true});
     }
   }
+
   componentWillUnmount() {
     document.removeEventListener('keyup', this.handleEnter, false);
   }
-
 
   handleEnter(event) {
     //check if enter key was pressed
     if(event.key === 'Enter') {
       //check which event we are on
       let currentState = this.state.renderState;
-      //find that in array..
-      let index = this.state.tutorialSlides.findIndex( (elm) => {
-        return elm === currentState;
-      });
-      //set new state with the next element after the found index;
-      let slide = this.state.tutorialSlides[index + 1];
-      this.setState({renderState: slide});
+      //if you are on badges, then trigger end of tutorial
+      if (currentState !== 'badges'){
+        //find that in array..
+        let index = this.state.tutorialSlides.findIndex( (elm) => {
+          return elm === currentState;
+        });
+        //set new state with the next element after the found index;
+        let slide = this.state.tutorialSlides[index + 1];
+        this.setState({renderState: slide});
+      } else {
+        this.setState({showTutorial: false});
+        document.removeEventListener('keyup', this.handleEnter, false)
+      }
     }
   }
+
   handleClick(event) {
     let id = event.target.dataset.id;
     if(id === 'restart') {
       this.setState({showTutorial: true, renderState: 'intro'});
     document.addEventListener('keyup', this.handleEnter, false);
+    } else if (id==='end') {
+      document.removeEventListener('keyup', this.handleEnter, false);
+      this.setState({showTutorial: false});
     } else {
       let slide = this.state.tutorialSlides[id];
       console.log(slide, id)
       this.setState({renderState: slide});
     }
   }
+
   highlightItem(target) {
     setTimeout( () => {
       document.querySelector(target).classList.add('highlight');
@@ -62,6 +73,7 @@ class Dashboard extends Component {
     }, 12000);
 
   }
+
   renderTutorial(key) {
     let render = null;
     switch(key) {
@@ -144,11 +156,7 @@ class Dashboard extends Component {
                     </div>
                 </div>
         break;
-      case 'end':
-        document.removeEventListener('keyup', this.handleEnter, false);
-        this.setState({showTutorial: false});
-        this.forceUpdate();
-      break;
+
     }
 
     return render;
