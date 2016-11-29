@@ -13,7 +13,7 @@ class App extends Component {
       name: "",
       isLoggedIn: false,
       goals: [],
-      view: "DailyGoals",
+      view: "Dashboard",
       badges: 0,
     }
 
@@ -31,14 +31,17 @@ class App extends Component {
   }
 
   setView(view){
-    if (view === 1){
-      this.setState({view: "AllGoals"});
+    if (view === 1) {
+      this.setState({view: "Dashboard"});
     }
-    if (view === 2){
+    if (view === 2) {
       this.setState({view: "DailyGoals"});
     }
-    if (view === 3){
+    if (view === 3) {
       this.setState({view: "Badges"});
+    }
+    if (view === 4) {
+      this.setState({view: "AllGoals"});
     }
   }
 
@@ -92,7 +95,7 @@ class App extends Component {
           transitionName="background"
           transitionEnterTimeout={1000}
           transitionLeaveTimeout={1000}>
-          <Carousel badges={this.state.badges} updateBadge={this.updateBadge} updateGoalsIndex={this.updateFromDatabase} goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase} component="animated-component"/>
+          <Carousel name={this.state.name} badges={this.state.badges} updateBadge={this.updateBadge} updateGoalsIndex={this.updateFromDatabase} goalList={this.state.goals} view={this.state.view} key={this.state.view} update={this.updateFromDatabase} component="animated-component"/>
         </ReactCSSTransitionGroup>);
     }
   }

@@ -48,6 +48,7 @@ class Nav extends Component {
               <li><a href="" id="ltGoals" onClick={this.handleLinks}>Goals</a></li>
               <li><a href="" id="dailyGoals" onClick={this.handleLinks}>Daily Reminders</a></li>
               <li><a href="" id="badges" onClick={this.handleLinks}>Badges</a></li>
+              <li><a href="" id="dashboard" onClick={this.handleLinks}>Dashboard</a></li>
               <li role="separator" className="divider"></li>
               <li><a href="" onClick={this.logOut}>Logout</a></li>
             </ul>
@@ -69,14 +70,17 @@ class Nav extends Component {
   handleLinks(event) {
     event.preventDefault();
     let id = event.target.id;
-    if (id === "ltGoals"){
+    if (id === "dashboard") {
       this.props.setView(1);
     }
-    if (id === "dailyGoals"){
+    if (id === "dailyGoals") {
       this.props.setView(2);
     }
-    if (id === "badges"){
+    if (id === "badges") {
       this.props.setView(3);
+    }
+    if (id === "ltGoals") {
+      this.props.setView(4);
     }
   }
 
