@@ -1,0 +1,10 @@
+@import 'mixins';
+
+ .navbar {
+   margin: 0px;
+   padding: 10px;
+   text-align: center;
+   @include linear-gradient(top, rgba(72, 13, 242, 0.13), rgba(189, 237, 252, 0.38), white);
+   border-bottom-width: 0px;
+ }
+
