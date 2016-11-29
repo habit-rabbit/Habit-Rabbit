@@ -1,13 +1,14 @@
 body {
+  color: #777;
   font-family: 'Raleway', sans-serif;
 }
 
 .create {
   display: inline-block;
   float: none;
-  vertical-align: top;
-  margin-top: 0px;
   margin-bottom: 0px;
+  margin-top: 0px;
+  vertical-align: top;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -21,3 +22,6 @@ h1 {
   margin-right: 20px;
 }
 
+#myModalLabel {
+  font-size: 25px;
+}

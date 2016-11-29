@@ -13,8 +13,19 @@ class AllGoals extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleKey = this.handleKey.bind(this);
   }
-
+  componentWillMount() {
+    document.addEventListener('keydown', this.handleKey, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKey, false);
+  }
+  handleKey(event) {
+    if(event.altKey && (event.key === 'n')) {
+      this.handleSubmit(event);
+    }
+  }
   handleChange(event) {
     let id = event.target.id;
     let value = event.target.value;
@@ -37,11 +48,11 @@ class AllGoals extends Component {
           <div className="page-header">
             <h1>Your Goals</h1>
             <form className="create goal" onSubmit={this.handleSubmit} >
-              <input type="submit" id="goal-button" className="btn btn-default"  value="Create A New Goal!"/>
+              <input type="submit" id="new-goal-button" className="btn btn-default"  value="Create A New Goal!"/>
             </form>
             <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
           </div>
-          <Goals update={this.props.update} goalList={this.props.goalList} goalsAreCurrent={this.props.goalsAreCurrent} setAppGoalsDefault={this.props.setAppGoalsDefault}/>
+          <Goals updateBadge={this.props.updateBadge} update={this.props.update} goalList={this.props.goalList} goalsAreCurrent={this.props.goalsAreCurrent} setAppGoalsDefault={this.props.setAppGoalsDefault}/>
         </div>
       </div>
     );

@@ -12,11 +12,28 @@ class SingleGoal extends Component {
     this.updateGoal = this.updateGoal.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.state = {
       showGoalinfo: false,
       goalInfo: "hide"
     }
   }
+
+  handleDelete (event) {
+    event.preventDefault();
+    $.ajax({
+      method: "post",
+      url: `/api/goals/${this.props.goalInfo.id}/delete`,
+      data: {
+        data: {
+          id: this.props.goalInfo.id
+        }
+      }
+    }).done(() => {
+      this.props.update();
+    });
+  }
+
  //=================show-hide goal details===============================
 
   handleMouseEnter() {
@@ -54,6 +71,7 @@ class SingleGoal extends Component {
   //============== update database: goal.is_done = true==================
   updateGoal() {
     console.log("Goal completed, sending post request");
+
     setTimeout(() => {
       $.ajax({
         method: 'post',
@@ -66,10 +84,15 @@ class SingleGoal extends Component {
       }).then(() => {
         setTimeout(() => {
           this.props.update();
+          this.props.updateBadge();
+
         }, 200);
       });
      }, 500);
   }
+
+
+
 
   //==============================For Tasks==============================
   getCurrentTask () {
@@ -87,9 +110,15 @@ class SingleGoal extends Component {
             <p className="tasks">{task.name}</p>
             <div id="finished-task-button">
             <span>Task Done? </span>
-             <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
+            <div className="daily-goals-icons goals-page">
+              <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
               <span className="glyphicon glyphicon-check" aria-hidden="true" data-taskid={task.id}></span>
-            </button>
+              </button>
+              <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
+              <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </button>
+            </div>
+
             </div>
           </div>
         );
@@ -124,33 +153,35 @@ class SingleGoal extends Component {
     } else {
       return(
         <div className={this.props.goalClass}>
-
-          <div className="col-md-3">
-          <h1> {this.props.goalInfo.name} </h1>
-
-
-          </div>
-          <div className="col-md-6">
-            <div className="progress">
-              <ProgressBar
-              taskArray={this.props.goalInfo.tasks}/>
+          <div className="row">
+            <div className="col-md-3">
+              <h1> {this.props.goalInfo.name} </h1>
             </div>
-          </div>
-          <div className="col-md-3">
+
+            <div className="col-md-6">
+              <div className="progress">
+                <ProgressBar
+                taskArray={this.props.goalInfo.tasks}/>
+              </div>
+            </div>
+          <div className="col-xs-3 col-md-3">
             <h4 className="task-list"> Next Task: </h4>
             {this.getCurrentTask()}
           </div>
           <div className="row goalInfo">
             <div className="col-xs-4 col-xs-offset-4">
-              <a href="#" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}> show my tasks </a>
+              <p href="" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > see task info </p>
               {this.renderGoalInfo()}
             </div>
+                <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
+                  <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </button>
           </div>
+        </div>
         </div>
       );
     }
   }
-//========================================================================
 
   render() {
     return (
