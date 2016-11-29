@@ -7,6 +7,8 @@
     padding-left: 20px;
     margin-top: 20px;
     text-align: center;
+    overflow-wrap: break-word;
+    display: block;
   }
 
   h3 {
@@ -88,6 +90,12 @@
   vertical-align: center;
 }
 
+  .btn {
+    // margin: 10px;
+    font-size: 16px;
+    color: turquoise;
+  }
+
 .goal-is-done {
   opacity: .2;
 }
@@ -115,16 +123,16 @@ background-color: #d8f7ff;
   opacity: 0;
 }
 
+.goalInfo-appear.goalInfo-appear-active {
+  opacity: 1;
+  transition: opacity 1s;
+}
+
 .glyphicon-check {
   color:#5bc0de;
 }
 
-.goalInfo-content{
-  .goalInfo-appear.goalInfo-appear-active {
-    opacity: 1;
-    transition: opacity 1s;
-  }
-}
+
 
 .goalInfo-inner{
   overflow: hidden;
@@ -148,6 +156,10 @@ background-color: #d8f7ff;
   &:hover{
     background: darken(#00b8c9, 15%);
   }
+}
+
+.glyphicon {
+  color: turquoise;
 }
 
 .progress-bar.progress-bar-info {
