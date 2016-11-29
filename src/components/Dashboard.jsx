@@ -85,14 +85,14 @@ class Dashboard extends Component {
             {this.props.goalList.map( (goal, goalIndex) => {
               if(!goal.is_done && goalIndex < 5) {
                 return (
-                  <div>
+                  <div key={goalIndex}>
                     <h4>{goal.name}...</h4>
                     <ol>
                       {goal.tasks.map((task, index) => {
                         let taskClass = "";
                         if(index < 3) {
                           return(
-                            <li className={taskClass}>{task.name}</li>
+                            <li key={(index)}className={taskClass}>{task.name}</li>
                             )
                         }
                       })}
@@ -195,7 +195,6 @@ class Dashboard extends Component {
 
   render() {
     let dashboard =
-        <div>
           <div className="row">
             <div className="col-md-6">
               <h2>Your Goals: </h2>
@@ -205,10 +204,6 @@ class Dashboard extends Component {
               <h2>Your Todos: </h2>
             </div>
           </div>
-          <div className="row">
-            <p className="goalInfo-toggle" data-id='restart' onClick={this.handleClick} >want to see the tutorial again? Click here</p>
-          </div>
-        </div>
     console.log("rendered")
     return(
       <div className="background-layout">
@@ -224,8 +219,11 @@ class Dashboard extends Component {
             {this.state.showTutorial ? this.renderTutorial(this.state.renderState) : dashboard }
               </ReactCSSTransitionGroup>
         </div>
+      {this.state.showTutorial ? <footer/>: <footer id='restart-tutorial'>
+        <p className="goalInfo-toggle" data-id='restart' onClick={this.handleClick} >want to see the tutorial again? Click here</p>
+      </footer>}
       </div>
-      );
+     );
 
   }
 
