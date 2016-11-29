@@ -1,7 +1,20 @@
 .text-center {
   text-align: center;
+  perspective: 100px;
   h1 {
     font-size: 14px;
+    animation: swing .5s ease-in-out;
+    @keyframes swing {
+      0% {
+        transform: rotateY(90deg);
+      }
+      90% {
+        transform: rotateY(-10deg);
+      }
+      100% {
+        transform: none;
+      }
+    }
   }
 }
 
@@ -18,12 +31,15 @@
 // }
 .example-enter {
   opacity: .001;
+  transform: rotateX(-90deg);
 }
 
 .example-enter.example-enter-active {
   font-size: 1em;
   opacity: 1;
+  transform: none;
   transition: opacity .5s ease-in;
+  transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
 }
 
 .example-leave {

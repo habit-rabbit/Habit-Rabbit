@@ -4,6 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+    this.renderGoalsAndTodos = this.renderGoalsAndTodos.bind(this);
     this.renderTutorial = this.renderTutorial.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.highlightItem = this.highlightItem.bind(this);
@@ -14,6 +15,11 @@ class Dashboard extends Component {
       showTutorial: false
     }
   }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if(nextProps.goalList.length !== this.props.goalList.length) {
+  //     return true;
+  //   }
+  // }
   componentWillMount() {
     document.addEventListener('keyup', this.handleEnter, false);
     //check to see if you have any goals.. if you dont its probably apparent
@@ -51,14 +57,13 @@ class Dashboard extends Component {
   handleClick(event) {
     let id = event.target.dataset.id;
     if(id === 'restart') {
-      this.setState({showTutorial: true, renderState: 'intro'});
-    document.addEventListener('keyup', this.handleEnter, false);
+      this.setState({showTutorial: true, renderState: 'start'});
+      document.addEventListener('keyup', this.handleEnter, false);
     } else if (id==='end') {
       document.removeEventListener('keyup', this.handleEnter, false);
       this.setState({showTutorial: false});
     } else {
       let slide = this.state.tutorialSlides[id];
-      console.log(slide, id)
       this.setState({renderState: slide});
     }
   }
@@ -72,7 +77,35 @@ class Dashboard extends Component {
     }, 12000);
 
   }
-
+  renderGoalsAndTodos(key) {
+    //only display top 5 goals and top 3 tasks for goal so we dont over populate dashboard
+    if(key === 'goals') {
+      return (
+        <div>
+          {this.props.goalList.map( (goal, goalIndex) => {
+            if(!goal.is_done && goalIndex < 5) {
+              return (
+                <div>
+                  <h4>{goal.name}...</h4>
+                  <ol>
+                    {goal.tasks.map((task, index) => {
+                      let taskClass = "";
+                      if(index < 3) {
+                        return(
+                          <li className={taskClass}>{task.name}</li>
+                          )
+                      }
+                    })}
+                ...
+                  </ol>
+                </div>
+                );
+            }
+          })}
+        </div>
+        );
+    }
+  }
   renderTutorial(key) {
     let render = null;
     switch(key) {
@@ -165,10 +198,11 @@ class Dashboard extends Component {
     let dashboard =
           <div className="row">
             <div className="col-md-6">
-              <h2>Your Current Number of Goals are: </h2>
+              <h2>Your Goals: </h2>
+               {this.props.goalList.length ? this.renderGoalsAndTodos('goals') : <p/>}
              </div>
             <div className="col-md-6">
-              <h2>Your Current Number of Goals are: </h2>
+              <h2>Your Todos: </h2>
             <p className="goalInfo-toggle" data-id='restart' onClick={this.handleClick} >want to see the tutorial again? Click here</p>
             </div>
           </div>
