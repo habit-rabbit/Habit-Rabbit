@@ -73,7 +73,7 @@ class Nav extends Component {
     event.preventDefault();
     let id = event.target.id;
     let className = event.target.className
-    if (id === "ltGoals"){
+    if (id === "ltGoals") {
       this.props.setView(1);
     }
     if (id === "dailyGoals") {
