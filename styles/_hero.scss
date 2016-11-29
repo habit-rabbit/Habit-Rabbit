@@ -35,11 +35,20 @@ p {
 }
 
 #register-body input {
+  font-size: 15px;
   margin: 1px;
   margin-top: 10px;
   padding: 10px;
   width: 80%;
 }
+
+#sign-up-button {
+  color: #5bc0de;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  padding: 5px 60px 5px 60px;
+}
+
 #hero-page {
   // background-color: #f8f8f8;
 }
