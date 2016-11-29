@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Goals from './Goals.jsx';
 import CreateTask from './CreateTask.jsx';
 import CreateDailyGoalModal from './CreateDailyGoalModal.jsx';
+import ProgressBar from './ProgressBar.jsx'
 
 class DailyGoals extends Component {
 
@@ -15,12 +16,22 @@ class DailyGoals extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.updateFromDatabase = this.updateFromDatabase.bind(this);
+    this.handleKey = this.handleKey.bind(this);
   }
-
+  componentWillMount() {
+    document.addEventListener('keydown', this.handleKey, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKey, false);
+  }
   componentDidMount () {
     this.updateFromDatabase();
   }
-
+  handleKey(event) {
+    if(event.altKey && (event.key === 'm')) {
+      this.handleSubmit(event);
+    }
+  }
   handleCheck (e, dailyGoal) {
     e.preventDefault();
     $.ajax({
@@ -118,6 +129,13 @@ class DailyGoals extends Component {
               <input type="submit" className="btn btn-default" value="Create A New Daily Reminder!" />
             </form>
             <CreateDailyGoalModal updateDailies={this.updateFromDatabase}/>
+          </div>
+          <div className="row">
+            <div className="col-xs-12 col-md-12">
+              <div className="progress">
+                <ProgressBar taskArray={this.state.dailies}/>
+              </div>
+            </div>
           </div>
           {this.renderDailyGoals()}
         </div>

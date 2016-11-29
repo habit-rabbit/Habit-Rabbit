@@ -8,7 +8,25 @@ class Nav extends Component {
     super(props);
     this.createNavLinks = this.createNavLinks.bind(this);
     this.logOut = this.logOut.bind(this);
-    this.handleLinks = this.handleLinks.bind(this);
+    this.handleLinks = this.handleLinks.bind(this)
+    this.handleKey = this.handleKey.bind(this);
+  }
+
+  componentWillMount() {
+    document.addEventListener('keydown', this.handleKey, false);
+  }
+
+  handleKey(event) {
+    if(event.altKey && (event.key === 'g')) {
+      event.target.id = "ltGoals"
+      this.handleLinks(event);
+    } else if(event.altKey && (event.key === 'b')) {
+      event.target.id = "badges"
+      this.handleLinks(event);
+    } else if(event.altKey && (event.key === 'd')) {
+      event.target.id = "dailyGoals"
+      this.handleLinks(event);
+    }
   }
 
   logOut(){
