@@ -15,6 +15,7 @@ class Dashboard extends Component {
     }
   }
   componentWillMount() {
+    console.log("GOAL LIST :", this.props.goalList)
     document.addEventListener('keyup', this.handleEnter, false);
     //check to see if you have any goals.. if you dont its probably apparent
     //youve never been to this website before

@@ -83,7 +83,7 @@ class Nav extends Component {
       this.props.setView(3);
       this.props.resetBadgeAlert();
     }
-    if (id === "dashboard") {
+    if (id === "dashboard" || id === "nav-header") {
       this.props.setView(4)
     }
   }

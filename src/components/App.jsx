@@ -90,6 +90,8 @@ class App extends Component {
 
 //this renders appropriate component if user is not logged in
   renderPage() {
+          console.log("GOAL LIST App :", this.state.goals)
+
     if (this.state.isLoggedIn === false) {
       return (<Hero
         setUserId={this.setUserId}
