@@ -91,7 +91,12 @@ class App extends Component {
           }
         }
       }).done(() => {
-        this.setState({badges: badges, newBadge: true});
+        if (badges <= 9) {
+          this.setState({badges: badges, newBadge: true});
+        } else {
+          this.setState({badges: badges});
+
+        }
       });
   }
 
