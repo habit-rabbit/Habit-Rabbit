@@ -226,7 +226,7 @@ router.get("/daily_goals", (req, res) => {
     query.data = {user_id: req.session['user-id']};
     db.getAllWhere(query,  (err, data) => {
       if (err) r.setErrorMsg("Everything is broken come back later (sorry and thanks).");
-      r.setData(data.sort((goalA, goalB) => {return goalB.id - goalA.id;}));
+      r.setData(data.sort((goalA, goalB) => {return goalA.is_done ? 1 : -1;}));//{return goalA.is_done - goalB.is_done;})); //sort((goalA, goalB) => {return goalB.id - goalA.id;})
       res.send(r);
     });
   } else {
