@@ -103,7 +103,14 @@ class SingleGoal extends Component {
       if(!this.props.goalInfo.is_done) {
         this.updateGoal();
       }
-      return <p> You've finished your goal! Rabeet is screeching with delight. </p>
+      return (
+        <div>
+        <p> You've finished your goal! Rabeet is screeching with delight. </p>
+          <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
+            <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          </button>
+        </div>
+        );
     } else {
         return (
           <div>
@@ -142,6 +149,7 @@ class SingleGoal extends Component {
 //========================================================================
 //===========================Render the goal component====================
   renderGoals() {
+
     if(!this.props.goalInfo.tasks) {
       return (
         <div>
@@ -152,7 +160,7 @@ class SingleGoal extends Component {
       );
     } else {
       return(
-        <div className={this.props.goalClass}>
+        <div className={this.props.goalClass} data-goalid={this.props.goalInfo.id}>
           <div className="row">
             <div className="col-md-3">
               <h1> {this.props.goalInfo.name} </h1>
@@ -173,9 +181,6 @@ class SingleGoal extends Component {
               <p href="" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > see task info </p>
               {this.renderGoalInfo()}
             </div>
-                <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
-                  <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
-              </button>
           </div>
         </div>
         </div>
