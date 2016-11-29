@@ -110,9 +110,15 @@ class SingleGoal extends Component {
             <p className="tasks">{task.name}</p>
             <div id="finished-task-button">
             <span>Task Done? </span>
-             <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
+            <div className="daily-goals-icons goals-page">
+              <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
               <span className="glyphicon glyphicon-check" aria-hidden="true" data-taskid={task.id}></span>
-            </button>
+              </button>
+              <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
+              <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </button>
+            </div>
+
             </div>
           </div>
         );
@@ -147,11 +153,9 @@ class SingleGoal extends Component {
     } else {
       return(
         <div className={this.props.goalClass}>
-
+        <div className="row">
           <div className="col-md-3">
           <h1> {this.props.goalInfo.name} </h1>
-
-
           </div>
           <div className="col-md-6">
             <div className="progress">
@@ -162,9 +166,7 @@ class SingleGoal extends Component {
           <div className="col-md-3">
             <h4 className="task-list"> Next Task: </h4>
             {this.getCurrentTask()}
-            <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
-              <span className="glyphicon glyphicon-trash" aria-hidden="true" ></span>
-            </button>
+          </div>
           </div>
           <div className="row goalInfo">
             <div className="col-xs-4 col-xs-offset-4">

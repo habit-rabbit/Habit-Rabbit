@@ -166,7 +166,7 @@ class CreateGoalModal extends Component {
               </div>
 
               <div className="form-group form-group-modal">
-                <button id="add-task-button" type="button" className="btn btn-default btn-lg" name="add-task" data-toggle="popover" onClick={this.handleAddTask}>
+                <button id="add-task-button" type="button" className="btn btn-default btn-lg" name="add-task" data-toggle="tooltip" data-placement="top" title="Add Task" onClick={this.handleAddTask}>
                   <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
               </div>

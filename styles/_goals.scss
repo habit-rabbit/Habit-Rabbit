@@ -4,8 +4,8 @@
 
   h1 {
     color: #595959;
-    padding-left: 10px;
-    padding-top: 25px;
+    padding-left: 20px;
+    margin-top: 20px;
     text-align: center;
   }
 
@@ -31,9 +31,8 @@
 
   .progress {
     margin: auto;
-    margin-top: -18px;
     position: absolute;
-    top: 54px; left: 0; bottom: 0; right: 0;
+    top: 70px; left: 0; bottom: 0; right: 0;
 
     .progress-bar {
       -webkit-transition: none;
@@ -111,9 +110,7 @@ background-color: #d8f7ff;
   padding: 5px;
 
     &:hover{
-    /*// max-height technique*/
       .goalInfo-content{
-      /*// If use the "height: auto", the effect not works. Is necessary some value for the CSS create a CSS animate, and we can use "max-height" with a great value for emulate this effect.*/
         max-height: 400px;
     }
   }
@@ -139,11 +136,11 @@ background-color: #d8f7ff;
   padding: 0 15px;
 }
 .goalInfo-toggle{
-  -webkit-transition: background .1s linear;
+/*  -webkit-transition: background .1s linear;
   -moz-transition: background .1s linear;
   -ms-transition: background .1s linear;
   -o-transition: background .1s linear;
-  transition: background .1s linear;
+  transition: background .1s linear;*/
   background: #00b8c9;
   border-radius: 3px;
   color: #fff;
@@ -161,10 +158,4 @@ background-color: #d8f7ff;
 .progress-bar.progress-bar-info {
   @include linear-gradient(left, rgb(177, 223, 255) 0, rgba(204, 0, 255, 0.68) 130%);
 }
-
-
-
-/*#finished-task-button {
-  float: right;
-}*/
 
