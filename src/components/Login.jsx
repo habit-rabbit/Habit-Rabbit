@@ -38,10 +38,10 @@ class Login extends Component {
   renderError() {
     if (this.state.loginError) {
       return (
-          <div className="alert alert-warning">
-            {this.state.loginError}
-          </div>
-        )
+        <div className="alert alert-warning">
+          {this.state.loginError}
+        </div>
+      )
     }
   }
  handleSubmit(event) {
@@ -64,8 +64,8 @@ class Login extends Component {
         $("#login-modal").modal("hide");
         //call function to update navbar here
         this.props.verifyLogin();
-        this.props.updateNavLinks();
-        this.props.updateGoals();
+        // this.props.updateNavLinks();
+        // this.props.updateGoals();
       } else if (result.error.msg) {
         this.setState({loginError: result.error.msg})
       }

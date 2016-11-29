@@ -11,6 +11,10 @@ class Carousel extends Component {
     this.renderView = this.renderView.bind(this);
   }
 
+  componentWillMount () {
+    console.log("State of goals in carousel", this.props.goalList);
+  }
+
   renderView(view) {
     if (view === "AllGoals"){
       // console.log("I made it into Carousel!!!!");
