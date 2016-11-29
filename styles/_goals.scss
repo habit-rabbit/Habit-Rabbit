@@ -131,16 +131,16 @@ background-color: #d8f7ff;
   opacity: 0;
 }
 
+.goalInfo-appear.goalInfo-appear-active {
+  opacity: 1;
+  transition: opacity 1s;
+}
+
 .glyphicon-check {
   color: turquoise;
 }
 
-.goalInfo-content{
-  .goalInfo-appear.goalInfo-appear-active {
-    opacity: 1;
-    transition: opacity 1s;
-  }
-}
+
 
 .goalInfo-inner{
   overflow: hidden;
