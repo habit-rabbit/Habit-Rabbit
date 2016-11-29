@@ -168,7 +168,7 @@ class SingleGoal extends Component {
           </div>
           <div className="row goalInfo">
             <div className="col-xs-12 col-md-9 col-centered">
-              <a href="" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > More Info </a>
+              <p href="" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > More Info </p>
               {this.renderGoalInfo()}
             </div>
           </div>
