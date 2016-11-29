@@ -41,9 +41,14 @@ class Dashboard extends Component {
   }
   handleClick(event) {
     let id = event.target.dataset.id;
-    let slide = this.state.tutorialSlides[id];
-    console.log(slide, id)
-    this.setState({renderState: slide});
+    if(id === 'restart') {
+      this.setState({showTutorial: true, renderState: 'intro'});
+      document.addEventListener('keyup', this.handleEnter, false);
+    } else {
+      let slide = this.state.tutorialSlides[id];
+      console.log(slide, id)
+      this.setState({renderState: slide});
+    }
   }
   highlightItem(target) {
     setTimeout( () => {
@@ -88,11 +93,11 @@ class Dashboard extends Component {
                     <div className="col-md-8">
                       <h2><strong>Daily Tasks</strong></h2>
                       <p>   You can set a plethora of daily tasks for you to keep track of..<br/>
-                       Have a mental note? Why waste that brain space! Write it down!
-                       You can navigate to the daily tasks page by either selecting the drop down menu on the navigation bar
+                        Have a mental note? Why waste that brain space! Write it down!
+                        You can navigate to the daily tasks page by either selecting the drop down menu on the navigation bar
                       <b> Or! </b> by pressing Alt and 'd' together on your keyboard!
                       <br/> On the Daily Task page, you can jot down all those tasks by selecting the create task button or by
-                       or by pressing Alt and 'm' together on your keyboard.</p>
+                         or by pressing Alt and 'm' together on your keyboard.</p>
                       <p className="goalInfo-toggle" data-id='3' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
                     <div>
@@ -110,8 +115,8 @@ class Dashboard extends Component {
                       <b> Or! </b> by pressing Alt and 'g' together on your keyboard!
                       <br/> On the Goals page, you can create a new goal by selecting the button (or by pressing Alt 'n') and add tasks
                         to keep track of your goal.<br/></p>
-                        <h4>This is the fun part!</h4>
-                        <p>You are rewared for completing goals (isn't that awesome?). For every goal you finish you get a nice badge to
+                      <h4>This is the fun part!</h4>
+                      <p>You are rewared for completing goals (isn't that awesome?). For every goal you finish you get a nice badge to
                         show off in your badges page(explained next). Earn them, no one likes a cheater...</p>
                       <p className="goalInfo-toggle" data-id='4' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
@@ -125,7 +130,10 @@ class Dashboard extends Component {
                     <div className="col-md-8">
                       <h2><strong>Badges</strong></h2>
                       <p> This is where you get to see what your good work has surmised too..<br/>
-                        There are 9 custom decorated Bunny Badges to achieve! </p>
+                        There are 9 custom decorated Bunny Badges to achieve!
+                        You can get to your badges page by selecting it in the dropdown on the nav menu
+                        <b> Or! </b> by pressing Alt and 'g' together on your keyboard!
+                      </p>
                       <p className="goalInfo-toggle" data-id='end' onClick={this.handleClick} >Press Enter or click here to end </p>
                     </div>
                     <div>
@@ -135,7 +143,8 @@ class Dashboard extends Component {
         break;
       case 'end':
         document.removeEventListener('keyup', this.handleEnter, false);
-        console.log("this ended?")
+        this.setState({showTutorial: false});
+        this.forceUpdate();
       break;
     }
 
@@ -145,10 +154,15 @@ class Dashboard extends Component {
   render() {
     let dashboard =
           <div className="row">
-            <div className="col-md-6"> test</div>
-            <div className="col-md-6"> test</div>
+            <div className="col-md-6">
+              <h2>Your Current Number of Goals are: </h2>
+             </div>
+            <div className="col-md-6">
+              <h2>Your Current Number of Goals are: </h2>
+            <p className="goalInfo-toggle" data-id='restart' onClick={this.handleClick} >want to see the tutorial again? Click here</p>
+            </div>
           </div>
-
+    console.log("rendered")
     return(
       <div className="background-layout">
         <div className="container main-content">
