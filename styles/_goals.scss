@@ -3,7 +3,7 @@
   margin: 3em;
 
   h1 {
-    color: #595959;
+    color:#777;
     padding-left: 20px;
     margin-top: 20px;
     text-align: center;
@@ -15,15 +15,14 @@
   }
 
   h4 {
-    color: #595959;
+    color:#777;
     padding-top: 25px;
     text-align: center;
   }
 
   p {
-    font-size: 1em;
+    font-size: 14px;
   }
-
   .col-centered {
     float: none;
     margin: 0 auto;
@@ -82,14 +81,10 @@
   }
   transition: top 1s;
 }
-  .goal-is-done {
-    opacity: .2;
-  }
-  .goal-not-done {
-  }
+
 /* Strikethrough */
 .daily-goal {
-  color: turquoise;
+  color:#5bc0de;
   vertical-align: center;
 }
 
@@ -121,7 +116,7 @@ background-color: #d8f7ff;
 }
 
 .glyphicon-check {
-  color: turquoise;
+  color:#5bc0de;
 }
 
 .goalInfo-content{
@@ -159,3 +154,14 @@ background-color: #d8f7ff;
   @include linear-gradient(left, rgb(177, 223, 255) 0, rgba(204, 0, 255, 0.68) 130%);
 }
 
+.page-header {
+    margin: 40px 0 20px;
+    border-bottom: 0px;
+}
+
+#new-goal-button {
+    font-weight: 900;
+    color: #5bc0de;
+    padding: 5px 60px 5px 60px;
+    letter-spacing: 1.5px;
+}
