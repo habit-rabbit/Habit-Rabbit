@@ -10,7 +10,7 @@ class Dashboard extends Component {
     this.handleEnter = this.handleEnter.bind(this);
     this.state = {
       renderState: 'intro',
-      tutorialSlides: ['intro', 'start', 'tutorial-dailyGoals', 'tutorial-goals']
+      tutorialSlides: ['intro', 'start', 'dailyGoals', 'goals']
     }
   }
   componentWillMount() {
@@ -22,6 +22,16 @@ class Dashboard extends Component {
   handleEnter(event) {
     //check if enter key was pressed
     if(event.key === 'Enter') {
+      //check which event we are on
+      let currentState = this.state.renderState;
+      //find that in array..
+      let index = this.state.tutorialSlides.findIndex( (elm) => {
+        return elm === currentState;
+      });
+      //set new state with the next element after the found index;
+      let slide = this.state.tutorialSlides[index + 1];
+      console.log(slide, "this is th elisde")
+      this.setState({renderState: slide});
     }
   }
   handleClick(event) {
