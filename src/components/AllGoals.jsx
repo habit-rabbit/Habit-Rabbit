@@ -48,7 +48,7 @@ class AllGoals extends Component {
           <div className="page-header">
             <h1>Your Goals</h1>
             <form className="create goal" onSubmit={this.handleSubmit} >
-              <input type="submit" id="goal-button" className="btn btn-default"  value="Create A New Goal!"/>
+              <input type="submit" id="new-goal-button" className="btn btn-default"  value="Create A New Goal!"/>
             </form>
             <CreateGoalModal goalName={this.state.name} updateGoalsIndex={this.props.updateGoalsIndex}/>
           </div>

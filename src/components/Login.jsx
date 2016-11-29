@@ -98,7 +98,7 @@ class Login extends Component {
               </div>
 
               <div className="form-group form-group-modal">
-                <input type="submit" name="login" className="btn btn-default" value="Login" />
+                <input type="submit" name="login" id="sign-up-button" className="btn btn-default" value="Login" />
               </div>
               </form>
             </div>

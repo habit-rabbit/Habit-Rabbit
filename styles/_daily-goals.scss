@@ -1,24 +1,33 @@
+.daily-goal {
+  /*color:#5bc0de;*/
+  vertical-align: center;
+}
+
+.daily-goals-icons {
+  float: right;
+  /*font-size: 2em;*/
+    i {
+      margin: 10px;
+    }
+    .btn {
+      font-size: 16px;
+      margin: 10px 10px 0 0;
+    }
+}
+
 .daily-goals-template {
   background-color: #d8f7ff;
   background-image: none;
   margin: 3em;
 }
 
-.daily-goal {
-  /*color: turquoise;*/
-  vertical-align: center;
+.page-header h1 {
+  padding-left: 43px;
 }
 
-.daily-goals-icons {
-  float: right;
-  font-size: 2em;
-    i {
-      margin: 10px;
-      color: turquoise;
-    }
-    .btn {
-      margin: 10px;
-      font-size: 16px;
-      color: turquoise;
-    }
+#new-daily-button {
+  color: #5bc0de;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  padding: 5px 40px 5px 40px;
 }

@@ -119,7 +119,7 @@ class Register extends Component {
                 <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Password Confirmation" value={this.state.value} onChange={this.handleChange}/>
               </div>
               <div className="form-group form-group-modal">
-                <input type="submit" name="register" className="btn btn-default" value="Sign On Up!" />
+                <input type="submit" name="register" id="sign-up-button" className="btn btn-default" value="Sign On Up!" />
               </div>
             </form>
             </div>
