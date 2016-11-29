@@ -7,6 +7,8 @@
     padding-left: 10px;
     padding-top: 25px;
     text-align: center;
+    overflow-wrap: break-word;
+    display: block;
   }
 
   h3 {
@@ -94,6 +96,12 @@
   vertical-align: center;
 }
 
+  .btn {
+    margin: 10px;
+    font-size: 16px;
+    color: turquoise;
+  }
+
 .goal-is-done {
   opacity: .2;
 }
@@ -156,6 +164,10 @@ background-color: #d8f7ff;
   &:hover{
     background: darken(#00b8c9, 15%);
   }
+}
+
+.glyphicon {
+  color: turquoise;
 }
 
 .progress-bar.progress-bar-info {
