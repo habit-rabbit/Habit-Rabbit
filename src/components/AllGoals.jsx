@@ -13,8 +13,19 @@ class AllGoals extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleKey = this.handleKey.bind(this);
   }
-
+  componentWillMount() {
+    document.addEventListener('keydown', this.handleKey, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKey, false);
+  }
+  handleKey(event) {
+    if(event.altKey && (event.key === 'n')) {
+      this.handleSubmit(event);
+    }
+  }
   handleChange(event) {
     let id = event.target.id;
     let value = event.target.value;
