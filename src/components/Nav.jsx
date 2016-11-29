@@ -73,7 +73,7 @@ class Nav extends Component {
     event.preventDefault();
     let id = event.target.id;
     let className = event.target.className
-    if (id === "ltGoals"){
+    if (id === "ltGoals") {
       this.props.setView(1);
     }
     if (id === "dailyGoals") {
@@ -83,7 +83,7 @@ class Nav extends Component {
       this.props.setView(3);
       this.props.resetBadgeAlert();
     }
-    if (id === "dashboard") {
+    if (id === "dashboard" || id === "nav-header") {
       this.props.setView(4)
     }
   }
@@ -98,9 +98,9 @@ class Nav extends Component {
         </li>
       );
     }
-    if (id === "ltGoals") {
-      this.props.setView(4);
-    }
+    // if (id === "ltGoals") {
+    //   this.props.setView(4);
+    // }
   }
 
   render() {
