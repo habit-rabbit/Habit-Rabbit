@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import AllGoals from './AllGoals.jsx';
 import DailyGoals from './DailyGoals.jsx';
 import Badges from './Badges.jsx';
-
+import Dashboard from './Dashboard.jsx'
 
 class Carousel extends Component {
 
@@ -21,6 +21,9 @@ class Carousel extends Component {
     }
     if (view === "DailyGoals"){
       return(<DailyGoals className="component-render"/>);
+    }
+     if (view === "Dashboard"){
+      return(<Dashboard name={this.props.name} goalList={this.props.goalList} className="component-render"/>);
     }
   }
 

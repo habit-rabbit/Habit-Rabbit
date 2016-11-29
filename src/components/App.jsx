@@ -13,7 +13,7 @@ class App extends Component {
       name: "",
       isLoggedIn: false,
       goals: [],
-      view: "DailyGoals",
+      view: "Dashboard",
       badges: 0,
       newBadge: false,
     }
@@ -33,14 +33,17 @@ class App extends Component {
   }
 
   setView(view){
-    if (view === 1){
+    if (view === 1) {
       this.setState({view: "AllGoals"});
     }
-    if (view === 2){
+    if (view === 2) {
       this.setState({view: "DailyGoals"});
     }
-    if (view === 3){
+    if (view === 3) {
       this.setState({view: "Badges"});
+    }
+    if (view === 4) {
+      this.setState({view: "Dashboard"});
     }
   }
 
