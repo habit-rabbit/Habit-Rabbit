@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ProgressBar from './ProgressBar.jsx';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class SingleGoal extends Component {
 
@@ -11,11 +12,28 @@ class SingleGoal extends Component {
     this.updateGoal = this.updateGoal.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.state = {
       showGoalinfo: false,
       goalInfo: "hide"
     }
   }
+
+  handleDelete (event) {
+    event.preventDefault();
+    $.ajax({
+      method: "post",
+      url: `/api/goals/${this.props.goalInfo.id}/delete`,
+      data: {
+        data: {
+          id: this.props.goalInfo.id
+        }
+      }
+    }).done(() => {
+      this.props.update();
+    });
+  }
+
  //=================show-hide goal details===============================
 
   handleMouseEnter() {
@@ -28,14 +46,22 @@ class SingleGoal extends Component {
   renderGoalInfo() {
     let counter = 0;
     if(this.state.goalInfo === "show") {
-      return(
-              <div className="goalInfo-inner">
-                {this.props.goalInfo.tasks.map((task) => {
-                  let taskClass = task.is_done ? "strikethrough" : "";
-                  counter++;
-                  return <p className={taskClass} key={counter}>{counter}: {task.name}  </p>
-                })}
+      return( <div>
+              <ReactCSSTransitionGroup
+                transitionName="goalInfo"
+                transitionAppear={true}
+                transitionAppearTimeout={1000}
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}>
+              <div className="goalInfo-content">
+                  {this.props.goalInfo.tasks.map((task) => {
+                    let taskClass = task.is_done ? "strikethrough" : "";
+                    counter++;
+                    return <p className={taskClass} key={counter}>{counter}: {task.name}  </p>
+                  })}
               </div>
+              </ReactCSSTransitionGroup>
+            </div>
         );
     } else {
       return null;
@@ -45,6 +71,7 @@ class SingleGoal extends Component {
   //============== update database: goal.is_done = true==================
   updateGoal() {
     console.log("Goal completed, sending post request");
+
     setTimeout(() => {
       $.ajax({
         method: 'post',
@@ -57,10 +84,15 @@ class SingleGoal extends Component {
       }).then(() => {
         setTimeout(() => {
           this.props.update();
+          this.props.updateBadge();
+
         }, 200);
       });
      }, 500);
   }
+
+
+
 
   //==============================For Tasks==============================
   getCurrentTask () {
@@ -76,10 +108,12 @@ class SingleGoal extends Component {
         return (
           <div>
             <p className="tasks">{task.name}</p>
-            <span>Finished already? </span>
+            <div id="finished-task-button">
+            <span>Task Done? </span>
              <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
               <span className="glyphicon glyphicon-check" aria-hidden="true" data-taskid={task.id}></span>
             </button>
+            </div>
           </div>
         );
       }
@@ -113,6 +147,7 @@ class SingleGoal extends Component {
     } else {
       return(
         <div className={this.props.goalClass}>
+
           <div className="col-xs-3 col-md-3">
           <h1> {this.props.goalInfo.name} </h1>
 
@@ -127,10 +162,13 @@ class SingleGoal extends Component {
           <div className="col-xs-3 col-md-3">
             <h4 className="task-list"> Next Task: </h4>
             {this.getCurrentTask()}
+            <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
+              <span className="glyphicon glyphicon-trash" aria-hidden="true" ></span>
+            </button>
           </div>
           <div className="row goalInfo">
             <div className="col-xs-12 col-md-9 col-centered">
-              <a href="#" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > More Info </a>
+              <a href="" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > More Info </a>
               {this.renderGoalInfo()}
             </div>
           </div>

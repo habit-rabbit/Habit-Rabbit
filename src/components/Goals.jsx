@@ -34,8 +34,9 @@ class Goals extends Component {
             // console.log("which goals are in here?", goal)
             let goalClass = goal.is_done ? "goal-is-done" : "goal-not-done"
             return (
+
               <div className="goals-template row well" key={index}>
-               <SingleGoal update={this.props.update} goalClass={goalClass} goalInfo={goal} renderGoalInfoModal={this.renderGoalInfoModal}/>
+               <SingleGoal updateBadge={this.props.updateBadge} update={this.props.update} goalClass={goalClass} goalInfo={goal} renderGoalInfoModal={this.renderGoalInfoModal}/>
               </div>
             )
           })}

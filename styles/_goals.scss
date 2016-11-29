@@ -1,9 +1,11 @@
 @import 'mixins';
-
 .goals-template {
+  margin: 3em;
 
   h1 {
     color: #595959;
+    padding-left: 10px;
+    padding-top: 25px;
     text-align: center;
     overflow-wrap: break-word;
     display: block;
@@ -16,20 +18,22 @@
 
   h4 {
     color: #595959;
+    padding-top: 25px;
     text-align: center;
   }
-
-  margin: 3em;
 
   p {
     font-size: 1em;
   }
+
   .col-centered {
     float: none;
     margin: 0 auto;
   }
+
   .progress {
     margin: auto;
+    margin-top: -18px;
     position: absolute;
     top: 54px; left: 0; bottom: 0; right: 0;
 
@@ -44,27 +48,43 @@
     position: relative;
     text-decoration: line-through;
   }
+
   .tasks {
     overflow-wrap: break-word;
   }
+
   .task-list {
     text-align: left;
   }
-
-  .well {
-    background-color: #96C8A2;
-  }
-  -webkit-transition: max-height 1s ease-in;
+/*  -webkit-transition: max-height 1s ease-in;
   -moz-transition: max-height 1s ease-in;
   -ms-transition: max-height 1s ease-in;
   -o-transition: max-height 1s ease-in;
   transition: max-height 1s ease-in;
   // background: #e5feff;
   overflow: hidden;
-  // "height: 0" not working with css transitions
-  max-height: 800px;
+  // "height: 0" not work with css transitions
+  max-height: 800px;*/
 }
 
+.goals-template.row.well {
+  padding: 0px;
+
+  .well {
+    background-color: #96C8A2;
+  }
+  animation: slideDown 1s;
+  @keyframes slideDown{
+    from {
+
+      transform: translateY(50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  transition: top 1s;
+}
   .goal-is-done {
     opacity: .2;
   }
@@ -75,49 +95,60 @@
   color: turquoise;
   vertical-align: center;
 }
-.daily-goals-icons {
-  float: right;
-  font-size: 2em;
 
-  i {
-    margin: 10px;
-    color: turquoise;
-  }
-
+<<<<<<< HEAD
   .btn {
     margin: 10px;
     font-size: 16px;
     color: turquoise;
   }
 
+=======
+.goal-is-done {
+  opacity: .2;
+>>>>>>> master
 }
 
+.goal-not-done {
+background-color: #d8f7ff;
+}
+ /*Strikethrough*/
 
-
-.goalInfo{
+.goalInfo {
   display: inline-block;
   text-align: left;
-  margin: 1%;
+  margin: auto;
   width: 100%;
+  padding: 5px;
 
-  &:hover{
-
-    // max-height technique
-    .goalInfo-content{
-      // If use the "height: auto", the effect not works. Is necessary some value for the CSS create a CSS animate, and we can use "max-height" with a great value for emulate this effect.
-      max-height: 400px;
+    &:hover{
+    /*// max-height technique*/
+      .goalInfo-content{
+      /*// If use the "height: auto", the effect not works. Is necessary some value for the CSS create a CSS animate, and we can use "max-height" with a great value for emulate this effect.*/
+        max-height: 400px;
     }
-
   }
 }
 
+.goalInfo-appear {
+  opacity: 0;
+}
+
+.glyphicon-check {
+  color: turquoise;
+}
+
 .goalInfo-content{
+  .goalInfo-appear.goalInfo-appear-active {
+    opacity: 1;
+    transition: opacity 1s;
+  }
 }
 
 .goalInfo-inner{
+  overflow: hidden;
   padding: 0 15px;
 }
-
 .goalInfo-toggle{
   -webkit-transition: background .1s linear;
   -moz-transition: background .1s linear;
@@ -136,7 +167,6 @@
   &:hover{
     background: darken(#00b8c9, 15%);
   }
-
 }
 
 .glyphicon {
@@ -149,11 +179,7 @@
 
 
 
-
-
-
-
-
-
-
+/*#finished-task-button {
+  float: right;
+}*/
 
