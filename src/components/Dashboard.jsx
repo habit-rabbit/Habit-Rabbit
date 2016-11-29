@@ -18,7 +18,7 @@ class Dashboard extends Component {
     document.addEventListener('keyup', this.handleEnter, false);
     //check to see if you have any goals.. if you dont its probably apparent
     //youve never been to this website before
-    if (!this.props.goalList.length) {
+    if (this.props.goalList.length === 0) {
       this.setState({showTutorial: true});
     }
   }

@@ -98,9 +98,9 @@ class Nav extends Component {
         </li>
       );
     }
-    if (id === "ltGoals") {
-      this.props.setView(4);
-    }
+    // if (id === "ltGoals") {
+    //   this.props.setView(4);
+    // }
   }
 
   render() {
