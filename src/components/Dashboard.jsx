@@ -43,7 +43,7 @@ class Dashboard extends Component {
     let id = event.target.dataset.id;
     if(id === 'restart') {
       this.setState({showTutorial: true, renderState: 'intro'});
-      document.addEventListener('keyup', this.handleEnter, false);
+    document.addEventListener('keyup', this.handleEnter, false);
     } else {
       let slide = this.state.tutorialSlides[id];
       console.log(slide, id)
