@@ -4,7 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.renderGoalsAndTodos = this.renderGoalsAndTodos.bind(this);
+    this.renderGoals = this.renderGoals.bind(this);
     this.renderTutorial = this.renderTutorial.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.highlightItem = this.highlightItem.bind(this);
@@ -78,34 +78,32 @@ class Dashboard extends Component {
     }, 12000);
 
   }
-  renderGoalsAndTodos(key) {
+  renderGoals() {
     //only display top 5 goals and top 3 tasks for goal so we dont over populate dashboard
-    if(key === 'goals') {
-      return (
-        <div>
-          {this.props.goalList.map( (goal, goalIndex) => {
-            if(!goal.is_done && goalIndex < 5) {
-              return (
-                <div>
-                  <h4>{goal.name}...</h4>
-                  <ol>
-                    {goal.tasks.map((task, index) => {
-                      let taskClass = "";
-                      if(index < 3) {
-                        return(
-                          <li className={taskClass}>{task.name}</li>
-                          )
-                      }
-                    })}
-                ...
-                  </ol>
-                </div>
-                );
-            }
-          })}
-        </div>
-        );
-    }
+        return (
+          <div>
+            {this.props.goalList.map( (goal, goalIndex) => {
+              if(!goal.is_done && goalIndex < 5) {
+                return (
+                  <div>
+                    <h4>{goal.name}...</h4>
+                    <ol>
+                      {goal.tasks.map((task, index) => {
+                        let taskClass = "";
+                        if(index < 3) {
+                          return(
+                            <li className={taskClass}>{task.name}</li>
+                            )
+                        }
+                      })}
+                  ...
+                    </ol>
+                  </div>
+                  );
+              }
+            })}
+          </div>
+          );
   }
   renderTutorial(key) {
     let render = null;
@@ -197,16 +195,20 @@ class Dashboard extends Component {
 
   render() {
     let dashboard =
+        <div>
           <div className="row">
             <div className="col-md-6">
               <h2>Your Goals: </h2>
-               {this.props.goalList.length ? this.renderGoalsAndTodos('goals') : <p/>}
+               {this.props.goalList.length ? this.renderGoals() : <p>You don't have any goals yet! </p>}
              </div>
             <div className="col-md-6">
               <h2>Your Todos: </h2>
-            <p className="goalInfo-toggle" data-id='restart' onClick={this.handleClick} >want to see the tutorial again? Click here</p>
             </div>
           </div>
+          <div className="row">
+            <p className="goalInfo-toggle" data-id='restart' onClick={this.handleClick} >want to see the tutorial again? Click here</p>
+          </div>
+        </div>
     console.log("rendered")
     return(
       <div className="background-layout">
