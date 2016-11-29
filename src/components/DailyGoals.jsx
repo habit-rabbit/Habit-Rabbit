@@ -16,12 +16,22 @@ class DailyGoals extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.updateFromDatabase = this.updateFromDatabase.bind(this);
+    this.handleKey = this.handleKey.bind(this);
   }
-
+  componentWillMount() {
+    document.addEventListener('keydown', this.handleKey, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKey, false);
+  }
   componentDidMount () {
     this.updateFromDatabase();
   }
-
+  handleKey(event) {
+    if(event.altKey && (event.key === 'm')) {
+      this.handleSubmit(event);
+    }
+  }
   handleCheck (e, dailyGoal) {
     e.preventDefault();
     $.ajax({
