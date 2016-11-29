@@ -164,19 +164,19 @@ class SingleGoal extends Component {
                 taskArray={this.props.goalInfo.tasks}/>
               </div>
             </div>
-          </div>
           <div className="col-xs-3 col-md-3">
             <h4 className="task-list"> Next Task: </h4>
             {this.getCurrentTask()}
-            <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
-              <span className="glyphicon glyphicon-trash" aria-hidden="true" ></span>
-            </button>
           </div>
           <div className="row goalInfo">
-            <div className="col-xs-12 col-md-9 col-centered">
-              <p href="" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > More Info </p>
+            <div className="col-xs-4 col-xs-offset-4">
+              <p href="" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > see task info </p>
               {this.renderGoalInfo()}
             </div>
+                <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
+                  <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </button>
+          </div>
         </div>
         </div>
       );
