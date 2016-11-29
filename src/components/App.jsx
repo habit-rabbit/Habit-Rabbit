@@ -25,10 +25,10 @@ class App extends Component {
     this.updateBadge = this.updateBadge.bind(this);
     this.resetBadgeAlert = this.resetBadgeAlert.bind(this);
 
-    this.updateFromDatabase();
   }
 
   componentWillMount(){
+    this.updateFromDatabase();
     this.verifyLogin();
   }
 
@@ -59,7 +59,7 @@ class App extends Component {
   }
 
   updateFromDatabase () {
-    console.log("Calling DB from App");
+    console.log("Calling DB from App, goallist is", this.state.goals);
     $.ajax({
       method: "get",
       url: "/api/goals",
@@ -140,6 +140,7 @@ class App extends Component {
           setView={this.setView}
           newBadge={this.state.newBadge}
           resetBadgeAlert={this.resetBadgeAlert}
+          updateGoals={this.updateFromDatabase}
          />
         {this.renderPage()}
       </div>
