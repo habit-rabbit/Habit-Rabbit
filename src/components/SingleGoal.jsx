@@ -154,27 +154,27 @@ class SingleGoal extends Component {
       return(
         <div className={this.props.goalClass}>
           <div className="row">
-            <div className="col-xs-3 col-md-3">
+            <div className="col-md-3">
               <h1> {this.props.goalInfo.name} </h1>
             </div>
 
-            <div className="col-xs-6 col-md-6">
+            <div className="col-md-6">
               <div className="progress">
                 <ProgressBar
                 taskArray={this.props.goalInfo.tasks}/>
               </div>
             </div>
-            <div className="col-xs-3 col-md-3">
+            <div className="col-md-3">
               <h4 className="task-list"> Next Task: </h4>
               {this.getCurrentTask()}
             </div>
             </div>
             <div className="row goalInfo">
-            <div className="col-xs-4 col-xs-offset-4">
-              <a href="" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > see task info </a>
-              {this.renderGoalInfo()}
+              <div className="col-xs-4 col-xs-offset-4">
+                <a href="" className="goalInfo-toggle" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} > see task info </a>
+                {this.renderGoalInfo()}
+              </div>
             </div>
-          </div>
         </div>
       );
     }
