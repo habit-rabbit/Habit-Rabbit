@@ -25,6 +25,7 @@
   p {
     font-size: 14px;
   }
+
   .col-centered {
     float: none;
     margin: 0 auto;
@@ -54,15 +55,6 @@
   .task-list {
     text-align: left;
   }
-/*  -webkit-transition: max-height 1s ease-in;
-  -moz-transition: max-height 1s ease-in;
-  -ms-transition: max-height 1s ease-in;
-  -o-transition: max-height 1s ease-in;
-  transition: max-height 1s ease-in;
-  // background: #e5feff;
-  overflow: hidden;
-  // "height: 0" not work with css transitions
-  max-height: 800px;*/
 }
 
 .goals-template.row.well {
@@ -83,18 +75,7 @@
   }
   transition: top 1s;
 }
-
 /* Strikethrough */
-.daily-goal {
-  color:#5bc0de;
-  vertical-align: center;
-}
-
-  .btn {
-    // margin: 10px;
-    font-size: 16px;
-    color: turquoise;
-  }
 
 .goal-is-done {
   opacity: .2;
@@ -164,6 +145,10 @@ background-color: #d8f7ff;
 .page-header {
     margin: 40px 0 20px;
     border-bottom: 0px;
+}
+
+.daily-goals-icons.goals-page {
+  position: absolute;
 }
 
 #new-goal-button {
