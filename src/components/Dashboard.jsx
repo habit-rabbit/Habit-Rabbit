@@ -10,11 +10,17 @@ class Dashboard extends Component {
     this.handleEnter = this.handleEnter.bind(this);
     this.state = {
       renderState: 'intro',
-      tutorialSlides: ['intro', 'start', 'dailyGoals', 'goals']
+      tutorialSlides: ['intro', 'start', 'dailyGoals', 'goals', 'badges', 'end'],
+      showTutorial: false
     }
   }
   componentWillMount() {
     document.addEventListener('keyup', this.handleEnter, false);
+    //check to see if you have any goals.. if you dont its probably apparent
+    //youve never been to this website before
+    if (!this.props.goalList.length) {
+      this.setState({showTutorial: true});
+    }
   }
   componentWillUnmount() {
     document.removeEventListener('keyup', this.handleEnter, false);
@@ -30,7 +36,6 @@ class Dashboard extends Component {
       });
       //set new state with the next element after the found index;
       let slide = this.state.tutorialSlides[index + 1];
-      console.log(slide, "this is th elisde")
       this.setState({renderState: slide});
     }
   }
@@ -58,12 +63,11 @@ class Dashboard extends Component {
                       <p><b>Oh Wow! </b> Its your first time here! Well lucky for you we have
                       this <i>handy</i> dandy tutorial lined up for you! </p>
                       <br/>
-                      <p className="goalInfo-toggle" data-id='1' onClick={this.handleClick} >Click here to Start</p>
+                      <p className="goalInfo-toggle" data-id='1' onClick={this.handleClick} >Click here to Start or press Enter</p>
                     </div>
                 </div>
         break;
       case 'start':
-        this.highlightItem('.dropdown')
         render = <div className="row fade-in highlight" key={key}>
                     <div className="col-md-8">
                       <h2><strong>Welcome to Habit Rabit!</strong></h2>
@@ -87,7 +91,7 @@ class Dashboard extends Component {
                        Have a mental note? Why waste that brain space! Write it down!
                        You can navigate to the daily tasks page by either selecting the drop down menu on the navigation bar
                       <b> Or! </b> by pressing Alt and 'd' together on your keyboard!
-                      <br/> On the Daily Task view, you can jot down all those tasks by selecting the create task button or by
+                      <br/> On the Daily Task page, you can jot down all those tasks by selecting the create task button or by
                        or by pressing Alt and 'm' together on your keyboard.</p>
                       <p className="goalInfo-toggle" data-id='3' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
@@ -96,6 +100,43 @@ class Dashboard extends Component {
                     </div>
                 </div>
         break;
+      case 'goals':
+        render = <div className="row fade-in" key={key}>
+                    <div className="col-md-8">
+                      <h2><strong>Goals</strong></h2>
+                      <p> This is where you get to kick the butt out of a goal you've always had!<br/>
+                       Maybe you want to excercise a bit more? Learn a new instrument? Kick a bad habit?
+                       You can do that here! Navigate to the goals page by either selecting it in the dropdown menu in the nav bar
+                      <b> Or! </b> by pressing Alt and 'g' together on your keyboard!
+                      <br/> On the Goals page, you can create a new goal by selecting the button (or by pressing Alt 'n') and add tasks
+                        to keep track of your goal.<br/></p>
+                        <h4>This is the fun part!</h4>
+                        <p>You are rewared for completing goals (isn't that awesome?). For every goal you finish you get a nice badge to
+                        show off in your badges page(explained next). Earn them, no one likes a cheater...</p>
+                      <p className="goalInfo-toggle" data-id='4' onClick={this.handleClick} >Press Enter or click here to continue... </p>
+                    </div>
+                    <div>
+                        <img src="/rabeetpig.png" alt="image-of-zombie-rabbit"/>
+                    </div>
+                </div>
+        break;
+      case 'badges':
+        render = <div className="row fade-in" key={key}>
+                    <div className="col-md-8">
+                      <h2><strong>Badges</strong></h2>
+                      <p> This is where you get to see what your good work has surmised too..<br/>
+                        There are 9 custom decorated Bunny Badges to achieve! </p>
+                      <p className="goalInfo-toggle" data-id='end' onClick={this.handleClick} >Press Enter or click here to end </p>
+                    </div>
+                    <div>
+                        <img src="/rabeetgreen.png" alt="image-of-zombie-rabbit"/>
+                    </div>
+                </div>
+        break;
+      case 'end':
+        document.removeEventListener('keyup', this.handleEnter, false);
+        console.log("this ended?")
+      break;
     }
 
     return render;
@@ -119,7 +160,7 @@ class Dashboard extends Component {
                 transitionEnterTimeout={1500}
                 transitionLeaveTimeout={500}
                 transitionLeave={false}>
-            {this.props.goalList.length ? dashboard : this.renderTutorial(this.state.renderState)}
+            {this.state.showTutorial ? this.renderTutorial(this.state.renderState) : dashboard }
               </ReactCSSTransitionGroup>
         </div>
       </div>
