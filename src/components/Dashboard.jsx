@@ -124,11 +124,13 @@ class Dashboard extends Component {
         render = <div className="row fade-in highlight" key={key}>
                     <div className="col-md-8">
                       <h2><strong>Welcome to Habit Rabit!</strong></h2>
-                      <p>   The solution to your goal-setting needs </p>
-                      <p> <br/> This app allows you to create and keep track of the goals,
-                        habits (good and bad ones!), and todos that you have in your busy life
-                        all in one place while making it fun to <i>tick</i> of anything on those lists!
-                      </p>
+                      <div className="tutorial-text">
+                        <p>   The solution to your goal-setting needs </p>
+                        <p>  This app allows you to create and keep track of the goals,
+                          habits (good and bad ones!), and todos that you have in your busy life
+                          all in one place while making it fun to <i>tick</i> of anything on those lists!
+                        </p>
+                      </div>
                       <p className="goalInfo-toggle" data-id='2' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
                     <div>
@@ -140,12 +142,14 @@ class Dashboard extends Component {
         render = <div className="row fade-in" key={key}>
                     <div className="col-md-8">
                       <h2><strong>Daily Tasks</strong></h2>
-                      <p>   You can set a plethora of daily tasks for you to keep track of..<br/>
-                        Have a mental note? Why waste that brain space! Write it down!
-                        You can navigate to the daily tasks page by either selecting the drop down menu on the navigation bar
-                      <b> Or! </b> by pressing Alt and 'd' together on your keyboard!
-                      <br/> On the Daily Task page, you can jot down all those tasks by selecting the create task button or by
-                         or by pressing Alt and 'm' together on your keyboard.</p>
+                      <div className="tutorial-text">
+                        <p>   You can set a plethora of daily tasks for you to keep track of..<br/>
+                          Have a mental note? Why waste that brain space! Write it down!
+                          You can navigate to the daily tasks page by either selecting the drop down menu on the navigation bar
+                        <b> Or! </b> by pressing Alt and 'd' together on your keyboard!
+                        <br/> On the Daily Task page, you can jot down all those tasks by selecting the create task button or by
+                           or by pressing Alt and 'm' together on your keyboard.</p>
+                      </div>
                       <p className="goalInfo-toggle" data-id='3' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
                     <div>
@@ -157,15 +161,17 @@ class Dashboard extends Component {
         render = <div className="row fade-in" key={key}>
                     <div className="col-md-8">
                       <h2><strong>Goals</strong></h2>
-                      <p>This is where you get to kick the butt out of a goal you've always had!<br/>
-                       Maybe you want to excercise a bit more? Learn a new instrument? Kick a bad habit?
-                       You can do that here! Navigate to the goals page by either selecting it in the dropdown menu in the nav bar
-                      <b> Or! </b> by pressing Alt and 'g' together on your keyboard!
-                      <br/>On the Goals page, you can create a new goal by selecting the button (or by pressing Alt 'n') and add tasks
-                        to keep track of your goal.<br/></p>
-                      <h4>This is the fun part!</h4>
-                      <p>You are rewared for completing goals (isn't that awesome?). For every goal you finish you get a nice badge to
-                        show off in your badges page(explained next). Earn them, no one likes a cheater...</p>
+                      <div className="tutorial-text">
+                        <p>This is where you get to kick the butt out of a goal you've always had!<br/>
+                         Maybe you want to excercise a bit more? Learn a new instrument? Kick a bad habit?
+                         You can do that here! Navigate to the goals page by either selecting it in the dropdown menu in the nav bar
+                        <b> Or! </b> by pressing Alt and 'g' together on your keyboard!
+                        <br/>On the Goals page, you can create a new goal by selecting the button (or by pressing Alt 'n') and add tasks
+                          to keep track of your goal.<br/></p>
+                        <h4>This is the fun part!</h4>
+                        <p>You are rewared for completing goals (isn't that awesome?). For every goal you finish you get a nice badge to
+                          show off in your badges page(explained next). Earn them, no one likes a cheater...</p>
+                      </div>
                       <p className="goalInfo-toggle" data-id='4' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
                     <div>
@@ -177,11 +183,13 @@ class Dashboard extends Component {
         render = <div className="row fade-in" key={key}>
                     <div className="col-md-8">
                       <h2><strong>Badges</strong></h2>
-                      <p>This is where you get to see what your good work has surmised too..<br/>
-                        There are 9 custom decorated Bunny Badges to achieve!
-                        You can get to your badges page by selecting it in the dropdown on the nav menu
-                        <b> Or! </b> by pressing Alt and 'g' together on your keyboard!
-                      </p>
+                      <div className="tutorial-text">
+                        <p>This is where you get to see what your good work has surmised too..<br/>
+                          There are 9 custom decorated Bunny Badges to achieve!
+                          You can get to your badges page by selecting it in the dropdown on the nav menu
+                          <b> Or! </b> by pressing Alt and 'g' together on your keyboard!
+                        </p>
+                      </div>
                       <p className="goalInfo-toggle" data-id='end' onClick={this.handleClick} >Press Enter or click here to end </p>
                     </div>
                     <div>
