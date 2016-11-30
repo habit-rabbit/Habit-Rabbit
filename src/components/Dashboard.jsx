@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class Dashboard extends Component {
+  //the dashboard as of now serves as a tutorial page,
+  //it however has left room to be converted to a user 'dashboard' with some
+  //minor changes. With time constraints, the decision was made to not use this
+  // user dashboard feature as it would not be polished to our standards by time of release
   constructor(props) {
     super(props);
-    this.renderGoals = this.renderGoals.bind(this);
+    // this.renderGoals = this.renderGoals.bind(this);
     this.renderTutorial = this.renderTutorial.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.highlightItem = this.highlightItem.bind(this);
     this.handleEnter = this.handleEnter.bind(this);
     this.state = {
       renderState: 'intro',
@@ -18,11 +21,11 @@ class Dashboard extends Component {
 
   componentWillMount() {
     document.addEventListener('keyup', this.handleEnter, false);
-    //check to see if you have any goals.. if you dont its probably apparent
-    //youve never been to this website before
-    if (!this.props.goalList.length ) { // undefined...
-      this.setState({showTutorial: true});
-    }
+    // **this conditional is in regards to a future feature of the tutorial view being converted to a user dashboard
+    // ** not in implemenation currently
+    // if (!this.props.goalList.length ) { // undefined...
+    //   this.setState({showTutorial: true});
+    // }
   }
 
   componentWillUnmount() {
@@ -66,17 +69,9 @@ class Dashboard extends Component {
       this.setState({renderState: slide});
     }
   }
-
-  highlightItem(target) {
-    setTimeout( () => {
-      document.querySelector(target).classList.add('highlight');
-    }, 6000);
-    setTimeout( () => {
-      document.querySelector(target).classList.remove('highlight');
-    }, 12000);
-
-  }
-  renderGoals() {
+  //at this time we are not implementing the rendering of goals as this is intended for the user dashboard feature which is
+  // not in production at this time
+  /*renderGoals() {
     //only display top 5 goals and top 3 tasks for goal so we dont over populate dashboard
         return (
           <div>
@@ -103,6 +98,8 @@ class Dashboard extends Component {
           </div>
           );
   }
+*/
+//this function conditionally renders a "slide" dependant on a key that is passed in. This function is triggered by a state change
   renderTutorial(key) {
     let render = null;
     switch(key) {
