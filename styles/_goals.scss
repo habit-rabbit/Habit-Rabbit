@@ -126,7 +126,7 @@ background-color: #d8f7ff;
   -ms-transition: background .1s linear;
   -o-transition: background .1s linear;
   transition: background .1s linear;*/
-  background: #00b8c9;
+  background: #5bc0de;
   border-radius: 3px;
   color: #fff;
   display: block;
@@ -134,7 +134,10 @@ background-color: #d8f7ff;
   margin: 0 0 10px;
   text-align: center;
   text-decoration: none;
-
+  .first {
+    width: 40%;
+    margin: 0 auto 10px;
+  }
   &:hover{
     background: darken(#00b8c9, 15%);
   }

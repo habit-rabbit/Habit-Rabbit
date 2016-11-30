@@ -21,7 +21,6 @@ class Dashboard extends Component {
   //   }
   // }
   componentWillMount() {
-    console.log("Trying to login and the goal list is", this.props.goalList);
     document.addEventListener('keyup', this.handleEnter, false);
     //check to see if you have any goals.. if you dont its probably apparent
     //youve never been to this website before
@@ -48,6 +47,8 @@ class Dashboard extends Component {
         //set new state with the next element after the found index;
         let slide = this.state.tutorialSlides[index + 1];
         this.setState({renderState: slide});
+      } else if (currentState === "badges") {
+          this.props.setView(2);
       } else {
         this.setState({showTutorial: false});
         document.removeEventListener('keyup', this.handleEnter, false)
@@ -115,7 +116,7 @@ class Dashboard extends Component {
                       <p><b>Oh Wow! </b> Its your first time here! Well lucky for you we have
                       this <i>handy</i> dandy tutorial lined up for you! </p>
                       <br/>
-                      <p className="goalInfo-toggle" data-id='1' onClick={this.handleClick} >Click here to Start or press Enter</p>
+                      <p className="goalInfo-toggle first" data-id='1' onClick={this.handleClick} >Click here to Start or press Enter</p>
                     </div>
                 </div>
         break;
@@ -156,11 +157,11 @@ class Dashboard extends Component {
         render = <div className="row fade-in" key={key}>
                     <div className="col-md-8">
                       <h2><strong>Goals</strong></h2>
-                      <p> This is where you get to kick the butt out of a goal you've always had!<br/>
+                      <p>This is where you get to kick the butt out of a goal you've always had!<br/>
                        Maybe you want to excercise a bit more? Learn a new instrument? Kick a bad habit?
                        You can do that here! Navigate to the goals page by either selecting it in the dropdown menu in the nav bar
                       <b> Or! </b> by pressing Alt and 'g' together on your keyboard!
-                      <br/> On the Goals page, you can create a new goal by selecting the button (or by pressing Alt 'n') and add tasks
+                      <br/>On the Goals page, you can create a new goal by selecting the button (or by pressing Alt 'n') and add tasks
                         to keep track of your goal.<br/></p>
                       <h4>This is the fun part!</h4>
                       <p>You are rewared for completing goals (isn't that awesome?). For every goal you finish you get a nice badge to
@@ -176,7 +177,7 @@ class Dashboard extends Component {
         render = <div className="row fade-in" key={key}>
                     <div className="col-md-8">
                       <h2><strong>Badges</strong></h2>
-                      <p> This is where you get to see what your good work has surmised too..<br/>
+                      <p>This is where you get to see what your good work has surmised too..<br/>
                         There are 9 custom decorated Bunny Badges to achieve!
                         You can get to your badges page by selecting it in the dropdown on the nav menu
                         <b> Or! </b> by pressing Alt and 'g' together on your keyboard!

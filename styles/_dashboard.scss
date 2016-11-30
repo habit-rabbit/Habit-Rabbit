@@ -6,8 +6,8 @@
   text-align: center;
   perspective: 100px;
   h1 {
-    font-size: 14px;
-    animation: swing .5s ease-in-out;
+    font-size: 30px;
+    // animation: swing .5s ease-in-out;
     @keyframes swing {
       0% {
         transform: rotateY(90deg);
@@ -21,18 +21,9 @@
     }
   }
 }
-
-// .fade-in {
-//   animation: fadeIn 2s;
-//   @keyframes fadeIn {
-//     from {
-//       opacity: .2;
-//     }
-//     to {
-//       opacity: 1;
-//     }
-//   }
-// }
+h2 {
+  padding: 0;
+}
 .example-enter {
   opacity: .001;
   transform: rotateX(-90deg);
@@ -63,11 +54,11 @@
 }
 
 
-  @keyframes hightlight {
+  @keyframes highlight {
     from {
       color: grey;
     }
     to {
-      color: #00b8c9
+      color: #5bc0de;
     }
   }
