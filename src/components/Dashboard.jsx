@@ -12,7 +12,7 @@ class Dashboard extends Component {
     this.state = {
       renderState: 'intro',
       tutorialSlides: ['intro', 'start', 'dailyGoals', 'goals', 'badges'],
-      showTutorial: false
+      showTutorial: true
     }
   }
   // shouldComponentUpdate(nextProps, nextState) {
@@ -62,7 +62,8 @@ class Dashboard extends Component {
       document.addEventListener('keyup', this.handleEnter, false);
     } else if (id==='end') {
       document.removeEventListener('keyup', this.handleEnter, false);
-      this.setState({showTutorial: false});
+      this.setState({showTutorial: true});
+      this.props.setView(2);
     } else {
       let slide = this.state.tutorialSlides[id];
       this.setState({renderState: slide});
@@ -219,8 +220,10 @@ class Dashboard extends Component {
             {this.state.showTutorial ? this.renderTutorial(this.state.renderState) : dashboard }
               </ReactCSSTransitionGroup>
         </div>
-      {this.state.showTutorial ? <footer/>: <footer id='restart-tutorial'>
-        <p className="goalInfo-toggle" data-id='restart' onClick={this.handleClick} >want to see the tutorial again? Click here</p>
+      {this.state.showTutorial ? <footer className="footer"/>: <footer id='restart-tutorial' className="footer">
+        <div className="container">
+          <p className="goalInfo-toggle" data-id='restart' onClick={this.handleClick}> Want to see the tutorial again? Click here</p>
+        </div>
       </footer>}
       </div>
      );

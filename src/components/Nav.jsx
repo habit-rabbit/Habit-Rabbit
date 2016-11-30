@@ -50,7 +50,7 @@ class Nav extends Component {
               <li><a href="" id="ltGoals" onClick={this.handleLinks}>Goals</a></li>
               <li><a href="" id="dailyGoals" onClick={this.handleLinks}>Daily Reminders</a></li>
               <li><a href="" id="badges" onClick={this.handleLinks}>Badges</a></li>
-              <li><a href="" id="dashboard" onClick={this.handleLinks}>Dashboard</a></li>
+              <li><a href="" id="dashboard" onClick={this.handleLinks}>Tutorial</a></li>
               <li role="separator" className="divider"></li>
               <li><a href="" onClick={this.logOut}>Logout</a></li>
             </ul>
@@ -76,14 +76,14 @@ class Nav extends Component {
     if (id === "ltGoals") {
       this.props.setView(1);
     }
-    if (id === "dailyGoals") {
+    if (id === "dailyGoals" || id === "nav-header") {
       this.props.setView(2);
     }
     if (id === "badges" || id === "new-badge"){
       this.props.setView(3);
       this.props.resetBadgeAlert();
     }
-    if (id === "dashboard" || id === "nav-header") {
+    if (id === "dashboard") {
       this.props.setView(4)
     }
   }
