@@ -180,7 +180,7 @@ class Dashboard extends Component {
                       <p className="tutorial-toggle" data-id='end' onClick={this.handleClick}> Press Enter or click here to end. </p>
                     </div>
                     <div>
-                      <img src="/rabeetdv.png" id="tutorial-bunny" alt="Rabeet-wants-you-to-succeed!"/>
+                      <img src="/rabeetdv.png" id="tutorial-bunny-badge" alt="Rabeet-wants-you-to-succeed!"/>
                       <p><h6 className="text-center"> Do I get a Badge? </h6></p>
                     </div>
                 </div>
