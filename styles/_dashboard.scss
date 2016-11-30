@@ -53,17 +53,26 @@ h2 {
   opacity: 1;
 }
 
-
-  @keyframes highlight {
-    from {
-      color: grey;
-    }
-    to {
-      color: #5bc0de;
-    }
+@keyframes hightlight {
+  from {
+    color: grey;
   }
+  to {
+    color: #5bc0de
+  }
+}
 
-.tutorial-text p {
-  padding: 10px;
-  text-align: left;
+.tutorial-toggle{
+  background: #5bc0de;
+  color: #fff;
+  display: block;
+  font-size: 25px;
+  margin-top: 15px;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover{
+    background: #d8f7ff;
+    color: #777;
+  }
 }
