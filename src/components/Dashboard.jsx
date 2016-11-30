@@ -111,80 +111,76 @@ class Dashboard extends Component {
     switch(key) {
       case 'intro':
         render = <div className="row fade-in" key={key}>
-                    <div className="col-md-12">
-                      <p><b>Oh Wow! </b> Its your first time here! Well lucky for you we have
-                      this <i>handy</i> dandy tutorial lined up for you! </p>
+                    <div className="col-md-12" className="text-center">
+                      <p><strong>A Habit Rabbit's work is never</strong>done!</p>
                       <br/>
-                      <p className="goalInfo-toggle" data-id='1' onClick={this.handleClick} >Click here to Start or press Enter</p>
+                      <p className="tutorial-toggle" data-id='1' onClick={this.handleClick} >Click here to Start or press Enter</p>
                     </div>
                 </div>
         break;
       case 'start':
         render = <div className="row fade-in highlight" key={key}>
-                    <div className="col-md-8">
-                      <h2><strong>Welcome to Habit Rabit!</strong></h2>
-                      <p>   The solution to your goal-setting needs </p>
-                      <p> <br/> This app allows you to create and keep track of the goals,
-                        habits (good and bad ones!), and todos that you have in your busy life
-                        all in one place while making it fun to <i>tick</i> of anything on those lists!
-                      </p>
-                      <p className="goalInfo-toggle" data-id='2' onClick={this.handleClick} >Press Enter or click here to continue... </p>
+                    <div className="col-sm-6 col-sm-offset-3">
+                      <h2><strong> What a Habit Rabbit is? </strong></h2>
+                      <p> Habit Rabbit is all you need in life to keep you motivated & activated! </p>
+                      <p> Keep yourself in <i>check</i> with your Daily Due's list!</p>
+                      <p> Add Goals to your Long-term Goals page! </p>
+                      <p> Work towards achieving them by completing your Tasks! </p>
+                      <p> Do well and you might get a treat... </p>
+                      <p className="tutorial-toggle" data-id='2' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
                     <div>
-                        <img src="/rabeetdv.png" alt="image-of-zombie-rabbit"/>
+                        <img src="/rabeetdv.png" alt="Rabeet-wants-you-to-succeed!" />
+                        <p><h6 className="text-center"> What am I? </h6></p>
                     </div>
                 </div>
         break;
       case 'dailyGoals':
         render = <div className="row fade-in" key={key}>
-                    <div className="col-md-8">
+                    <div className="col-sm-6 col-sm-offset-3">
                       <h2><strong>Daily Tasks</strong></h2>
-                      <p>   You can set a plethora of daily tasks for you to keep track of..<br/>
-                        Have a mental note? Why waste that brain space! Write it down!
-                        You can navigate to the daily tasks page by either selecting the drop down menu on the navigation bar
-                      <b> Or! </b> by pressing Alt and 'd' together on your keyboard!
-                      <br/> On the Daily Task page, you can jot down all those tasks by selecting the create task button or by
-                         or by pressing Alt and 'm' together on your keyboard.</p>
-                      <p className="goalInfo-toggle" data-id='3' onClick={this.handleClick} >Press Enter or click here to continue... </p>
+                      <br/>
+                        <p> To-Do lists got ya down? The Habit Rabbits feels you. That's why the Rabbits keep track of all those bits and pieces for you! </p>
+                        <br/><p> On the Daily Task page you can jot down all those reminders and tasks by pressing the "Create A New Daily Reminder" button. Maybe it's HD ('heavy duty', Rabbits <i>love</i> acronyms.), like doing that important thing with the stuff, or selling that old jalopy wagon. Maybe it's simple, like "hey, don't be a turkey, floss your teeth!", Rabbits have got your back!< /p>
+                        <br/><p><h6> Navigate to Daily Tasks by either selecting it from the dropdown menu in the top right,<b> Or! </b> by pressing Alt and 'd' together on your keyboard! </h6></p>
+                      <p className="tutorial-toggle" data-id='3' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
                     <div>
-                        <img src="/rabeetdv.png" alt="image-of-zombie-rabbit"/>
+                        <img src="/rabeetdv.png" alt="Rabeet-wants-you-to-succeed!"/>
+                        <p><h6 className="text-center"> What a Daily Task is? </h6></p>
                     </div>
                 </div>
         break;
       case 'goals':
         render = <div className="row fade-in" key={key}>
-                    <div className="col-md-8">
+                    <div className="col-sm-6 col-sm-offset-3">
                       <h2><strong>Goals</strong></h2>
-                      <p> This is where you get to kick the butt out of a goal you've always had!<br/>
-                       Maybe you want to excercise a bit more? Learn a new instrument? Kick a bad habit?
-                       You can do that here! Navigate to the goals page by either selecting it in the dropdown menu in the nav bar
-                      <b> Or! </b> by pressing Alt and 'g' together on your keyboard!
-                      <br/> On the Goals page, you can create a new goal by selecting the button (or by pressing Alt 'n') and add tasks
-                        to keep track of your goal.<br/></p>
-                      <h4>This is the fun part!</h4>
-                      <p>You are rewared for completing goals (isn't that awesome?). For every goal you finish you get a nice badge to
-                        show off in your badges page(explained next). Earn them, no one likes a cheater...</p>
-                      <p className="goalInfo-toggle" data-id='4' onClick={this.handleClick} >Press Enter or click here to continue... </p>
+                      <p> Start setting some Goals! To add your Goal, press "Create A New Goal" on the Long-term Goals page. From there enter your Goal.</p>
+                      <p><h5>Examples: "learn to play a ..., Try and cook a ..., Climb Mt. Bunnimonjaro, Quit biting claws, Read all the Harry Potter books... So many options! The world is your Toaster! I mean Oyster! </h5></p>
+                      <p> You can have a multitude of Tasks for each Goal. Tasks are defined by you, because you're awesome! Set as many as you want, but remember, the end goal is the...end...Goal... Heh. Think of Tasks as stepping-stones to reach your Goal. Break it down into chunks. For example, if you wanted to learn to play the Guitar, Task 1 might be "Get a Guitar in my paws. I mean hands."! Goals are the best. Don't be shy to set many! You can do it, the Rabbits believe in you! </p>
+                      <br/><p><h6> Navigate to Goals by either selecting it in the dropdown menu in the top right,
+                      <b> Or! </b> by pressing Alt and 'g' together on your keyboard! </h6></p>
+                      <p className="tutorial-toggle" data-id='4' onClick={this.handleClick} >Press Enter or click here to continue... </p>
                     </div>
                     <div>
-                        <img src="/rabeetdv.png" alt="image-of-zombie-rabbit"/>
+                        <img src="/rabeetdv.png" alt="Rabeet-wants-you-to-succeed!"/>
+                        <p><h6 className="text-center"> What a Goalz is? </h6></p>
                     </div>
                 </div>
         break;
       case 'badges':
         render = <div className="row fade-in" key={key}>
-                    <div className="col-md-8">
+                    <div className="col-sm-6 col-sm-offset-3">
                       <h2><strong>Badges</strong></h2>
-                      <p> This is where you get to see what your good work has surmised too..<br/>
-                        There are 9 custom decorated Bunny Badges to achieve!
-                        You can get to your badges page by selecting it in the dropdown on the nav menu
-                        <b> Or! </b> by pressing Alt and 'g' together on your keyboard!
-                      </p>
-                      <p className="goalInfo-toggle" data-id='end' onClick={this.handleClick} >Press Enter or click here to end </p>
+                        <p>You are rewared for acheiving your Goals! Isn't that incredible? aren't YOU incredible? The Habit Rabbits think so. But you best EARN them, cheating will get you no where in life... Probably. </p>
+
+                        <br/><p><h6>Navigate to Badges by selecting it in the dropdown on the nav menu
+                        <b> Or! </b> by pressing Alt and 'g' together on your keyboard! </h6></p>
+                      <p className="tutorial-toggle" data-id='end' onClick={this.handleClick} >Press Enter or click here to end. </p>
                     </div>
                     <div>
-                        <img src="/rabeetdv.png" alt="image-of-zombie-rabbit"/>
+                        <img src="/rabeetdv.png" alt="Rabeet-wants-you-to-succeed!"/>
+                        <p><h6 className="text-center"> Do I get a Badge? </h6></p>
                     </div>
                 </div>
         break;
@@ -222,7 +218,7 @@ class Dashboard extends Component {
         </div>
       {this.state.showTutorial ? <footer className="footer"/>: <footer id='restart-tutorial' className="footer">
         <div className="container">
-          <p className="goalInfo-toggle" data-id='restart' onClick={this.handleClick}> Want to see the tutorial again? Click here</p>
+          <p className="tutorial-toggle" data-id='restart' onClick={this.handleClick}> Again?!?! </p>
         </div>
       </footer>}
       </div>
