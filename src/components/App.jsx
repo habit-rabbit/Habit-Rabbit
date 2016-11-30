@@ -13,7 +13,7 @@ class App extends Component {
       name: "",
       isLoggedIn: false,
       goals: [],
-      view: "Dashboard",
+      view: "DailyGoals",
       badges: 0,
       newBadge: false,
     }
@@ -111,7 +111,9 @@ class App extends Component {
     if (this.state.isLoggedIn === false) {
       return (<Hero
         setUserId={this.setUserId}
-        verifyLogin={this.verifyLogin} />);
+        verifyLogin={this.verifyLogin}
+        setView={this.setView}
+        />);
     } else {
       return (
         <ReactCSSTransitionGroup
@@ -122,6 +124,7 @@ class App extends Component {
           transitionLeaveTimeout={1000}>
           <Carousel
           name={this.state.name}
+          setView={this.setView}
           badges={this.state.badges}
           updateBadge={this.updateBadge}
           updateGoalsIndex={this.updateFromDatabase}

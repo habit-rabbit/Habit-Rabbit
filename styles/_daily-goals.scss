@@ -1,17 +1,16 @@
-.daily-goal {
-  /*color:#5bc0de;*/
+/*.daily-goal {
+  color: #5bc0de;
   vertical-align: center;
-}
+}*/
 
 .daily-goals-icons {
   float: right;
-  /*font-size: 2em;*/
     i {
       margin: 10px;
     }
     .btn {
       font-size: 16px;
-      margin: 10px 10px 0 0;
+      margin: 0px 10px 0 0;
     }
 }
 
@@ -23,11 +22,4 @@
 
 .page-header h1 {
   padding-left: 43px;
-}
-
-#new-daily-button {
-  color: #5bc0de;
-  font-weight: 900;
-  letter-spacing: 1.5px;
-  padding: 5px 40px 5px 40px;
 }

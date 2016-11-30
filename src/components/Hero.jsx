@@ -62,6 +62,7 @@ class Hero extends Component {
       if (result.data.isLoggedIn) {
           this.setState({first_name: '', last_name: '', email: '', password: '', password_confirmation: '', signupError: null});
           this.props.verifyLogin();
+          this.props.setView(4);
         } else if(result.error.msg) {
           this.setState({signupError: result.error.msg});
         }
@@ -124,7 +125,7 @@ class Hero extends Component {
                   <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Password Confirmation" value={this.state.value} onChange={this.handleChange}/>
                 </div>
                 <div className="form-group">
-                  <input type="submit" name="register" id="sign-up-button" className="btn btn-default" value="Sign On Up!" />
+                  <input type="submit" name="register" id="submit-button" className="btn btn-default" value="Sign On Up!" />
                 </div>
               </form>
             </div>
