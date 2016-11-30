@@ -158,8 +158,17 @@ background-color: #d8f7ff;
 }
 
 #submit-button {
-    color: #5bc0de;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    padding: 5px 60px 5px 60px;
+  background-color: #5bc0de;
+  background-image: none;
+  border-width: 0;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  padding: 5px 60px 5px 60px;
+  text-shadow: none;
+
+   &:hover{
+    background: #d8f7ff;
+    color: #777;
+  }
 }

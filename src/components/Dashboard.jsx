@@ -131,7 +131,7 @@ class Dashboard extends Component {
                     </div>
                     <div>
                         <img src="/rabeetdv.png" alt="Rabeet-wants-you-to-succeed!" />
-                        <p><h6> What am I? </h6></p>
+                        <p><h6 className="text-center"> What am I? </h6></p>
                     </div>
                 </div>
         break;
@@ -147,7 +147,7 @@ class Dashboard extends Component {
                     </div>
                     <div>
                         <img src="/rabeetdv.png" alt="Rabeet-wants-you-to-succeed!"/>
-                        <p><h6> What a Daily Task is? </h6></p>
+                        <p><h6 className="text-center"> What a Daily Task is? </h6></p>
                     </div>
                 </div>
         break;
@@ -164,7 +164,7 @@ class Dashboard extends Component {
                     </div>
                     <div>
                         <img src="/rabeetdv.png" alt="Rabeet-wants-you-to-succeed!"/>
-                        <p><h6> What a Goalz is? </h6></p>
+                        <p><h6 className="text-center"> What a Goalz is? </h6></p>
                     </div>
                 </div>
         break;
@@ -180,7 +180,7 @@ class Dashboard extends Component {
                     </div>
                     <div>
                         <img src="/rabeetdv.png" alt="Rabeet-wants-you-to-succeed!"/>
-                        <p><h6> Do I get a Badge? </h6></p>
+                        <p><h6 className="text-center"> Do I get a Badge? </h6></p>
                     </div>
                 </div>
         break;

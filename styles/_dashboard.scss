@@ -67,21 +67,21 @@
     color: grey;
   }
   to {
-    color: #00b8c9
+    color: #5bc0de
   }
 }
 
 .tutorial-toggle{
-  background: #00b8c9;
-  border-radius: 3px;
+  background: #5bc0de;
   color: #fff;
   display: block;
-  font-size: 30px;
+  font-size: 25px;
   margin-top: 15px;
   text-align: center;
   text-decoration: none;
 
   &:hover{
-    background: darken(#00b8c9, 15%);
+    background: #d8f7ff;
+    color: #777;
   }
 }
