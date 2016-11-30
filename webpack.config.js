@@ -1,25 +1,25 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require("path");
+var webpack = require("webpack");
 
 module.exports = {
-  devtool: 'eval',
+  devtool: "eval",
   entry: [
-    'webpack/hot/dev-server',
-    'webpack-hot-middleware/client',
-    // 'webpack-dev-server/client?http://localhost:3000',
-    './src/index.jsx'
+    "webpack/hot/dev-server",
+    "webpack-hot-middleware/client",
+    // "webpack-dev-server/client?http://localhost:3000",
+    "./src/index.jsx"
   ],
   output: {
-    path: '/',
-    filename: 'bundle.js',
-    publicPath: '/build/'
+    path: "/",
+    filename: "bundle.js",
+    publicPath: "/build/"
   },
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
-        include: path.join(__dirname, 'src')
+        loaders: ["babel"],
+        include: path.join(__dirname, "src")
       },
       {
         test: /\.scss$/,

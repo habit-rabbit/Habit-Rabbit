@@ -1,22 +1,22 @@
-const router = require('express').Router();
-const db = require("../api/query_class.js");
-const bcrypt = require('bcrypt');
-const ResponseData = require('../api/response.js');
+const router       = require("express").Router();
+const db           = require("../api/query_class.js");
+const bcrypt       = require("bcrypt");
+const ResponseData = require("../api/response.js");
 
-router.get('/', (req, res) => {
-  res.render('index');
+router.get("/", (req, res) => {
+  res.render("index");
 });
 
-router.get('/login', (req, res) => {
+router.get("/login", (req, res) => {
   let isLoggedIn;
   let name;
   let badges;
-  if (req.session['user-id']){
+  if (req.session["user-id"]){
     isLoggedIn = true;
     const query = {};
     query.data = {};
-    query.table = 'users';
-    query.data.id = req.session['user-id'];
+    query.table = "users";
+    query.data.id = req.session["user-id"];
     //query data base for user, if found grab hash and compare to pw
     db.getRow(query, (err, data) => {
       if (err) {
@@ -29,28 +29,27 @@ router.get('/login', (req, res) => {
     });
   } else {
     isLoggedIn = false;
-    name = '';
+    name = "";
     badges = 0;
     res.json({name: name, isLoggedIn: isLoggedIn, badges: badges});
   }
 });
 
-router.post('/logout', (req, res) =>{
+router.post("/logout", (req, res) =>{
   req.session = null;
   res.json({isLoggedIn: false});
-
 });
 
-router.post('/login', (req, res) => {
+router.post("/login", (req, res) => {
   const r = new ResponseData();
   const pw = req.body.data.password;
   const query = {};
   query.data = {};
-  query.table = 'users';
+  query.table = "users";
   query.data.email = req.body.data.email;
   //query data base for user, if found grab hash and compare to pw
   db.getRow(query, (err, data) => {
-    const responder = function() {res.json(r);}
+    const responder = function () {res.json(r);}
     //if err, the query was made with an invalid email;
     if (err) {
       r.setErrorMsg("Invalid credentials, please try again or signup");
@@ -58,13 +57,13 @@ router.post('/login', (req, res) => {
     } else if (!data.length) {
       //if data is empty that means the email supplied did not match
       // a record in the db
-      r.setErrorMsg(`Incorrect email or password!`);
+      r.setErrorMsg("Incorrect email or password!");
       responder();
     } else {
       //database found user
       let user = data[0];
       // compare password to has...
-      bcrypt.compare(pw, user.password_digest, function(err, result) {
+      bcrypt.compare(pw, user.password_digest, function (err, result) {
         if(err) {
           throw err;
         }
@@ -72,7 +71,6 @@ router.post('/login', (req, res) => {
           //setcookie
           req.session["user-id"] = user.id;
           r.setData({isLoggedIn: true});
-
         }
         responder();
       });

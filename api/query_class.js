@@ -1,8 +1,6 @@
-
-// require('dotenv').config({silent: true});
-const ENV = process.env.ENV || process.env.NODE_ENV || "development";
+const ENV           = process.env.ENV || process.env.NODE_ENV || "development";
 const knexConfig    = require("../knexfile");
-const k          = require("knex")(knexConfig[ENV]);
+const k             = require("knex")(knexConfig[ENV]);
 
 
 function database() {
@@ -58,7 +56,7 @@ database.prototype.getAllWhere = function (query, callback) {
 database.prototype.getGoalsWithTasks = function(query, callback) {
   //queries database for all goals and joins their respective
   // tasks to the goal as an array of JSON objects
-  // contained in a property names 'tasks' for a goal
+  // contained in a property named 'tasks' for a goal
 
   this.knex('goals')
   .select([
