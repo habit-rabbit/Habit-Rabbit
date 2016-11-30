@@ -70,19 +70,19 @@ class Badges extends Component {
           </div>
           <div className='container'>
             <div className="row">
-              <div className='col-md-4'><div className="full-circle badge1">{this.renderImage(0)}</div><h4 className='badge-text'>{this.renderText(0)}</h4></div>
-              <div className='col-md-4'><div className="full-circle badge2">{this.renderImage(1)}</div><h4 className='badge-text'>{this.renderText(1)}</h4></div>
-              <div className='col-md-4'><div className="full-circle badge3">{this.renderImage(2)}</div><h4 className='badge-text'>{this.renderText(2)}</h4></div>
+              <div className='col-md-4 badge-table'><div className="full-circle badge1">{this.renderImage(0)}</div><h4 className='badge-text'>{this.renderText(0)}</h4></div>
+              <div className='col-md-4 badge-table'><div className="full-circle badge2">{this.renderImage(1)}</div><h4 className='badge-text'>{this.renderText(1)}</h4></div>
+              <div className='col-md-4 badge-table'><div className="full-circle badge3">{this.renderImage(2)}</div><h4 className='badge-text'>{this.renderText(2)}</h4></div>
             </div>
             <div className='row'>
-              <div className='col-md-4'><div className="full-circle badge4">{this.renderImage(3)}</div><h4 className='badge-text'>{this.renderText(3)}</h4></div>
-              <div className='col-md-4'><div className="full-circle badge5">{this.renderImage(4)}</div><h4 className='badge-text'>{this.renderText(4)}</h4></div>
-              <div className='col-md-4'><div className="full-circle badge6">{this.renderImage(5)}</div><h4 className='badge-text'>{this.renderText(5)}</h4></div>
+              <div className='col-md-4 badge-table'><div className="full-circle badge4">{this.renderImage(3)}</div><h4 className='badge-text'>{this.renderText(3)}</h4></div>
+              <div className='col-md-4 badge-table'><div className="full-circle badge5">{this.renderImage(4)}</div><h4 className='badge-text'>{this.renderText(4)}</h4></div>
+              <div className='col-md-4 badge-table'><div className="full-circle badge6">{this.renderImage(5)}</div><h4 className='badge-text'>{this.renderText(5)}</h4></div>
             </div>
             <div className='row'>
-              <div className='col-md-4'><div className="full-circle badge7">{this.renderImage(6)}</div><h4 className='badge-text'>{this.renderText(6)}</h4></div>
-              <div className='col-md-4'><div className="full-circle badge8">{this.renderImage(7)}</div><h4 className='badge-text'>{this.renderText(7)}</h4></div>
-              <div className='col-md-4'><div className="full-circle badge9">{this.renderImage(8)}</div><h4 className='badge-text'>{this.renderText(8)}</h4></div>
+              <div className='col-md-4 badge-table'><div className="full-circle badge7">{this.renderImage(6)}</div><h4 className='badge-text'>{this.renderText(6)}</h4></div>
+              <div className='col-md-4 badge-table'><div className="full-circle badge8">{this.renderImage(7)}</div><h4 className='badge-text'>{this.renderText(7)}</h4></div>
+              <div className='col-md-4 badge-table'><div className="full-circle badge9">{this.renderImage(8)}</div><h4 className='badge-text'>{this.renderText(8)}</h4></div>
             </div>
           </div>
         </div>
