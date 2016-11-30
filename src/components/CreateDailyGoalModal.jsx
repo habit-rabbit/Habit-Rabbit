@@ -92,7 +92,7 @@ class CreateDailyGoalModal extends Component {
               </div>
 
               <div className="form-group form-group-modal">
-                <input type="submit" name="create-goal" className="btn btn-default" value="Get Cracking!" />
+                <input id="submit-button" type="submit" name="create-goal" className="btn btn-default" value="Don't you, forget about me..." />
               </div>
             </form>
             </div>
