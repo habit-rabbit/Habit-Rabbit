@@ -62,6 +62,7 @@ class Hero extends Component {
       if (result.data.isLoggedIn) {
           this.setState({first_name: '', last_name: '', email: '', password: '', password_confirmation: '', signupError: null});
           this.props.verifyLogin();
+          this.props.setView(4);
         } else if(result.error.msg) {
           this.setState({signupError: result.error.msg});
         }

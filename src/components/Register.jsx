@@ -68,6 +68,7 @@ class Register extends Component {
           this.setState({first_name: '', last_name: '', email: '', password: '', password_confirmation: '', regError: null});
           this.props.verifyLogin();
           $("#register-modal").modal("hide");
+          this.props.setView(4);
         } else if (result.error.msg) {
           this.setState({regError: result.error.msg})
         }
