@@ -25,7 +25,7 @@ var CronJob = require('cron').CronJob;
 //   })
 // });
 
-new CronJob('0 0 0 * * *', function() {
+let job = new CronJob('0 0 0 * * *', function() {
 console.log("Cron schedule active");
   console.log("Time is");
   let query = {};
@@ -39,6 +39,7 @@ console.log("Cron schedule active");
     }
   });
 }, null, false, 'America/Los_Angeles');
+job.start();
 
 
 router.post("/goals/create", (req, res) => {
