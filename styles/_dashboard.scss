@@ -62,12 +62,26 @@
   opacity: 1;
 }
 
-
-  @keyframes hightlight {
-    from {
-      color: grey;
-    }
-    to {
-      color: #00b8c9
-    }
+@keyframes hightlight {
+  from {
+    color: grey;
   }
+  to {
+    color: #00b8c9
+  }
+}
+
+.tutorial-toggle{
+  background: #00b8c9;
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  font-size: 30px;
+  margin-top: 15px;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover{
+    background: darken(#00b8c9, 15%);
+  }
+}
