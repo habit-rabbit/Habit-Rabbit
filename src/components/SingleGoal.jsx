@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import ProgressBar from './ProgressBar.jsx';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import React, {Component} from "react";
+import ProgressBar from "./ProgressBar.jsx";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 
 class SingleGoal extends Component {
 
@@ -15,7 +15,7 @@ class SingleGoal extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.state = {
       showGoalinfo: false,
-      goalInfo: "hide"
+      goalInfo: "hide",
     }
   }
 
@@ -26,7 +26,7 @@ class SingleGoal extends Component {
       url: `/api/goals/${this.props.goalInfo.id}/delete`,
       data: {
         data: {
-          id: this.props.goalInfo.id
+          id: this.props.goalInfo.id,
         }
       }
     }).done(() => {
@@ -36,14 +36,14 @@ class SingleGoal extends Component {
 
  //=================show-hide goal details===============================
 
-  handleMouseEnter() {
+  handleMouseEnter () {
     this.setState({goalInfo: "show"});
   }
-  handleMouseLeave() {
+  handleMouseLeave () {
     this.setState({goalInfo: "hide"});
   }
 
-  renderGoalInfo() {
+  renderGoalInfo () {
     let counter = 0;
     if(this.state.goalInfo === "show") {
       return( <div>
@@ -69,21 +69,23 @@ class SingleGoal extends Component {
   }
   // ====================================================================
   //============== update database: goal.is_done = true==================
-  updateGoal() {
-    $.ajax({
-      method: 'post',
-      url: `/api/goals/${this.props.goalInfo.id}/update`,
-      data: {
+  updateGoal () {
+    setTimeout(() => {
+      $.ajax({
+        method: "post",
+        url: `/api/goals/${this.props.goalInfo.id}/update`,
         data: {
-          is_done: true
+          data: {
+            is_done: true
+          }
         }
-      }
-    }).then(() => {
-      setTimeout(() => {
-        this.props.update();
-        this.props.updateBadge();
-      }, 100);
-    });
+      }).then(() => {
+        setTimeout(() => {
+          this.props.update();
+          this.props.updateBadge();
+        }, 200);
+      });
+    }, 400);
   }
 
   //==============================For Tasks==============================
@@ -92,32 +94,31 @@ class SingleGoal extends Component {
     //if task is undefined, it means there are no more tasks to complete
     //at this point we update the goal and set its is_done flag to true
     if (!task) {
-      if(!this.props.goalInfo.is_done) {
+      if (!this.props.goalInfo.is_done) {
         this.updateGoal();
       }
       return (
         <div>
-        <p> You've finished your goal! Rabeet is screeching with delight. </p>
+          <p> You've finished your goal! Rabeet is screeching with delight. </p>
           <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
             <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
           </button>
         </div>
-        );
+      );
     } else {
         return (
           <div>
             <p className="tasks">{task.name}</p>
             <div id="finished-task-button">
-            <span> Task Done? </span>
-            <div className="daily-goals-icons goals-page">
-              <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
-              <span className="glyphicon glyphicon-check" aria-hidden="true" data-taskid={task.id}></span>
-              </button>
-              <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
-              <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
-              </button>
-            </div>
-
+              <span> Task Done? </span>
+              <div className="daily-goals-icons goals-page">
+                <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
+                 <span className="glyphicon glyphicon-check" aria-hidden="true" data-taskid={task.id}></span>
+                </button>
+                <button type="button" className="btn btn-default" aria-label="Trash" onClick={this.handleDelete}>
+                  <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+              </div>
             </div>
           </div>
         );
@@ -142,7 +143,7 @@ class SingleGoal extends Component {
 //===========================Render the goal component====================
   renderGoals() {
 
-    if(!this.props.goalInfo.tasks) {
+    if (!this.props.goalInfo.tasks) {
       return (
         <div>
           <h3>Let's talk about tasks... </h3>
@@ -180,14 +181,13 @@ class SingleGoal extends Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <div>
         {this.renderGoals()}
       </div>
     );
   }
-
 }
 
 export default SingleGoal;
