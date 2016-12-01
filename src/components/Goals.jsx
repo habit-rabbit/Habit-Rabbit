@@ -19,14 +19,6 @@ class Goals extends Component {
       return (
         <h3> Loading Goals... </h3>
       );
-    } else if (this.props.goalList.length === 0) {
-      return (
-        <div>
-          <h3> You haven't created any goals yet!</h3>
-          <h3>WHAT ARE YOU EVEN DOING HERE?!?</h3>
-          <h3>GET ON IT.</h3>
-        </div>
-      );
     } else {
       return (
         <div>
