@@ -1,10 +1,12 @@
 @import 'mixins';
 
-h2 {
-  color: #5bc0de;
-  font-weight: bolder;
-  padding-top: 35px;
-  padding-bottom: 20px;
+.col-lg-12.text-center {
+  h2 {
+    color: #5bc0de;
+    font-weight: bolder;
+    padding-top: 35px;
+    padding-bottom: 20px;
+  }
 }
 
 p {
