@@ -48,7 +48,7 @@ class Badges extends Component {
   // }
 
   buildTextArray(){
-    let textArray = ["You're not in Kansas anymore.", "You're gonna need a bigger b-- goal...", "I love the smell of napalm in the morning.", "Rosebud.", "Have you tried turning it off and on again?", "Soylent Green is people!", "Frankly, Susan, I don't give a damn.","Open the pod bay doors, HAL", "Proper Planning Prevents Poor Performance"]
+    let textArray = ["ABG. Always Be Goalsing.", "You're gonna need a bigger b-- Goal...", "I love the smell of napalm in the morning.", "Rosebud.", "Have you tried turning it off and on again?", "Soylent Green is people!", "Nobdy puts Baby in the corner.","Open the pod bay doors, HAL", "Proper Planning Prevents Poor Performance"]
     let numberComplete = this.props.badges;
     if (numberComplete < 9) {
       let slicedTextArray = textArray.slice(0, numberComplete);

@@ -93,7 +93,7 @@ class CreateGoalModal extends Component {
 
   renderForms() {
     return this.state.tasks.map((item, index) => {
-      return <input autoFocus={focus} className="task-name" type="text" value={item} onChange={ (e) => {this.updateTask(e, index)} } name={`task-name-${index}`} key={index} placeholder="Task Name"/>
+      return <input autoFocus={focus} className="task-name" type="text" value={item} onChange={ (e) => {this.updateTask(e, index)} } name={`task-name-${index}`} key={index} placeholder="Task Name? To add another, press the Green button."/>
     });
   }
 
@@ -158,7 +158,7 @@ class CreateGoalModal extends Component {
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
 
               <div className="form-group form-group-modal">
-                <input id="goal-name" type="text" value={this.state.goalName} onChange={this.handleChange} name="goalName" placeholder="Goal Name" />
+                <input id="goal-name" type="text" value={this.state.goalName} onChange={this.handleChange} name="goalName" placeholder="What is your Goal?" />
               </div>
 
               <div className="form-group form-group-modal">
