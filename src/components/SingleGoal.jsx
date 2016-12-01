@@ -70,20 +70,22 @@ class SingleGoal extends Component {
   // ====================================================================
   //============== update database: goal.is_done = true==================
   updateGoal() {
-    $.ajax({
-      method: 'post',
-      url: `/api/goals/${this.props.goalInfo.id}/update`,
-      data: {
+    setTimeout(() => {
+      $.ajax({
+        method: 'post',
+        url: `/api/goals/${this.props.goalInfo.id}/update`,
         data: {
-          is_done: true
+          data: {
+            is_done: true
+          }
         }
-      }
-    }).then(() => {
-      setTimeout(() => {
-        this.props.update();
-        this.props.updateBadge();
-      }, 100);
-    });
+      }).then(() => {
+        setTimeout(() => {
+          this.props.update();
+          this.props.updateBadge();
+        }, 200);
+      });
+    }, 400);
   }
 
   //==============================For Tasks==============================
