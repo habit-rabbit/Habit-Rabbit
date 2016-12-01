@@ -108,7 +108,7 @@ class Dashboard extends Component {
                     <div className="col-md-12" className="text-center">
                       <p><strong>A Habit Rabbit's work is never</strong> done!</p>
                       <br/>
-                      <p className="tutorial-toggle" data-id='1' onClick={this.handleClick}> Click here to Start or press Enter </p>
+                      <p className="tutorial-toggle" data-id='1' onClick={this.handleClick}> Click here to Start the Tutorial! </p>
                     </div>
                 </div>
         break;
@@ -126,7 +126,7 @@ class Dashboard extends Component {
                     </div>
                     <div>
                         <img src="/rabeetdv.png" id="tutorial-bunny" alt="Rabeet-wants-you-to-succeed!"/>
-                        <p><h6 className="text-center"> What am I? </h6></p>
+                        <h6 className="text-center"> What am I? </h6>
                     </div>
                 </div>
         break;
@@ -139,12 +139,12 @@ class Dashboard extends Component {
                       <br/>
                       <p> On the "Daily Task" page you can jot down all those reminders and tasks by pressing the "Create A New Daily Reminder" button. Maybe it's HD ("heavy duty" - Rabbits <i>love</i> acronyms.), like doing that important thing with the stuff, or selling that jalopy old wagon. Maybe it's simple, like "Hey, don't be a turkey, floss your teeth!". In any case, the Habit Rabbits have got your back!</p>
                       <br/>
-                      <p><h6> Navigate to "Daily Tasks" by selecting it from the dropdown menu (click your name) in the top right. </h6></p>
+                      <h6> Navigate to "Daily Tasks" by selecting it from the dropdown menu (click your name) in the top right. </h6>
                       <p className="tutorial-toggle" data-id='3' onClick={this.handleClick}> Click here to continue or press Enter </p>
                     </div>
                     <div>
                       <img src="/rabeetdv.png" id="tutorial-bunny-daily" alt="Rabeet-wants-you-to-succeed!"/>
-                      <p><h6 className="text-center"> What a Daily Task is? </h6></p>
+                      <h6 className="text-center"> What a Daily Task is? </h6>
                     </div>
                 </div>
         break;
@@ -154,15 +154,15 @@ class Dashboard extends Component {
                       <h2><strong>Goals</strong></h2>
                       <br/>
                       <p> Start setting some Goals! To add your Goal, press "Create A New Goal" on the "Long-term Goals" page. From there you can review your current Goals and add new ones. </p>
-                      <p><h5> Examples: "Learn to play a ..., Try and cook a ..., Climb Mt. Bunnimonjaro, Quit biting claws, Read all the Harry Potter books... So many options! The world is your toaster! I mean oyster! </h5></p>
+                      <h5> Examples: "Learn to play a ..., Try and cook a ..., Climb Mt. Bunnimonjaro, Quit biting claws, Read all the Harry Potter books... So many options! The world is your toaster! I mean oyster! </h5>
                       <p> You can have a multitude of Tasks for each Goal. Tasks are defined by you, because you're awesome! Set as many as you want, but remember, the end goal is the...end...Goal... Heh. Think of Tasks as stepping-stones to reach your Goal. Break it down into chunks. For example, if you wanted to learn to play the guitar, Task 1 might be "Get a guitar in my paws... I mean hands!" Goals are the best. Don't be shy to set many! You can do it, the Rabbits believe in you! </p>
                       <br/>
-                      <p><h6> Navigate to "Long-term Goals" by selecting it from the dropdown menu (click your name) in the top right. </h6></p>
+                      <h6> Navigate to "Long-term Goals" by selecting it from the dropdown menu (click your name) in the top right. </h6>
                       <p className="tutorial-toggle" data-id='4' onClick={this.handleClick}> Click here to continue or press Enter </p>
                     </div>
                     <div>
                       <img src="/rabeetdv.png" id="tutorial-bunny-goal" alt="Rabeet-wants-you-to-succeed!"/>
-                      <p><h6 className="text-center"> What a Goalz is? </h6></p>
+                      <h6 className="text-center"> What a Goalz is? </h6>
                     </div>
                 </div>
         break;
@@ -173,12 +173,12 @@ class Dashboard extends Component {
                       <br/>
                       <p>You are rewarded for achieving your Goals! And not just by that fabulous brain rush of serotonin! Isn't that incredible? Aren't YOU incredible? The Habit Rabbits think so. But you best EARN those rewards! Cheating will get you nowhere in life... Probably. </p>
                       <br/>
-                      <p><h6> Navigate to "Badges" by selecting it from the dropdown menu in the top right. </h6></p>
+                      <h6> Navigate to "Badges" by selecting it from the dropdown menu in the top right. </h6>
                       <p className="tutorial-toggle" data-id='end' onClick={this.handleClick}> Press Enter or click here to end. </p>
                     </div>
                     <div>
                       <img src="/rabeetdv.png" id="tutorial-bunny-badge" alt="Rabeet-wants-you-to-succeed!"/>
-                      <p><h6 className="text-center"> Do I get a Badge? </h6></p>
+                      <h6 className="text-center"> Do I get a Badge? </h6>
                     </div>
                 </div>
         break;
@@ -191,7 +191,6 @@ class Dashboard extends Component {
       <div className="row">
         <div className="col-md-6">
           <h2> Your Goals: </h2>
-           {this.props.goalList.length ? this.renderGoals() : <p> You don't have any goals yet! </p>}
          </div>
         <div className="col-md-6">
           <h2> Your Todos: </h2>
