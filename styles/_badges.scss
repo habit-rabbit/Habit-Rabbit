@@ -1,11 +1,3 @@
-.full-circle {
-  height: 220px;
-  -moz-border-radius: 110px;
-  -webkit-border-radius: 110px;
-  width: 220px;
-  margin: auto;
-  // z-index: +99;
-}
 
 .badge1{
   background-color: #ec1559;
@@ -39,10 +31,19 @@
   text-align: center;
 }
 
-.table.no-border tr td, .table.no-border tr th {
-  border-width: 0;
-}
-
 .badge-table {
   height: 280px;
+}
+
+.full-circle {
+  height: 220px;
+  -moz-border-radius: 110px;
+  -webkit-border-radius: 110px;
+  width: 220px;
+  margin: auto;
+  // z-index: +99;
+}
+
+.table.no-border tr td, .table.no-border tr th {
+  border-width: 0;
 }

@@ -1,33 +1,14 @@
-#restart-tutorial {
-  position: relative;
-  bottom: 0;
-}
-.text-center {
-  text-align: center;
-  perspective: 100px;
-  h1 {
-    font-size: 30px;
-    // animation: swing .5s ease-in-out;
-    @keyframes swing {
-      0% {
-        transform: rotateY(90deg);
-      }
-      90% {
-        transform: rotateY(-10deg);
-      }
-      100% {
-        transform: none;
-      }
-    }
-  }
-}
-
-h2 {
+h2, h5, h6 {
   color: #5bc0de;
 }
 
-h5, h6 {
-  color: #5bc0de;
+.col-sm-6.col-sm-offset-3 {
+  padding-top: 30px;
+}
+
+.example-appear {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
 }
 
 .example-enter {
@@ -35,37 +16,33 @@ h5, h6 {
   transform: rotateX(-90deg);
 }
 
+.example-leave {
+  opacity: 1;
+}
+
 .example-enter.example-enter-active {
   font-size: 1em;
   opacity: 1;
   transform: none;
-  transition: opacity .5s ease-in;
   transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
-}
-
-.example-leave {
-  opacity: 1;
+  transition: opacity .5s ease-in;
 }
 
 .example-leave.example-leave-active {
   opacity: 0.01;
 }
 
-.example-appear {
-  opacity: 0.01;
-  transition: opacity 1s ease-in;
-}
 .example-appear.example-appear-active {
   opacity: 1;
 }
 
-@keyframes hightlight {
-  from {
-    color: grey;
-  }
-  to {
-    color: #5bc0de
-  }
+.row.fade-in {
+  padding-top: 30px;
+}
+
+.text-center {
+  perspective: 100px;
+  text-align: center;
 }
 
 .tutorial-toggle{
@@ -76,19 +53,15 @@ h5, h6 {
   margin-top: 15px;
   text-align: center;
   text-decoration: none;
-
-  &:hover{
-    background: #d8f7ff;
-    color: #777;
-  }
+    &:hover{
+      background: #d8f7ff;
+      color: #777;
+    }
 }
 
-.col-sm-6.col-sm-offset-3 {
-  padding-top: 30px;
-}
-
-.row.fade-in {
-  padding-top: 30px;
+#restart-tutorial {
+  bottom: 0;
+  position: relative;
 }
 
 #tutorial-bunny {
