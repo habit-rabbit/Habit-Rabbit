@@ -1,4 +1,9 @@
 @import 'mixins';
+
+.daily-goals-icons.goals-page {
+  position: absolute;
+}
+
 .goals-template {
   margin: 3em;
 
@@ -10,63 +15,55 @@
     padding-left: 20px;
     text-align: center;
   }
-
   h3 {
     padding-top: 2em;
     text-align: center;
   }
-
   h4 {
     color:#777;
     padding-top: 20px;
     text-align: center;
   }
-
   p {
     font-size: 14px;
   }
-
   .col-centered {
     float: none;
     margin: 0 auto;
   }
-
   .progress {
     margin: auto;
     position: absolute;
     top: 70px; left: 0; bottom: 0; right: 0;
-    margin-left: 40px;
-    margin-right: 40px;
-
-    .progress-bar {
-      -webkit-transition: none;
-      -o-transition: none;
-      transition: none;
-    }
+      .progress-bar {
+        -webkit-transition: none;
+        -o-transition: none;
+        transition: none;
+      }
   }
-
   .strikethrough {
     position: relative;
     text-decoration: line-through;
   }
-
   .tasks {
     overflow-wrap: break-word;
   }
-
   .task-list {
     text-align: left;
   }
 }
-
+/*progress css under goals-template class manages all progress, progress class below makes bar under 'daily tasks' even with wells.*/
 .progress {
   margin-left: 40px;
   margin-right: 42px;
 }
 
+.glyphicon {
+  color: #5bc0de;
+}
+
 .goals-template.row.well {
   padding: 0px;
-
   .well {
     background-color: #96C8A2;
   }
@@ -98,7 +95,6 @@
   padding: 5px;
   text-align: left;
   width: 100%;
-
     &:hover{
       .goalInfo-content{
         max-height: 400px;
@@ -115,17 +111,12 @@
   transition: opacity 1s;
 }
 
-
 .goalInfo-inner{
   overflow: hidden;
   padding: 0 15px;
 }
+
 .goalInfo-toggle{
-/*  -webkit-transition: background .1s linear;
-  -moz-transition: background .1s linear;
-  -ms-transition: background .1s linear;
-  -o-transition: background .1s linear;
-  transition: background .1s linear;*/
   background: #5bc0de;
   border-radius: 3px;
   color: #fff;
@@ -134,21 +125,13 @@
   margin: 0 0 10px;
   text-align: center;
   text-decoration: none;
-  .first {
-    width: 40%;
-    margin: 0 auto 10px;
-  }
-  &:hover{
-    background: darken(#5bc0de, 15%);
-  }
-}
-
-.glyphicon {
-  color: #5bc0de;
-}
-
-.progress-bar.progress-bar-info {
-  @include linear-gradient(left, rgb(177, 223, 255) 0, rgba(204, 0, 255, 0.68) 130%);
+    .first {
+      width: 40%;
+      margin: 0 auto 10px;
+    }
+    &:hover{
+      background: darken(#5bc0de, 15%);
+    }
 }
 
 .page-header {
@@ -156,8 +139,8 @@
   margin: 40px 0 20px;
 }
 
-.daily-goals-icons.goals-page {
-  position: absolute;
+.progress-bar.progress-bar-info {
+  @include linear-gradient(left, rgb(177, 223, 255) 0, rgba(204, 0, 255, 0.68) 130%);
 }
 
 #submit-button {
@@ -169,7 +152,6 @@
   letter-spacing: 1.5px;
   padding: 5px 60px 5px 60px;
   text-shadow: none;
-
    &:hover{
     background: #d8f7ff;
     color: #777;

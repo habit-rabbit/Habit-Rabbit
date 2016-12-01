@@ -3,14 +3,6 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
-.create {
-  display: inline-block;
-  float: none;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  vertical-align: top;
-}
-
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   padding: 0;
@@ -20,6 +12,14 @@ h1 {
   display: inline-block;
   line-height: 34px;
   margin-right: 20px;
+}
+
+.create {
+  display: inline-block;
+  float: none;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  vertical-align: top;
 }
 
 #myModalLabel {
