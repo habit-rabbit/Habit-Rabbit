@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import React, {Component} from "react";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 class Dashboard extends Component {
   //the dashboard as of now serves as a tutorial page,
-  //it however has left room to be converted to a user 'dashboard' with some
+  //it however has left room to be converted to a user "dashboard" with some
   //minor changes. With time constraints, the decision was made to not use this
   // user dashboard feature as it would not be polished to our standards by time of release
   constructor(props) {
@@ -13,14 +13,14 @@ class Dashboard extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleEnter = this.handleEnter.bind(this);
     this.state = {
-      renderState: 'intro',
-      tutorialSlides: ['intro', 'start', 'dailyGoals', 'goals', 'badges'],
-      showTutorial: true
+      renderState: "intro",
+      tutorialSlides: ["intro", "start", "dailyGoals", "goals", "badges"],
+      showTutorial: true,
     }
   }
 
-  componentWillMount() {
-    document.addEventListener('keyup', this.handleEnter, false);
+  componentWillMount () {
+    document.addEventListener("keyup", this.handleEnter, false);
     // **this conditional is in regards to a future feature of the tutorial view being converted to a user dashboard
     // ** not in implemenation currently
     // if (!this.props.goalList.length ) { // undefined...
@@ -28,17 +28,17 @@ class Dashboard extends Component {
     // }
   }
 
-  componentWillUnmount() {
-    document.removeEventListener('keyup', this.handleEnter, false);
+  componentWillUnmount () {
+    document.removeEventListener("keyup", this.handleEnter, false);
   }
 
-  handleEnter(event) {
+  handleEnter (event) {
     //check if enter key was pressed
-    if(event.key === 'Enter') {
+    if (event.key === "Enter") {
       //check which event we are on
       let currentState = this.state.renderState;
       //if you are on badges, then trigger end of tutorial
-      if (currentState !== 'badges'){
+      if (currentState !== "badges"){
         //find that in array..
         let index = this.state.tutorialSlides.findIndex( (elm) => {
           return elm === currentState;
@@ -50,18 +50,18 @@ class Dashboard extends Component {
           this.props.setView(2);
       } else {
         this.setState({showTutorial: false});
-        document.removeEventListener('keyup', this.handleEnter, false)
+        document.removeEventListener("keyup", this.handleEnter, false)
       }
     }
   }
 
-  handleClick(event) {
+  handleClick (event) {
     let id = event.target.dataset.id;
-    if(id === 'restart') {
-      this.setState({showTutorial: true, renderState: 'start'});
-      document.addEventListener('keyup', this.handleEnter, false);
-    } else if (id==='end') {
-      document.removeEventListener('keyup', this.handleEnter, false);
+    if (id === "restart") {
+      this.setState({showTutorial: true, renderState: "start"});
+      document.addEventListener("keyup", this.handleEnter, false);
+    } else if (id==="end") {
+      document.removeEventListener("keyup", this.handleEnter, false);
       this.setState({showTutorial: true});
       this.props.setView(2);
     } else {
@@ -100,19 +100,19 @@ class Dashboard extends Component {
   }
 */
 //this function conditionally renders a "slide" dependant on a key that is passed in. This function is triggered by a state change
-  renderTutorial(key) {
+  renderTutorial (key) {
     let render = null;
     switch(key) {
-      case 'intro':
+      case "intro":
         render = <div className="row fade-in" key={key}>
                     <div className="col-md-12" className="text-center">
                       <p><strong>A Habit Rabbit's work is never</strong> done!</p>
                       <br/>
-                      <p className="tutorial-toggle" data-id='1' onClick={this.handleClick}> Click here to Start the Tutorial! </p>
+                      <p className="tutorial-toggle" data-id="1" onClick={this.handleClick}> Click here to Start the Tutorial! </p>
                     </div>
                 </div>
         break;
-      case 'start':
+      case "start":
         render = <div className="row fade-in highlight" key={key}>
                     <div className="col-sm-6 col-sm-offset-3">
                       <h2><strong> What is a Habit Rabbit? </strong></h2>
@@ -122,7 +122,7 @@ class Dashboard extends Component {
                       <p> Add Goals to your Long-term Goals page! </p>
                       <p> Work towards achieving them by completing your Tasks! </p>
                       <p> Do well and you might get a treat... </p>
-                      <p className="tutorial-toggle" data-id='2' onClick={this.handleClick}> Click here to continue or press Enter </p>
+                      <p className="tutorial-toggle" data-id="2" onClick={this.handleClick}> Click here to continue or press Enter </p>
                     </div>
                     <div>
                         <img src="/rabeetdv.png" id="tutorial-bunny" alt="Rabeet-wants-you-to-succeed!"/>
@@ -130,7 +130,7 @@ class Dashboard extends Component {
                     </div>
                 </div>
         break;
-      case 'dailyGoals':
+      case "dailyGoals":
         render = <div className="row fade-in" key={key}>
                     <div className="col-sm-6 col-sm-offset-3">
                       <h2><strong>Daily Tasks</strong></h2>
@@ -140,7 +140,7 @@ class Dashboard extends Component {
                       <p> On the "Daily Task" page you can jot down all those reminders and tasks by pressing the "Create A New Daily Reminder" button. Maybe it's HD ("heavy duty" - Rabbits <i>love</i> acronyms.), like doing that important thing with the stuff, or selling that jalopy old wagon. Maybe it's simple, like "Hey, don't be a turkey, floss your teeth!". In any case, the Habit Rabbits have got your back!</p>
                       <br/>
                       <h6> Navigate to "Daily Tasks" by selecting it from the dropdown menu (click your name) in the top right. </h6>
-                      <p className="tutorial-toggle" data-id='3' onClick={this.handleClick}> Click here to continue or press Enter </p>
+                      <p className="tutorial-toggle" data-id="3" onClick={this.handleClick}> Click here to continue or press Enter </p>
                     </div>
                     <div>
                       <img src="/rabeetdv.png" id="tutorial-bunny-daily" alt="Rabeet-wants-you-to-succeed!"/>
@@ -148,7 +148,7 @@ class Dashboard extends Component {
                     </div>
                 </div>
         break;
-      case 'goals':
+      case "goals":
         render = <div className="row fade-in" key={key}>
                     <div className="col-sm-6 col-sm-offset-3">
                       <h2><strong>Goals</strong></h2>
@@ -158,7 +158,7 @@ class Dashboard extends Component {
                       <p> You can have a multitude of Tasks for each Goal. Tasks are defined by you, because you're awesome! Set as many as you want, but remember, the end goal is the...end...Goal... Heh. Think of Tasks as stepping-stones to reach your Goal. Break it down into chunks. For example, if you wanted to learn to play the guitar, Task 1 might be "Get a guitar in my paws... I mean hands!" Goals are the best. Don't be shy to set many! You can do it, the Rabbits believe in you! </p>
                       <br/>
                       <h6> Navigate to "Long-term Goals" by selecting it from the dropdown menu (click your name) in the top right. </h6>
-                      <p className="tutorial-toggle" data-id='4' onClick={this.handleClick}> Click here to continue or press Enter </p>
+                      <p className="tutorial-toggle" data-id="4" onClick={this.handleClick}> Click here to continue or press Enter </p>
                     </div>
                     <div>
                       <img src="/rabeetdv.png" id="tutorial-bunny-goal" alt="Rabeet-wants-you-to-succeed!"/>
@@ -166,7 +166,7 @@ class Dashboard extends Component {
                     </div>
                 </div>
         break;
-      case 'badges':
+      case "badges":
         render = <div className="row fade-in" key={key}>
                     <div className="col-sm-6 col-sm-offset-3">
                       <h2><strong> Badges </strong></h2>
@@ -174,7 +174,7 @@ class Dashboard extends Component {
                       <p>You are rewarded for achieving your Goals! And not just by that fabulous brain rush of serotonin! Isn't that incredible? Aren't YOU incredible? The Habit Rabbits think so. But you best EARN those rewards! Cheating will get you nowhere in life... Probably. </p>
                       <br/>
                       <h6> Navigate to "Badges" by selecting it from the dropdown menu in the top right. </h6>
-                      <p className="tutorial-toggle" data-id='end' onClick={this.handleClick}> Press Enter or click here to end. </p>
+                      <p className="tutorial-toggle" data-id="end" onClick={this.handleClick}> Press Enter or click here to end. </p>
                     </div>
                     <div>
                       <img src="/rabeetdv.png" id="tutorial-bunny-badge" alt="Rabeet-wants-you-to-succeed!"/>
@@ -186,7 +186,7 @@ class Dashboard extends Component {
     return render;
   }
 
-  render() {
+  render () {
     let dashboard =
       <div className="row">
         <div className="col-md-6">
