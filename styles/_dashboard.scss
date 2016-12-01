@@ -21,9 +21,15 @@
     }
   }
 }
+
 h2 {
-  padding: 0;
+  color: #5bc0de;
 }
+
+h5, h6 {
+  color: #5bc0de;
+}
+
 .example-enter {
   opacity: .001;
   transform: rotateX(-90deg);
