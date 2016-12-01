@@ -11,11 +11,11 @@ let job = new cronJob("0 0 0 * * *", function() {
   query.table = "daily_goals";
   query.data = {is_done: false};
   db.updateTable(query, (err, data) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  }, null, false, "America/Los_Angeles");
+    if (err) {
+      console.log(err);
+    }
+  });
+}, null, false, "America/Los_Angeles");
 job.start();
 
 
