@@ -15,11 +15,11 @@ class Dashboard extends Component {
     this.state = {
       renderState: "intro",
       tutorialSlides: ["intro", "start", "dailyGoals", "goals", "badges"],
-      showTutorial: true
+      showTutorial: true,
     }
   }
 
-  componentWillMount() {
+  componentWillMount () {
     document.addEventListener("keyup", this.handleEnter, false);
     // **this conditional is in regards to a future feature of the tutorial view being converted to a user dashboard
     // ** not in implemenation currently
@@ -28,13 +28,13 @@ class Dashboard extends Component {
     // }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     document.removeEventListener("keyup", this.handleEnter, false);
   }
 
-  handleEnter(event) {
+  handleEnter (event) {
     //check if enter key was pressed
-    if(event.key === "Enter") {
+    if (event.key === "Enter") {
       //check which event we are on
       let currentState = this.state.renderState;
       //if you are on badges, then trigger end of tutorial
@@ -55,9 +55,9 @@ class Dashboard extends Component {
     }
   }
 
-  handleClick(event) {
+  handleClick (event) {
     let id = event.target.dataset.id;
-    if(id === "restart") {
+    if (id === "restart") {
       this.setState({showTutorial: true, renderState: "start"});
       document.addEventListener("keyup", this.handleEnter, false);
     } else if (id==="end") {
@@ -100,7 +100,7 @@ class Dashboard extends Component {
   }
 */
 //this function conditionally renders a "slide" dependant on a key that is passed in. This function is triggered by a state change
-  renderTutorial(key) {
+  renderTutorial (key) {
     let render = null;
     switch(key) {
       case "intro":
@@ -186,7 +186,7 @@ class Dashboard extends Component {
     return render;
   }
 
-  render() {
+  render () {
     let dashboard =
       <div className="row">
         <div className="col-md-6">
