@@ -70,29 +70,21 @@ class SingleGoal extends Component {
   // ====================================================================
   //============== update database: goal.is_done = true==================
   updateGoal() {
-    console.log("Goal completed, sending post request");
-
-    setTimeout(() => {
-      $.ajax({
-        method: 'post',
-        url: `/api/goals/${this.props.goalInfo.id}/update`,
+    $.ajax({
+      method: 'post',
+      url: `/api/goals/${this.props.goalInfo.id}/update`,
+      data: {
         data: {
-          data: {
-            is_done: true
-          }
+          is_done: true
         }
-      }).then(() => {
-        setTimeout(() => {
-          this.props.update();
-          this.props.updateBadge();
-
-        }, 200);
-      });
-     }, 500);
+      }
+    }).then(() => {
+      setTimeout(() => {
+        this.props.update();
+        this.props.updateBadge();
+      }, 100);
+    });
   }
-
-
-
 
   //==============================For Tasks==============================
   getCurrentTask () {
@@ -116,7 +108,7 @@ class SingleGoal extends Component {
           <div>
             <p className="tasks">{task.name}</p>
             <div id="finished-task-button">
-            <span>Task Done? </span>
+            <span> Task Done? </span>
             <div className="daily-goals-icons goals-page">
               <button type="button" className="btn btn-default" aria-label="Checkbox" onClick={this.handleCheck} data-taskid={task.id}>
               <span className="glyphicon glyphicon-check" aria-hidden="true" data-taskid={task.id}></span>

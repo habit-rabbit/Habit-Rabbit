@@ -1,10 +1,10 @@
 
-require('dotenv').config({silent: true});
+require("dotenv").config({silent: true});
 
 module.exports = {
 
   development: {
-    client: 'postgresql',
+    client: "postgresql",
     connection: {
       host     : process.env.DB_HOST,
       user     : process.env.DB_USER,
@@ -14,41 +14,41 @@ module.exports = {
       ssl      : process.env.DB_SSL
     },
     migrations: {
-      directory: './db/migrations',
-      tableName: 'migrations'
+      directory: "./db/migrations",
+      tableName: "migrations"
     },
     seeds: {
-      directory: './db/seeds'
+      directory: "./db/seeds"
     }
   },
 
   staging: {
-    client: 'postgresql',
+    client: "postgresql",
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database: "my_db",
+      user:     "username",
+      password: "password"
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      directory: './db/migrations',
-      tableName: 'knex_migrations'
+      directory: "./db/migrations",
+      tableName: "knex_migrations"
     }
   },
 
   production: {
-    client: 'postgresql',
+    client: "postgresql",
     connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      directory: './db/migrations',
-      tableName: 'knex_migrations'
+      directory: "./db/migrations",
+      tableName: "knex_migrations"
     }
   }
 
